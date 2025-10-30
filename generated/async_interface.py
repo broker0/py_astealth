@@ -25,6 +25,9 @@ class AsyncInterface:
     async def FindTypeEx(self, ObjType: int, Color: int, Container: int, InSub: bool) -> int:
         raise NotImplementedError
 
+    async def GetDirection(self, ID: int) -> int:
+        raise NotImplementedError
+
     async def GetFindedList(self) -> list[int]:
         raise NotImplementedError
 
@@ -38,4 +41,10 @@ class AsyncInterface:
         raise NotImplementedError
 
     async def SetEventCallback(self, EventIndex: int) -> None:
+        raise NotImplementedError
+
+    async def Step(self, Direction: int, Running: bool) -> int:
+        raise NotImplementedError
+
+    async def StepQ(self, Direction: int, Running: bool) -> int:
         raise NotImplementedError
