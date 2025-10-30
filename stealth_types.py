@@ -1,7 +1,8 @@
+from datetime import datetime, timedelta
 from typing import Any, BinaryIO
 from py_astealth.core.base_types import PrimitiveType, RPCType
 
-__all__ = ['U8', 'I8', 'U16', 'I16', 'U32', 'I32', 'U64', 'I64', 'String', 'Bool']
+__all__ = ['Bool', 'U8', 'I8', 'U16', 'I16', 'U32', 'I32', 'U64', 'I64', 'F32', 'F64', 'DateTime', 'String']
 
 
 class Bool(PrimitiveType):
@@ -48,7 +49,32 @@ class I64(PrimitiveType):
     _format = '<q'
     _mapping = int
 
-# TODO float types, date type
+
+class F32(PrimitiveType):
+    _format = "<f"
+    _mapping = float
+
+
+class F64(PrimitiveType):
+    _format = "<d"
+    _mapping = float
+
+
+class DateTime(F64):
+    _format = "<d"
+    _mapping = datetime
+    DELPHI_EPOCH = datetime(1899, 12, 30)
+
+    @classmethod
+    def pack_simple_value(cls, stream: BinaryIO, value: Any):
+        delta = value - cls.DELPHI_EPOCH
+        days = delta.totalseconds() / (24 * 60 * 60)
+        super().pack_simple_value(stream, days)
+
+    @classmethod
+    def unpack_simple_value(cls, stream: BinaryIO) -> Any:
+        days = super().unpack_simple_value(stream)
+        return cls.DELPHI_EPOCH + timedelta(days=days)
 
 
 class String(RPCType):
