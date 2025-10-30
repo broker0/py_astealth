@@ -4,11 +4,7 @@ import typing
 from dataclasses import dataclass
 from typing import Any, get_type_hints, Callable
 
-
-@dataclass
-class ParameterSpec:
-    name: str
-    type: Any
+from py_astealth.core.base_types import ParameterSpec
 
 
 @dataclass

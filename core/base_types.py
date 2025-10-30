@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from dataclasses import dataclass
 from typing import Any, BinaryIO, get_type_hints
 import struct
 import typing
@@ -99,10 +100,16 @@ class PrimitiveType(RPCType):
         return unpacked_value
 
 
+@dataclass
+class ParameterSpec:
+    name: str
+    type: Any
+
+
 class StructType(RPCType):
     # '_fields' is a list of structure fields to be serialized.
     # The first element of the tuple is the field name, the second element is the field type.
-    _fields: list[tuple[str, Any]] = []
+    _fields: list[ParameterSpec] = []
 
     @classmethod
     def pack_simple_value(cls, stream: BinaryIO, value: Any):
