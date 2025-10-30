@@ -75,3 +75,19 @@ class StealthApi(ApiSpecification):
     @ApiSpecification.method(39)
     def ConnectedTime(self) -> DateTime:
         pass
+
+    @ApiSpecification.method(381)
+    def GetMultiAllParts(self, MultiID: U32) -> list[MultiPart]:
+        pass
+
+    @ApiSpecification.method(347)
+    def GetMultis(self) -> list[Multi]:
+        pass
+
+    @ApiSpecification.method(387)
+    def GetStealthInfo(self) -> AboutData:
+        pass
+
+    @ApiSpecification.method(225)
+    def GetGumpTextLines(self, GumpIndex: U16) -> list[String]:
+        pass

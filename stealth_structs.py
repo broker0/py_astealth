@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from py_astealth.stealth_types import *
 from py_astealth.core.base_types import StructType
 
-__all__ = ["WorldPoint", "FoundTile"]
+__all__ = ["WorldPoint", "FoundTile", "Multi", "MultiPart", "AboutData"]
 
 
 # Using the @StructType.register decorator registers fields (arguments of constructor) for serialization.
@@ -26,5 +26,40 @@ class FoundTile(StructType):
     x: U16
     y: U16
     z: I8
+
+
+@StructType.register
+@dataclass
+class Multi(StructType):
+    id: U32
+    x: U16
+    y: U16
+    z: I8
+    xmin: U16
+    xmax: U16
+    ymin: U16
+    ymax: U16
+    width: U16
+    height: U16
+
+@StructType.register
+@dataclass
+class MultiPart(StructType):
+    graphic: U16
+    x: U16
+    y: U16
+    z: I8
+    flag: U32
+
+
+@StructType.register
+@dataclass
+class AboutData(StructType):
+    version: list[U16]
+    build: U16
+    build_date: DateTime
+    git_rev_num: U16
+    git_rev: String
+
 
 # TODO other Stealth struct-types

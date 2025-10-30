@@ -19,10 +19,14 @@ class SyncInterface:
     def FindTypeEx(self, ObjType: int, Color: int, Container: int, InSub: bool) -> int: pass
     def GetDirection(self, ID: int) -> int: pass
     def GetFindedList(self) -> list[int]: pass
-    def GetLineTime(self) -> RPCType: pass
+    def GetGumpTextLines(self, GumpIndex: int) -> list[str]: pass
+    def GetLineTime(self) -> datetime: pass
+    def GetMultiAllParts(self, MultiID: int) -> list[MultiPart]: pass
+    def GetMultis(self) -> list[Multi]: pass
     def GetPathArray3D(self, StartX: int, StartY: int, StartZ: int, FinishX: int, FinishY: int, FinishZ: int, WorldNum: int, AccuracyXY: int, AccuracyZ: int, Run: bool) -> list[WorldPoint]: pass
     def GetSelfID(self) -> int: pass
     def GetStaticTilesArray(self, Xmin: int, Ymin: int, Xmax: int, Ymax: int, WorldNum: int, TileTypes: list[int]) -> list[FoundTile]: pass
+    def GetStealthInfo(self) -> AboutData: pass
     def SetEventCallback(self, EventIndex: int) -> None: pass
     def Step(self, Direction: int, Running: bool) -> int: pass
     def StepQ(self, Direction: int, Running: bool) -> int: pass
