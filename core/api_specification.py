@@ -100,6 +100,7 @@ class ApiSpecification:
             "", "",
             f"from py_astealth.stealth_types import *",
             f"from py_astealth.stealth_structs import *",
+            f"from datetime import datetime",
             "", "",
             f"class {class_name}:",
             f"    \"\"\"base class defining the interface of {cls.__name__}.\"\"\"",
@@ -115,9 +116,10 @@ class ApiSpecification:
             args_str = ", ".join(arg_list)
             ret_type_str = ApiSpecification.get_type_name(spec.result.type)
 
-            lines.append(f"    {prefix}def {spec.name}({args_str}) -> {ret_type_str}:")
-            lines.append(f"        raise NotImplementedError")
-            lines.append("")
+            lines.append(f"    {prefix}def {spec.name}({args_str}) -> {ret_type_str}: pass")
+            # lines.append(f"    {prefix}def {spec.name}({args_str}) -> {ret_type_str}:")
+            # lines.append(f"        raise NotImplementedError")
+            # lines.append("")
 
         with open(output_path, "w", encoding="utf-8") as f:
             f.write("\n".join(lines))
