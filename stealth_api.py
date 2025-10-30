@@ -67,3 +67,11 @@ class StealthApi(ApiSpecification):
     @ApiSpecification.method(157)
     def GetDirection(self, ID: U32) -> U8:
         pass
+
+    @ApiSpecification.method(108)
+    def GetLineTime(self) -> DateTime:
+        pass
+
+    @ApiSpecification.method(39)
+    def ConnectedTime(self) -> DateTime:
+        pass
