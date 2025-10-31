@@ -16,33 +16,9 @@ def create_async_method(method_spec: MethodSpec) -> Callable:
     async method implementation
     """
     async def api_method_impl(self: AsyncStealthClient, *args, **kwargs):
-        # This is a function and is an implementation of an API method.
-        # 'self' is assumed to inherit from AsyncRPCClient.
-        if len(args) != len(method_spec.args):
-            raise TypeError(f"{method_spec.name}() takes {len(method_spec.args)} arguments but {len(args)} were given")
-
-        # Serialization of arguments
-        with io.BytesIO() as args_stream:
-            arg_types = [arg.type for arg in method_spec.args]
-            for arg_value, arg_type in zip(args, arg_types):
-                RPCType.pack_value(args_stream, arg_value, arg_type)
-            args_payload = args_stream.getvalue()
-
-        # Calling an RPC method through an instance of self
-        ret_type = method_spec.result.type
-        call_ret_arg = None if ret_type is type(None) else ret_type
-
-        # use 'self.call_method', which will be available on the instance
-        # by passing it the method number, serialized arguments, and the return type class.
-        result_payload = await self.call_method(method_spec.id, args_payload, call_ret_arg)
-
-        # no ret value
-        if call_ret_arg is None or not result_payload:
-            return None
-
-        # Deserialization of the result
-        result_stream = io.BytesIO(result_payload)
-        return RPCType.unpack_value(result_stream, ret_type)
+        # 'self' is an instance of AsyncStealthApiClient, which inherits from AsyncStealthClient.
+        # It just passes the call down to 'call_method'.
+        return await self.call_method(method_spec, *args)
 
     # for better debugging
     api_method_impl.__name__ = method_spec.name
@@ -111,14 +87,12 @@ def create_sync_proxy_method(method_spec: MethodSpec) -> Callable:
     """
     sync method implementation
     """
-    method_name = method_spec.name
-
     def sync_proxy_impl(self: SyncApiAdapter, *args, **kwargs):
         if self._loop is None or not self._loop.is_running():
             raise ConnectionError("Client not connected")
 
         # get an asynchronous method from the '_async_client'
-        async_method = getattr(self._async_client, method_name)
+        async_method = getattr(self._async_client, method_spec.name)
 
         # we create a coroutine method with arguments and pass it for execution
         coro = async_method(*args, **kwargs)
@@ -128,8 +102,8 @@ def create_sync_proxy_method(method_spec: MethodSpec) -> Callable:
         except Exception as e:
             raise e
 
-    sync_proxy_impl.__name__ = method_name
-    sync_proxy_impl.__doc__ = f"Sync proxy for API method {method_name}(...)"
+    sync_proxy_impl.__name__ = method_spec.name
+    sync_proxy_impl.__doc__ = f"Sync proxy for API method {method_spec.name}(...)"
     return sync_proxy_impl
 
 

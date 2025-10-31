@@ -5,6 +5,8 @@ from dataclasses import dataclass
 from enum import IntEnum
 from typing import Any
 
+from py_astealth.core.api_specification import MethodSpec
+from py_astealth.core.base_types import RPCType
 from py_astealth.core.rpc_client import AsyncRPCClient
 from py_astealth.stealth_types import *
 
@@ -152,21 +154,30 @@ class AsyncStealthClient(AsyncRPCClient):
         self.call_id = (self.call_id + 1) & 0xFFFF
         return self.call_id
 
-    async def call_method(self, method_id: int, args_payload: bytes, ret) -> Any:
-        # call_method receives the id of the method being called, the packed arguments,
-        # and the type of the return value of the method.
+    async def call_method(self, method_spec: MethodSpec, *args) -> Any:
+        # call_method receives the method_spec and arguments
+
+        if len(args) != len(method_spec.args):
+            raise TypeError(f"{method_spec.name}() takes {len(method_spec.args)} arguments but {len(args)} were given")
+
+        # Serialization of arguments
+        with io.BytesIO() as args_stream:
+            arg_types = [arg.type for arg in method_spec.args]
+            for arg_value, arg_type in zip(args, arg_types):
+                RPCType.pack_value(args_stream, arg_value, arg_type)
+            args_payload = args_stream.getvalue()
 
         # If the method returns a value (not None), then we generate a new call_id;
         # if it returns nothing, then call_id=0
-        expect_reply = ret is not None
+        ret_type = method_spec.result.type
+        expect_reply = ret_type is not type(None)
         call_id = self._get_call_id() if expect_reply else 0
 
         # a function call packet starts with two u16 values - method_id and call_id
         # and then come the packed arguments
-        header = struct.pack("<2H", method_id, call_id)
+        header = struct.pack("<2H", method_spec.id, call_id)
         packet = header + args_payload
 
-        # If the function returns a result, then we create a future for the response and add it to _pending_replies
         future = None
         if expect_reply:
             future = asyncio.get_running_loop().create_future()
@@ -176,9 +187,14 @@ class AsyncStealthClient(AsyncRPCClient):
         # TODO You can create an adaptive timeout based on method_id - for example,
         #  GetPathArray3D can work for tens of seconds, while most methods should provide an "instant" response
 
-        # We send the package and, if necessary, wait for the result.
         self.send_packet(packet)
-        return await future if expect_reply else None
+        result_payload = await future if expect_reply else None
+
+        if not result_payload:
+            return None
+
+        result_stream = io.BytesIO(result_payload)
+        return RPCType.unpack_value(result_stream, ret_type)
 
     def send_packet(self, payload: bytes):
         if not self._transport:
