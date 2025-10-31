@@ -109,6 +109,7 @@ class StealthRPCEncoder:
     Serialize and deserialize arguments, results and callbacks
     """
 
+    # encoding of event argument data types 0..7
     EVENT_TYPES = (String, U32, I32, U16, I16, U8, I8, Bool)
 
     @staticmethod
@@ -149,9 +150,9 @@ class StealthRPCEncoder:
         event_payload = []
         for _ in range(arg_count):
             arg_type = U8.unpack_simple_value(stream)
-            event_payload.append(AsyncStealthClient.EVENT_TYPES[arg_type].unpack_simple_value(stream))
+            event_payload.append(StealthRPCEncoder.EVENT_TYPES[arg_type].unpack_simple_value(stream))
 
-        return event_id, event_payload
+        return EventType(event_id), event_payload
 
 
 class AsyncStealthClient(AsyncRPCClient):
@@ -167,9 +168,6 @@ class AsyncStealthClient(AsyncRPCClient):
         TOGGLE_PAUSE = 4
         EVENT = 6
         REQ_SCRIPT_PATH = 9
-
-    # encoding of event argument data types 0..7
-    EVENT_TYPES = (String, U32, I32, U16, I16, U8, I8, Bool)
 
     def __init__(self, host: str, port: int):
         self.host = host
