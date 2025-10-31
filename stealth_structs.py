@@ -1,9 +1,6 @@
 from dataclasses import dataclass
-
 from py_astealth.stealth_types import *
 from py_astealth.core.base_types import StructType
-
-__all__ = ["WorldPoint", "FoundTile", "Multi", "MultiPart", "AboutData"]
 
 
 # Using the @StructType.register decorator registers fields (arguments of constructor) for serialization.
@@ -42,6 +39,7 @@ class Multi(StructType):
     width: U16
     height: U16
 
+
 @StructType.register
 @dataclass
 class MultiPart(StructType):
@@ -63,3 +61,9 @@ class AboutData(StructType):
 
 
 # TODO other Stealth struct-types
+
+
+__all__ = [
+    name for name, obj in globals().copy().items()
+    if isinstance(obj, type) and issubclass(obj, StructType) and obj is not StructType
+]

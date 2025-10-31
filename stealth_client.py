@@ -236,7 +236,6 @@ class AsyncStealthClient(AsyncRPCClient):
         self._connected.set()
 
     def connection_lost(self, exc):
-        print("Connection lost")
         self._transport = None
         self._connected.clear()
         for future in self._pending_replies.values():
@@ -272,6 +271,10 @@ class AsyncStealthClient(AsyncRPCClient):
                 event_id, event_payload = StealthRPCEncoder.decode_event(stream)
                 event = StealthEvent(id=event_id, arguments=event_payload)
                 self.events.put_nowait(event)
+
+            elif packet_type == AsyncStealthClient.PacketType.STOP_SCRIPT:
+                print(f"[Info] Received  {packet_type.name}, close connection, stopping client")
+                self.close()
 
             else:
                 print(f"[Info] Received packet of unknown or unhandled type: {packet_type.name}")
