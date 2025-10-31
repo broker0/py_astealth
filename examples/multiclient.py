@@ -2,9 +2,11 @@ import asyncio
 from datetime import datetime
 
 from py_astealth.api_client import AsyncStealthApiClient
+from py_astealth.examples.example_lib import graceful_shutdown
 from py_stealth.protocol import get_port
 
 
+@graceful_shutdown
 async def find_long_path(client: AsyncStealthApiClient):
     await client.AddToSystemJournal("[+] Pathfinding in progress")
     t1 = datetime.now()
@@ -19,19 +21,15 @@ async def find_long_path(client: AsyncStealthApiClient):
     return path
 
 
+@graceful_shutdown
 async def periodic_clicker(client: AsyncStealthApiClient):
     await client.AddToSystemJournal("Clicker started")
 
-    try:
-        self_id = await client.GetSelfID()
-        while True:
-            await client.AddToSystemJournal(f"[*] Click on {self_id}")
-            await client.ClickOnObject(self_id)
-            await asyncio.sleep(1)
-    except asyncio.CancelledError:
-        await client.AddToSystemJournal("Clicker cancelled")
-    except Exception as e:
-        print(f"[!] exception in Clicker {e}")
+    self_id = await client.GetSelfID()
+    while True:
+        await client.AddToSystemJournal(f"[*] Click on {self_id}")
+        await client.ClickOnObject(self_id)
+        await asyncio.sleep(1)
 
 
 async def main():
@@ -59,8 +57,7 @@ async def main():
     for task in pending:
         task.cancel()
 
-    if pending:
-        await asyncio.wait(pending)
+    await asyncio.gather(*pending, return_exceptions=True)
 
     client1.close()
     client2.close()
