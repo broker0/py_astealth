@@ -64,11 +64,11 @@ class DateTime(F64):
     _format = "<d"
     _mapping = datetime
     DELPHI_EPOCH = datetime(1899, 12, 30)
+    DAY = timedelta(days=1)
 
     @classmethod
     def pack_simple_value(cls, stream: BinaryIO, value: Any):
-        delta = value - cls.DELPHI_EPOCH
-        days = delta.totalseconds() / (24 * 60 * 60)
+        days = (value - cls.DELPHI_EPOCH) / cls.DAY
         super().pack_simple_value(stream, days)
 
     @classmethod

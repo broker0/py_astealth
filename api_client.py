@@ -1,5 +1,4 @@
 import asyncio
-import io
 import threading
 from typing import Callable
 
@@ -7,8 +6,7 @@ from py_astealth.generated.async_interface import AsyncInterface
 from py_astealth.generated.sync_interface import SyncInterface
 from py_astealth.stealth_api import StealthApi
 from py_astealth.stealth_client import AsyncStealthClient
-from py_astealth.core.base_types import RPCType
-from py_astealth.core.api_specification import MethodSpec, ApiSpecification, implement_api
+from py_astealth.core.api_specification import MethodSpec, implement_api
 
 
 def create_async_method(method_spec: MethodSpec) -> Callable:

@@ -52,6 +52,7 @@ class AsyncStealthRPCProtocol(asyncio.Protocol):
             self.transport.close()
 
 
+
 @dataclass
 class StealthEvent:
     id: int
@@ -101,6 +102,56 @@ class EventType(IntEnum):
     EvGlobalChat = 39
     EvWarDamage = 40
     EvContextMenu = 41
+
+
+class StealthRPCEncoder:
+    """
+    Serialize and deserialize arguments, results and callbacks
+    """
+
+    EVENT_TYPES = (String, U32, I32, U16, I16, U8, I8, Bool)
+
+    @staticmethod
+    def encode_arguments(method_spec: MethodSpec, *args) -> bytes:
+        """
+        encode arguments list to bytes
+        """
+        if len(args) != len(method_spec.args):
+            raise TypeError(f"{method_spec.name}() takes {len(method_spec.args)} arguments but {len(args)} were given")
+
+        with io.BytesIO() as stream:
+            arg_types = [arg.type for arg in method_spec.args]
+            for arg_value, arg_type in zip(args, arg_types):
+                RPCType.pack_value(stream, arg_value, arg_type)
+
+            return stream.getvalue()
+
+    @staticmethod
+    def decode_result(method_spec: MethodSpec, payload: bytes) -> Any:
+        """
+        decode single (result) value from bytes to python types
+        """
+        if not payload:
+            return None
+
+        stream = io.BytesIO(payload)
+        ret_type = method_spec.result.type
+        return RPCType.unpack_value(stream, ret_type)
+
+    @staticmethod
+    def decode_event(stream: io.BytesIO) -> (EventType, list):
+        """
+        decode server events (callbacks) id and arguments
+        """
+        event_id, arg_count = U8.unpack_simple_value(stream), U8.unpack_simple_value(stream)
+
+        # read all event arguments from the stream
+        event_payload = []
+        for _ in range(arg_count):
+            arg_type = U8.unpack_simple_value(stream)
+            event_payload.append(AsyncStealthClient.EVENT_TYPES[arg_type].unpack_simple_value(stream))
+
+        return event_id, event_payload
 
 
 class AsyncStealthClient(AsyncRPCClient):
@@ -157,18 +208,7 @@ class AsyncStealthClient(AsyncRPCClient):
     async def call_method(self, method_spec: MethodSpec, *args) -> Any:
         # call_method receives the method_spec and arguments
 
-        if len(args) != len(method_spec.args):
-            raise TypeError(f"{method_spec.name}() takes {len(method_spec.args)} arguments but {len(args)} were given")
-
-        # Serialization of arguments
-        with io.BytesIO() as args_stream:
-            arg_types = [arg.type for arg in method_spec.args]
-            for arg_value, arg_type in zip(args, arg_types):
-                RPCType.pack_value(args_stream, arg_value, arg_type)
-            args_payload = args_stream.getvalue()
-
-        # If the method returns a value (not None), then we generate a new call_id;
-        # if it returns nothing, then call_id=0
+        # for methods with a return value, we assign a new call_id
         ret_type = method_spec.result.type
         expect_reply = ret_type is not type(None)
         call_id = self._get_call_id() if expect_reply else 0
@@ -176,6 +216,7 @@ class AsyncStealthClient(AsyncRPCClient):
         # a function call packet starts with two u16 values - method_id and call_id
         # and then come the packed arguments
         header = struct.pack("<2H", method_spec.id, call_id)
+        args_payload = StealthRPCEncoder.encode_arguments(method_spec, *args)
         packet = header + args_payload
 
         future = None
@@ -190,18 +231,7 @@ class AsyncStealthClient(AsyncRPCClient):
         self.send_packet(packet)
         result_payload = await future if expect_reply else None
 
-        if not result_payload:
-            return None
-
-        result_stream = io.BytesIO(result_payload)
-        return RPCType.unpack_value(result_stream, ret_type)
-
-    def send_packet(self, payload: bytes):
-        if not self._transport:
-            raise ConnectionError("Client not connected")
-        # the packet is preceded by u32 length
-        packet_len = struct.pack('<I', len(payload))
-        self._transport.write(packet_len + payload)
+        return StealthRPCEncoder.decode_result(method_spec, result_payload)
 
     def connection_made(self, transport: asyncio.Transport):
         self._transport = transport
@@ -214,6 +244,13 @@ class AsyncStealthClient(AsyncRPCClient):
         for future in self._pending_replies.values():
             if not future.done():
                 future.set_exception(ConnectionAbortedError("Connection lost"))
+
+    def send_packet(self, payload: bytes):
+        if not self._transport:
+            raise ConnectionError("Client not connected")
+        # the packet is preceded by u32 length
+        packet_len = struct.pack('<I', len(payload))
+        self._transport.write(packet_len + payload)
 
     def handle_packet(self, payload: bytes):
         """unpacking incoming server packets"""
@@ -234,14 +271,7 @@ class AsyncStealthClient(AsyncRPCClient):
                     print(f"[Warning] Result received for unknown reply_id: {call_id}")
 
             elif packet_type == AsyncStealthClient.PacketType.EVENT:
-                event_id, arg_count = EventType(U8.unpack_simple_value(stream)), U8.unpack_simple_value(stream)
-
-                # read all event arguments from the stream
-                event_payload = []
-                for _ in range(arg_count):
-                    arg_type = U8.unpack_simple_value(stream)
-                    event_payload.append(AsyncStealthClient.EVENT_TYPES[arg_type].unpack_simple_value(stream))
-
+                event_id, event_payload = StealthRPCEncoder.decode_event(stream)
                 event = StealthEvent(id=event_id, arguments=event_payload)
                 self.events.put_nowait(event)
 
