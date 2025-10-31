@@ -87,6 +87,36 @@ class ApiSpecification:
             if hasattr(member, 'method_spec')  # We are only interested in those who have 'method_spec' field
         ]
 
+
+    @classmethod
+    def generate_module(cls, output_path, sync):
+        lines = [
+            "###################################################################",
+            "# This file was generated automatically. Do not edit it manually! #",
+            "###################################################################",
+            "", "",
+            f"from py_astealth.stealth_types import *",
+            f"from py_astealth.stealth_structs import *",
+            f"from datetime import datetime",
+            "", "",
+            ""
+        ]
+        prefix = "" if sync else "async "
+        for spec in cls.get_methods():
+            arg_list = []
+            for arg in spec.args:
+                arg_list.append(f"{arg.name}: {cls.get_type_name(arg.type)}")
+
+            args_str = ", ".join(arg_list)
+            ret_type_str = ApiSpecification.get_type_name(spec.result.type)
+
+            lines.append(f"{prefix}def {spec.name}({args_str}) -> {ret_type_str}: pass")
+
+        with open(output_path, "w", encoding="utf-8") as f:
+            f.write("\n".join(lines))
+
+        print(f"{prefix}module '{cls.__name__}' generated in '{output_path}'")
+
     @classmethod
     def generate_base_class(cls, output_path: str, class_name: str, sync):
         """
@@ -124,7 +154,7 @@ class ApiSpecification:
         with open(output_path, "w", encoding="utf-8") as f:
             f.write("\n".join(lines))
 
-        print(f"Async interface '{cls.__name__}' generated in '{output_path}'")
+        print(f"{prefix}interface '{cls.__name__}' generated in '{output_path}'")
 
 
 def implement_api(api_spec: type[ApiSpecification], method_factory: Callable[[MethodSpec], Callable]):
