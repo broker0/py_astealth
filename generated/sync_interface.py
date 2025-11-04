@@ -11,22 +11,37 @@ from datetime import datetime
 class SyncInterface:
     """base class defining the interface of StealthApi."""
 
-    def AddToSystemJournal(self, text: str) -> None: pass
+    def AddToSystemJournal(self, Text: str) -> None: pass
     def CharName(self) -> str: pass
     def ClearEventCallback(self, EventIndex: int) -> None: pass
     def ClickOnObject(self, ObjID: int) -> None: pass
     def ConnectedTime(self) -> datetime: pass
     def FindTypeEx(self, ObjType: int, Color: int, Container: int, InSub: bool) -> int: pass
+    def GetColor(self, ID: int) -> int: pass
     def GetDirection(self, ID: int) -> int: pass
     def GetFindedList(self) -> list[int]: pass
     def GetGumpTextLines(self, GumpIndex: int) -> list[str]: pass
     def GetLineTime(self) -> datetime: pass
     def GetMultiAllParts(self, MultiID: int) -> list[MultiPart]: pass
     def GetMultis(self) -> list[Multi]: pass
+    def GetName(self, ObjectID: int) -> str: pass
+    def GetNotoriety(self, ID: int) -> int: pass
     def GetPathArray3D(self, StartX: int, StartY: int, StartZ: int, FinishX: int, FinishY: int, FinishZ: int, WorldNum: int, AccuracyXY: int, AccuracyZ: int, Run: bool) -> list[WorldPoint]: pass
-    def GetSelfID(self) -> int: pass
     def GetStaticTilesArray(self, Xmin: int, Ymin: int, Xmax: int, Ymax: int, WorldNum: int, TileTypes: list[int]) -> list[FoundTile]: pass
     def GetStealthInfo(self) -> AboutData: pass
+    def GetType(self, ID: int) -> int: pass
+    def GetX(self, ID: int) -> int: pass
+    def GetY(self, ID: int) -> int: pass
+    def GetZ(self, ID: int) -> int: pass
+    def Ignore(self, ID: int) -> None: pass
+    def IgnoreOff(self, ID: int) -> None: pass
+    def IgnoreReset(self) -> None: pass
+    def IsObjectExists(self, ID: int) -> bool: pass
+    def ObjAtLayerEx(self, Layer: int, ID: int) -> int: pass
+    def Self(self) -> int: pass
     def SetEventCallback(self, EventIndex: int) -> None: pass
+    def SetFindDistance(self, Value: int) -> None: pass
+    def SetFindVertical(self, Value: int) -> None: pass
     def Step(self, Direction: int, Running: bool) -> int: pass
     def StepQ(self, Direction: int, Running: bool) -> int: pass
+    def WorldNum(self) -> int: pass

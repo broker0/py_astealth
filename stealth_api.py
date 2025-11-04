@@ -20,7 +20,23 @@ class StealthApi(ApiSpecification):
         pass
 
     @ApiSpecification.method(14)
-    def GetSelfID(self) -> U32:
+    def Self(self) -> U32:
+        pass
+
+    @ApiSpecification.method(233)
+    def ObjAtLayerEx(self, Layer: U8, ID: U32) -> U32:
+        pass
+
+    @ApiSpecification.method(151)
+    def GetType(self, ID: U32) -> U16:
+        pass
+
+    @ApiSpecification.method(159)
+    def GetColor(self, ID: U32) -> U16:
+        pass
+
+    @ApiSpecification.method(169)
+    def GetNotoriety(self, ID: U32) -> U8:
         pass
 
     @ApiSpecification.method(104)
@@ -31,8 +47,24 @@ class StealthApi(ApiSpecification):
     def CharName(self) -> String:
         pass
 
+    @ApiSpecification.method(147)
+    def GetName(ObjectID: U32) -> String:
+        pass
+
     @ApiSpecification.method(13)
-    def AddToSystemJournal(self, text: String) -> None:
+    def AddToSystemJournal(self, Text: String) -> None:
+        pass
+
+    @ApiSpecification.method(127)
+    def SetFindDistance(self, Value: U32) -> None:
+        pass
+
+    @ApiSpecification.method(129)
+    def SetFindVertical(self, Value: U32) -> None:
+        pass
+
+    @ApiSpecification.method(155)
+    def IsObjectExists(self, ID: U32) -> Bool:
         pass
 
     @ApiSpecification.method(131)
@@ -41,6 +73,18 @@ class StealthApi(ApiSpecification):
 
     @ApiSpecification.method(138)
     def GetFindedList(self) -> list[U32]:
+        pass
+
+    @ApiSpecification.method(134)
+    def Ignore(self, ID: U32) -> None:
+        pass
+
+    @ApiSpecification.method(135)
+    def IgnoreOff(self, ID: U32) -> None:
+        pass
+
+    @ApiSpecification.method(136)
+    def IgnoreReset(self) -> None:
         pass
 
     @ApiSpecification.method(286)
@@ -62,6 +106,22 @@ class StealthApi(ApiSpecification):
 
     @ApiSpecification.method(325)
     def StepQ(self, Direction: U8, Running: Bool) -> I32:
+        pass
+
+    @ApiSpecification.method(15)
+    def GetX(self, ID: U32) -> U16:
+        pass
+
+    @ApiSpecification.method(16)
+    def GetY(self, ID: U32) -> U16:
+        pass
+
+    @ApiSpecification.method(17)
+    def GetZ(self, ID: U32) -> I8:
+        pass
+
+    @ApiSpecification.method(18)
+    def WorldNum(self) -> U8:
         pass
 
     @ApiSpecification.method(157)
