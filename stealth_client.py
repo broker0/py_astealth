@@ -52,13 +52,6 @@ class AsyncStealthRPCProtocol(asyncio.Protocol):
             self.transport.close()
 
 
-
-@dataclass
-class StealthEvent:
-    id: int
-    arguments: list
-
-
 class EventType(IntEnum):
     EvItemInfo = 0
     EvItemDeleted = 1
@@ -102,6 +95,12 @@ class EventType(IntEnum):
     EvGlobalChat = 39
     EvWarDamage = 40
     EvContextMenu = 41
+
+
+@dataclass
+class StealthEvent:
+    id: EventType
+    arguments: list
 
 
 class StealthRPCEncoder:
