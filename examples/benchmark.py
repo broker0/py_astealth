@@ -1,7 +1,7 @@
 import asyncio
 from datetime import datetime
 
-from py_astealth.api_client import AsyncStealthApiClient, SyncStealthApiClient
+from py_astealth.api_client import AsyncStealthApiClient, SyncStealthApiClient, SyncStealthApiClientFast
 from py_stealth.protocol import get_port
 import py_stealth as stealth
 
@@ -26,7 +26,7 @@ async def modern_async_stealth():
 
     start_time = datetime.now()
     for x in range(0, COUNT):
-        await client.GetSelfID()
+        await client.Self()
     time = datetime.now() - start_time
     ms = time.total_seconds() * 1000 + time.microseconds / 1000
     print(f"{COUNT} calls in {ms} milliseconds, {ms / COUNT} ms per call, {(COUNT / ms) * 1000} calls in one seconds")
@@ -40,7 +40,21 @@ def modern_sync_stealth():
 
     start_time = datetime.now()
     for x in range(0, COUNT):
-        client.GetSelfID()
+        client.Self()
+    time = datetime.now() - start_time
+    ms = time.total_seconds() * 1000 + time.microseconds / 1000
+    print(f"{COUNT} calls in {ms} milliseconds, {ms / COUNT} ms per call, {(COUNT / ms) * 1000} calls in one seconds")
+
+    client.close()
+
+
+def modern_fast_sync_stealth():
+    client = SyncStealthApiClientFast('127.0.0.1', get_port())
+    client.connect()
+
+    start_time = datetime.now()
+    for x in range(0, COUNT):
+        client.Self()
     time = datetime.now() - start_time
     ms = time.total_seconds() * 1000 + time.microseconds / 1000
     print(f"{COUNT} calls in {ms} milliseconds, {ms / COUNT} ms per call, {(COUNT / ms) * 1000} calls in one seconds")
@@ -51,7 +65,7 @@ def modern_sync_stealth():
 def modern_sync_in_classic():
     start_time = datetime.now()
     for x in range(0, COUNT):
-        nstealth.GetSelfID()
+        nstealth.Self()
     time = datetime.now() - start_time
     ms = time.total_seconds() * 1000 + time.microseconds / 1000
     print(f"{COUNT} calls in {ms} milliseconds, {ms / COUNT} ms per call, {(COUNT / ms) * 1000} calls in one seconds")
@@ -64,6 +78,8 @@ def main():
     modern_sync_stealth()
     print("======= Modern sync in classic interface benchmark =======")
     modern_sync_in_classic()
+    print("======= Fast sync stealth benchmark =======")
+    modern_fast_sync_stealth()
     print("======= Modern async stealth benchmark =======")
     asyncio.run(modern_async_stealth())
 

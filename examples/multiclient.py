@@ -11,8 +11,8 @@ async def find_long_path(client: AsyncStealthApiClient):
     await client.AddToSystemJournal("[+] Pathfinding in progress")
     t1 = datetime.now()
     path = await client.GetPathArray3D(
-        1832, 2779, 0,
-        1374, 1808, 3,
+        656, 1344, 0,
+        1374, 1808, 0,
         0,
         1, 1,
         True
@@ -25,7 +25,7 @@ async def find_long_path(client: AsyncStealthApiClient):
 async def periodic_clicker(client: AsyncStealthApiClient):
     await client.AddToSystemJournal("Clicker started")
 
-    self_id = await client.GetSelfID()
+    self_id = await client.Self()
     while True:
         await client.AddToSystemJournal(f"[*] Click on {self_id}")
         await client.ClickOnObject(self_id)

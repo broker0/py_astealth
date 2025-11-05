@@ -54,6 +54,7 @@ async def main():
             # waiting complete task
             await asyncio.gather(*_tasks, return_exceptions=True)
 
+        await client.ClearEventCallback(EventType.EvSpeech)
         client.close()
 
 if __name__ == "__main__":
