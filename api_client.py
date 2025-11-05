@@ -50,6 +50,7 @@ class SyncApiAdapter:
     It seems to be thread-safe
     """
     def __init__(self, async_client_class, host: str, port: int):
+        self._lock = threading.Lock()
         self._async_client = async_client_class(host, port)
         self._loop = None
         self._thread = None
@@ -86,25 +87,27 @@ class SyncApiAdapter:
             raise e
 
     def connect(self):
-        if self._thread is not None:
-            raise RuntimeError("Already connected")
-        self._thread = threading.Thread(target=self._run_event_loop, daemon=True)
-        self._thread.start()
-        if not self._ready_event.wait(timeout=10):
-            raise ConnectionError("Cannot connect")
+        with self._lock:
+            if self._thread is not None:
+                raise RuntimeError("Already connected")
+            self._thread = threading.Thread(target=self._run_event_loop, daemon=True)
+            self._thread.start()
+            if not self._ready_event.wait(timeout=10):
+                raise ConnectionError("Cannot connect")
 
     def get_event(self) -> Optional[StealthEvent]:
         return self._execute_coro_in_loop(self._async_client.get_event(), timeout=1.0)
 
     def close(self):
-        if self._thread is None or self._loop is None or not self._loop.is_running():
-            return
-        self._loop.call_soon_threadsafe(self._async_client.close)
-        self._loop.call_soon_threadsafe(self._loop.stop)
-        self._thread.join()
-        self._thread = None
-        self._loop = None
-        self._ready_event.clear()
+        with self._lock:
+            if self._thread is None or self._loop is None or not self._loop.is_running():
+                return
+            self._loop.call_soon_threadsafe(self._async_client.close)
+            self._loop.call_soon_threadsafe(self._loop.stop)
+            self._thread.join()
+            self._thread = None
+            self._loop = None
+            self._ready_event.clear()
 
 
 def create_sync_proxy_method(method_spec: MethodSpec) -> Callable:
@@ -121,7 +124,13 @@ def create_sync_proxy_method(method_spec: MethodSpec) -> Callable:
         # we create a coroutine method with arguments and pass it for execution
         coro = async_method(*args, **kwargs)
 
-        return asyncio.run_coroutine_threadsafe(coro, self._loop)
+        future = asyncio.run_coroutine_threadsafe(coro, self._loop)
+        try:
+            return future.result(timeout=30)
+        except Exception as e:
+            raise e
+
+        # return asyncio.run_coroutine_threadsafe(coro, self._loop)
 
     sync_proxy_impl.__name__ = method_spec.name
     sync_proxy_impl.__doc__ = f"Sync proxy for API method {method_spec.name}(...)"
