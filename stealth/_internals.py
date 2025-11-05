@@ -1,12 +1,10 @@
 import asyncio
-import sys
 import threading
 from typing import Optional, List
 import atexit
 
 from py_astealth.api_client import AsyncStealthApiClient
 from py_astealth.core.api_specification import MethodSpec
-from py_astealth.stealth_api import StealthApi
 
 from py_stealth.protocol import get_port
 
@@ -36,18 +34,18 @@ class _StealthManager:
     """
     manages the event loop and clients
     """
-
     def __init__(self):
-        # Ресурсы
         self._loop: Optional[asyncio.AbstractEventLoop] = None
         self._thread: Optional[threading.Thread] = None
         self._is_shutting_down = False
 
         self._local_storage = threading.local()
+        self._local_storage.handlers = {}
         self._all_clients: List[AsyncStealthApiClient] = []
         self._clients_lock = threading.Lock()
 
         self._start_event_loop()
+        self.get_client_for_thread()    # generate client for current (main) thread
 
     def get_client_for_thread(self) -> AsyncStealthApiClient:
         """
@@ -58,7 +56,9 @@ class _StealthManager:
             if self._is_shutting_down:
                 raise RuntimeError("Stealth manager is shutting down.")
 
-            client = AsyncStealthApiClient(host=HOST, port=get_port())
+            port = get_port()
+            print("port", port)
+            client = AsyncStealthApiClient(host=HOST, port=port)
 
             future = asyncio.run_coroutine_threadsafe(client.connect(), self._loop)
             future.result(timeout=10)
@@ -71,6 +71,20 @@ class _StealthManager:
             self._local_storage.client_proxy = proxy
 
         return proxy
+
+    def get_event_for_thread(self):
+        client = self.get_client_for_thread()
+        future = asyncio.run_coroutine_threadsafe(client.get_event(), self._loop)
+        return future.result(timeout=10)
+
+    def get_handler_for_thread(self, event_type):
+        return self._local_storage.handlers.get(event_type)
+
+    def set_handler_for_thread(self, event_type, handler):
+        if handler:
+            self._local_storage.handlers[event_type] = handler
+        elif handler is None and event_type in self._local_storage.handlers:
+            del self._local_storage.handlers[event_type]
 
     def close_client_for_thread(self, client: AsyncStealthApiClient):
         """
@@ -86,8 +100,7 @@ class _StealthManager:
             except ValueError:
                 pass
 
-        if self._loop and self._loop.is_running():
-            self._loop.call_soon_threadsafe(client.close)
+        client.close()
 
     def _start_event_loop(self):
         ready_event = threading.Event()
@@ -103,17 +116,10 @@ class _StealthManager:
                 return
             self._is_shutting_down = True
 
-        futures = []
         with self._clients_lock:
             for client in self._all_clients:
                 client.close()
             self._all_clients.clear()
-
-        for f in futures:
-            try:
-                f.result(timeout=5)
-            except Exception:
-                pass
 
         self._loop.call_soon_threadsafe(self._loop.stop)
         self._thread.join()
@@ -155,11 +161,4 @@ def _create_global_proxy(method_spec: MethodSpec):
     global_api_proxy.__doc__ = f"Global API call for {method_spec.name}."
     return global_api_proxy
 
-
-def _populate_module():
-    current_module = sys.modules[__name__]
-
-    for spec in StealthApi.get_methods():
-        proxy_function = _create_global_proxy(spec)
-        setattr(current_module, spec.name, proxy_function)
 
