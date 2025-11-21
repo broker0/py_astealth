@@ -9,6 +9,7 @@ from dataclasses import dataclass
 from enum import IntEnum
 from typing import Any
 
+from py_astealth.core.api_specification import MethodSpec
 from py_astealth.core.base_types import RPCType
 from py_astealth.core.rpc_client import AsyncRPCClient
 from py_astealth.stealth_types import *
