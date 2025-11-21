@@ -1,0 +1,6487 @@
+[
+    {
+        "pascal_name": "SetGlobal",
+        "name": "SetGlobal",
+        "id":         310,
+        "args":        
+        [
+            {
+                "name": "GlobalRegion ",
+                "type": " String"            
+            },
+            {
+                "name": "VarName ",
+                "type": " String"            
+            },
+            {
+                "name": "VarValue ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GetGlobal",
+        "name": "GetGlobal",
+        "id":         311,
+        "args":        
+        [
+            {
+                "name": "GlobalRegion ",
+                "type": " String"            
+            },
+            {
+                "name": "VarName ",
+                "type": " String"            
+            }        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "Connect",
+        "name": "Connect",
+        "id":         45,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "Disconnect",
+        "name": "Disconnect",
+        "id":         46,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "SetARStatus",
+        "name": "SetARStatus",
+        "id":         22,
+        "args":        
+        [
+            {
+                "name": "Value ",
+                "type": " Boolean"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GetARStatus",
+        "name": "GetARStatus",
+        "id":         21,
+        "args":        
+        [
+        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "SetPauseScriptOnDisconnectStatus",
+        "name": "SetPauseScriptOnDisconnectStatus",
+        "id":         24,
+        "args":        
+        [
+            {
+                "name": "Value ",
+                "type": " Boolean"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GetPauseScriptOnDisconnectStatus",
+        "name": "GetPauseScriptOnDisconnectStatus",
+        "id":         23,
+        "args":        
+        [
+        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "Connected",
+        "name": "Connected",
+        "id":         12,
+        "args":        
+        [
+        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "CharName",
+        "name": "CharName",
+        "id":         19,
+        "args":        
+        [
+        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "ProfileShardName",
+        "name": "ProfileShardName",
+        "id":         343,
+        "args":        
+        [
+        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "ShardName",
+        "name": "ShardName",
+        "id":         47,
+        "args":        
+        [
+        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "SelfID",
+        "name": "Self",
+        "id":         14,
+        "args":        
+        [
+        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "Gold",
+        "name": "Gold",
+        "id":         27,
+        "args":        
+        [
+        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "ConnectedTime",
+        "name": "ConnectedTime",
+        "id":         38,
+        "args":        
+        [
+        
+        ],
+        "result": "datetime"    
+    },
+    {
+        "pascal_name": "DisconnectedTime",
+        "name": "DisconnectedTime",
+        "id":         39,
+        "args":        
+        [
+        
+        ],
+        "result": "datetime"    
+    },
+    {
+        "pascal_name": "LineID",
+        "name": "LineID",
+        "id":         106,
+        "args":        
+        [
+        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "FoundedParamID",
+        "name": "FoundParamID",
+        "id":         105,
+        "args":        
+        [
+        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "LineType",
+        "name": "LineType",
+        "id":         107,
+        "args":        
+        [
+        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "LineName",
+        "name": "LineName",
+        "id":         114,
+        "args":        
+        [
+        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "LineTime",
+        "name": "LineTime",
+        "id":         108,
+        "args":        
+        [
+        
+        ],
+        "result": "datetime"    
+    },
+    {
+        "pascal_name": "LineMsgType",
+        "name": "LineMsgType",
+        "id":         109,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "LineTextColor",
+        "name": "LineTextColor",
+        "id":         110,
+        "args":        
+        [
+        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "LineTextFont",
+        "name": "LineTextFont",
+        "id":         111,
+        "args":        
+        [
+        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "LineIndex",
+        "name": "LineIndex",
+        "id":         112,
+        "args":        
+        [
+        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "LineCount",
+        "name": "LineCount",
+        "id":         113,
+        "args":        
+        [
+        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "AddToSystemJournal",
+        "name": "AddToSystemJournal",
+        "id":         13,
+        "args":        
+        [
+            {
+                "name": "Text ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "AddToJournal",
+        "name": "AddToJournal",
+        "id":         304,
+        "args":        
+        [
+            {
+                "name": "Text ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "LastJournalMessage",
+        "name": "LastJournalMessage",
+        "id":         120,
+        "args":        
+        [
+        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "InJournal",
+        "name": "InJournal",
+        "id":         121,
+        "args":        
+        [
+            {
+                "name": "Str ",
+                "type": " String"            
+            }        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "InJournalBetweenTimes",
+        "name": "InJournalBetweenTimes",
+        "id":         122,
+        "args":        
+        [
+            {
+                "name": "Str ",
+                "type": " String"            
+            },
+            {
+                "name": "TimeBegin ",
+                "type": " TDateTime"            
+            },
+            {
+                "name": "TimeEnd ",
+                "type": " TDateTime"            
+            }        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "Journal",
+        "name": "Journal",
+        "id":         123,
+        "args":        
+        [
+            {
+                "name": "StringIndex ",
+                "type": " Integer"            
+            }        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "SetJournalLine",
+        "name": "SetJournalLine",
+        "id":         124,
+        "args":        
+        [
+            {
+                "name": "StringIndex ",
+                "type": " Integer"            
+            },
+            {
+                "name": "Text ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "ClearJournal",
+        "name": "ClearJournal",
+        "id":         119,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "ClearSystemJournal",
+        "name": "ClearSystemJournal",
+        "id":         346,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "LowJournal",
+        "name": "LowJournal",
+        "id":         125,
+        "args":        
+        [
+        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "HighJournal",
+        "name": "HighJournal",
+        "id":         126,
+        "args":        
+        [
+        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "WaitJournalLine",
+        "name": "WaitJournalLine",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "StartTime ",
+                "type": " TDateTime"            
+            },
+            {
+                "name": "Str ",
+                "type": " String"            
+            },
+            {
+                "name": "MaxWaitTimeMS ",
+                "type": " Integer"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "WaitJournalLineSystem",
+        "name": "WaitJournalLineSystem",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "StartTime ",
+                "type": " TDateTime"            
+            },
+            {
+                "name": "Str ",
+                "type": " String"            
+            },
+            {
+                "name": "MaxWaitTimeMS ",
+                "type": " Integer"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "IsObjectExists",
+        "name": "IsObjectExists",
+        "id":         155,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "SetEventProc",
+        "name": "SetEventProc",
+        "id":         7,
+        "args":        
+        [
+            {
+                "name": "Eventname ",
+                "type": " TPacketEvent"            
+            },
+            {
+                "name": "Procname ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "HTTP_Get",
+        "name": "HTTP_Get",
+        "id":         258,
+        "args":        
+        [
+            {
+                "name": "URL ",
+                "type": " String"            
+            },
+            {
+                "name": "LStream",
+                "type": " TMemoryStream = nil"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "HTTP_Post",
+        "name": "HTTP_Post",
+        "id":         259,
+        "args":        
+        [
+            {
+                "name": "URL ",
+                "type": " String"            
+            },
+            {
+                "name": "PostData ",
+                "type": " TStringList"            
+            }        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "HTTP_Post",
+        "name": "HTTP_Post",
+        "id":         259,
+        "args":        
+        [
+            {
+                "name": "URL ",
+                "type": " String"            
+            },
+            {
+                "name": "PostData ",
+                "type": " String"            
+            }        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "HTTP_Body",
+        "name": "HTTP_Body",
+        "id":         260,
+        "args":        
+        [
+        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "HTTP_Header",
+        "name": "HTTP_Header",
+        "id":         261,
+        "args":        
+        [
+        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "UseProxy",
+        "name": "UseProxy",
+        "id":         62,
+        "args":        
+        [
+        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "ProxyIP",
+        "name": "ProxyIP",
+        "id":         60,
+        "args":        
+        [
+        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "ProxyPort",
+        "name": "ProxyPort",
+        "id":         61,
+        "args":        
+        [
+        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "ProfileName",
+        "name": "ProfileName",
+        "id":         11,
+        "args":        
+        [
+        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "ChangeProfile",
+        "name": "ChangeProfile",
+        "id":         20,
+        "args":        
+        [
+            {
+                "name": "Name ",
+                "type": " String"            
+            }        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "StealthInfo",
+        "name": "StealthInfo",
+        "id":         387,
+        "args":        
+        [
+        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "StealthPath",
+        "name": "StealthPath",
+        "id":         305,
+        "args":        
+        [
+        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "CurrentScriptPath",
+        "name": "CurrentScriptPath",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "StealthProfilePath",
+        "name": "StealthProfilePath",
+        "id":         306,
+        "args":        
+        [
+        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "ShardPath",
+        "name": "ShardPath",
+        "id":         307,
+        "args":        
+        [
+        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "GetScriptsCount",
+        "name": "GetScriptsCount",
+        "id":         450,
+        "args":        
+        [
+        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "GetScriptPath",
+        "name": "GetScriptPath",
+        "id":         451,
+        "args":        
+        [
+            {
+                "name": "ScriptIndex ",
+                "type": " Word"            
+            }        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "GetScriptName",
+        "name": "GetScriptName",
+        "id":         458,
+        "args":        
+        [
+            {
+                "name": "ScriptIndex ",
+                "type": " Word"            
+            }        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "SetScriptName",
+        "name": "SetScriptName",
+        "id":         457,
+        "args":        
+        [
+            {
+                "name": "ScriptIndex ",
+                "type": " Word"            
+            },
+            {
+                "name": "Value ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GetScriptState",
+        "name": "GetScriptState",
+        "id":         452,
+        "args":        
+        [
+            {
+                "name": "ScriptIndex ",
+                "type": " Word"            
+            }        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "StartScript",
+        "name": "StartScript",
+        "id":         453,
+        "args":        
+        [
+            {
+                "name": "ScriptPath ",
+                "type": " String"            
+            }        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "StopScript",
+        "name": "StopScript",
+        "id":         454,
+        "args":        
+        [
+            {
+                "name": "ScriptIndex ",
+                "type": " Word"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "PauseResumeScript",
+        "name": "PauseResumeScript",
+        "id":         4,
+        "args":        
+        [
+            {
+                "name": "ScriptIndex ",
+                "type": " Word"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "StopAllScripts",
+        "name": "StopAllScripts",
+        "id":         456,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GetScriptsList",
+        "name": "GetScriptsList",
+        "id":         460,
+        "args":        
+        [
+        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "GetScriptsList",
+        "name": "GetScriptsList",
+        "id":         460,
+        "args":        
+        [
+        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "PrintScriptMethodsList",
+        "name": "PrintScriptMethodsList",
+        "id":         256,
+        "args":        
+        [
+            {
+                "name": "FileName ",
+                "type": " String = '"            
+            },
+            {
+                "name": "SortedList ",
+                "type": " Boolean = False"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "FillNewWindow",
+        "name": "FillNewWindow",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "s ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "FillInfoWindow",
+        "name": "FillInfoWindow",
+        "id":         303,
+        "args":        
+        [
+            {
+                "name": "s ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "ClearInfoWindow",
+        "name": "ClearInfoWindow",
+        "id":         348,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "Backpack",
+        "name": "Backpack",
+        "id":         48,
+        "args":        
+        [
+        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "Ground",
+        "name": "Ground",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "Sex",
+        "name": "Sex",
+        "id":         25,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "CharTitle",
+        "name": "CharTitle",
+        "id":         26,
+        "args":        
+        [
+        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "Armor",
+        "name": "Armor",
+        "id":         28,
+        "args":        
+        [
+        
+        ],
+        "result": "short"    
+    },
+    {
+        "pascal_name": "Weight",
+        "name": "Weight",
+        "id":         29,
+        "args":        
+        [
+        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "MaxWeight",
+        "name": "MaxWeight",
+        "id":         30,
+        "args":        
+        [
+        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "Race",
+        "name": "Race",
+        "id":         31,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "WorldNum",
+        "name": "WorldNum",
+        "id":         18,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "PetsCurrent",
+        "name": "PetsCurrent",
+        "id":         33,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "PetsMax",
+        "name": "PetsMax",
+        "id":         32,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "FireResist",
+        "name": "FireResist",
+        "id":         34,
+        "args":        
+        [
+        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "ColdResist",
+        "name": "ColdResist",
+        "id":         35,
+        "args":        
+        [
+        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "PoisonResist",
+        "name": "PoisonResist",
+        "id":         36,
+        "args":        
+        [
+        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "EnergyResist",
+        "name": "EnergyResist",
+        "id":         37,
+        "args":        
+        [
+        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "LastContainer",
+        "name": "LastContainer",
+        "id":         40,
+        "args":        
+        [
+        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "LastTarget",
+        "name": "LastTarget",
+        "id":         41,
+        "args":        
+        [
+        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "LastAttack",
+        "name": "LastAttack",
+        "id":         42,
+        "args":        
+        [
+        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "LastStatus",
+        "name": "LastStatus",
+        "id":         43,
+        "args":        
+        [
+        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "LastObject",
+        "name": "LastObject",
+        "id":         44,
+        "args":        
+        [
+        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "Hidden",
+        "name": "Hidden",
+        "id":         63,
+        "args":        
+        [
+        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "Poisoned",
+        "name": "Poisoned",
+        "id":         64,
+        "args":        
+        [
+        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "Paralyzed",
+        "name": "Paralyzed",
+        "id":         65,
+        "args":        
+        [
+        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "Dead",
+        "name": "Dead",
+        "id":         66,
+        "args":        
+        [
+        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "WarMode",
+        "name": "WarMode",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "WarTargetID",
+        "name": "WarTargetID",
+        "id":         67,
+        "args":        
+        [
+        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "SetWarMode",
+        "name": "SetWarMode",
+        "id":         68,
+        "args":        
+        [
+            {
+                "name": "Value ",
+                "type": " Boolean"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "Attack",
+        "name": "Attack",
+        "id":         69,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "UseSelfPaperdollScroll",
+        "name": "UseSelfPaperdollScroll",
+        "id":         70,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "UseOtherPaperdollScroll",
+        "name": "UseOtherPaperdollScroll",
+        "id":         71,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GetName",
+        "name": "GetName",
+        "id":         147,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "Str",
+        "name": "Str",
+        "id":         160,
+        "args":        
+        [
+        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "Int",
+        "name": "Int",
+        "id":         161,
+        "args":        
+        [
+        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "Dex",
+        "name": "Dex",
+        "id":         162,
+        "args":        
+        [
+        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "Life",
+        "name": "Life",
+        "id":         52,
+        "args":        
+        [
+        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "HP",
+        "name": "HP",
+        "id":         163,
+        "args":        
+        [
+        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "Mana",
+        "name": "Mana",
+        "id":         165,
+        "args":        
+        [
+        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "Stam",
+        "name": "Stam",
+        "id":         167,
+        "args":        
+        [
+        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "MaxLife",
+        "name": "MaxLife",
+        "id":         55,
+        "args":        
+        [
+        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "MaxHP",
+        "name": "MaxHP",
+        "id":         164,
+        "args":        
+        [
+        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "MaxMana",
+        "name": "MaxMana",
+        "id":         166,
+        "args":        
+        [
+        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "MaxStam",
+        "name": "MaxStam",
+        "id":         168,
+        "args":        
+        [
+        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "Luck",
+        "name": "Luck",
+        "id":         58,
+        "args":        
+        [
+        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "ExtendedInfo",
+        "name": "ExtendedInfo",
+        "id":         59,
+        "args":        
+        [
+        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "GetParent",
+        "name": "GetParent",
+        "id":         170,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "RhandLayer",
+        "name": "RhandLayer",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "LhandLayer",
+        "name": "LhandLayer",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "ShoesLayer",
+        "name": "ShoesLayer",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "PantsLayer",
+        "name": "PantsLayer",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "ShirtLayer",
+        "name": "ShirtLayer",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "HatLayer",
+        "name": "HatLayer",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "GlovesLayer",
+        "name": "GlovesLayer",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "RingLayer",
+        "name": "RingLayer",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "TalismanLayer",
+        "name": "TalismanLayer",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "NeckLayer",
+        "name": "NeckLayer",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "HairLayer",
+        "name": "HairLayer",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "WaistLayer",
+        "name": "WaistLayer",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "TorsoLayer",
+        "name": "TorsoLayer",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "BraceLayer",
+        "name": "BraceLayer",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "BeardLayer",
+        "name": "BeardLayer",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "TorsoHLayer",
+        "name": "TorsoHLayer",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "EarLayer",
+        "name": "EarLayer",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "ArmsLayer",
+        "name": "ArmsLayer",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "CloakLayer",
+        "name": "CloakLayer",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "BpackLayer",
+        "name": "BpackLayer",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "RobeLayer",
+        "name": "RobeLayer",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "EggsLayer",
+        "name": "EggsLayer",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "LegsLayer",
+        "name": "LegsLayer",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "HorseLayer",
+        "name": "HorseLayer",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "RstkLayer",
+        "name": "RstkLayer",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "NRstkLayer",
+        "name": "NRstkLayer",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "SellLayer",
+        "name": "SellLayer",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "BankLayer",
+        "name": "BankLayer",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "ObjAtLayer",
+        "name": "ObjAtLayer",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "LayerType ",
+                "type": " Byte"            
+            }        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "ObjAtLayerEx",
+        "name": "ObjAtLayerEx",
+        "id":         233,
+        "args":        
+        [
+            {
+                "name": "LayerType ",
+                "type": " Byte"            
+            },
+            {
+                "name": "PlayerID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "GetLayer",
+        "name": "GetLayer",
+        "id":         234,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "TargetPresent",
+        "name": "TargetPresent",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "TargetID",
+        "name": "TargetID",
+        "id":         72,
+        "args":        
+        [
+        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "WaitForTarget",
+        "name": "WaitForTarget",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "MaxWaitTimeMS ",
+                "type": " Integer"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "CancelTarget",
+        "name": "CancelTarget",
+        "id":         73,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "TargetToObject",
+        "name": "TargetToObject",
+        "id":         74,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "TargetToXYZ",
+        "name": "TargetToXYZ",
+        "id":         75,
+        "args":        
+        [
+            {
+                "name": "X ",
+                "type": " Word"            
+            },
+            {
+                "name": "Y ",
+                "type": " Word"            
+            },
+            {
+                "name": "Z ",
+                "type": " ShortInt"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "TargetToTile",
+        "name": "TargetToTile",
+        "id":         76,
+        "args":        
+        [
+            {
+                "name": "Tile ",
+                "type": " Word"            
+            },
+            {
+                "name": "X ",
+                "type": " Word"            
+            },
+            {
+                "name": "Y ",
+                "type": " Word"            
+            },
+            {
+                "name": "Z ",
+                "type": " ShortInt"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "TargetByResource",
+        "name": "TargetByResource",
+        "id":         389,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            },
+            {
+                "name": "Resource",
+                "type": " Word"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "WaitTargetObject",
+        "name": "WaitTargetObject",
+        "id":         77,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "WaitTargetTile",
+        "name": "WaitTargetTile",
+        "id":         78,
+        "args":        
+        [
+            {
+                "name": "Tile ",
+                "type": " Word"            
+            },
+            {
+                "name": "X ",
+                "type": " Word"            
+            },
+            {
+                "name": "Y ",
+                "type": " Word"            
+            },
+            {
+                "name": "Z ",
+                "type": " ShortInt"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "WaitTargetXYZ",
+        "name": "WaitTargetXYZ",
+        "id":         79,
+        "args":        
+        [
+            {
+                "name": "X ",
+                "type": " Word"            
+            },
+            {
+                "name": "Y ",
+                "type": " Word"            
+            },
+            {
+                "name": "Z ",
+                "type": " ShortInt"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "WaitTargetSelf",
+        "name": "WaitTargetSelf",
+        "id":         80,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "WaitTargetType",
+        "name": "WaitTargetType",
+        "id":         81,
+        "args":        
+        [
+            {
+                "name": "ObjType ",
+                "type": " Word"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "CancelWaitTarget",
+        "name": "CancelWaitTarget",
+        "id":         82,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "WaitTargetGround",
+        "name": "WaitTargetGround",
+        "id":         83,
+        "args":        
+        [
+            {
+                "name": "ObjType ",
+                "type": " Word"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "WaitTargetLast",
+        "name": "WaitTargetLast",
+        "id":         84,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "UOSay",
+        "name": "UOSay",
+        "id":         308,
+        "args":        
+        [
+            {
+                "name": "Text ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "UOSayColor",
+        "name": "UOSayColor",
+        "id":         309,
+        "args":        
+        [
+            {
+                "name": "Text ",
+                "type": " String"            
+            },
+            {
+                "name": "Color ",
+                "type": " Word"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "ConsoleEntryReply",
+        "name": "ConsoleEntryReply",
+        "id":         312,
+        "args":        
+        [
+            {
+                "name": "Text ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "ConsoleEntryUnicodeReply",
+        "name": "ConsoleEntryUnicodeReply",
+        "id":         313,
+        "args":        
+        [
+            {
+                "name": "Text ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "UseSkill",
+        "name": "UseSkill",
+        "id":         90,
+        "args":        
+        [
+            {
+                "name": "SkillName ",
+                "type": " String"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "SkillLockState",
+        "name": "SkillLockState",
+        "id":         369,
+        "args":        
+        [
+            {
+                "name": "SkillName ",
+                "type": " String"            
+            },
+            {
+                "name": "skillState ",
+                "type": " Byte"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "SetSkillLockState",
+        "name": "ChangeSkillLockState",
+        "id":         91,
+        "args":        
+        [
+            {
+                "name": "SkillName ",
+                "type": " String"            
+            },
+            {
+                "name": "skillState ",
+                "type": " Byte"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GetSkillLockState",
+        "name": "GetSkillLockState",
+        "id":         369,
+        "args":        
+        [
+            {
+                "name": "SkillName ",
+                "type": " String"            
+            }        
+        ],
+        "result": "byte"    
+    },
+    {
+        "pascal_name": "GetSkillValue",
+        "name": "GetSkillValue",
+        "id":         93,
+        "args":        
+        [
+            {
+                "name": "SkillName ",
+                "type": " String"            
+            }        
+        ],
+        "result": "double"    
+    },
+    {
+        "pascal_name": "GetSkillCurrentValue",
+        "name": "GetSkillCurrentValue",
+        "id":         351,
+        "args":        
+        [
+            {
+                "name": "SkillName ",
+                "type": " String"            
+            }        
+        ],
+        "result": "double"    
+    },
+    {
+        "pascal_name": "GetSkillCap",
+        "name": "GetSkillCap",
+        "id":         92,
+        "args":        
+        [
+            {
+                "name": "SkillName ",
+                "type": " String"            
+            }        
+        ],
+        "result": "double"    
+    },
+    {
+        "pascal_name": "UseObject",
+        "name": "UseObject",
+        "id":         101,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "UseType",
+        "name": "UseType",
+        "id":         102,
+        "args":        
+        [
+            {
+                "name": "ObjType ",
+                "type": " Word"            
+            },
+            {
+                "name": "Color ",
+                "type": " Word"            
+            }        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "UseFromGround",
+        "name": "UseFromGround",
+        "id":         103,
+        "args":        
+        [
+            {
+                "name": "ObjType ",
+                "type": " Word"            
+            },
+            {
+                "name": "Color ",
+                "type": " Word"            
+            }        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "UseItemOnMobile",
+        "name": "UseItemOnMobile",
+        "id":         359,
+        "args":        
+        [
+            {
+                "name": "ItemSerial ",
+                "type": " Cardinal"            
+            },
+            {
+                "name": "TargetSerial ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "BandageSelf",
+        "name": "BandageSelf",
+        "id":         360,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "ClickOnObject",
+        "name": "ClickOnObject",
+        "id":         104,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "Cast",
+        "name": "Cast",
+        "id":         96,
+        "args":        
+        [
+            {
+                "name": "SpellName ",
+                "type": " String"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "CastToObject",
+        "name": "CastToObject",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "SpellName ",
+                "type": " String"            
+            },
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "GetActiveAbility",
+        "name": "GetActiveAbility",
+        "id":         87,
+        "args":        
+        [
+        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "UsePrimaryAbility",
+        "name": "UsePrimaryAbility",
+        "id":         85,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "ToggleFly",
+        "name": "ToggleFly",
+        "id":         88,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "UseSecondaryAbility",
+        "name": "UseSecondaryAbility",
+        "id":         86,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "ClearJournalIgnore",
+        "name": "ClearJournalIgnore",
+        "id":         116,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "ClearChatUserIgnore",
+        "name": "ClearChatUserIgnore",
+        "id":         118,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "AddJournalIgnore",
+        "name": "AddJournalIgnore",
+        "id":         115,
+        "args":        
+        [
+            {
+                "name": "Str ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "AddChatUserIgnore",
+        "name": "AddChatUserIgnore",
+        "id":         117,
+        "args":        
+        [
+            {
+                "name": "Mobile ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "FindType",
+        "name": "FindType",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "ObjType ",
+                "type": " Word"            
+            },
+            {
+                "name": "Container ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "FindTypeEx",
+        "name": "FindTypeEx",
+        "id":         131,
+        "args":        
+        [
+            {
+                "name": "ObjType ",
+                "type": " Word"            
+            },
+            {
+                "name": "Color ",
+                "type": " Word"            
+            },
+            {
+                "name": "Container ",
+                "type": " Cardinal"            
+            },
+            {
+                "name": "InSub ",
+                "type": " Boolean"            
+            }        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "FindTypesArrayEx",
+        "name": "FindTypesArrayEx",
+        "id":         340,
+        "args":        
+        [
+            {
+                "name": "ObjTypes ",
+                "type": " TWordDynArray"            
+            },
+            {
+                "name": "Colors ",
+                "type": " TWordDynArray"            
+            },
+            {
+                "name": "Containers ",
+                "type": " TCardinalDynArray"            
+            },
+            {
+                "name": "InSub ",
+                "type": " Boolean"            
+            }        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "FindTypesArrayEx",
+        "name": "FindTypesArrayEx",
+        "id":         340,
+        "args":        
+        [
+            {
+                "name": "ObjTypes ",
+                "type": " array of Word"            
+            },
+            {
+                "name": "Colors ",
+                "type": " array of Word"            
+            },
+            {
+                "name": "Containers ",
+                "type": " array of Cardinal"            
+            },
+            {
+                "name": "InSub ",
+                "type": " Boolean"            
+            }        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "FindNotoriety",
+        "name": "FindNotoriety",
+        "id":         132,
+        "args":        
+        [
+            {
+                "name": "ObjType ",
+                "type": " Word"            
+            },
+            {
+                "name": "Notoriety ",
+                "type": " Byte"            
+            }        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "FindAtCoord",
+        "name": "FindAtCoord",
+        "id":         133,
+        "args":        
+        [
+            {
+                "name": "X ",
+                "type": " Word"            
+            },
+            {
+                "name": "Y ",
+                "type": " Word"            
+            }        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "Ignore",
+        "name": "Ignore",
+        "id":         134,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "IgnoreOff",
+        "name": "IgnoreOff",
+        "id":         135,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "IgnoreReset",
+        "name": "IgnoreReset",
+        "id":         136,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GetIgnoreList",
+        "name": "GetIgnoreList",
+        "id":         137,
+        "args":        
+        [
+            {
+                "name": "UserList ",
+                "type": " TStringList"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "GetIgnoreList",
+        "name": "GetIgnoreList",
+        "id":         137,
+        "args":        
+        [
+        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "GetFindedList",
+        "name": "GetFindedList",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "UserList ",
+                "type": " TStringList"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "GetFoundItems",
+        "name": "GetFoundList",
+        "id":         138,
+        "args":        
+        [
+        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "FindItem",
+        "name": "FindItem",
+        "id":         139,
+        "args":        
+        [
+        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "FindCount",
+        "name": "FindCount",
+        "id":         140,
+        "args":        
+        [
+        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "FindQuantity",
+        "name": "FindQuantity",
+        "id":         141,
+        "args":        
+        [
+        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "FindFullQuantity",
+        "name": "FindFullQuantity",
+        "id":         142,
+        "args":        
+        [
+        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "PredictedX",
+        "name": "PredictedX",
+        "id":         143,
+        "args":        
+        [
+        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "PredictedY",
+        "name": "PredictedY",
+        "id":         144,
+        "args":        
+        [
+        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "PredictedZ",
+        "name": "PredictedZ",
+        "id":         145,
+        "args":        
+        [
+        
+        ],
+        "result": "byte"    
+    },
+    {
+        "pascal_name": "PredictedDirection",
+        "name": "PredictedDirection",
+        "id":         146,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "GetX",
+        "name": "GetX",
+        "id":         15,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "GetY",
+        "name": "GetY",
+        "id":         16,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "GetZ",
+        "name": "GetZ",
+        "id":         17,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "byte"    
+    },
+    {
+        "pascal_name": "GetAltName",
+        "name": "GetAltName",
+        "id":         148,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "GetTitle",
+        "name": "GetTitle",
+        "id":         149,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "GetPlayerStatusText",
+        "name": "GetPlayerStatusText",
+        "id":         390,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "GetCliloc",
+        "name": "GetCliloc",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "GetTooltip",
+        "name": "GetTooltip",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "GetType",
+        "name": "GetType",
+        "id":         151,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "GetQuantity",
+        "name": "GetQuantity",
+        "id":         154,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "GetPrice",
+        "name": "GetPrice",
+        "id":         156,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "GetDirection",
+        "name": "GetDirection",
+        "id":         157,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "GetDistance",
+        "name": "GetDistance",
+        "id":         158,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "GetColor",
+        "name": "GetColor",
+        "id":         159,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "GetStr",
+        "name": "GetStr",
+        "id":         160,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "GetInt",
+        "name": "GetInt",
+        "id":         161,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "GetDex",
+        "name": "GetDex",
+        "id":         162,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "GetHP",
+        "name": "GetHP",
+        "id":         163,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "GetMaxHP",
+        "name": "GetMaxHP",
+        "id":         164,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "GetMana",
+        "name": "GetMana",
+        "id":         165,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "GetMaxMana",
+        "name": "GetMaxMana",
+        "id":         166,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "GetStam",
+        "name": "GetStam",
+        "id":         167,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "GetMaxStam",
+        "name": "GetMaxStam",
+        "id":         168,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "GetNotoriety",
+        "name": "GetNotoriety",
+        "id":         169,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "IsWarMode",
+        "name": "WarMode",
+        "id":         171,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "IsNPC",
+        "name": "IsNPC",
+        "id":         172,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "IsDead",
+        "name": "IsDead",
+        "id":         173,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "IsRunning",
+        "name": "IsRunning",
+        "id":         174,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "IsContainer",
+        "name": "IsContainer",
+        "id":         175,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "IsHidden",
+        "name": "IsHidden",
+        "id":         176,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "IsMovable",
+        "name": "IsMovable",
+        "id":         177,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "IsYellowHits",
+        "name": "IsYellowHits",
+        "id":         178,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "IsPoisoned",
+        "name": "IsPoisoned",
+        "id":         179,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "IsParalyzed",
+        "name": "IsParalyzed",
+        "id":         180,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "IsFemale",
+        "name": "IsFemale",
+        "id":         181,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "IsHouse",
+        "name": "IsHouse",
+        "id":         382,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "DragItem",
+        "name": "DragItem",
+        "id":         191,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            },
+            {
+                "name": "Count ",
+                "type": " Integer"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "DropItem",
+        "name": "DropItem",
+        "id":         192,
+        "args":        
+        [
+            {
+                "name": "MoveIntoID ",
+                "type": " Cardinal"            
+            },
+            {
+                "name": "X ",
+                "type": " Integer"            
+            },
+            {
+                "name": "Y ",
+                "type": " Integer"            
+            },
+            {
+                "name": "Z ",
+                "type": " Integer"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "MoveItem",
+        "name": "MoveItem",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            },
+            {
+                "name": "Count ",
+                "type": " Integer"            
+            },
+            {
+                "name": "MoveIntoID ",
+                "type": " Cardinal"            
+            },
+            {
+                "name": "X ",
+                "type": " Integer"            
+            },
+            {
+                "name": "Y ",
+                "type": " Integer"            
+            },
+            {
+                "name": "Z ",
+                "type": " Integer"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "Grab",
+        "name": "Grab",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            },
+            {
+                "name": "Count ",
+                "type": " Integer"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "Drop",
+        "name": "Drop",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            },
+            {
+                "name": "Count ",
+                "type": " Integer"            
+            },
+            {
+                "name": "X ",
+                "type": " Integer"            
+            },
+            {
+                "name": "Y ",
+                "type": " Integer"            
+            },
+            {
+                "name": "Z ",
+                "type": " Integer"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "DropHere",
+        "name": "DropHere",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "ItemID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "MoveItems",
+        "name": "MoveItems",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "Container ",
+                "type": " Cardinal"            
+            },
+            {
+                "name": "ItemsType ",
+                "type": " Word"            
+            },
+            {
+                "name": "ItemsColor ",
+                "type": " Word"            
+            },
+            {
+                "name": "MoveIntoID ",
+                "type": " Cardinal"            
+            },
+            {
+                "name": "X ",
+                "type": " Integer"            
+            },
+            {
+                "name": "Y ",
+                "type": " Integer"            
+            },
+            {
+                "name": "Z ",
+                "type": " Integer"            
+            },
+            {
+                "name": "DelayMS ",
+                "type": " Integer"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "MoveItemsEx",
+        "name": "MoveItemsEx",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "Container ",
+                "type": " Cardinal"            
+            },
+            {
+                "name": "ItemsType ",
+                "type": " Word"            
+            },
+            {
+                "name": "ItemsColor ",
+                "type": " Word"            
+            },
+            {
+                "name": "MoveIntoID ",
+                "type": " Cardinal"            
+            },
+            {
+                "name": "X ",
+                "type": " Integer"            
+            },
+            {
+                "name": "Y ",
+                "type": " Integer"            
+            },
+            {
+                "name": "Z ",
+                "type": " Integer"            
+            },
+            {
+                "name": "DelayMS ",
+                "type": " Integer"            
+            },
+            {
+                "name": "MaxItems ",
+                "type": " Integer"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "RequestContextMenu",
+        "name": "RequestContextMenu",
+        "id":         193,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "SetContextMenuHook",
+        "name": "SetContextMenuHook",
+        "id":         194,
+        "args":        
+        [
+            {
+                "name": "MenuID ",
+                "type": " Cardinal"            
+            },
+            {
+                "name": "EntryNumber ",
+                "type": " Byte"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "IsTrade",
+        "name": "IsTrade",
+        "id":         197,
+        "args":        
+        [
+        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "GetTradeContainer",
+        "name": "GetTradeContainer",
+        "id":         198,
+        "args":        
+        [
+            {
+                "name": "TradeNum ",
+                "type": " Byte"            
+            },
+            {
+                "name": "Num ",
+                "type": " Byte"            
+            }        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "TradeCheck",
+        "name": "TradeCheck",
+        "id":         202,
+        "args":        
+        [
+            {
+                "name": "TradeNum ",
+                "type": " Byte"            
+            },
+            {
+                "name": "Num ",
+                "type": " Byte"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "GetTradeOpponent",
+        "name": "GetTradeOpponent",
+        "id":         199,
+        "args":        
+        [
+            {
+                "name": "TradeNum ",
+                "type": " Byte"            
+            }        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "GetTradeOpponentName",
+        "name": "GetTradeOpponentName",
+        "id":         201,
+        "args":        
+        [
+            {
+                "name": "TradeNum ",
+                "type": " Byte"            
+            }        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "TradeCount",
+        "name": "TradeCount",
+        "id":         200,
+        "args":        
+        [
+        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "ConfirmTrade",
+        "name": "ConfirmTrade",
+        "id":         203,
+        "args":        
+        [
+            {
+                "name": "TradeNum ",
+                "type": " Byte"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "CancelTrade",
+        "name": "CancelTrade",
+        "id":         204,
+        "args":        
+        [
+            {
+                "name": "TradeNum ",
+                "type": " Byte"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "WaitMenu",
+        "name": "WaitMenu",
+        "id":         205,
+        "args":        
+        [
+            {
+                "name": "MenuCaption ",
+                "type": " String"            
+            },
+            {
+                "name": "ElementCaption ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "CloseMenu",
+        "name": "CloseMenu",
+        "id":         210,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "AutoMenu",
+        "name": "AutoMenu",
+        "id":         206,
+        "args":        
+        [
+            {
+                "name": "MenuCaption ",
+                "type": " String"            
+            },
+            {
+                "name": "ElementCaption ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "CancelMenu",
+        "name": "CancelMenu",
+        "id":         209,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "CancelAllMenuHooks",
+        "name": "CancelAllMenuHooks",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "MenuHookPresent",
+        "name": "MenuHookPresent",
+        "id":         207,
+        "args":        
+        [
+        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "MenuPresent",
+        "name": "MenuPresent",
+        "id":         208,
+        "args":        
+        [
+        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "WaitGump",
+        "name": "WaitGump",
+        "id":         211,
+        "args":        
+        [
+            {
+                "name": "Value ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GumpAutoTextEntry",
+        "name": "GumpAutoTextEntry",
+        "id":         213,
+        "args":        
+        [
+            {
+                "name": "TextEntryID ",
+                "type": " Integer"            
+            },
+            {
+                "name": "Value ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GumpAutoRadiobutton",
+        "name": "GumpAutoRadiobutton",
+        "id":         214,
+        "args":        
+        [
+            {
+                "name": "RadiobuttonID ",
+                "type": " Integer"            
+            },
+            {
+                "name": "Value ",
+                "type": " Integer"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GumpAutoCheckBox",
+        "name": "GumpAutoCheckBox",
+        "id":         215,
+        "args":        
+        [
+            {
+                "name": "CheckBoxID ",
+                "type": " Integer"            
+            },
+            {
+                "name": "Value ",
+                "type": " Integer"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "NumGumpButton",
+        "name": "NumGumpButton",
+        "id":         216,
+        "args":        
+        [
+            {
+                "name": "GumpIndex ",
+                "type": " Word"            
+            },
+            {
+                "name": "Value ",
+                "type": " Integer"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "NumGumpTextEntry",
+        "name": "NumGumpTextEntry",
+        "id":         217,
+        "args":        
+        [
+            {
+                "name": "GumpIndex ",
+                "type": " Word"            
+            },
+            {
+                "name": "TextEntryID ",
+                "type": " Integer"            
+            },
+            {
+                "name": "Value ",
+                "type": " String"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "NumGumpRadiobutton",
+        "name": "NumGumpRadiobutton",
+        "id":         218,
+        "args":        
+        [
+            {
+                "name": "GumpIndex ",
+                "type": " Word"            
+            },
+            {
+                "name": "RadiobuttonID ",
+                "type": " Integer"            
+            },
+            {
+                "name": "Value ",
+                "type": " Integer"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "NumGumpCheckBox",
+        "name": "NumGumpCheckBox",
+        "id":         219,
+        "args":        
+        [
+            {
+                "name": "GumpIndex ",
+                "type": " Word"            
+            },
+            {
+                "name": "CBID ",
+                "type": " Integer"            
+            },
+            {
+                "name": "Value ",
+                "type": " Integer"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "WaitTextEntry",
+        "name": "WaitTextEntry",
+        "id":         212,
+        "args":        
+        [
+            {
+                "name": "Value ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GetGumpsCount",
+        "name": "GetGumpsCount",
+        "id":         220,
+        "args":        
+        [
+        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "IsGump",
+        "name": "IsGump",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "GetGumpSerial",
+        "name": "GetGumpSerial",
+        "id":         222,
+        "args":        
+        [
+            {
+                "name": "GumpIndex ",
+                "type": " Word"            
+            }        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "GetGumpID",
+        "name": "GetGumpID",
+        "id":         223,
+        "args":        
+        [
+            {
+                "name": "GumpIndex ",
+                "type": " Word"            
+            }        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "IsGumpCanBeClosed",
+        "name": "IsGumpCanBeClosed",
+        "id":         224,
+        "args":        
+        [
+            {
+                "name": "GumpIndex ",
+                "type": " Word"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "GetGumpTextLines",
+        "name": "GetGumpTextLines",
+        "id":         225,
+        "args":        
+        [
+            {
+                "name": "GumpIndex ",
+                "type": " Word"            
+            },
+            {
+                "name": "TL ",
+                "type": " TStringList"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GetGumpTextLines",
+        "name": "GetGumpTextLines",
+        "id":         225,
+        "args":        
+        [
+            {
+                "name": "GumpIndex ",
+                "type": " Word"            
+            }        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "GetGumpFullLines",
+        "name": "GetGumpFullLines",
+        "id":         226,
+        "args":        
+        [
+            {
+                "name": "GumpIndex ",
+                "type": " Word"            
+            },
+            {
+                "name": "TL ",
+                "type": " TStringList"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GetGumpFullLines",
+        "name": "GetGumpFullLines",
+        "id":         226,
+        "args":        
+        [
+            {
+                "name": "GumpIndex ",
+                "type": " Word"            
+            }        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "GetGumpShortLines",
+        "name": "GetGumpShortLines",
+        "id":         227,
+        "args":        
+        [
+            {
+                "name": "GumpIndex ",
+                "type": " Word"            
+            },
+            {
+                "name": "TL ",
+                "type": " TStringList"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GetGumpShortLines",
+        "name": "GetGumpShortLines",
+        "id":         227,
+        "args":        
+        [
+            {
+                "name": "GumpIndex ",
+                "type": " Word"            
+            }        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "GetGumpButtonsDescription",
+        "name": "GetGumpButtonsDescription",
+        "id":         228,
+        "args":        
+        [
+            {
+                "name": "GumpIndex ",
+                "type": " Word"            
+            },
+            {
+                "name": "TL ",
+                "type": " TStringList"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GetGumpButtonsDescription",
+        "name": "GetGumpButtonsDescription",
+        "id":         228,
+        "args":        
+        [
+            {
+                "name": "GumpIndex ",
+                "type": " Word"            
+            }        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "GetGumpInfo",
+        "name": "GetGumpInfo",
+        "id":         229,
+        "args":        
+        [
+            {
+                "name": "GumpIndex ",
+                "type": " Word"            
+            },
+            {
+                "name": "GumpInfo ",
+                "type": " TGumpInfo"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GetGumpInfo",
+        "name": "GetGumpInfo",
+        "id":         229,
+        "args":        
+        [
+            {
+                "name": "GumpIndex ",
+                "type": " Word"            
+            }        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "CloseSimpleGump",
+        "name": "CloseSimpleGump",
+        "id":         221,
+        "args":        
+        [
+            {
+                "name": "GumpIndex ",
+                "type": " Word"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "AddGumpIgnoreBySerial",
+        "name": "AddGumpIgnoreBySerial",
+        "id":         231,
+        "args":        
+        [
+            {
+                "name": "Serial ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "AddGumpIgnoreByID",
+        "name": "AddGumpIgnoreByID",
+        "id":         230,
+        "args":        
+        [
+            {
+                "name": "ID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "ClearGumpsIgnore",
+        "name": "ClearGumpsIgnore",
+        "id":         232,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "WearItem",
+        "name": "WearItem",
+        "id":         235,
+        "args":        
+        [
+            {
+                "name": "Layer ",
+                "type": " Byte"            
+            },
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "Disarm",
+        "name": "Disarm",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "Equip",
+        "name": "Equip",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "Layer ",
+                "type": " Byte"            
+            },
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "Equipt",
+        "name": "Equipt",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "Layer ",
+                "type": " Byte"            
+            },
+            {
+                "name": "ObjType ",
+                "type": " Word"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "Unequip",
+        "name": "Unequip",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "Layer ",
+                "type": " Byte"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "Undress",
+        "name": "Undress",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "DressSavedSet",
+        "name": "DressSavedSet",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "EquipDressSet",
+        "name": "EquipDressSet",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "SetDress",
+        "name": "SetDress",
+        "id":         238,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "Count",
+        "name": "Count",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "ObjType ",
+                "type": " Word"            
+            }        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "CountGround",
+        "name": "CountGround",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "ObjType ",
+                "type": " Word"            
+            }        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "CountEx",
+        "name": "CountEx",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "ObjType ",
+                "type": " Word"            
+            },
+            {
+                "name": "Color ",
+                "type": " Word"            
+            },
+            {
+                "name": "Container ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "BP",
+        "name": "BP",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "BM",
+        "name": "BM",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "GA",
+        "name": "GA",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "GS",
+        "name": "GS",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "MR",
+        "name": "MR",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "NS",
+        "name": "NS",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "SA",
+        "name": "SA",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "SS",
+        "name": "SS",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "BPCount",
+        "name": "BPCount",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "BMCount",
+        "name": "BMCount",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "GACount",
+        "name": "GACount",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "GSCount",
+        "name": "GSCount",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "MRCount",
+        "name": "MRCount",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "NSCount",
+        "name": "NSCount",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "SACount",
+        "name": "SACount",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "SSCount",
+        "name": "SSCount",
+        "id":         999,
+        "args":        
+        [
+        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "AutoBuy",
+        "name": "AutoBuy",
+        "id":         240,
+        "args":        
+        [
+            {
+                "name": "ItemType ",
+                "type": " Word"            
+            },
+            {
+                "name": "ItemColor ",
+                "type": " Word"            
+            },
+            {
+                "name": "Quantity ",
+                "type": " Word"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "AutoBuyEx",
+        "name": "AutoBuyEx",
+        "id":         243,
+        "args":        
+        [
+            {
+                "name": "ItemType ",
+                "type": " Word"            
+            },
+            {
+                "name": "ItemColor ",
+                "type": " Word"            
+            },
+            {
+                "name": "Quantity ",
+                "type": " Word"            
+            },
+            {
+                "name": "Price ",
+                "type": " Cardinal"            
+            },
+            {
+                "name": "Name ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GetShopList",
+        "name": "GetShopList",
+        "id":         241,
+        "args":        
+        [
+            {
+                "name": "List ",
+                "type": " TStringList"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GetShopList",
+        "name": "GetShopList",
+        "id":         241,
+        "args":        
+        [
+        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "ClearShopList",
+        "name": "ClearShopList",
+        "id":         242,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GetAutoBuyDelay",
+        "name": "GetAutoBuyDelay",
+        "id":         244,
+        "args":        
+        [
+        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "SetAutoBuyDelay",
+        "name": "SetAutoBuyDelay",
+        "id":         245,
+        "args":        
+        [
+            {
+                "name": "Value ",
+                "type": " Word"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "AutoSell",
+        "name": "AutoSell",
+        "id":         248,
+        "args":        
+        [
+            {
+                "name": "ItemType ",
+                "type": " Word"            
+            },
+            {
+                "name": "ItemColor ",
+                "type": " Word"            
+            },
+            {
+                "name": "Quantity ",
+                "type": " Word"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GetAutoSellDelay",
+        "name": "GetAutoSellDelay",
+        "id":         246,
+        "args":        
+        [
+        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "SetAutoSellDelay",
+        "name": "SetAutoSellDelay",
+        "id":         247,
+        "args":        
+        [
+            {
+                "name": "Value ",
+                "type": " Word"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GetTileFlags",
+        "name": "GetTileFlags",
+        "id":         278,
+        "args":        
+        [
+            {
+                "name": "Group ",
+                "type": " Byte"            
+            },
+            {
+                "name": "Tile ",
+                "type": " Word"            
+            }        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "ConvertIntegerToFlags",
+        "name": "ConvertIntegerToFlags",
+        "id":         350,
+        "args":        
+        [
+            {
+                "name": "group ",
+                "type": " Byte"            
+            },
+            {
+                "name": "I ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "GetLayerCount",
+        "name": "GetLayerCount",
+        "id":         282,
+        "args":        
+        [
+            {
+                "name": "x ",
+                "type": " Word"            
+            },
+            {
+                "name": "y ",
+                "type": " Word"            
+            },
+            {
+                "name": "WorldNum ",
+                "type": " Byte"            
+            }        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "GetLandTileData",
+        "name": "GetLandTileData",
+        "id":         280,
+        "args":        
+        [
+            {
+                "name": "Tile ",
+                "type": " Word"            
+            }        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "GetStaticTileData",
+        "name": "GetStaticTileData",
+        "id":         281,
+        "args":        
+        [
+            {
+                "name": "Tile ",
+                "type": " Word"            
+            }        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "ReadStaticsXY",
+        "name": "ReadStaticsXY",
+        "id":         283,
+        "args":        
+        [
+            {
+                "name": "X ",
+                "type": " Word"            
+            },
+            {
+                "name": "Y ",
+                "type": " Word"            
+            },
+            {
+                "name": "WorldNum ",
+                "type": " Byte"            
+            }        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "AddUserStatic",
+        "name": "AddUserStatic",
+        "id":         383,
+        "args":        
+        [
+            {
+                "name": "StaticItem ",
+                "type": " TStaticItem"            
+            },
+            {
+                "name": "WorldNum ",
+                "type": " Byte"            
+            }        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "RemoveUserStatic",
+        "name": "RemoveUserStatic",
+        "id":         384,
+        "args":        
+        [
+            {
+                "name": "ID ",
+                "type": " Integer"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "ClearUserStatics",
+        "name": "ClearUserStatics",
+        "id":         385,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GetSurfaceZ",
+        "name": "GetSurfaceZ",
+        "id":         284,
+        "args":        
+        [
+            {
+                "name": "X ",
+                "type": " Word"            
+            },
+            {
+                "name": "Y ",
+                "type": " Word"            
+            },
+            {
+                "name": "WorldNum ",
+                "type": " Byte"            
+            }        
+        ],
+        "result": "byte"    
+    },
+    {
+        "pascal_name": "GetMapCell",
+        "name": "GetCell",
+        "id":         388,
+        "args":        
+        [
+            {
+                "name": "X ",
+                "type": " Word"            
+            },
+            {
+                "name": "Y ",
+                "type": " Word"            
+            },
+            {
+                "name": "WorldNum ",
+                "type": " Byte"            
+            }        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "IsWorldCellPassable",
+        "name": "IsWorldCellPassable",
+        "id":         285,
+        "args":        
+        [
+            {
+                "name": "CurrX ",
+                "type": " Word"            
+            },
+            {
+                "name": "CurrY ",
+                "type": " Word"            
+            },
+            {
+                "name": "CurrZ ",
+                "type": " ShortInt"            
+            },
+            {
+                "name": "DestX ",
+                "type": " Word"            
+            },
+            {
+                "name": "DestY ",
+                "type": " Word"            
+            },
+            {
+                "name": "DestZ ",
+                "type": " ShortInt"            
+            },
+            {
+                "name": "WorldNum ",
+                "type": " Byte"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "GetLandTilesArray",
+        "name": "GetLandTilesArray",
+        "id":         287,
+        "args":        
+        [
+            {
+                "name": "Xmin ",
+                "type": " Word"            
+            },
+            {
+                "name": "Ymin ",
+                "type": " Word"            
+            },
+            {
+                "name": "Xmax ",
+                "type": " Word"            
+            },
+            {
+                "name": "Ymax ",
+                "type": " Word"            
+            },
+            {
+                "name": "WorldNum ",
+                "type": " Byte"            
+            },
+            {
+                "name": "TileType ",
+                "type": " Word"            
+            },
+            {
+                "name": "LandTilesArray ",
+                "type": " TFoundTilesArray"            
+            }        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "GetLandTilesArrayEx",
+        "name": "GetLandTilesArrayEx",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "Xmin ",
+                "type": " Word"            
+            },
+            {
+                "name": "Ymin ",
+                "type": " Word"            
+            },
+            {
+                "name": "Xmax ",
+                "type": " Word"            
+            },
+            {
+                "name": "Ymax ",
+                "type": " Word"            
+            },
+            {
+                "name": "WorldNum ",
+                "type": " Byte"            
+            },
+            {
+                "name": "TileTypes ",
+                "type": " array of Word"            
+            },
+            {
+                "name": "LandTilesArray ",
+                "type": " TFoundTilesArray"            
+            }        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "GetLandTilesArray",
+        "name": "GetLandTilesArray",
+        "id":         287,
+        "args":        
+        [
+            {
+                "name": "Xmin ",
+                "type": " Word"            
+            },
+            {
+                "name": "Ymin ",
+                "type": " Word"            
+            },
+            {
+                "name": "Xmax ",
+                "type": " Word"            
+            },
+            {
+                "name": "Ymax ",
+                "type": " Word"            
+            },
+            {
+                "name": "WorldNum ",
+                "type": " Byte"            
+            },
+            {
+                "name": "TileType ",
+                "type": " Word"            
+            }        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "GetLandTilesArrayEx",
+        "name": "GetLandTilesArrayEx",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "Xmin ",
+                "type": " Word"            
+            },
+            {
+                "name": "Ymin ",
+                "type": " Word"            
+            },
+            {
+                "name": "Xmax ",
+                "type": " Word"            
+            },
+            {
+                "name": "Ymax ",
+                "type": " Word"            
+            },
+            {
+                "name": "WorldNum ",
+                "type": " Byte"            
+            },
+            {
+                "name": "TileTypes ",
+                "type": " array of Word"            
+            }        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "GetStaticTilesArray",
+        "name": "GetStaticTilesArray",
+        "id":         286,
+        "args":        
+        [
+            {
+                "name": "Xmin ",
+                "type": " Word"            
+            },
+            {
+                "name": "Ymin ",
+                "type": " Word"            
+            },
+            {
+                "name": "Xmax ",
+                "type": " Word"            
+            },
+            {
+                "name": "Ymax ",
+                "type": " Word"            
+            },
+            {
+                "name": "WorldNum ",
+                "type": " Byte"            
+            },
+            {
+                "name": "TileType ",
+                "type": " Word"            
+            },
+            {
+                "name": "FoundTilesArray ",
+                "type": " TFoundTilesArray"            
+            }        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "GetStaticTilesArrayEx",
+        "name": "GetStaticTilesArrayEx",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "Xmin ",
+                "type": " Word"            
+            },
+            {
+                "name": "Ymin ",
+                "type": " Word"            
+            },
+            {
+                "name": "Xmax ",
+                "type": " Word"            
+            },
+            {
+                "name": "Ymax ",
+                "type": " Word"            
+            },
+            {
+                "name": "WorldNum ",
+                "type": " Byte"            
+            },
+            {
+                "name": "TileTypes ",
+                "type": " array of Word"            
+            },
+            {
+                "name": "FoundTilesArray ",
+                "type": " TFoundTilesArray"            
+            }        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "GetStaticTilesArray",
+        "name": "GetStaticTilesArray",
+        "id":         286,
+        "args":        
+        [
+            {
+                "name": "Xmin ",
+                "type": " Word"            
+            },
+            {
+                "name": "Ymin ",
+                "type": " Word"            
+            },
+            {
+                "name": "Xmax ",
+                "type": " Word"            
+            },
+            {
+                "name": "Ymax ",
+                "type": " Word"            
+            },
+            {
+                "name": "WorldNum ",
+                "type": " Byte"            
+            },
+            {
+                "name": "TileType ",
+                "type": " Word"            
+            }        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "GetStaticTilesArrayEx",
+        "name": "GetStaticTilesArrayEx",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "Xmin ",
+                "type": " Word"            
+            },
+            {
+                "name": "Ymin ",
+                "type": " Word"            
+            },
+            {
+                "name": "Xmax ",
+                "type": " Word"            
+            },
+            {
+                "name": "Ymax ",
+                "type": " Word"            
+            },
+            {
+                "name": "WorldNum ",
+                "type": " Byte"            
+            },
+            {
+                "name": "TileTypes ",
+                "type": " array of Word"            
+            }        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "SetSilentMode",
+        "name": "SetSilentMode",
+        "id":         301,
+        "args":        
+        [
+            {
+                "name": "Value ",
+                "type": " Boolean"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "RequestStats",
+        "name": "RequestStats",
+        "id":         249,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "HelpRequest",
+        "name": "HelpRequest",
+        "id":         250,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "QuestRequest",
+        "name": "QuestRequest",
+        "id":         251,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "RenameMobile",
+        "name": "RenameMobile",
+        "id":         252,
+        "args":        
+        [
+            {
+                "name": "MobID ",
+                "type": " Cardinal"            
+            },
+            {
+                "name": "NewName ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "OpenDoor",
+        "name": "OpenDoor",
+        "id":         182,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "Bow",
+        "name": "Bow",
+        "id":         183,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "Salute",
+        "name": "Salute",
+        "id":         184,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "AddFigure",
+        "name": "AddFigure",
+        "id":         550,
+        "args":        
+        [
+            {
+                "name": "figure ",
+                "type": " TMapFigure"            
+            }        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "RemoveFigure",
+        "name": "RemoveFigure",
+        "id":         551,
+        "args":        
+        [
+            {
+                "name": "FigureID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "UpdateFigure",
+        "name": "UpdateFigure",
+        "id":         552,
+        "args":        
+        [
+            {
+                "name": "FigureID ",
+                "type": " Cardinal"            
+            },
+            {
+                "name": "figure ",
+                "type": " TMapFigure"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "ClearFigures",
+        "name": "ClearFigures",
+        "id":         553,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "CheckLag",
+        "name": "CheckLag",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "timeoutMS ",
+                "type": " Integer"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "SetRunUnmountTimer",
+        "name": "SetRunUnmountTimer",
+        "id":         316,
+        "args":        
+        [
+            {
+                "name": "Value ",
+                "type": " Word"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "SetWalkMountTimer",
+        "name": "SetWalkMountTimer",
+        "id":         317,
+        "args":        
+        [
+            {
+                "name": "Value ",
+                "type": " Word"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "SetRunMountTimer",
+        "name": "SetRunMountTimer",
+        "id":         318,
+        "args":        
+        [
+            {
+                "name": "Value ",
+                "type": " Word"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "SetWalkUnmountTimer",
+        "name": "SetWalkUnmountTimer",
+        "id":         319,
+        "args":        
+        [
+            {
+                "name": "Value ",
+                "type": " Word"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GetRunUnmountTimer",
+        "name": "GetRunUnmountTimer",
+        "id":         322,
+        "args":        
+        [
+        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "GetWalkMountTimer",
+        "name": "GetWalkMountTimer",
+        "id":         321,
+        "args":        
+        [
+        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "GetRunMountTimer",
+        "name": "GetRunMountTimer",
+        "id":         320,
+        "args":        
+        [
+        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "GetWalkUnmountTimer",
+        "name": "GetWalkUnmountTimer",
+        "id":         323,
+        "args":        
+        [
+        
+        ],
+        "result": "ushort"    
+    },
+    {
+        "pascal_name": "GetNextStepZ",
+        "name": "GetNextStepZ",
+        "id":         366,
+        "args":        
+        [
+            {
+                "name": "CurrX ",
+                "type": " Word"            
+            },
+            {
+                "name": "CurrY ",
+                "type": " Word"            
+            },
+            {
+                "name": "DestX ",
+                "type": " Word"            
+            },
+            {
+                "name": "DestY ",
+                "type": " Word"            
+            },
+            {
+                "name": "WorldNum ",
+                "type": " Byte"            
+            },
+            {
+                "name": "CurrZ ",
+                "type": " ShortInt"            
+            }        
+        ],
+        "result": "byte"    
+    },
+    {
+        "pascal_name": "CalcDir",
+        "name": "CalcDir",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "Xfrom ",
+                "type": " Word"            
+            },
+            {
+                "name": "Yfrom ",
+                "type": " Word"            
+            },
+            {
+                "name": "Xto ",
+                "type": " Word"            
+            },
+            {
+                "name": "Yto ",
+                "type": " Word"            
+            }        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "Step",
+        "name": "Step",
+        "id":         324,
+        "args":        
+        [
+            {
+                "name": "Direction ",
+                "type": " Byte"            
+            },
+            {
+                "name": "Running ",
+                "type": " Boolean"            
+            }        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "StepQ",
+        "name": "StepQ",
+        "id":         325,
+        "args":        
+        [
+            {
+                "name": "Direction ",
+                "type": " Byte"            
+            },
+            {
+                "name": "Running ",
+                "type": " Boolean"            
+            }        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "SetBadLocation",
+        "name": "SetBadLocation",
+        "id":         328,
+        "args":        
+        [
+            {
+                "name": "X ",
+                "type": " Word"            
+            },
+            {
+                "name": "Y ",
+                "type": " Word"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "SetGoodLocation",
+        "name": "SetGoodLocation",
+        "id":         329,
+        "args":        
+        [
+            {
+                "name": "X ",
+                "type": " Word"            
+            },
+            {
+                "name": "Y ",
+                "type": " Word"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "ClearBadLocationList",
+        "name": "ClearBadLocationList",
+        "id":         330,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "SetBadObject",
+        "name": "SetBadObject",
+        "id":         331,
+        "args":        
+        [
+            {
+                "name": "ObjType ",
+                "type": " Word"            
+            },
+            {
+                "name": "Color ",
+                "type": " Word"            
+            },
+            {
+                "name": "Radius ",
+                "type": " Byte"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "ClearBadObjectList",
+        "name": "ClearBadObjectList",
+        "id":         332,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "MoverStop",
+        "name": "MoverStop",
+        "id":         353,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "MoveXY",
+        "name": "MoveXY",
+        "id":         327,
+        "args":        
+        [
+            {
+                "name": "Xdst ",
+                "type": " Word"            
+            },
+            {
+                "name": "Ydst ",
+                "type": " Word"            
+            },
+            {
+                "name": "Optimized ",
+                "type": " Boolean"            
+            },
+            {
+                "name": "Accuracy ",
+                "type": " Integer"            
+            },
+            {
+                "name": "Running ",
+                "type": " Boolean"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "MoveXY",
+        "name": "MoveXY",
+        "id":         327,
+        "args":        
+        [
+            {
+                "name": "Xdst ",
+                "type": " Word"            
+            },
+            {
+                "name": "Ydst ",
+                "type": " Word"            
+            },
+            {
+                "name": "Optimized ",
+                "type": " Boolean"            
+            },
+            {
+                "name": "Accuracy ",
+                "type": " Integer"            
+            },
+            {
+                "name": "Running ",
+                "type": " Boolean"            
+            },
+            {
+                "name": "StepCallback ",
+                "type": " TMoverStepCallBack = nil"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "newMoveXY",
+        "name": "newMoveXY",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "Xdst ",
+                "type": " Word"            
+            },
+            {
+                "name": "Ydst ",
+                "type": " Word"            
+            },
+            {
+                "name": "Optimized ",
+                "type": " Boolean"            
+            },
+            {
+                "name": "Accuracy ",
+                "type": " Integer"            
+            },
+            {
+                "name": "Running ",
+                "type": " Boolean"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "newMoveXY",
+        "name": "newMoveXY",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "Xdst ",
+                "type": " Word"            
+            },
+            {
+                "name": "Ydst ",
+                "type": " Word"            
+            },
+            {
+                "name": "Optimized ",
+                "type": " Boolean"            
+            },
+            {
+                "name": "Accuracy ",
+                "type": " Integer"            
+            },
+            {
+                "name": "Running ",
+                "type": " Boolean"            
+            },
+            {
+                "name": "StepCallback ",
+                "type": " TMoverStepCallBack = nil"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "MoveXYZ",
+        "name": "MoveXYZ",
+        "id":         326,
+        "args":        
+        [
+            {
+                "name": "Xdst ",
+                "type": " Word"            
+            },
+            {
+                "name": "Ydst ",
+                "type": " Word"            
+            },
+            {
+                "name": "Zdst ",
+                "type": " ShortInt"            
+            },
+            {
+                "name": "AccuracyXY ",
+                "type": " Integer"            
+            },
+            {
+                "name": "AccuracyZ ",
+                "type": " Integer"            
+            },
+            {
+                "name": "Running ",
+                "type": " Boolean"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "MoveXYZ",
+        "name": "MoveXYZ",
+        "id":         326,
+        "args":        
+        [
+            {
+                "name": "Xdst ",
+                "type": " Word"            
+            },
+            {
+                "name": "Ydst ",
+                "type": " Word"            
+            },
+            {
+                "name": "Zdst ",
+                "type": " ShortInt"            
+            },
+            {
+                "name": "AccuracyXY ",
+                "type": " Integer"            
+            },
+            {
+                "name": "AccuracyZ ",
+                "type": " Integer"            
+            },
+            {
+                "name": "Running ",
+                "type": " Boolean"            
+            },
+            {
+                "name": "StepCallback ",
+                "type": " TMoverStepCallBack = nil"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "GetPathArray",
+        "name": "GetPathArray",
+        "id":         334,
+        "args":        
+        [
+            {
+                "name": "Xdst ",
+                "type": " Word"            
+            },
+            {
+                "name": "Ydst ",
+                "type": " Word"            
+            },
+            {
+                "name": "Optimized ",
+                "type": " Boolean"            
+            },
+            {
+                "name": "Accuracy ",
+                "type": " Integer"            
+            },
+            {
+                "name": "PathArray ",
+                "type": " TPathArray"            
+            }        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "GetPathArray3D",
+        "name": "GetPathArray3D",
+        "id":         335,
+        "args":        
+        [
+            {
+                "name": "StartX ",
+                "type": " Word"            
+            },
+            {
+                "name": "StartY ",
+                "type": " Word"            
+            },
+            {
+                "name": "StartZ ",
+                "type": " ShortInt"            
+            },
+            {
+                "name": "FinishX ",
+                "type": " Word"            
+            },
+            {
+                "name": "FinishY ",
+                "type": " Word"            
+            },
+            {
+                "name": "FinishZ ",
+                "type": " ShortInt"            
+            },
+            {
+                "name": "WorldNum ",
+                "type": " Byte"            
+            },
+            {
+                "name": "AccuracyXY ",
+                "type": " Integer"            
+            },
+            {
+                "name": "AccuracyZ ",
+                "type": " Integer"            
+            },
+            {
+                "name": "Run ",
+                "type": " Boolean"            
+            },
+            {
+                "name": "PathArray ",
+                "type": " TPathArray"            
+            }        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "GetPathArray",
+        "name": "GetPathArray",
+        "id":         334,
+        "args":        
+        [
+            {
+                "name": "Xdst ",
+                "type": " Word"            
+            },
+            {
+                "name": "Ydst ",
+                "type": " Word"            
+            },
+            {
+                "name": "Optimized ",
+                "type": " Boolean"            
+            },
+            {
+                "name": "Accuracy ",
+                "type": " Integer"            
+            }        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "GetPathArray3D",
+        "name": "GetPathArray3D",
+        "id":         335,
+        "args":        
+        [
+            {
+                "name": "StartX ",
+                "type": " Word"            
+            },
+            {
+                "name": "StartY ",
+                "type": " Word"            
+            },
+            {
+                "name": "StartZ ",
+                "type": " ShortInt"            
+            },
+            {
+                "name": "FinishX ",
+                "type": " Word"            
+            },
+            {
+                "name": "FinishY ",
+                "type": " Word"            
+            },
+            {
+                "name": "FinishZ ",
+                "type": " ShortInt"            
+            },
+            {
+                "name": "WorldNum ",
+                "type": " Byte"            
+            },
+            {
+                "name": "AccuracyXY ",
+                "type": " Integer"            
+            },
+            {
+                "name": "AccuracyZ ",
+                "type": " Integer"            
+            },
+            {
+                "name": "Run ",
+                "type": " Boolean"            
+            }        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "SetCatchBag",
+        "name": "SetCatchBag",
+        "id":         99,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "ubyte"    
+    },
+    {
+        "pascal_name": "UnsetCatchBag",
+        "name": "UnsetCatchBag",
+        "id":         100,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "EmptyContainer",
+        "name": "EmptyContainer",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "Container ",
+                "type": " Cardinal"            
+            },
+            {
+                "name": "DestContainer ",
+                "type": " Cardinal"            
+            },
+            {
+                "name": "DelayMS ",
+                "type": " Word"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "SetStatState",
+        "name": "SetStatState",
+        "id":         254,
+        "args":        
+        [
+            {
+                "name": "statNum ",
+                "type": " Byte"            
+            },
+            {
+                "name": "statState ",
+                "type": " Byte"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "SetStatLockState",
+        "name": "SetStatLockState",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "statNum ",
+                "type": " Byte"            
+            },
+            {
+                "name": "statState ",
+                "type": " Byte"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GetStatLockState",
+        "name": "GetStatLockState",
+        "id":         372,
+        "args":        
+        [
+            {
+                "name": "statNum ",
+                "type": " Byte"            
+            }        
+        ],
+        "result": "byte"    
+    },
+    {
+        "pascal_name": "GetStaticArt",
+        "name": "GetStaticArt",
+        "id":         255,
+        "args":        
+        [
+            {
+                "name": "ObjType ",
+                "type": " Cardinal"            
+            },
+            {
+                "name": "Hue ",
+                "type": " Word"            
+            }        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "CheckLOS",
+        "name": "CheckLOS",
+        "id":         333,
+        "args":        
+        [
+            {
+                "name": "Xfrom ",
+                "type": " Word"            
+            },
+            {
+                "name": "Yfrom ",
+                "type": " Word"            
+            },
+            {
+                "name": "Zfrom ",
+                "type": " ShortInt"            
+            },
+            {
+                "name": "Xto ",
+                "type": " Integer"            
+            },
+            {
+                "name": "Yto ",
+                "type": " Integer"            
+            },
+            {
+                "name": "Zto ",
+                "type": " ShortInt"            
+            },
+            {
+                "name": "WorldNum ",
+                "type": " Byte"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "GetContextMenu",
+        "name": "GetContextMenu",
+        "id":         195,
+        "args":        
+        [
+            {
+                "name": "list ",
+                "type": " TStringList"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GetContextMenu",
+        "name": "GetContextMenu",
+        "id":         195,
+        "args":        
+        [
+        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "ClearContextMenu",
+        "name": "ClearContextMenu",
+        "id":         196,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "MobileCanBeRenamed",
+        "name": "MobileCanBeRenamed",
+        "id":         253,
+        "args":        
+        [
+            {
+                "name": "MobID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "ClientPrint",
+        "name": "ClientPrint",
+        "id":         289,
+        "args":        
+        [
+            {
+                "name": "Text ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "ClientPrintEx",
+        "name": "ClientPrintEx",
+        "id":         290,
+        "args":        
+        [
+            {
+                "name": "SenderID ",
+                "type": " Cardinal"            
+            },
+            {
+                "name": "Color ",
+                "type": " Word"            
+            },
+            {
+                "name": "Font ",
+                "type": " Word"            
+            },
+            {
+                "name": "Text ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GetQuestArrow",
+        "name": "GetQuestArrow",
+        "id":         300,
+        "args":        
+        [
+            {
+                "name": "point ",
+                "type": " TPoint"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "InviteToParty",
+        "name": "InviteToParty",
+        "id":         262,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "RemoveFromParty",
+        "name": "RemoveFromParty",
+        "id":         263,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "PartyPrivateMessageTo",
+        "name": "PartyMessageTo",
+        "id":         264,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            },
+            {
+                "name": "Msg ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "PartySay",
+        "name": "PartySay",
+        "id":         265,
+        "args":        
+        [
+            {
+                "name": "Msg ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "PartyCanLootMe",
+        "name": "PartyCanLootMe",
+        "id":         266,
+        "args":        
+        [
+            {
+                "name": "Value ",
+                "type": " Boolean"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "PartyAcceptInvite",
+        "name": "PartyAcceptInvite",
+        "id":         267,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "PartyDeclineInvite",
+        "name": "PartyDeclineInvite",
+        "id":         268,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "PartyLeave",
+        "name": "PartyLeave",
+        "id":         269,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "PartyMembersList",
+        "name": "PartyMembersList",
+        "id":         270,
+        "args":        
+        [
+        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "PartyMembersList",
+        "name": "PartyMembersList",
+        "id":         270,
+        "args":        
+        [
+        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "InParty",
+        "name": "InParty",
+        "id":         271,
+        "args":        
+        [
+        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "GetToolTipRec",
+        "name": "GetToolTipRec",
+        "id":         152,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "GetBuffBarInfo",
+        "name": "GetBuffBarInfo",
+        "id":         349,
+        "args":        
+        [
+        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "GetClilocByID",
+        "name": "GetClilocByID",
+        "id":         153,
+        "args":        
+        [
+            {
+                "name": "ClilocID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "GetClilocByID",
+        "name": "GetClilocByID",
+        "id":         153,
+        "args":        
+        [
+            {
+                "name": "ClilocID ",
+                "type": " Cardinal"            
+            },
+            {
+                "name": "Params ",
+                "type": " TArray<String>"            
+            }        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "CloseClientUIWindow",
+        "name": "CloseClientUIWindow",
+        "id":         291,
+        "args":        
+        [
+            {
+                "name": "UIWindowType ",
+                "type": " TUIWindowType"            
+            },
+            {
+                "name": "ID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "IsActiveSpellAbility",
+        "name": "IsActiveSpellAbility",
+        "id":         98,
+        "args":        
+        [
+            {
+                "name": "SpellName ",
+                "type": " String"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "ClientRequestObjectTarget",
+        "name": "ClientRequestObjectTarget",
+        "id":         292,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "ClientRequestTileTarget",
+        "name": "ClientRequestTileTarget",
+        "id":         293,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "ClientTargetResponsePresent",
+        "name": "ClientTargetResponsePresent",
+        "id":         294,
+        "args":        
+        [
+        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "WaitForClientTargetResponse",
+        "name": "WaitForClientTargetResponse",
+        "id":         999,
+        "args":        
+        [
+            {
+                "name": "MaxWaitTimeMS ",
+                "type": " Integer"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "ClientTargetResponse",
+        "name": "ClientTargetResponse",
+        "id":         295,
+        "args":        
+        [
+        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "UseVirtue",
+        "name": "UseVirtue",
+        "id":         95,
+        "args":        
+        [
+            {
+                "name": "VirtueName ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "ReqVirtuesGump",
+        "name": "ReqVirtuesGump",
+        "id":         94,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GetMenuItems",
+        "name": "GetMenuItems",
+        "id":         338,
+        "args":        
+        [
+            {
+                "name": "Caption ",
+                "type": " String"            
+            },
+            {
+                "name": "TL ",
+                "type": " TStringList"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GetMenuItems",
+        "name": "GetMenuItems",
+        "id":         338,
+        "args":        
+        [
+            {
+                "name": "Caption ",
+                "type": " String"            
+            }        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "GetMenuItemsEx",
+        "name": "GetMenuItemsEx",
+        "id":         358,
+        "args":        
+        [
+            {
+                "name": "Caption ",
+                "type": " String"            
+            }        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "GetLastMenuItems",
+        "name": "GetLastMenuItems",
+        "id":         339,
+        "args":        
+        [
+            {
+                "name": "TL ",
+                "type": " TStringList"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GetLastMenuItems",
+        "name": "GetLastMenuItems",
+        "id":         339,
+        "args":        
+        [
+        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "GameServerIPString",
+        "name": "GameServerIPString",
+        "id":         341,
+        "args":        
+        [
+        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "CloseClientGump",
+        "name": "CloseClientGump",
+        "id":         342,
+        "args":        
+        [
+            {
+                "name": "ID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "ClientHide",
+        "name": "ClientHide",
+        "id":         368,
+        "args":        
+        [
+            {
+                "name": "ObjID ",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "bool"    
+    },
+    {
+        "pascal_name": "GetMultis",
+        "name": "GetMultis",
+        "id":         347,
+        "args":        
+        [
+            {
+                "name": "items ",
+                "type": " TMultiItems"            
+            }        
+        ],
+        "result": "uint"    
+    },
+    {
+        "pascal_name": "GetMultis",
+        "name": "GetMultis",
+        "id":         347,
+        "args":        
+        [
+        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "GetMultiAllParts",
+        "name": "GetMultiAllParts",
+        "id":         381,
+        "args":        
+        [
+            {
+                "name": "MultiID",
+                "type": " Cardinal"            
+            }        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "GetMultiPartsAtPosition",
+        "name": "GetMultiPartsAtPosition",
+        "id":         380,
+        "args":        
+        [
+            {
+                "name": "X ",
+                "type": " Word"            
+            },
+            {
+                "name": "Y ",
+                "type": " Word"            
+            }        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "ExtChangeProfile",
+        "name": "ChangeProfileEx",
+        "id":         352,
+        "args":        
+        [
+            {
+                "name": "ProfileName ",
+                "type": " String"            
+            },
+            {
+                "name": "ShardName ",
+                "type": " String = ''"            
+            },
+            {
+                "name": "CharName ",
+                "type": " String = ''"            
+            }        
+        ],
+        "result": "int"    
+    },
+    {
+        "pascal_name": "SetARExtParams",
+        "name": "SetARExtParams",
+        "id":         354,
+        "args":        
+        [
+            {
+                "name": "ShardName ",
+                "type": " String = ''"            
+            },
+            {
+                "name": "CharName ",
+                "type": " String = ''"            
+            },
+            {
+                "name": "UseAtEveryConnect ",
+                "type": " Boolean = False"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GlobalChatJoinChannel",
+        "name": "GlobalChatJoinChannel",
+        "id":         361,
+        "args":        
+        [
+            {
+                "name": "ChName ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GlobalChatLeaveChannel",
+        "name": "GlobalChatLeaveChannel",
+        "id":         362,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GlobalChatSendMsg",
+        "name": "GlobalChatSendMsg",
+        "id":         363,
+        "args":        
+        [
+            {
+                "name": "MsgText ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GlobalChatActiveChannel",
+        "name": "GlobalChatActiveChannel",
+        "id":         364,
+        "args":        
+        [
+        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "GlobalChatChannelsList",
+        "name": "GlobalChatChannelsList",
+        "id":         365,
+        "args":        
+        [
+            {
+                "name": "TL ",
+                "type": " TStringList"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "GlobalChatChannelsList",
+        "name": "GlobalChatChannelsList",
+        "id":         365,
+        "args":        
+        [
+        
+        ],
+        "result": "???"    
+    },
+    {
+        "pascal_name": "BookGetPageText",
+        "name": "BookGetPageText",
+        "id":         373,
+        "args":        
+        [
+            {
+                "name": "Page ",
+                "type": " Word"            
+            }        
+        ],
+        "result": "string"    
+    },
+    {
+        "pascal_name": "BookSetText",
+        "name": "BookSetText",
+        "id":         374,
+        "args":        
+        [
+            {
+                "name": "Text ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "BookSetPageText",
+        "name": "BookSetPageText",
+        "id":         375,
+        "args":        
+        [
+            {
+                "name": "Page ",
+                "type": " Word"            
+            },
+            {
+                "name": "Text ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "BookSetHeader",
+        "name": "BookSetHeader",
+        "id":         377,
+        "args":        
+        [
+            {
+                "name": "Title ",
+                "type": " String"            
+            },
+            {
+                "name": "Author ",
+                "type": " String"            
+            }        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "BookClearText",
+        "name": "BookClearText",
+        "id":         376,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "EquipLastWeapon",
+        "name": "EquipLastWeapon",
+        "id":         370,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    },
+    {
+        "pascal_name": "DumpObjectsCache",
+        "name": "DumpObjectsCache",
+        "id":         367,
+        "args":        
+        [
+        
+        ],
+        "result": ""    
+    }
+]
