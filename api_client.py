@@ -178,6 +178,7 @@ class SyncApiAdapterFast:
 
         self._loop.run_until_complete(self._async_client.close())
         self._loop.stop()
+        self._loop.close()
 
 
 def create_sync_proxy_method_fast(method_spec: MethodSpec) -> Callable:

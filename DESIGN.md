@@ -62,7 +62,8 @@ It also waits for the method's execution result, if necessary, and decodes the r
 `api_client.py` -
 
 `AsyncStealthApiClient` is an endpoint - it is a client and provides us with access to the API.
-It inherits the AsyncInterface class and AsyncStealthClient . AsyncInterface is simply a stub with methods for IDE hints.
+It inherits the `AsyncInterface` class and `AsyncStealthClient`. 
+`AsyncInterface` is simply a stub with methods for IDE hints.
 
 Method binding is performed by the `implement_api` decorator, which receives an `ApiSpecification`
 class as an argument, describing the API, and a `method_factory` that simply returns a closure method 
