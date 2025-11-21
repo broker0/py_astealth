@@ -6,8 +6,8 @@ from py_astealth.stealth_structs import WorldPoint
 
 
 class SharedState:
-    def __init__(self):
-        self.master_pos = None
+    def __init__(self, pos):
+        self.master_pos = pos
         self.running = True
         self.updated_event = asyncio.Event()
 
@@ -41,6 +41,7 @@ async def track_master(client, state: SharedState):
         if pos != state.master_pos:
             state.master_pos = pos
             state.updated_event.set()
+
         await asyncio.sleep(10/1000)
 
 
@@ -49,6 +50,7 @@ async def control_slave(client, state: SharedState):
     
     min_dist = 2
     run_flag = True
+    path = []
     
     while state.running:
         if not state.master_pos:
@@ -57,41 +59,44 @@ async def control_slave(client, state: SharedState):
 
         mx, my, mz, mdir = state.master_pos
         sx, sy, sz, sdir = await get_position(client)
+        world_num = await client.WorldNum()
 
         dist = max(abs(mx-sx), abs(my-sy))
 
         if dist <= min_dist:
             try:
                 await asyncio.wait_for(state.updated_event.wait(), timeout=1.0)
+                await client.AddToSystemJournal(f"Master position updated {mx, my}")
                 state.updated_event.clear()
+                sx, sy, sz, sdir = await get_position(client)
+                path = await client.GetPathArray3D(sx, sy, sz, mx, my, mz, world_num, 1, 1, run_flag)
             except asyncio.TimeoutError:
                 pass
 
             continue
+        else:
+            if state.updated_event.is_set():
+                path = await client.GetPathArray3D(sx, sy, sz, mx, my, mz, world_num, 1, 1, run_flag)
+                state.updated_event.clear()
 
-        world_num = await client.WorldNum()
-        path = await client.GetPathArray3D(sx, sy, sz, mx, my, mz, world_num, 1, 1, run_flag)
-
-        if not path:
-            print("No path found!")
-            await asyncio.sleep(1.0)
-            continue
-
-        if len(path) > 0:
+        if path:
             next_point = path[0]
-            direction = calc_direction(sx, sy, next_point.x, next_point.y)
-
-            result = await client.StepQ(direction, run_flag)
-            # result = await client.Step(direction, run_flag)
+            dx, dy = sx-next_point.x, sy-next_point.y
+            if abs(dx) < 2 and abs(dy) < 2 and abs(dx) + abs(dy) > 0:
+                await client.AddToSystemJournal(f"Slave move to {next_point.x}, {next_point.y}")
+                direction = calc_direction(sx, sy, next_point.x, next_point.y)
+                result = await client.Step(direction, run_flag)
+                path.pop(0)
+            else:
+                await client.AddToSystemJournal(f"recalc path, because dx, dy=({dx}, {dy})")
+                path = await client.GetPathArray3D(sx, sy, sz, mx, my, mz, world_num, 1, 1, run_flag)
 
         await asyncio.sleep(5/1000)
 
 
 async def complex_follower(master, slave):
-    state = SharedState()
-    state.master_pos = await get_position(master)
+    state = SharedState(await get_position(master))
 
-    # Create tasks
     tracker = asyncio.create_task(track_master(master, state))
     controller = asyncio.create_task(control_slave(slave, state))
 
@@ -117,7 +122,6 @@ async def simple_follower(master, slave):
         if (mx, my, mz, mdir) != curr_pos:
             await slave.AddToSystemJournal(f"Master position updated {mx, my}")
             curr_pos = (mx, my, mz, mdir)
-            # update path
             path = await slave.GetPathArray3D(sx, sy, sz, mx, my, mz, world_num, 1, 1, run_flag)
 
         if path:
@@ -153,9 +157,8 @@ async def main():
     await slave.connect()
     print(f"Slave connected. Profile: {await slave.ProfileName()}")
 
-    # await complex_follower(master, slave)
-    await simple_follower(master, slave)
-
+    await complex_follower(master, slave)
+    # await simple_follower(master, slave)
 
 
 if __name__ == "__main__":
