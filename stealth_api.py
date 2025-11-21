@@ -138,7 +138,7 @@ class StealthApi(ApiSpecification):
         pass
 
     @ApiSpecification.method(145)
-    def PredictedZ(self) -> U8:
+    def PredictedZ(self) -> I8:
         pass
 
     @ApiSpecification.method(146)
