@@ -842,7 +842,7 @@ class StealthApi(ApiSpecification):
         pass
 
     @ApiSpecification.method(220)
-    def GetGumpsCount(self) -> U32:
+    def GetGumpsCount(self) -> U16:
         pass
 
     @ApiSpecification.method(221)

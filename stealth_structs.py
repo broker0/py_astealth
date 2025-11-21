@@ -235,6 +235,14 @@ class GumpGroup(StructType):
 
 @StructType.register
 @dataclass
+class GumpEndGroup(StructType):
+    Number: I32
+    Page: I32
+    ElemNum: I32
+
+
+@StructType.register
+@dataclass
 class GumpButton(StructType):
     X: I32
     Y: I32
@@ -510,14 +518,14 @@ class Gump(StructType):
 class GumpInfo(StructType):
     gump: Gump
     Groups: list[GumpGroup]
-    EndGroups: list[None]
+    EndGroups: list[GumpEndGroup]
     Buttons: list[GumpButton]
     ButtonsTileArt: list[GumpButtonTileArt]
     CheckBoxes: list[GumpCheckBox]
     Checkers: list[GumpCheckerTrans]
     CroppedText: list[GumpCroppedText]
     Pics: list[GumpPic]
-    TiledPics: list[GumpPicTiled]
+    PicsTiled: list[GumpPicTiled]
     RadioButtons: list[GumpRadioButton]
     ResizePics: list[GumpResizePic]
     Texts: list[GumpText]
@@ -532,6 +540,7 @@ class GumpInfo(StructType):
     XmfHtmlHued: list[GumpXmfHTMLColor]
     XmfHtmlToks: list[GumpXmfHTMLTok]
     Properties: list[GumpItemProperty]
+
 
 
 # TODO other Stealth struct-types
