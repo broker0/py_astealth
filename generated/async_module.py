@@ -163,6 +163,7 @@ async def GetSkillLockState(SkillName: str) -> int: pass
 async def GetSkillValue(SkillName: str) -> float: pass
 async def GetStam(ObjID: int) -> int: pass
 async def GetStatLockState(statNum: int) -> int: pass
+async def GetStaticArt(ObjType: int, Hue: int) -> list[int]: pass
 async def GetStaticTileData(Tile: int) -> StaticTileData: pass
 async def GetStaticTilesArray(Xmin: int, Ymin: int, Xmax: int, Ymax: int, WorldNum: int, TileTypes: list[int]) -> list[FoundTile]: pass
 async def GetStealthInfo() -> AboutData: pass
@@ -285,6 +286,7 @@ async def ReqVirtuesGump() -> None: pass
 async def RequestContextMenu(ObjID: int) -> None: pass
 async def RequestStats(ObjID: int) -> None: pass
 async def Salute() -> None: pass
+async def ScriptPath(ScriptName: str) -> None: pass
 async def Self() -> int: pass
 async def SetARExtParams(ShardName: str, CharName: str, UseAtEveryConnect: bool) -> None: pass
 async def SetARStatus(Value: bool) -> None: pass

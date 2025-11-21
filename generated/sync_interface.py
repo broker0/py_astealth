@@ -165,6 +165,7 @@ class SyncInterface:
     def GetSkillValue(self, SkillName: str) -> float: pass
     def GetStam(self, ObjID: int) -> int: pass
     def GetStatLockState(self, statNum: int) -> int: pass
+    def GetStaticArt(self, ObjType: int, Hue: int) -> list[int]: pass
     def GetStaticTileData(self, Tile: int) -> StaticTileData: pass
     def GetStaticTilesArray(self, Xmin: int, Ymin: int, Xmax: int, Ymax: int, WorldNum: int, TileTypes: list[int]) -> list[FoundTile]: pass
     def GetStealthInfo(self) -> AboutData: pass
@@ -287,6 +288,7 @@ class SyncInterface:
     def RequestContextMenu(self, ObjID: int) -> None: pass
     def RequestStats(self, ObjID: int) -> None: pass
     def Salute(self) -> None: pass
+    def ScriptPath(self, ScriptName: str) -> None: pass
     def Self(self) -> int: pass
     def SetARExtParams(self, ShardName: str, CharName: str, UseAtEveryConnect: bool) -> None: pass
     def SetARStatus(self, Value: bool) -> None: pass

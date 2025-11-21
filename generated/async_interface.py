@@ -165,6 +165,7 @@ class AsyncInterface:
     async def GetSkillValue(self, SkillName: str) -> float: pass
     async def GetStam(self, ObjID: int) -> int: pass
     async def GetStatLockState(self, statNum: int) -> int: pass
+    async def GetStaticArt(self, ObjType: int, Hue: int) -> list[int]: pass
     async def GetStaticTileData(self, Tile: int) -> StaticTileData: pass
     async def GetStaticTilesArray(self, Xmin: int, Ymin: int, Xmax: int, Ymax: int, WorldNum: int, TileTypes: list[int]) -> list[FoundTile]: pass
     async def GetStealthInfo(self) -> AboutData: pass
@@ -287,6 +288,7 @@ class AsyncInterface:
     async def RequestContextMenu(self, ObjID: int) -> None: pass
     async def RequestStats(self, ObjID: int) -> None: pass
     async def Salute(self) -> None: pass
+    async def ScriptPath(self, ScriptName: str) -> None: pass
     async def Self(self) -> int: pass
     async def SetARExtParams(self, ShardName: str, CharName: str, UseAtEveryConnect: bool) -> None: pass
     async def SetARStatus(self, Value: bool) -> None: pass
