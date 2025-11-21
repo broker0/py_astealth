@@ -1454,9 +1454,9 @@ class StealthApi(ApiSpecification):
     def GetStatLockState(self, statNum: U8) -> U8:
         pass
 
-    # @ApiSpecification.method(255)
-    # def GetStaticArt(self, ObjType: U32, Hue: U16) -> ???:
-    #     pass
+    @ApiSpecification.method(255)
+    def GetStaticArt(self, ObjType: U32, Hue: U16) -> list[U8]:
+        pass
 
     # @ApiSpecification.method(256)
     # def PrintScriptMethodsList(self, FileName: String = ', SortedList: Boolean = False) -> None:

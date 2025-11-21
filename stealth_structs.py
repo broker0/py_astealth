@@ -198,14 +198,15 @@ class Point(StructType):
 @StructType.register
 @dataclass
 class MapFigure(StructType):
-    Kind: U16
-    Coord: U16
+    Kind: I32
+    Coord: I32
     X1: I32
     Y1: I32
     X2: I32
-    Y2: U32
+    Y2: I32
     BrushColor: U32
-    BrushStyle: U16
+    BrushStyle: I32
+    Color: U32
     WorldNum: U8
     Text: String
 
