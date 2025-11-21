@@ -2,7 +2,7 @@ import asyncio
 from datetime import datetime
 
 from py_astealth.api_client import AsyncStealthApiClient, SyncStealthApiClient, SyncStealthApiClientFast
-from py_stealth.protocol import get_port
+from py_astealth.stealth_client import get_stealth_port
 import py_stealth as stealth
 
 from py_astealth import stealth as nstealth
@@ -21,7 +21,7 @@ def classic_sync_stealth():
 
 
 async def modern_async_stealth():
-    client = AsyncStealthApiClient("127.0.0.1", get_port())
+    client = AsyncStealthApiClient(*get_stealth_port())
     await client.connect()
 
     start_time = datetime.now()
@@ -35,7 +35,7 @@ async def modern_async_stealth():
 
 
 def modern_sync_stealth():
-    client = SyncStealthApiClient('127.0.0.1', get_port())
+    client = SyncStealthApiClient(*get_stealth_port())
     client.connect()
 
     start_time = datetime.now()
@@ -49,7 +49,7 @@ def modern_sync_stealth():
 
 
 def modern_fast_sync_stealth():
-    client = SyncStealthApiClientFast('127.0.0.1', get_port())
+    client = SyncStealthApiClientFast(*get_stealth_port())
     client.connect()
 
     start_time = datetime.now()

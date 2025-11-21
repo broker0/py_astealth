@@ -15,7 +15,7 @@ class StealthBot(AsyncStealthApiClient):
 
     @graceful_shutdown
     async def periodic_clicker(self):
-        self_id = await self.GetSelfID()
+        self_id = await self.Self()
         while True:
             await self.AddToSystemJournal(f"[*] Click on {self_id}")
             await self.ClickOnObject(self_id)
@@ -31,10 +31,10 @@ class StealthBot(AsyncStealthApiClient):
 
     @graceful_shutdown
     async def mover(self):
-        self_id = await self.GetSelfID()
+        self_id = await self.Self()
         current_dir = await self.GetDirection(self_id)
         for step in range(1, 11):
-            # await asyncio.sleep(1)
+            await asyncio.sleep(1)
             t = datetime.now()
             step_res = await self.StepQ(current_dir, True)
             await self.AddToSystemJournal(f"Step {step} - {step_res} {datetime.now()-t}")

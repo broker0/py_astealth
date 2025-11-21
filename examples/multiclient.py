@@ -3,7 +3,7 @@ from datetime import datetime
 
 from py_astealth.api_client import AsyncStealthApiClient
 from py_astealth.examples.example_lib import graceful_shutdown
-from py_stealth.protocol import get_port
+from py_astealth.stealth_client import get_stealth_port
 
 
 @graceful_shutdown
@@ -33,9 +33,9 @@ async def periodic_clicker(client: AsyncStealthApiClient):
 
 
 async def main():
-    client1 = AsyncStealthApiClient("127.0.0.1", get_port())
+    client1 = AsyncStealthApiClient(*get_stealth_port())
     await client1.connect()
-    client2 = AsyncStealthApiClient("127.0.0.1", get_port())
+    client2 = AsyncStealthApiClient(*get_stealth_port())
     await client2.connect()
 
     # create tasks
