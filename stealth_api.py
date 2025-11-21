@@ -11,6 +11,14 @@ class StealthApi(ApiSpecification):
     Methods do not have to have an implementation, they are just a protocol specification.
     """
 
+
+    @ApiSpecification.method(10)
+    def ScriptPath(self, ScriptName: String) -> None:
+        """
+        special call-back method
+        """
+        pass
+
     ####################################################################################################################
     # connection management
     ####################################################################################################################
@@ -27,7 +35,7 @@ class StealthApi(ApiSpecification):
         pass
 
     @ApiSpecification.method(354)
-    def SetARExtParams(self, ShardName: String = '', CharName: String = '', UseAtEveryConnect: Bool = False) -> None:
+    def SetARExtParams(self, ShardName: String, CharName: String, UseAtEveryConnect: Bool) -> None:
         pass
 
     @ApiSpecification.method(38)
@@ -66,7 +74,7 @@ class StealthApi(ApiSpecification):
         pass
 
     @ApiSpecification.method(20)
-    def ChangeProfile(self, Name: String) -> int:
+    def ChangeProfile(self, Name: String) -> I32:
         pass
 
     @ApiSpecification.method(343)
@@ -74,7 +82,7 @@ class StealthApi(ApiSpecification):
         pass
 
     @ApiSpecification.method(352)
-    def ExtChangeProfile(self, ProfileName: String, ShardName: String = '', CharName: String = '') -> int:
+    def ExtChangeProfile(self, ProfileName: String, ShardName: String, CharName: String) -> I32:
         pass
 
     ####################################################################################################################

@@ -1,14 +1,24 @@
 import asyncio
 import io
+import os
+import socket
+import time
 import struct
+import sys
 from dataclasses import dataclass
 from enum import IntEnum
 from typing import Any
 
-from py_astealth.core.api_specification import MethodSpec
 from py_astealth.core.base_types import RPCType
 from py_astealth.core.rpc_client import AsyncRPCClient
 from py_astealth.stealth_types import *
+from py_astealth.stealth_api import StealthApi
+
+
+DEFAULT_STEALTH_HOST = '127.0.0.1'
+DEFAULT_STEALTH_PORT = 47602
+SOCK_TIMEOUT = 10.0
+GET_PORT_ATTEMPT_COUNT = 3
 
 
 class AsyncStealthRPCProtocol(asyncio.Protocol):
@@ -127,6 +137,26 @@ class StealthRPCEncoder:
             return stream.getvalue()
 
     @staticmethod
+    def encode_tuple(*items) -> bytes:
+        """
+        Encodes a sequence of (value, type) pairs into bytes.
+        Example: encode_tuple((10, U16), (0, U16))
+        """
+        with io.BytesIO() as stream:
+            for value, type_cls in items:
+                RPCType.pack_value(stream, value, type_cls)
+            return stream.getvalue()
+
+    @staticmethod
+    def encode_packet(method_spec: MethodSpec, call_id: int, *args) -> bytes:
+        """
+        encode full packet with header and arguments
+        """
+        header = StealthRPCEncoder.encode_tuple((method_spec.id, U16), (call_id, U16))
+        args_payload = StealthRPCEncoder.encode_arguments(method_spec, *args)
+        return header + args_payload
+
+    @staticmethod
     def decode_result(method_spec: MethodSpec, payload: bytes) -> Any:
         """
         decode single (result) value from bytes to python types
@@ -210,11 +240,7 @@ class AsyncStealthClient(AsyncRPCClient):
         expect_reply = ret_type is not type(None)
         call_id = self._get_call_id() if expect_reply else 0
 
-        # a function call packet starts with two u16 values - method_id and call_id
-        # and then come the packed arguments
-        header = struct.pack("<2H", method_spec.id, call_id)
-        args_payload = StealthRPCEncoder.encode_arguments(method_spec, *args)
-        packet = header + args_payload
+        packet = StealthRPCEncoder.encode_packet(method_spec, call_id, *args)
 
         future = None
         if expect_reply:
@@ -275,6 +301,11 @@ class AsyncStealthClient(AsyncRPCClient):
                 print(f"[Info] Received  {packet_type.name}, close connection, stopping client")
                 self.close()
 
+            elif packet_type == AsyncStealthClient.PacketType.REQ_SCRIPT_PATH:
+                lp = os.path.realpath(sys.argv[0])
+                packet = StealthRPCEncoder.encode_packet(StealthApi.ScriptPath.method_spec, 0, lp)
+                self.send_packet(packet)
+
             else:
                 print(f"[Info] Received packet of unknown or unhandled type: {packet_type.name}")
 
@@ -282,3 +313,81 @@ class AsyncStealthClient(AsyncRPCClient):
             # KeyError - if an unknown PacketType arrives
             # struct.error, ValueError - if the packet is "broken" (unexpected end)
             print(f"[Error] Error parsing packet: {e}. Payload (hex): {payload.hex(' ')}")
+
+    @staticmethod
+    def get_stealth_port(host: str = DEFAULT_STEALTH_HOST, port: int = DEFAULT_STEALTH_PORT) -> [str, int]:
+        return get_stealth_port(host, port)
+
+
+def get_stealth_port(host: str = DEFAULT_STEALTH_HOST, port: int = DEFAULT_STEALTH_PORT) -> [str, int]:
+    """
+    Synchronously retrieves the script port from the Stealth client.
+    """
+    # Check command line arguments first (standard behavior)
+    if len(sys.argv) >= 3 and sys.argv[2].isdigit():
+        return host, int(sys.argv[2])
+
+    for i in range(GET_PORT_ATTEMPT_COUNT):
+        sock = None
+        try:
+            sock = socket.create_connection((host, port), timeout=SOCK_TIMEOUT)
+
+            # Packet structure:
+            # Type: 2 bytes (unsigned short) = 4
+            # Value: 4 bytes (unsigned int) = 0xDEADBEEF
+            packet = struct.pack('<HI', 4, 0xDEADBEEF)
+            sock.sendall(packet)
+
+            # Read length first (2 bytes)
+            header_data = b''
+            while len(header_data) < 2:
+                chunk = sock.recv(2 - len(header_data))
+                if not chunk:
+                    raise ConnectionError("Connection closed while reading length")
+                header_data += chunk
+            
+            length = struct.unpack('<H', header_data)[0]
+            
+            # Read payload
+            payload_data = b''
+            while len(payload_data) < length:
+                chunk = sock.recv(length - len(payload_data))
+                if not chunk:
+                    raise ConnectionError("Connection closed while reading payload")
+                payload_data += chunk
+
+            if len(payload_data) >= 2:
+                # The port is at offset 2 (after 2 bytes of something? logic copied from async version)
+                # Wait, the async version did:
+                # data = await reader.read(4096)
+                # length = struct.unpack_from('<H', data)[0]
+                # if len(data) >= 2 + length: ... script_port = struct.unpack_from('<H', data, 2)[0]
+                
+                # The async logic was slightly loose reading 4096 bytes at once.
+                # Let's stick to the protocol: 2 bytes length, then `length` bytes payload.
+                # The previous code did: `script_port = struct.unpack_from('<H', data, 2)[0]`
+                # But `data` included the length bytes if read in one go?
+                # No, `reader.read(4096)` returns whatever is available.
+                # If it returned length(2) + payload, then offset 2 is start of payload.
+                # So script_port is at the BEGINNING of the payload.
+                
+                script_port = struct.unpack_from('<H', payload_data, 0)[0]
+                return host, script_port
+
+        except (OSError, struct.error, ConnectionError):
+            # If we can't connect to the main Stealth port, we can't get the script port
+            if i == GET_PORT_ATTEMPT_COUNT - 1:
+                if sock:
+                    sock.close()
+                raise RuntimeError(f"Stealth not found at {host}:{port}")
+            
+            if sock:
+                sock.close()
+            
+            time.sleep(0.1)
+            continue
+        finally:
+            if sock:
+                sock.close()
+
+    raise RuntimeError("Failed to retrieve script port from Stealth")
