@@ -83,7 +83,7 @@ class String(RPCType):
 
     @classmethod
     def pack_simple_value(cls, stream: BinaryIO, value: Any):
-        encoded_str = value.encode(String.STEALTH_CODEC)
+        encoded_str = value.encode(cls.STEALTH_CODEC)
         # The length is written as 4 bytes.
         U32.pack_simple_value(stream, len(encoded_str))
         # Write encoded to UTF-16_LE string bytes
@@ -97,7 +97,7 @@ class String(RPCType):
         if len(data) < size: raise ValueError(f"Stream ended while reading {cls}")
 
         # cls.mapping is not used here either, so decode returns a string
-        decoded_value = data.decode(String.STEALTH_CODEC)
+        decoded_value = data.decode(cls.STEALTH_CODEC)
         return decoded_value
 
 

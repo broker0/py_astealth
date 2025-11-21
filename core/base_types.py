@@ -90,11 +90,12 @@ class PrimitiveType(RPCType):
         # We calculate the size of this type in bytes and read from the stream
         size = struct.calcsize(f'{cls._format}')
         data = stream.read(size)
-        if len(data) < size: raise ValueError(f"Stream ended while reading {cls}")
+        if len(data) < size:
+            raise ValueError(f"Stream ended while reading {cls}")
 
         # unpack the received data according to the format
         unpacked_value, = struct.unpack(f'{cls._format}', data)
-        # TODO float types
+
         # In fact, cls.mapping is not used, since struct.unpack converts the binary data
         # to an integer or bool type according to the format
         return unpacked_value
