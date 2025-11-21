@@ -6,11 +6,7 @@ import atexit
 from py_astealth.api_client import AsyncStealthApiClient
 from py_astealth.core.api_specification import MethodSpec
 
-from py_stealth.protocol import get_port
-
-
-HOST = "127.0.0.1"
-PORT = 47602
+from py_astealth.stealth_client import get_stealth_port
 
 
 class _ThreadLocalClientProxy:
@@ -56,9 +52,9 @@ class _StealthManager:
             if self._is_shutting_down:
                 raise RuntimeError("Stealth manager is shutting down.")
 
-            port = get_port()
+            host, port = get_stealth_port()
             print("port", port)
-            client = AsyncStealthApiClient(host=HOST, port=port)
+            client = AsyncStealthApiClient(host, port)
 
             future = asyncio.run_coroutine_threadsafe(client.connect(), self._loop)
             future.result(timeout=10)
