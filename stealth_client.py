@@ -358,20 +358,6 @@ def get_stealth_port(host: str = DEFAULT_STEALTH_HOST, port: int = DEFAULT_STEAL
                 payload_data += chunk
 
             if len(payload_data) >= 2:
-                # The port is at offset 2 (after 2 bytes of something? logic copied from async version)
-                # Wait, the async version did:
-                # data = await reader.read(4096)
-                # length = struct.unpack_from('<H', data)[0]
-                # if len(data) >= 2 + length: ... script_port = struct.unpack_from('<H', data, 2)[0]
-                
-                # The async logic was slightly loose reading 4096 bytes at once.
-                # Let's stick to the protocol: 2 bytes length, then `length` bytes payload.
-                # The previous code did: `script_port = struct.unpack_from('<H', data, 2)[0]`
-                # But `data` included the length bytes if read in one go?
-                # No, `reader.read(4096)` returns whatever is available.
-                # If it returned length(2) + payload, then offset 2 is start of payload.
-                # So script_port is at the BEGINNING of the payload.
-                
                 script_port = struct.unpack_from('<H', payload_data, 0)[0]
                 return host, script_port
 
