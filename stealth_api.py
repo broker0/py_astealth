@@ -1526,6 +1526,184 @@ class StealthApi(ApiSpecification):
     def GetPlayerStatusText(self, ObjID: U32) -> String:
         pass
 
+
+    # new methods
+    @ApiSpecification.method(49)
+    def GetSelfStr(self) -> I32:
+        pass
+    @ApiSpecification.method(50)
+    def GetSelfInt(self) -> I32:
+        pass
+    @ApiSpecification.method(51)
+    def GetSelfDex(self) -> I32:
+        pass
+    @ApiSpecification.method(53)
+    def GetSelfMana(self) -> I32:
+        pass
+    @ApiSpecification.method(54)
+    def GetSelfStam(self) -> I32:
+        pass
+    @ApiSpecification.method(56)
+    def GetSelfMaxMana(self) -> I32:
+        pass
+    @ApiSpecification.method(57)
+    def GetMaxStam(self) -> int:
+        pass
+    @ApiSpecification.method(89)
+    def GetSkillID(self, SkillName: String) -> I32:
+        pass
+    @ApiSpecification.method(150)
+    def GetTooltip(self, ObjID: U32) -> String:
+        pass
+    @ApiSpecification.method(185)
+    def GetPickupedItem(self) -> U32:
+        pass
+    @ApiSpecification.method(186)
+    def SetPickupedItem(self, ID: U32) -> None:
+        pass
+    @ApiSpecification.method(187)
+    def GetDropCheckCoord(self) -> Bool:
+        pass
+    @ApiSpecification.method(188)
+    def SetDropCheckCoord(self, Value: Bool) -> None:
+        pass
+    @ApiSpecification.method(189)
+    def GetDropDelay(self) -> U32:
+        pass
+    @ApiSpecification.method(190)
+    def SetDropDelay(self, Value: U32) -> None:
+        pass
+    @ApiSpecification.method(236)
+    def GetDressSpeed(self) -> U16:
+        pass
+    @ApiSpecification.method(237)
+    def SetDressSpeed(self, Value: U16) -> None:
+        pass
+    @ApiSpecification.method(239)
+    def GetDressSet(self) -> list[LayerObject]:
+        pass
+    @ApiSpecification.method(256)
+    def PrintScriptMethodsList(self, FileName: String, SortedList: Bool) -> None:
+        pass
+    @ApiSpecification.method(257)
+    def SetAlarm(self) -> None:
+        pass
+    @ApiSpecification.method(297)
+    def CheckLagBegin(self) -> None:
+        pass
+    @ApiSpecification.method(298)
+    def CheckLagEnd(self) -> None:
+        pass
+    @ApiSpecification.method(299)
+    def IsCheckLagEnd(self) -> Bool:
+        pass
+    @ApiSpecification.method(302)
+    def GetSilentMode(self) -> Bool:
+        pass
+    @ApiSpecification.method(336)
+    def SetFindInNulPoint(self, Value: Bool) -> None:
+        pass
+    @ApiSpecification.method(337)
+    def GetFindInNulPoint(self) -> Bool:
+        pass
+    @ApiSpecification.method(344)
+    def GetLastStepQUsedDoor(self) -> U32:
+        pass
+    @ApiSpecification.method(345)
+    def GetContextMenuRec(self) -> ContextMenuRec:
+        pass
+    @ApiSpecification.method(355)
+    def GetClientVersionInt(self) -> I32:
+        pass
+    @ApiSpecification.method(356)
+    def UnequipItemsSetMacro(self) -> None:
+        pass
+    @ApiSpecification.method(357)
+    def EquipItemsSetMacro(self) -> None:
+        pass
+
+    @ApiSpecification.method(371)
+    def CreateChar(self,
+                   ProfileName: String,
+                   ShardName: String,
+                   CharName: String,
+                   Gender: Bool,
+                   Race: I8,
+                   Strn: I8, Dex: I8, Int: I8,
+                   Skill1: String, Skill2: String, Skill3: String, Skill4: String,
+                   SkillValue1: I32, SkillValue2: I32, SkillValue3: I32, SkillValue4: I32,
+                   City: I8, Slot: U32) -> None:
+        pass
+    @ApiSpecification.method(386)
+    def AddToSystemJournalEx(self, value: String, textcolor: I32, bgcolor: I32, fontsize: I32, fontname: String) -> None:
+        pass
+    @ApiSpecification.method(400)
+    def SetMoveOpenDoor(self, Value: Bool) -> None:
+        pass
+    @ApiSpecification.method(401)
+    def GetMoveOpenDoor(self) -> Bool:
+        pass
+    @ApiSpecification.method(402)
+    def SetMoveThroughNPC(self, Value: U16) -> None:
+        pass
+    @ApiSpecification.method(403)
+    def GetMoveThroughNPC(self) -> U16:
+        pass
+    @ApiSpecification.method(404)
+    def SetMoveThroughCorner(self, Value: Bool) -> None:
+        pass
+    @ApiSpecification.method(405)
+    def GetMoveThroughCorner(self) -> Bool:
+        pass
+    @ApiSpecification.method(406)
+    def SetMoveHeuristicMult(self, Value: I32) -> None:
+        pass
+    @ApiSpecification.method(407)
+    def GetMoveHeuristicMult(self) -> I32:
+        pass
+    @ApiSpecification.method(408)
+    def SetMoveCheckStamina(self, Value: U16) -> None:
+        pass
+    @ApiSpecification.method(409)
+    def GetMoveCheckStamina(self) -> U16:
+        pass
+    @ApiSpecification.method(410)
+    def SetMoveTurnCost(self, Value: I32) -> None:
+        pass
+    @ApiSpecification.method(411)
+    def GetMoveTurnCost(self) -> I32:
+        pass
+    @ApiSpecification.method(412)
+    def SetMoveBetweenTwoCorners(self, Value: Bool) -> None:
+        pass
+    @ApiSpecification.method(413)
+    def GetMoveBetweenTwoCorners(self) -> Bool:
+        pass
+    @ApiSpecification.method(455)
+    def PauseResumeSelScript(self, ScriptIndex: U16) -> None:
+        pass
+    @ApiSpecification.method(459)
+    def GetScriptParams(self) -> U32:
+        pass
+    @ApiSpecification.method(501)
+    def Messenger_GetConnected(self, MesID: U8) -> Bool:
+        pass
+    @ApiSpecification.method(502)
+    def Messenger_SetConnected(self, MesID: U8, Value: Bool) -> None:
+        pass
+    @ApiSpecification.method(503)
+    def Messenger_GetToken(self, MesID: U8) -> String:
+        pass
+    @ApiSpecification.method(504)
+    def Messenger_SetToken(self, MesID: U8, Value: String) -> None:
+        pass
+    @ApiSpecification.method(505)
+    def Messenger_GetName(self, MesID: U8) -> String:
+        pass
+    @ApiSpecification.method(506)
+    def Messenger_SendMessage(self, MesID: U8, Msg: String, UserID: String) -> None:
+        pass
+
     #############################
     # Invalid method_id block
     #############################

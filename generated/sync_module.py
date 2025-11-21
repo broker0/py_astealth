@@ -16,6 +16,7 @@ def AddGumpIgnoreBySerial(Serial: int) -> None: pass
 def AddJournalIgnore(Str: str) -> None: pass
 def AddToJournal(Text: str) -> None: pass
 def AddToSystemJournal(Text: str) -> None: pass
+def AddToSystemJournalEx(value: str, textcolor: int, bgcolor: int, fontsize: int, fontname: str) -> None: pass
 def AddUserStatic(StaticItem: UserStaticItem, WorldNum: int) -> int: pass
 def Armor() -> int: pass
 def Attack(ObjID: int) -> None: pass
@@ -40,6 +41,8 @@ def ChangeProfile(Name: str) -> int: pass
 def CharName() -> str: pass
 def CharTitle() -> str: pass
 def CheckLOS(Xfrom: int, Yfrom: int, Zfrom: int, Xto: int, Yto: int, Zto: int, WorldNum: int) -> bool: pass
+def CheckLagBegin() -> None: pass
+def CheckLagEnd() -> None: pass
 def ClearBadLocationList() -> None: pass
 def ClearBadObjectList() -> None: pass
 def ClearChatUserIgnore() -> None: pass
@@ -73,6 +76,7 @@ def ConnectedTime() -> datetime: pass
 def ConsoleEntryReply(Text: str) -> None: pass
 def ConsoleEntryUnicodeReply(Text: str) -> None: pass
 def ConvertIntegerToFlags(Group: int, Flags: int) -> list[str]: pass
+def CreateChar(ProfileName: str, ShardName: str, CharName: str, Gender: bool, Race: int, Strn: int, Dex: int, Int: int, Skill1: str, Skill2: str, Skill3: str, Skill4: str, SkillValue1: int, SkillValue2: int, SkillValue3: int, SkillValue4: int, City: int, Slot: int) -> None: pass
 def Dead() -> bool: pass
 def Disconnect() -> None: pass
 def DisconnectedTime() -> datetime: pass
@@ -80,6 +84,7 @@ def DragItem(ObjID: int, Count: int) -> bool: pass
 def DropItem(MoveIntoID: int, X: int, Y: int, Z: int) -> bool: pass
 def DumpObjectsCache() -> None: pass
 def EnergyResist() -> int: pass
+def EquipItemsSetMacro() -> None: pass
 def EquipLastWeapon() -> None: pass
 def ExtChangeProfile(ProfileName: str, ShardName: str, CharName: str) -> int: pass
 def FillInfoWindow(s: str) -> None: pass
@@ -101,14 +106,21 @@ def GetAutoBuyDelay() -> int: pass
 def GetAutoSellDelay() -> int: pass
 def GetBuffBarInfo() -> list[BuffBarInfo]: pass
 def GetCell(X: int, Y: int, WorldNum: int) -> MapCell: pass
+def GetClientVersionInt() -> int: pass
 def GetClilocByID(ClilocID: int) -> str: pass
 def GetColor(ID: int) -> int: pass
 def GetContextMenu() -> list[str]: pass
+def GetContextMenuRec() -> ContextMenuRec: pass
 def GetDex(ObjID: int) -> int: pass
 def GetDirection(ID: int) -> int: pass
 def GetDistance(ObjID: int) -> int: pass
+def GetDressSet() -> list[LayerObject]: pass
+def GetDressSpeed() -> int: pass
+def GetDropCheckCoord() -> bool: pass
+def GetDropDelay() -> int: pass
 def GetExtInfo() -> ExtendedInfo: pass
 def GetFindDistance() -> int: pass
+def GetFindInNulPoint() -> bool: pass
 def GetFindVertical() -> int: pass
 def GetFindedList() -> list[int]: pass
 def GetGlobal(GlobalRegion: str, VarName: str) -> str: pass
@@ -126,15 +138,23 @@ def GetInt(ObjID: int) -> int: pass
 def GetLandTileData(Tile: int) -> LandTileData: pass
 def GetLandTilesArray(Xmin: int, Ymin: int, Xmax: int, Ymax: int, WorldNum: int, TileType: list[int]) -> list[FoundTile]: pass
 def GetLastMenuItems() -> list[str]: pass
+def GetLastStepQUsedDoor() -> int: pass
 def GetLayer(ObjID: int) -> int: pass
 def GetLayerCount(x: int, y: int, WorldNum: int) -> int: pass
 def GetLineTime() -> datetime: pass
 def GetMana(ObjID: int) -> int: pass
 def GetMaxHP(ObjID: int) -> int: pass
 def GetMaxMana(ObjID: int) -> int: pass
-def GetMaxStam(ObjID: int) -> int: pass
+def GetMaxStam() -> int: pass
 def GetMenuItems(Caption: str) -> list[str]: pass
 def GetMenuItemsEx(Caption: str) -> list[MenuItem]: pass
+def GetMoveBetweenTwoCorners() -> bool: pass
+def GetMoveCheckStamina() -> int: pass
+def GetMoveHeuristicMult() -> int: pass
+def GetMoveOpenDoor() -> bool: pass
+def GetMoveThroughCorner() -> bool: pass
+def GetMoveThroughNPC() -> int: pass
+def GetMoveTurnCost() -> int: pass
 def GetMultiAllParts(MultiID: int) -> list[MultiPart]: pass
 def GetMultiPartsAtPosition(X: int, Y: int) -> list[MultiPart]: pass
 def GetMultis() -> list[Multi]: pass
@@ -145,6 +165,7 @@ def GetParent(ObjID: int) -> int: pass
 def GetPathArray(Xdst: int, Ydst: int, Optimized: bool, Accuracy: int) -> list[WorldPoint]: pass
 def GetPathArray3D(StartX: int, StartY: int, StartZ: int, FinishX: int, FinishY: int, FinishZ: int, WorldNum: int, AccuracyXY: int, AccuracyZ: int, Run: bool) -> list[WorldPoint]: pass
 def GetPauseScriptOnDisconnectStatus() -> bool: pass
+def GetPickupedItem() -> int: pass
 def GetPlayerStatusText(ObjID: int) -> str: pass
 def GetPrice(ObjID: int) -> int: pass
 def GetQuantity(ObjID: int) -> int: pass
@@ -152,13 +173,22 @@ def GetQuestArrow() -> Point: pass
 def GetRunMountTimer() -> int: pass
 def GetRunUnmountTimer() -> int: pass
 def GetScriptName(ScriptIndex: int) -> str: pass
+def GetScriptParams() -> int: pass
 def GetScriptPath(ScriptIndex: int) -> str: pass
 def GetScriptState(ScriptIndex: int) -> int: pass
 def GetScriptsCount() -> int: pass
 def GetScriptsList() -> list[ScriptInfo]: pass
+def GetSelfDex() -> int: pass
+def GetSelfInt() -> int: pass
+def GetSelfMana() -> int: pass
+def GetSelfMaxMana() -> int: pass
+def GetSelfStam() -> int: pass
+def GetSelfStr() -> int: pass
 def GetShopList() -> list[str]: pass
+def GetSilentMode() -> bool: pass
 def GetSkillCap(SkillName: str) -> float: pass
 def GetSkillCurrentValue(SkillName: str) -> float: pass
+def GetSkillID(SkillName: str) -> int: pass
 def GetSkillLockState(SkillName: str) -> int: pass
 def GetSkillValue(SkillName: str) -> float: pass
 def GetStam(ObjID: int) -> int: pass
@@ -171,6 +201,7 @@ def GetStr(ObjID: int) -> int: pass
 def GetSurfaceZ(X: int, Y: int, WorldNum: int) -> int: pass
 def GetTileFlags(Group: int, Tile: int) -> int: pass
 def GetTitle(ObjID: int) -> str: pass
+def GetTooltip(ObjID: int) -> str: pass
 def GetTooltipRec(ObjID: int) -> list[ClilocRec]: pass
 def GetTradeContainer(TradeNum: int, Num: int) -> int: pass
 def GetTradeOpponent(TradeNum: int) -> int: pass
@@ -205,6 +236,7 @@ def InJournalBetweenTimes(Str: str, TimeBegin: datetime, TimeEnd: datetime) -> i
 def InParty() -> bool: pass
 def InviteToParty(ObjID: int) -> None: pass
 def IsActiveSpellAbility(SpellName: str) -> bool: pass
+def IsCheckLagEnd() -> bool: pass
 def IsContainer(ObjID: int) -> bool: pass
 def IsDead(ObjID: int) -> bool: pass
 def IsFemale(ObjID: int) -> bool: pass
@@ -222,6 +254,7 @@ def IsWarMode(ObjID: int) -> bool: pass
 def IsWorldCellPassable(CurrX: int, CurrY: int, CurrZ: int, DestX: int, DestY: int, DestZ: int, WorldNum: int) -> bool: pass
 def IsYellowHits(ObjID: int) -> bool: pass
 def Journal(StringIndex: int) -> str: pass
+def LangVersion(Lang: int, Major: int, Minor: int, Revision: int, Build: int) -> None: pass
 def LastAttack() -> int: pass
 def LastContainer() -> int: pass
 def LastJournalMessage() -> str: pass
@@ -244,6 +277,12 @@ def MaxLife() -> int: pass
 def MaxWeight() -> int: pass
 def MenuHookPresent() -> bool: pass
 def MenuPresent() -> bool: pass
+def Messenger_GetConnected(MesID: int) -> bool: pass
+def Messenger_GetName(MesID: int) -> str: pass
+def Messenger_GetToken(MesID: int) -> str: pass
+def Messenger_SendMessage(MesID: int, Msg: str, UserID: str) -> None: pass
+def Messenger_SetConnected(MesID: int, Value: bool) -> None: pass
+def Messenger_SetToken(MesID: int, Value: str) -> None: pass
 def MobileCanBeRenamed(MobID: int) -> bool: pass
 def MoveXY(Xdst: int, Ydst: int, Optimized: bool, Accuracy: int, Running: bool) -> bool: pass
 def MoveXYZ(Xdst: int, Ydst: int, Zdst: int, AccuracyXY: int, AccuracyZ: int, Running: bool) -> bool: pass
@@ -263,6 +302,7 @@ def PartyMembersList() -> list[int]: pass
 def PartyPrivateMessageTo(ObjID: int, Msg: str) -> None: pass
 def PartySay(Msg: str) -> None: pass
 def PauseResumeScript(ScriptIndex: int) -> None: pass
+def PauseResumeSelScript(ScriptIndex: int) -> None: pass
 def PetsCurrent() -> int: pass
 def PetsMax() -> int: pass
 def PoisonResist() -> int: pass
@@ -271,6 +311,7 @@ def PredictedDirection() -> int: pass
 def PredictedX() -> int: pass
 def PredictedY() -> int: pass
 def PredictedZ() -> int: pass
+def PrintScriptMethodsList(FileName: str, SortedList: bool) -> None: pass
 def ProfileName() -> str: pass
 def ProfileShardName() -> str: pass
 def ProxyIP() -> str: pass
@@ -290,6 +331,7 @@ def ScriptPath(ScriptName: str) -> None: pass
 def Self() -> int: pass
 def SetARExtParams(ShardName: str, CharName: str, UseAtEveryConnect: bool) -> None: pass
 def SetARStatus(Value: bool) -> None: pass
+def SetAlarm() -> None: pass
 def SetAutoBuyDelay(Value: int) -> None: pass
 def SetAutoSellDelay(Value: int) -> None: pass
 def SetBadLocation(X: int, Y: int) -> None: pass
@@ -297,13 +339,25 @@ def SetBadObject(ObjType: int, Color: int, Radius: int) -> None: pass
 def SetCatchBag(ObjID: int) -> int: pass
 def SetContextMenuHook(MenuID: int, EntryNumber: int) -> None: pass
 def SetDress() -> None: pass
+def SetDressSpeed(Value: int) -> None: pass
+def SetDropCheckCoord(Value: bool) -> None: pass
+def SetDropDelay(Value: int) -> None: pass
 def SetEventCallback(EventIndex: int) -> None: pass
 def SetFindDistance(Value: int) -> None: pass
+def SetFindInNulPoint(Value: bool) -> None: pass
 def SetFindVertical(Value: int) -> None: pass
 def SetGlobal(GlobalRegion: str, VarName: str, VarValue: str) -> None: pass
 def SetGoodLocation(X: int, Y: int) -> None: pass
 def SetJournalLine(StringIndex: int, Text: str) -> None: pass
+def SetMoveBetweenTwoCorners(Value: bool) -> None: pass
+def SetMoveCheckStamina(Value: int) -> None: pass
+def SetMoveHeuristicMult(Value: int) -> None: pass
+def SetMoveOpenDoor(Value: bool) -> None: pass
+def SetMoveThroughCorner(Value: bool) -> None: pass
+def SetMoveThroughNPC(Value: int) -> None: pass
+def SetMoveTurnCost(Value: int) -> None: pass
 def SetPauseScriptOnDisconnectStatus(Value: bool) -> None: pass
+def SetPickupedItem(ID: int) -> None: pass
 def SetRunMountTimer(Value: int) -> None: pass
 def SetRunUnmountTimer(Value: int) -> None: pass
 def SetScriptName(ScriptIndex: int, Value: str) -> None: pass
@@ -333,6 +387,7 @@ def TradeCheck(TradeNum: int, Num: int) -> bool: pass
 def TradeCount() -> int: pass
 def UOSay(Text: str) -> None: pass
 def UOSayColor(Text: str, Color: int) -> None: pass
+def UnequipItemsSetMacro() -> None: pass
 def UnsetCatchBag() -> None: pass
 def UpdateFigure(FigureID: int, figure: MapFigure) -> bool: pass
 def UseFromGround(ObjType: int, Color: int) -> int: pass

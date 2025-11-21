@@ -223,6 +223,31 @@ class BuffBarInfo(StructType):
     BuffText: String
 
 
+@StructType.register
+@dataclass
+class LayerObject(StructType):
+    Layer: U8
+    ObjID: U32
+
+
+
+@StructType.register
+@dataclass
+class ContextMenuEntry(StructType):
+    Tag: U16
+    IntLocID: U32
+    Flags: U16
+    Color: U16
+
+@StructType.register
+@dataclass
+class ContextMenuRec(StructType):
+    ID: U32
+    EntriesNumber: U8
+    NewCliloc: Bool
+    Entries: list[ContextMenuEntry]
+
+
 ####################################################################################################################
 # gump elements
 ####################################################################################################################
