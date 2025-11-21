@@ -20,7 +20,7 @@ DEFAULT_STEALTH_HOST = '127.0.0.1'
 DEFAULT_STEALTH_PORT = 47602
 SOCK_TIMEOUT = 10.0
 GET_PORT_ATTEMPT_COUNT = 3
-
+VERSION = 2, 8, 0, 0
 
 class AsyncStealthRPCProtocol(asyncio.Protocol):
     """
@@ -146,10 +146,11 @@ class StealthRPCEncoder:
         with io.BytesIO() as stream:
             for value, type_cls in items:
                 RPCType.pack_value(stream, value, type_cls)
+
             return stream.getvalue()
 
     @staticmethod
-    def encode_packet(method_spec: MethodSpec, call_id: int, *args) -> bytes:
+    def encode_method(method_spec: MethodSpec, call_id: int, *args) -> bytes:
         """
         encode full packet with header and arguments
         """
@@ -218,9 +219,11 @@ class AsyncStealthClient(AsyncRPCClient):
                 lambda: AsyncStealthRPCProtocol(self), self.host, self.port
             )
             await self._connected.wait()  # waiting for connection to be established
-            # TODO make normal package formation with the version instead of this hardcode
-            encoded = b'\x05\x00\x00\x00\x01\x02\x07\x00\x00'
-            self.send_packet(encoded)
+
+            # packet = StealthRPCEncoder.encode_method(StealthApi.LangVersion.method_spec, 0, 1, *VERSION)
+            # self.send_packet(packet)
+            await self.call_method(StealthApi.LangVersion.method_spec, 1, *VERSION)
+
         except ConnectionRefusedError:
             print(f"Unable to connect to {self.host}:{self.port}. Connection refused.")
             raise
@@ -241,7 +244,7 @@ class AsyncStealthClient(AsyncRPCClient):
         expect_reply = ret_type is not type(None)
         call_id = self._get_call_id() if expect_reply else 0
 
-        packet = StealthRPCEncoder.encode_packet(method_spec, call_id, *args)
+        packet = StealthRPCEncoder.encode_method(method_spec, call_id, *args)
 
         future = None
         if expect_reply:
@@ -303,8 +306,8 @@ class AsyncStealthClient(AsyncRPCClient):
                 self.close()
 
             elif packet_type == AsyncStealthClient.PacketType.REQ_SCRIPT_PATH:
-                lp = os.path.realpath(sys.argv[0])
-                packet = StealthRPCEncoder.encode_packet(StealthApi.ScriptPath.method_spec, 0, lp)
+                script_name = os.path.realpath(sys.argv[0])
+                packet = StealthRPCEncoder.encode_method(StealthApi.ScriptPath.method_spec, 0, script_name)
                 self.send_packet(packet)
 
             else:

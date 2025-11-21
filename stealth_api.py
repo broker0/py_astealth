@@ -11,12 +11,15 @@ class StealthApi(ApiSpecification):
     Methods do not have to have an implementation, they are just a protocol specification.
     """
 
+    ####################################################################################################################
+    # special callback methods
+    ####################################################################################################################
+    @ApiSpecification.method(5)
+    def LangVersion(self, Lang: U8, Major: U8, Minor: U8, Revision: U8, Build: U8):
+        pass
 
     @ApiSpecification.method(10)
     def ScriptPath(self, ScriptName: String) -> None:
-        """
-        special call-back method
-        """
         pass
 
     ####################################################################################################################
