@@ -25,7 +25,7 @@ such as integers/floats, strings, and datetimes.
 
 The file `stealth_structs.py` describes composite (structure) types.
 
-`StealhApi` is a declarative description of the UO Stealth client API. 
+`StealthApi` is a declarative description of the UO Stealth client API. 
 It only requires declaring a function, annotating its arguments and return type, 
 and using the `@ApiSpecification.method(int)` decorator to associate the method 
 with its numeric identifier. 
@@ -68,3 +68,67 @@ It inherits the `AsyncInterface` class and `AsyncStealthClient`.
 Method binding is performed by the `implement_api` decorator, which receives an `ApiSpecification`
 class as an argument, describing the API, and a `method_factory` that simply returns a closure method 
 that handles this call.
+
+Synchronous Clients
+===================
+
+While `AsyncStealthApiClient` provides the core asynchronous interface, the library also includes wrappers for synchronous usage, which can be more convenient for simple scripts or those migrating from `py_stealth`.
+
+`SyncStealthApiClient` - A thread-safe synchronous adapter. It runs the asyncio event loop in a separate background thread. This allows you to use the client in a standard blocking manner from your main thread.
+
+`SyncStealthApiClientFast` - A single-threaded synchronous adapter. It manages the event loop within the current thread. It is not thread-safe and should be used when you want to avoid the overhead of a separate thread but still want a blocking interface.
+
+Event Handling
+==============
+
+The client supports receiving asynchronous events from the Stealth server (e.g., chat messages, item updates).
+
+`StealthEvent` - Represents an event with an `id` (EventType) and a list of `arguments`.
+
+`get_event()` - Both async and sync clients provide this method to retrieve the next event from the queue.
+
+Usage Examples
+==============
+
+### Asynchronous Example
+
+```python
+import asyncio
+from py_astealth.api_client import AsyncStealthApiClient
+
+async def main():
+    client = AsyncStealthApiClient('localhost', 47602)
+    await client.connect()
+    
+    # Call an API method
+    self_id = await client.GetSelfID()
+    print(f"My ID: {self_id}")
+    
+    # Event loop
+    while True:
+        event = await client.get_event()
+        if event:
+            print(f"Received event: {event}")
+        await asyncio.sleep(0.1)
+
+if __name__ == '__main__':
+    asyncio.run(main())
+```
+
+### Synchronous Example
+
+```python
+from py_astealth.api_client import SyncStealthApiClient
+
+# Using context manager for automatic connection/disconnection
+with SyncStealthApiClient('localhost', 47602) as client:
+    if client.Connected():
+        print("Connected to Stealth!")
+        
+    client.AddToSystemJournal("Hello from Python!")
+```
+
+Code Generation
+===============
+
+The `py_astealth.generated` package contains auto-generated interface stubs (`AsyncInterface`, `SyncInterface`). These files are not meant to be edited manually but are crucial for providing IDE autocompletion and type hinting for the dynamically generated API methods.
