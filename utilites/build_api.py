@@ -6,7 +6,7 @@ PASCAL_TO_PYTHON_TYPE_MAP = {
     "ubyte": "U8",
     "word": "U16",
     "short": "I16",
-    "shortint": "I16",
+    "shortint": "I8",
     "ushort": "U16",
     "integer": "I32",
     "uint": "U32",

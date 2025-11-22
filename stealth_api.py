@@ -161,7 +161,7 @@ class StealthApi(ApiSpecification):
         pass
 
     @ApiSpecification.method(28)
-    def Armor(self) -> I16:
+    def Armor(self) -> U16:
         pass
 
     @ApiSpecification.method(29)
@@ -205,15 +205,15 @@ class StealthApi(ApiSpecification):
         pass
 
     @ApiSpecification.method(52)
-    def Life(self) -> int:
+    def Life(self) -> I32:
         pass
 
     @ApiSpecification.method(55)
-    def MaxLife(self) -> int:
+    def MaxLife(self) -> I32:
         pass
 
     @ApiSpecification.method(58)
-    def Luck(self) -> int:
+    def Luck(self) -> U16:
         pass
 
     @ApiSpecification.method(59)
@@ -274,7 +274,7 @@ class StealthApi(ApiSpecification):
         pass
 
     @ApiSpecification.method(154)
-    def GetQuantity(self, ObjID: U32) -> int:
+    def GetQuantity(self, ObjID: U32) -> I32:
         pass
 
     @ApiSpecification.method(156)
@@ -298,39 +298,39 @@ class StealthApi(ApiSpecification):
         pass
 
     @ApiSpecification.method(160)
-    def GetStr(self, ObjID: U32) -> int:
+    def GetStr(self, ObjID: U32) -> I32:
         pass
 
     @ApiSpecification.method(161)
-    def GetInt(self, ObjID: U32) -> int:
+    def GetInt(self, ObjID: U32) -> I32:
         pass
 
     @ApiSpecification.method(162)
-    def GetDex(self, ObjID: U32) -> int:
+    def GetDex(self, ObjID: U32) -> I32:
         pass
 
     @ApiSpecification.method(163)
-    def GetHP(self, ObjID: U32) -> int:
+    def GetHP(self, ObjID: U32) -> I32:
         pass
 
     @ApiSpecification.method(164)
-    def GetMaxHP(self, ObjID: U32) -> int:
+    def GetMaxHP(self, ObjID: U32) -> I32:
         pass
 
     @ApiSpecification.method(165)
-    def GetMana(self, ObjID: U32) -> int:
+    def GetMana(self, ObjID: U32) -> I32:
         pass
 
     @ApiSpecification.method(166)
-    def GetMaxMana(self, ObjID: U32) -> int:
+    def GetMaxMana(self, ObjID: U32) -> I32:
         pass
 
     @ApiSpecification.method(167)
-    def GetStam(self, ObjID: U32) -> int:
+    def GetStam(self, ObjID: U32) -> I32:
         pass
 
     @ApiSpecification.method(168)
-    def GetMaxStam(self, ObjID: U32) -> int:
+    def GetMaxStam(self, ObjID: U32) -> I32:
         pass
 
     @ApiSpecification.method(170)
@@ -462,7 +462,7 @@ class StealthApi(ApiSpecification):
         pass
 
     @ApiSpecification.method(122)
-    def InJournalBetweenTimes(self, Str: String, TimeBegin: DateTime, TimeEnd: DateTime) -> int:
+    def InJournalBetweenTimes(self, Str: String, TimeBegin: DateTime, TimeEnd: DateTime) -> I32:
         pass
 
     @ApiSpecification.method(123)
@@ -486,7 +486,7 @@ class StealthApi(ApiSpecification):
         pass
 
     @ApiSpecification.method(105)
-    def FoundedParamID(self) -> int:
+    def FoundedParamID(self) -> I32:
         pass
 
     @ApiSpecification.method(106)
@@ -518,11 +518,11 @@ class StealthApi(ApiSpecification):
         pass
 
     @ApiSpecification.method(112)
-    def LineIndex(self) -> int:
+    def LineIndex(self) -> I32:
         pass
 
     @ApiSpecification.method(113)
-    def LineCount(self) -> int:
+    def LineCount(self) -> I32:
         pass
 
     @ApiSpecification.method(114)
@@ -651,11 +651,11 @@ class StealthApi(ApiSpecification):
     @ApiSpecification.method(139)
     def FindItem(self) -> U32: pass
     @ApiSpecification.method(140)
-    def FindCount(self) -> int: pass
+    def FindCount(self) -> I32: pass
     @ApiSpecification.method(141)
-    def FindQuantity(self) -> int: pass
+    def FindQuantity(self) -> I32: pass
     @ApiSpecification.method(142)
-    def FindFullQuantity(self) -> int: pass
+    def FindFullQuantity(self) -> I32: pass
 
     ####################################################################################################################
     # multis
@@ -1329,7 +1329,7 @@ class StealthApi(ApiSpecification):
     # UserStatic functions
     ####################################################################################################################
     @ApiSpecification.method(383)
-    def AddUserStatic(self, StaticItem: UserStaticItem, WorldNum: U8) -> int:
+    def AddUserStatic(self, StaticItem: UserStaticItem, WorldNum: U8) -> I32:
         pass
 
     @ApiSpecification.method(384)
@@ -1547,7 +1547,7 @@ class StealthApi(ApiSpecification):
     def GetSelfMaxMana(self) -> I32:
         pass
     @ApiSpecification.method(57)
-    def GetMaxStam(self) -> int:
+    def GetMaxStam(self) -> I32:
         pass
     @ApiSpecification.method(89)
     def GetSkillID(self, SkillName: String) -> I32:

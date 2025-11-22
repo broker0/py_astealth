@@ -211,7 +211,7 @@
         "name": "Armor",
         "id": 28,
         "args": [],
-        "result": "I16"
+        "result": "U16"
     },
     {
         "name": "Weight",
@@ -355,7 +355,7 @@
         "name": "Life",
         "id": 52,
         "args": [],
-        "result": "int"
+        "result": "I32"
     },
     {
         "name": "GetSelfMana",
@@ -373,7 +373,7 @@
         "name": "MaxLife",
         "id": 55,
         "args": [],
-        "result": "int"
+        "result": "I32"
     },
     {
         "name": "GetSelfMaxMana",
@@ -385,13 +385,13 @@
         "name": "GetMaxStam",
         "id": 57,
         "args": [],
-        "result": "int"
+        "result": "I32"
     },
     {
         "name": "Luck",
         "id": 58,
         "args": [],
-        "result": "int"
+        "result": "U16"
     },
     {
         "name": "GetExtInfo",
@@ -839,7 +839,7 @@
         "name": "FoundedParamID",
         "id": 105,
         "args": [],
-        "result": "int"
+        "result": "I32"
     },
     {
         "name": "LineID",
@@ -887,13 +887,13 @@
         "name": "LineIndex",
         "id": 112,
         "args": [],
-        "result": "int"
+        "result": "I32"
     },
     {
         "name": "LineCount",
         "id": 113,
         "args": [],
-        "result": "int"
+        "result": "I32"
     },
     {
         "name": "LineName",
@@ -975,7 +975,7 @@
                 "type": "DateTime"
             }
         ],
-        "result": "int"
+        "result": "I32"
     },
     {
         "name": "Journal",
@@ -1152,19 +1152,19 @@
         "name": "FindCount",
         "id": 140,
         "args": [],
-        "result": "int"
+        "result": "I32"
     },
     {
         "name": "FindQuantity",
         "id": 141,
         "args": [],
-        "result": "int"
+        "result": "I32"
     },
     {
         "name": "FindFullQuantity",
         "id": 142,
         "args": [],
-        "result": "int"
+        "result": "I32"
     },
     {
         "name": "PredictedX",
@@ -1276,7 +1276,7 @@
                 "type": "U32"
             }
         ],
-        "result": "int"
+        "result": "I32"
     },
     {
         "name": "IsObjectExists",
@@ -1342,7 +1342,7 @@
                 "type": "U32"
             }
         ],
-        "result": "int"
+        "result": "I32"
     },
     {
         "name": "GetInt",
@@ -1353,7 +1353,7 @@
                 "type": "U32"
             }
         ],
-        "result": "int"
+        "result": "I32"
     },
     {
         "name": "GetDex",
@@ -1364,7 +1364,7 @@
                 "type": "U32"
             }
         ],
-        "result": "int"
+        "result": "I32"
     },
     {
         "name": "GetHP",
@@ -1375,7 +1375,7 @@
                 "type": "U32"
             }
         ],
-        "result": "int"
+        "result": "I32"
     },
     {
         "name": "GetMaxHP",
@@ -1386,7 +1386,7 @@
                 "type": "U32"
             }
         ],
-        "result": "int"
+        "result": "I32"
     },
     {
         "name": "GetMana",
@@ -1397,7 +1397,7 @@
                 "type": "U32"
             }
         ],
-        "result": "int"
+        "result": "I32"
     },
     {
         "name": "GetMaxMana",
@@ -1408,7 +1408,7 @@
                 "type": "U32"
             }
         ],
-        "result": "int"
+        "result": "I32"
     },
     {
         "name": "GetStam",
@@ -1419,7 +1419,7 @@
                 "type": "U32"
             }
         ],
-        "result": "int"
+        "result": "I32"
     },
     {
         "name": "GetNotoriety",
@@ -3817,7 +3817,7 @@
                 "type": "U8"
             }
         ],
-        "result": "int"
+        "result": "I32"
     },
     {
         "name": "RemoveUserStatic",
