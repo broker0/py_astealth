@@ -1,16 +1,5 @@
 [
     {
-        "name": "PauseResumeScript",
-        "id": 4,
-        "args": [
-            {
-                "name": "ScriptIndex",
-                "type": "U16"
-            }
-        ],
-        "result": "None"
-    },
-    {
         "name": "LangVersion",
         "id": 5,
         "args": [
@@ -523,7 +512,7 @@
             },
             {
                 "name": "Z",
-                "type": "I16"
+                "type": "I8"
             }
         ],
         "result": "None"
@@ -546,7 +535,7 @@
             },
             {
                 "name": "Z",
-                "type": "I16"
+                "type": "I8"
             }
         ],
         "result": "None"
@@ -580,7 +569,7 @@
             },
             {
                 "name": "Z",
-                "type": "I16"
+                "type": "I8"
             }
         ],
         "result": "None"
@@ -599,7 +588,7 @@
             },
             {
                 "name": "Z",
-                "type": "I16"
+                "type": "I8"
             }
         ],
         "result": "None"
@@ -695,8 +684,8 @@
         "id": 91,
         "args": [
             {
-                "name": "SkillName",
-                "type": "String"
+                "name": "SkillID",
+                "type": "I32"
             },
             {
                 "name": "skillState",
@@ -710,8 +699,8 @@
         "id": 92,
         "args": [
             {
-                "name": "SkillName",
-                "type": "String"
+                "name": "SkillID",
+                "type": "I32"
             }
         ],
         "result": "F64"
@@ -721,8 +710,8 @@
         "id": 93,
         "args": [
             {
-                "name": "SkillName",
-                "type": "String"
+                "name": "SkillID",
+                "type": "I32"
             }
         ],
         "result": "F64"
@@ -775,7 +764,7 @@
                 "type": "U32"
             }
         ],
-        "result": "U8"
+        "result": "Bool"
     },
     {
         "name": "UnsetCatchBag",
@@ -1855,7 +1844,7 @@
         "args": [
             {
                 "name": "Value",
-                "type": "String"
+                "type": "I32"
             }
         ],
         "result": "None"
@@ -2621,7 +2610,7 @@
                 "type": "U8"
             }
         ],
-        "result": "U8"
+        "result": "I8"
     },
     {
         "name": "IsWorldCellPassable",
@@ -3068,7 +3057,7 @@
             },
             {
                 "name": "Zdst",
-                "type": "I16"
+                "type": "I8"
             },
             {
                 "name": "AccuracyXY",
@@ -3414,8 +3403,8 @@
         "id": 351,
         "args": [
             {
-                "name": "SkillName",
-                "type": "String"
+                "name": "SkillID",
+                "type": "I32"
             }
         ],
         "result": "F64"
@@ -3580,7 +3569,7 @@
             },
             {
                 "name": "CurrZ",
-                "type": "I16"
+                "type": "I8"
             }
         ],
         "result": "I8"
@@ -3607,8 +3596,8 @@
         "id": 369,
         "args": [
             {
-                "name": "SkillName",
-                "type": "String"
+                "name": "SkillID",
+                "type": "I32"
             }
         ],
         "result": "U8"

@@ -600,23 +600,23 @@ class StealthApi(ApiSpecification):
         pass
 
     @ApiSpecification.method(91)
-    def SetSkillLockState(self, SkillName: String, skillState: U8) -> None:
+    def SetSkillLockState(self, SkillID: I32, skillState: U8) -> None:
         pass
 
     @ApiSpecification.method(92)
-    def GetSkillCap(self, SkillName: String) -> F64:
+    def GetSkillCap(self, SkillID: I32) -> F64:
         pass
 
     @ApiSpecification.method(93)
-    def GetSkillValue(self, SkillName: String) -> F64:
+    def GetSkillValue(self, SkillID: I32) -> F64:
         pass
 
     @ApiSpecification.method(351)
-    def GetSkillCurrentValue(self, SkillName: String) -> F64:
+    def GetSkillCurrentValue(self, SkillID: I32) -> F64:
         pass
 
     @ApiSpecification.method(369)
-    def GetSkillLockState(self, SkillName: String) -> U8:
+    def GetSkillLockState(self, SkillID: I32) -> U8:
         pass
 
     ####################################################################################################################
@@ -716,7 +716,7 @@ class StealthApi(ApiSpecification):
         pass
 
     @ApiSpecification.method(326)
-    def MoveXYZ(self, Xdst: U16, Ydst: U16, Zdst: I16, AccuracyXY: I32, AccuracyZ: I32, Running: Bool) -> Bool:
+    def MoveXYZ(self, Xdst: U16, Ydst: U16, Zdst: I8, AccuracyXY: I32, AccuracyZ: I32, Running: Bool) -> Bool:
         pass
 
     @ApiSpecification.method(327)
@@ -754,7 +754,7 @@ class StealthApi(ApiSpecification):
 
 
     @ApiSpecification.method(366)
-    def GetNextStepZ(self, CurrX: U16, CurrY: U16, DestX: U16, DestY: U16, WorldNum: U8, CurrZ: I16) -> I8:
+    def GetNextStepZ(self, CurrX: U16, CurrY: U16, DestX: U16, DestY: U16, WorldNum: U8, CurrZ: I8) -> I8:
         pass
 
     @ApiSpecification.method(328)
@@ -810,7 +810,7 @@ class StealthApi(ApiSpecification):
         pass
 
     @ApiSpecification.method(284)
-    def GetSurfaceZ(self, X: U16, Y: U16, WorldNum: U8) -> U8:
+    def GetSurfaceZ(self, X: U16, Y: U16, WorldNum: U8) -> I8:
         pass
 
     @ApiSpecification.method(388)
@@ -821,7 +821,7 @@ class StealthApi(ApiSpecification):
     # gumps
     ####################################################################################################################
     @ApiSpecification.method(211)
-    def WaitGump(self, Value: String) -> None:
+    def WaitGump(self, Value: I32) -> None:
         pass
 
     @ApiSpecification.method(213)
@@ -966,10 +966,6 @@ class StealthApi(ApiSpecification):
     ####################################################################################################################
     # scripts management
     ####################################################################################################################
-    @ApiSpecification.method(4)
-    def PauseResumeScript(self, ScriptIndex: U16) -> None:
-        pass
-
     @ApiSpecification.method(450)
     def GetScriptsCount(self) -> U16:
         pass
@@ -988,6 +984,10 @@ class StealthApi(ApiSpecification):
 
     @ApiSpecification.method(454)
     def StopScript(self, ScriptIndex: U16) -> None:
+        pass
+
+    @ApiSpecification.method(455)
+    def PauseResumeSelScript (self, ScriptIndex: U16) -> None:
         pass
 
     @ApiSpecification.method(456)
@@ -1115,11 +1115,11 @@ class StealthApi(ApiSpecification):
         pass
 
     @ApiSpecification.method(75)
-    def TargetToXYZ(self, X: U16, Y: U16, Z: I16) -> None:
+    def TargetToXYZ(self, X: U16, Y: U16, Z: I8) -> None:
         pass
 
     @ApiSpecification.method(76)
-    def TargetToTile(self, Tile: U16, X: U16, Y: U16, Z: I16) -> None:
+    def TargetToTile(self, Tile: U16, X: U16, Y: U16, Z: I8) -> None:
         pass
 
     @ApiSpecification.method(77)
@@ -1127,11 +1127,11 @@ class StealthApi(ApiSpecification):
         pass
 
     @ApiSpecification.method(78)
-    def WaitTargetTile(self, Tile: U16, X: U16, Y: U16, Z: I16) -> None:
+    def WaitTargetTile(self, Tile: U16, X: U16, Y: U16, Z: I8) -> None:
         pass
 
     @ApiSpecification.method(79)
-    def WaitTargetXYZ(self, X: U16, Y: U16, Z: I16) -> None:
+    def WaitTargetXYZ(self, X: U16, Y: U16, Z: I8) -> None:
         pass
 
     @ApiSpecification.method(80)
@@ -1407,11 +1407,11 @@ class StealthApi(ApiSpecification):
         pass
 
     @ApiSpecification.method(95)
-    def UseVirtue(self, VirtueName: String) -> None:
+    def UseVirtue(self, VirtueID: U32) -> None:
         pass
 
     @ApiSpecification.method(99)
-    def SetCatchBag(self, ObjID: U32) -> U8:
+    def SetCatchBag(self, ObjID: U32) -> Bool:
         pass
 
     @ApiSpecification.method(100)

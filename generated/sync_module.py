@@ -186,11 +186,11 @@ def GetSelfStam() -> int: pass
 def GetSelfStr() -> int: pass
 def GetShopList() -> list[str]: pass
 def GetSilentMode() -> bool: pass
-def GetSkillCap(SkillName: str) -> float: pass
-def GetSkillCurrentValue(SkillName: str) -> float: pass
+def GetSkillCap(SkillID: int) -> float: pass
+def GetSkillCurrentValue(SkillID: int) -> float: pass
 def GetSkillID(SkillName: str) -> int: pass
-def GetSkillLockState(SkillName: str) -> int: pass
-def GetSkillValue(SkillName: str) -> float: pass
+def GetSkillLockState(SkillID: int) -> int: pass
+def GetSkillValue(SkillID: int) -> float: pass
 def GetStam(ObjID: int) -> int: pass
 def GetStatLockState(statNum: int) -> int: pass
 def GetStaticArt(ObjType: int, Hue: int) -> list[int]: pass
@@ -301,7 +301,6 @@ def PartyLeave() -> None: pass
 def PartyMembersList() -> list[int]: pass
 def PartyPrivateMessageTo(ObjID: int, Msg: str) -> None: pass
 def PartySay(Msg: str) -> None: pass
-def PauseResumeScript(ScriptIndex: int) -> None: pass
 def PauseResumeSelScript(ScriptIndex: int) -> None: pass
 def PetsCurrent() -> int: pass
 def PetsMax() -> int: pass
@@ -336,7 +335,7 @@ def SetAutoBuyDelay(Value: int) -> None: pass
 def SetAutoSellDelay(Value: int) -> None: pass
 def SetBadLocation(X: int, Y: int) -> None: pass
 def SetBadObject(ObjType: int, Color: int, Radius: int) -> None: pass
-def SetCatchBag(ObjID: int) -> int: pass
+def SetCatchBag(ObjID: int) -> bool: pass
 def SetContextMenuHook(MenuID: int, EntryNumber: int) -> None: pass
 def SetDress() -> None: pass
 def SetDressSpeed(Value: int) -> None: pass
@@ -362,7 +361,7 @@ def SetRunMountTimer(Value: int) -> None: pass
 def SetRunUnmountTimer(Value: int) -> None: pass
 def SetScriptName(ScriptIndex: int, Value: str) -> None: pass
 def SetSilentMode(Value: bool) -> None: pass
-def SetSkillLockState(SkillName: str, skillState: int) -> None: pass
+def SetSkillLockState(SkillID: int, skillState: int) -> None: pass
 def SetStatState(statNum: int, statState: int) -> None: pass
 def SetWalkMountTimer(Value: int) -> None: pass
 def SetWalkUnmountTimer(Value: int) -> None: pass
@@ -401,7 +400,7 @@ def UseSelfPaperdollScroll() -> None: pass
 def UseSkill(SkillID: int) -> None: pass
 def UseType(ObjType: int, Color: int) -> int: pass
 def UseVirtue(VirtueName: str) -> None: pass
-def WaitGump(Value: str) -> None: pass
+def WaitGump(Value: int) -> None: pass
 def WaitMenu(MenuCaption: str, ElementCaption: str) -> None: pass
 def WaitTargetGround(ObjType: int) -> None: pass
 def WaitTargetLast() -> None: pass

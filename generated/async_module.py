@@ -186,11 +186,11 @@ async def GetSelfStam() -> int: pass
 async def GetSelfStr() -> int: pass
 async def GetShopList() -> list[str]: pass
 async def GetSilentMode() -> bool: pass
-async def GetSkillCap(SkillName: str) -> float: pass
-async def GetSkillCurrentValue(SkillName: str) -> float: pass
+async def GetSkillCap(SkillID: int) -> float: pass
+async def GetSkillCurrentValue(SkillID: int) -> float: pass
 async def GetSkillID(SkillName: str) -> int: pass
-async def GetSkillLockState(SkillName: str) -> int: pass
-async def GetSkillValue(SkillName: str) -> float: pass
+async def GetSkillLockState(SkillID: int) -> int: pass
+async def GetSkillValue(SkillID: int) -> float: pass
 async def GetStam(ObjID: int) -> int: pass
 async def GetStatLockState(statNum: int) -> int: pass
 async def GetStaticArt(ObjType: int, Hue: int) -> list[int]: pass
@@ -301,7 +301,6 @@ async def PartyLeave() -> None: pass
 async def PartyMembersList() -> list[int]: pass
 async def PartyPrivateMessageTo(ObjID: int, Msg: str) -> None: pass
 async def PartySay(Msg: str) -> None: pass
-async def PauseResumeScript(ScriptIndex: int) -> None: pass
 async def PauseResumeSelScript(ScriptIndex: int) -> None: pass
 async def PetsCurrent() -> int: pass
 async def PetsMax() -> int: pass
@@ -336,7 +335,7 @@ async def SetAutoBuyDelay(Value: int) -> None: pass
 async def SetAutoSellDelay(Value: int) -> None: pass
 async def SetBadLocation(X: int, Y: int) -> None: pass
 async def SetBadObject(ObjType: int, Color: int, Radius: int) -> None: pass
-async def SetCatchBag(ObjID: int) -> int: pass
+async def SetCatchBag(ObjID: int) -> bool: pass
 async def SetContextMenuHook(MenuID: int, EntryNumber: int) -> None: pass
 async def SetDress() -> None: pass
 async def SetDressSpeed(Value: int) -> None: pass
@@ -362,7 +361,7 @@ async def SetRunMountTimer(Value: int) -> None: pass
 async def SetRunUnmountTimer(Value: int) -> None: pass
 async def SetScriptName(ScriptIndex: int, Value: str) -> None: pass
 async def SetSilentMode(Value: bool) -> None: pass
-async def SetSkillLockState(SkillName: str, skillState: int) -> None: pass
+async def SetSkillLockState(SkillID: int, skillState: int) -> None: pass
 async def SetStatState(statNum: int, statState: int) -> None: pass
 async def SetWalkMountTimer(Value: int) -> None: pass
 async def SetWalkUnmountTimer(Value: int) -> None: pass
@@ -401,7 +400,7 @@ async def UseSelfPaperdollScroll() -> None: pass
 async def UseSkill(SkillID: int) -> None: pass
 async def UseType(ObjType: int, Color: int) -> int: pass
 async def UseVirtue(VirtueName: str) -> None: pass
-async def WaitGump(Value: str) -> None: pass
+async def WaitGump(Value: int) -> None: pass
 async def WaitMenu(MenuCaption: str, ElementCaption: str) -> None: pass
 async def WaitTargetGround(ObjType: int) -> None: pass
 async def WaitTargetLast() -> None: pass

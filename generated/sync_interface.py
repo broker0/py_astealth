@@ -188,11 +188,11 @@ class SyncInterface:
     def GetSelfStr(self) -> int: pass
     def GetShopList(self) -> list[str]: pass
     def GetSilentMode(self) -> bool: pass
-    def GetSkillCap(self, SkillName: str) -> float: pass
-    def GetSkillCurrentValue(self, SkillName: str) -> float: pass
+    def GetSkillCap(self, SkillID: int) -> float: pass
+    def GetSkillCurrentValue(self, SkillID: int) -> float: pass
     def GetSkillID(self, SkillName: str) -> int: pass
-    def GetSkillLockState(self, SkillName: str) -> int: pass
-    def GetSkillValue(self, SkillName: str) -> float: pass
+    def GetSkillLockState(self, SkillID: int) -> int: pass
+    def GetSkillValue(self, SkillID: int) -> float: pass
     def GetStam(self, ObjID: int) -> int: pass
     def GetStatLockState(self, statNum: int) -> int: pass
     def GetStaticArt(self, ObjType: int, Hue: int) -> list[int]: pass
@@ -303,7 +303,6 @@ class SyncInterface:
     def PartyMembersList(self) -> list[int]: pass
     def PartyPrivateMessageTo(self, ObjID: int, Msg: str) -> None: pass
     def PartySay(self, Msg: str) -> None: pass
-    def PauseResumeScript(self, ScriptIndex: int) -> None: pass
     def PauseResumeSelScript(self, ScriptIndex: int) -> None: pass
     def PetsCurrent(self) -> int: pass
     def PetsMax(self) -> int: pass
@@ -338,7 +337,7 @@ class SyncInterface:
     def SetAutoSellDelay(self, Value: int) -> None: pass
     def SetBadLocation(self, X: int, Y: int) -> None: pass
     def SetBadObject(self, ObjType: int, Color: int, Radius: int) -> None: pass
-    def SetCatchBag(self, ObjID: int) -> int: pass
+    def SetCatchBag(self, ObjID: int) -> bool: pass
     def SetContextMenuHook(self, MenuID: int, EntryNumber: int) -> None: pass
     def SetDress(self) -> None: pass
     def SetDressSpeed(self, Value: int) -> None: pass
@@ -364,7 +363,7 @@ class SyncInterface:
     def SetRunUnmountTimer(self, Value: int) -> None: pass
     def SetScriptName(self, ScriptIndex: int, Value: str) -> None: pass
     def SetSilentMode(self, Value: bool) -> None: pass
-    def SetSkillLockState(self, SkillName: str, skillState: int) -> None: pass
+    def SetSkillLockState(self, SkillID: int, skillState: int) -> None: pass
     def SetStatState(self, statNum: int, statState: int) -> None: pass
     def SetWalkMountTimer(self, Value: int) -> None: pass
     def SetWalkUnmountTimer(self, Value: int) -> None: pass
@@ -403,7 +402,7 @@ class SyncInterface:
     def UseSkill(self, SkillID: int) -> None: pass
     def UseType(self, ObjType: int, Color: int) -> int: pass
     def UseVirtue(self, VirtueName: str) -> None: pass
-    def WaitGump(self, Value: str) -> None: pass
+    def WaitGump(self, Value: int) -> None: pass
     def WaitMenu(self, MenuCaption: str, ElementCaption: str) -> None: pass
     def WaitTargetGround(self, ObjType: int) -> None: pass
     def WaitTargetLast(self) -> None: pass

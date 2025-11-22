@@ -188,11 +188,11 @@ class AsyncInterface:
     async def GetSelfStr(self) -> int: pass
     async def GetShopList(self) -> list[str]: pass
     async def GetSilentMode(self) -> bool: pass
-    async def GetSkillCap(self, SkillName: str) -> float: pass
-    async def GetSkillCurrentValue(self, SkillName: str) -> float: pass
+    async def GetSkillCap(self, SkillID: int) -> float: pass
+    async def GetSkillCurrentValue(self, SkillID: int) -> float: pass
     async def GetSkillID(self, SkillName: str) -> int: pass
-    async def GetSkillLockState(self, SkillName: str) -> int: pass
-    async def GetSkillValue(self, SkillName: str) -> float: pass
+    async def GetSkillLockState(self, SkillID: int) -> int: pass
+    async def GetSkillValue(self, SkillID: int) -> float: pass
     async def GetStam(self, ObjID: int) -> int: pass
     async def GetStatLockState(self, statNum: int) -> int: pass
     async def GetStaticArt(self, ObjType: int, Hue: int) -> list[int]: pass
@@ -303,7 +303,6 @@ class AsyncInterface:
     async def PartyMembersList(self) -> list[int]: pass
     async def PartyPrivateMessageTo(self, ObjID: int, Msg: str) -> None: pass
     async def PartySay(self, Msg: str) -> None: pass
-    async def PauseResumeScript(self, ScriptIndex: int) -> None: pass
     async def PauseResumeSelScript(self, ScriptIndex: int) -> None: pass
     async def PetsCurrent(self) -> int: pass
     async def PetsMax(self) -> int: pass
@@ -338,7 +337,7 @@ class AsyncInterface:
     async def SetAutoSellDelay(self, Value: int) -> None: pass
     async def SetBadLocation(self, X: int, Y: int) -> None: pass
     async def SetBadObject(self, ObjType: int, Color: int, Radius: int) -> None: pass
-    async def SetCatchBag(self, ObjID: int) -> int: pass
+    async def SetCatchBag(self, ObjID: int) -> bool: pass
     async def SetContextMenuHook(self, MenuID: int, EntryNumber: int) -> None: pass
     async def SetDress(self) -> None: pass
     async def SetDressSpeed(self, Value: int) -> None: pass
@@ -364,7 +363,7 @@ class AsyncInterface:
     async def SetRunUnmountTimer(self, Value: int) -> None: pass
     async def SetScriptName(self, ScriptIndex: int, Value: str) -> None: pass
     async def SetSilentMode(self, Value: bool) -> None: pass
-    async def SetSkillLockState(self, SkillName: str, skillState: int) -> None: pass
+    async def SetSkillLockState(self, SkillID: int, skillState: int) -> None: pass
     async def SetStatState(self, statNum: int, statState: int) -> None: pass
     async def SetWalkMountTimer(self, Value: int) -> None: pass
     async def SetWalkUnmountTimer(self, Value: int) -> None: pass
@@ -403,7 +402,7 @@ class AsyncInterface:
     async def UseSkill(self, SkillID: int) -> None: pass
     async def UseType(self, ObjType: int, Color: int) -> int: pass
     async def UseVirtue(self, VirtueName: str) -> None: pass
-    async def WaitGump(self, Value: str) -> None: pass
+    async def WaitGump(self, Value: int) -> None: pass
     async def WaitMenu(self, MenuCaption: str, ElementCaption: str) -> None: pass
     async def WaitTargetGround(self, ObjType: int) -> None: pass
     async def WaitTargetLast(self) -> None: pass
