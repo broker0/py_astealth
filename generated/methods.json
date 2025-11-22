@@ -8,7 +8,7 @@
                 "type": "U16"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "LangVersion",
@@ -35,7 +35,7 @@
                 "type": "U8"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "SetEventCallback",
@@ -46,7 +46,7 @@
                 "type": "U8"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "ClearEventCallback",
@@ -57,7 +57,7 @@
                 "type": "U8"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "ScriptPath",
@@ -68,7 +68,7 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "ProfileName",
@@ -91,7 +91,7 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "Self",
@@ -170,7 +170,7 @@
                 "type": "Bool"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetPauseScriptOnDisconnectStatus",
@@ -187,7 +187,7 @@
                 "type": "Bool"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "Sex",
@@ -313,13 +313,13 @@
         "name": "Connect",
         "id": 45,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "Disconnect",
         "id": 46,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "ShardName",
@@ -456,7 +456,7 @@
                 "type": "Bool"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "Attack",
@@ -467,13 +467,13 @@
                 "type": "U32"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "UseSelfPaperdollScroll",
         "id": 70,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "UseOtherPaperdollScroll",
@@ -484,7 +484,7 @@
                 "type": "U32"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "TargetID",
@@ -496,7 +496,7 @@
         "name": "CancelTarget",
         "id": 73,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "TargetToObject",
@@ -507,7 +507,7 @@
                 "type": "U32"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "TargetToXYZ",
@@ -526,7 +526,7 @@
                 "type": "I16"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "TargetToTile",
@@ -549,7 +549,7 @@
                 "type": "I16"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "WaitTargetObject",
@@ -560,7 +560,7 @@
                 "type": "U32"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "WaitTargetTile",
@@ -583,7 +583,7 @@
                 "type": "I16"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "WaitTargetXYZ",
@@ -602,13 +602,13 @@
                 "type": "I16"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "WaitTargetSelf",
         "id": 80,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "WaitTargetType",
@@ -619,13 +619,13 @@
                 "type": "U16"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "CancelWaitTarget",
         "id": 82,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "WaitTargetGround",
@@ -636,25 +636,25 @@
                 "type": "U16"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "WaitTargetLast",
         "id": 84,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "UsePrimaryAbility",
         "id": 85,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "UseSecondaryAbility",
         "id": 86,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetActiveAbility",
@@ -666,7 +666,7 @@
         "name": "ToggleFly",
         "id": 88,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetSkillID",
@@ -688,7 +688,7 @@
                 "type": "I32"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "SetSkillLockState",
@@ -703,7 +703,7 @@
                 "type": "U8"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetSkillCap",
@@ -731,7 +731,7 @@
         "name": "ReqVirtuesGump",
         "id": 94,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "UseVirtue",
@@ -742,7 +742,7 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "Cast",
@@ -753,7 +753,7 @@
                 "type": "I32"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "IsActiveSpellAbility",
@@ -781,7 +781,7 @@
         "name": "UnsetCatchBag",
         "id": 100,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "UseObject",
@@ -792,7 +792,7 @@
                 "type": "U32"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "UseType",
@@ -833,7 +833,7 @@
                 "type": "U32"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "FoundedParamID",
@@ -910,13 +910,13 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "ClearJournalIgnore",
         "id": 116,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "AddChatUserIgnore",
@@ -927,19 +927,19 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "ClearChatUserIgnore",
         "id": 118,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "ClearJournal",
         "id": 119,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "LastJournalMessage",
@@ -1001,7 +1001,7 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "LowJournal",
@@ -1024,7 +1024,7 @@
                 "type": "U32"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetFindDistance",
@@ -1041,7 +1041,7 @@
                 "type": "U32"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetFindVertical",
@@ -1111,7 +1111,7 @@
                 "type": "U32"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "IgnoreOff",
@@ -1122,13 +1122,13 @@
                 "type": "U32"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "IgnoreReset",
         "id": 136,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetIgnoreList",
@@ -1568,19 +1568,19 @@
         "name": "OpenDoor",
         "id": 182,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "Bow",
         "id": 183,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "Salute",
         "id": 184,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetPickupedItem",
@@ -1597,7 +1597,7 @@
                 "type": "U32"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetDropCheckCoord",
@@ -1614,7 +1614,7 @@
                 "type": "Bool"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetDropDelay",
@@ -1631,7 +1631,7 @@
                 "type": "U32"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "DragItem",
@@ -1680,7 +1680,7 @@
                 "type": "U32"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "SetContextMenuHook",
@@ -1695,7 +1695,7 @@
                 "type": "U8"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetContextMenu",
@@ -1707,7 +1707,7 @@
         "name": "ClearContextMenu",
         "id": 196,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "IsTrade",
@@ -1782,7 +1782,7 @@
                 "type": "U8"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "CancelTrade",
@@ -1808,7 +1808,7 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "AutoMenu",
@@ -1823,7 +1823,7 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "MenuHookPresent",
@@ -1841,13 +1841,13 @@
         "name": "CancelMenu",
         "id": 209,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "CloseMenu",
         "id": 210,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "WaitGump",
@@ -1858,7 +1858,7 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "WaitTextEntry",
@@ -1869,7 +1869,7 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GumpAutoTextEntry",
@@ -1884,7 +1884,7 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GumpAutoRadiobutton",
@@ -1899,7 +1899,7 @@
                 "type": "I32"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GumpAutoCheckBox",
@@ -1914,7 +1914,7 @@
                 "type": "I32"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "NumGumpButton",
@@ -2003,7 +2003,7 @@
                 "type": "U16"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetGumpSerial",
@@ -2102,7 +2102,7 @@
                 "type": "U32"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "AddGumpIgnoreBySerial",
@@ -2113,13 +2113,13 @@
                 "type": "U32"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "ClearGumpsIgnore",
         "id": 232,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "ObjAtLayerEx",
@@ -2177,13 +2177,13 @@
                 "type": "U16"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "SetDress",
         "id": 238,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetDressSet",
@@ -2208,7 +2208,7 @@
                 "type": "U16"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetShopList",
@@ -2220,7 +2220,7 @@
         "name": "ClearShopList",
         "id": 242,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "AutoBuyEx",
@@ -2247,7 +2247,7 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetAutoBuyDelay",
@@ -2264,7 +2264,7 @@
                 "type": "U16"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetAutoSellDelay",
@@ -2281,7 +2281,7 @@
                 "type": "U16"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "AutoSell",
@@ -2300,7 +2300,7 @@
                 "type": "U16"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "RequestStats",
@@ -2311,19 +2311,19 @@
                 "type": "U32"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "HelpRequest",
         "id": 250,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "QuestRequest",
         "id": 251,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "RenameMobile",
@@ -2338,7 +2338,7 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "MobileCanBeRenamed",
@@ -2364,7 +2364,7 @@
                 "type": "U8"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetStaticArt",
@@ -2394,13 +2394,13 @@
                 "type": "Bool"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "SetAlarm",
         "id": 257,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "HTTP_Get",
@@ -2411,7 +2411,7 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "HTTP_Post",
@@ -2449,7 +2449,7 @@
                 "type": "U32"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "RemoveFromParty",
@@ -2460,7 +2460,7 @@
                 "type": "U32"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "PartyPrivateMessageTo",
@@ -2475,7 +2475,7 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "PartySay",
@@ -2486,7 +2486,7 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "PartyCanLootMe",
@@ -2497,25 +2497,25 @@
                 "type": "Bool"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "PartyAcceptInvite",
         "id": 267,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "PartyDeclineInvite",
         "id": 268,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "PartyLeave",
         "id": 269,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "PartyMembersList",
@@ -2729,7 +2729,7 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "ClientPrintEx",
@@ -2752,7 +2752,7 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "CloseClientUIWindow",
@@ -2767,19 +2767,19 @@
                 "type": "U32"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "ClientRequestObjectTarget",
         "id": 292,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "ClientRequestTileTarget",
         "id": 293,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "ClientTargetResponsePresent",
@@ -2797,13 +2797,13 @@
         "name": "CheckLagBegin",
         "id": 297,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "CheckLagEnd",
         "id": 298,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "IsCheckLagEnd",
@@ -2826,7 +2826,7 @@
                 "type": "Bool"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetSilentMode",
@@ -2843,7 +2843,7 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "AddToJournal",
@@ -2854,7 +2854,7 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "StealthPath",
@@ -2883,7 +2883,7 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "UOSayColor",
@@ -2898,7 +2898,7 @@
                 "type": "U16"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "SetGlobal",
@@ -2917,7 +2917,7 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetGlobal",
@@ -2943,7 +2943,7 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "ConsoleEntryUnicodeReply",
@@ -2954,7 +2954,7 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "SetRunUnmountTimer",
@@ -2965,7 +2965,7 @@
                 "type": "U16"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "SetWalkMountTimer",
@@ -2976,7 +2976,7 @@
                 "type": "U16"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "SetRunMountTimer",
@@ -2987,7 +2987,7 @@
                 "type": "U16"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "SetWalkUnmountTimer",
@@ -2998,7 +2998,7 @@
                 "type": "U16"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetRunMountTimer",
@@ -3125,7 +3125,7 @@
                 "type": "U16"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "SetGoodLocation",
@@ -3140,13 +3140,13 @@
                 "type": "U16"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "ClearBadLocationList",
         "id": 330,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "SetBadObject",
@@ -3165,13 +3165,13 @@
                 "type": "U8"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "ClearBadObjectList",
         "id": 332,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "CheckLOS",
@@ -3287,7 +3287,7 @@
                 "type": "Bool"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetFindInNulPoint",
@@ -3350,7 +3350,7 @@
                 "type": "U32"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "ProfileShardName",
@@ -3374,7 +3374,7 @@
         "name": "ClearSystemJournal",
         "id": 346,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetMultis",
@@ -3386,7 +3386,7 @@
         "name": "ClearInfoWindow",
         "id": 348,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetBuffBarInfo",
@@ -3443,7 +3443,7 @@
         "name": "MoverStop",
         "id": 353,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "SetARExtParams",
@@ -3462,7 +3462,7 @@
                 "type": "Bool"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetClientVersionInt",
@@ -3474,13 +3474,13 @@
         "name": "UnequipItemsSetMacro",
         "id": 356,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "EquipItemsSetMacro",
         "id": 357,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetMenuItemsEx",
@@ -3506,13 +3506,13 @@
                 "type": "U32"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "BandageSelf",
         "id": 360,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GlobalChatJoinChannel",
@@ -3523,13 +3523,13 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GlobalChatLeaveChannel",
         "id": 362,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GlobalChatSendMsg",
@@ -3540,7 +3540,7 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GlobalChatActiveChannel",
@@ -3589,7 +3589,7 @@
         "name": "DumpObjectsCache",
         "id": 367,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "ClientHide",
@@ -3617,7 +3617,7 @@
         "name": "EquipLastWeapon",
         "id": 370,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "CreateChar",
@@ -3696,7 +3696,7 @@
                 "type": "U32"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetStatLockState",
@@ -3729,7 +3729,7 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "BookSetPageText",
@@ -3744,13 +3744,13 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "BookClearText",
         "id": 376,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "BookSetHeader",
@@ -3765,7 +3765,7 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetMultiPartsAtPosition",
@@ -3834,7 +3834,7 @@
         "name": "ClearUserStatics",
         "id": 385,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "AddToSystemJournalEx",
@@ -3861,7 +3861,7 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetStealthInfo",
@@ -3901,7 +3901,7 @@
                 "type": "U16"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetPlayerStatusText",
@@ -3923,7 +3923,7 @@
                 "type": "Bool"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetMoveOpenDoor",
@@ -3940,7 +3940,7 @@
                 "type": "U16"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetMoveThroughNPC",
@@ -3957,7 +3957,7 @@
                 "type": "Bool"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetMoveThroughCorner",
@@ -3974,7 +3974,7 @@
                 "type": "I32"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetMoveHeuristicMult",
@@ -3991,7 +3991,7 @@
                 "type": "U16"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetMoveCheckStamina",
@@ -4008,7 +4008,7 @@
                 "type": "I32"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetMoveTurnCost",
@@ -4025,7 +4025,7 @@
                 "type": "Bool"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetMoveBetweenTwoCorners",
@@ -4081,7 +4081,7 @@
                 "type": "U16"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "PauseResumeSelScript",
@@ -4092,13 +4092,13 @@
                 "type": "U16"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "StopAllScripts",
         "id": 456,
         "args": [],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "SetScriptName",
@@ -4113,7 +4113,7 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "GetScriptName",
@@ -4162,7 +4162,7 @@
                 "type": "Bool"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "Messenger_GetToken",
@@ -4188,7 +4188,7 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "Messenger_GetName",
@@ -4218,7 +4218,7 @@
                 "type": "String"
             }
         ],
-        "result": ""
+        "result": "None"
     },
     {
         "name": "AddFigure",
@@ -4261,6 +4261,6 @@
         "name": "ClearFigures",
         "id": 553,
         "args": [],
-        "result": ""
+        "result": "None"
     }
 ]

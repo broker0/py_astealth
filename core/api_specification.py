@@ -78,7 +78,7 @@ class ApiSpecification:
     def get_original_type_name(type_obj: Any) -> str:
         """returns the original type name without applying _mapping transformation"""
         if type_obj is type(None):
-            return ""
+            return "None"
 
         origin = typing.get_origin(type_obj)
         if origin is list:  # list special case
