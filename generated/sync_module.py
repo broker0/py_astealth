@@ -123,7 +123,7 @@ def GetFindDistance() -> int: pass
 def GetFindInNulPoint() -> bool: pass
 def GetFindVertical() -> int: pass
 def GetFindedList() -> list[int]: pass
-def GetGlobal(GlobalRegion: str, VarName: str) -> str: pass
+def GetGlobal(GlobalRegion: int, VarName: str) -> str: pass
 def GetGumpButtonsDescription(GumpIndex: int) -> list[str]: pass
 def GetGumpFullLines(GumpIndex: int) -> list[str]: pass
 def GetGumpID(GumpIndex: int) -> int: pass
@@ -145,7 +145,7 @@ def GetLineTime() -> datetime: pass
 def GetMana(ObjID: int) -> int: pass
 def GetMaxHP(ObjID: int) -> int: pass
 def GetMaxMana(ObjID: int) -> int: pass
-def GetMaxStam() -> int: pass
+def GetMaxStam(ObjID: int) -> int: pass
 def GetMenuItems(Caption: str) -> list[str]: pass
 def GetMenuItemsEx(Caption: str) -> list[MenuItem]: pass
 def GetMoveBetweenTwoCorners() -> bool: pass
@@ -180,8 +180,11 @@ def GetScriptsCount() -> int: pass
 def GetScriptsList() -> list[ScriptInfo]: pass
 def GetSelfDex() -> int: pass
 def GetSelfInt() -> int: pass
+def GetSelfLife() -> int: pass
 def GetSelfMana() -> int: pass
+def GetSelfMaxLife() -> int: pass
 def GetSelfMaxMana() -> int: pass
+def GetSelfMaxStam() -> int: pass
 def GetSelfStam() -> int: pass
 def GetSelfStr() -> int: pass
 def GetShopList() -> list[str]: pass
@@ -235,7 +238,7 @@ def InJournal(Str: str) -> int: pass
 def InJournalBetweenTimes(Str: str, TimeBegin: datetime, TimeEnd: datetime) -> int: pass
 def InParty() -> bool: pass
 def InviteToParty(ObjID: int) -> None: pass
-def IsActiveSpellAbility(SpellName: str) -> bool: pass
+def IsActiveSpellAbility(SpellID: int) -> bool: pass
 def IsCheckLagEnd() -> bool: pass
 def IsContainer(ObjID: int) -> bool: pass
 def IsDead(ObjID: int) -> bool: pass
@@ -261,7 +264,6 @@ def LastJournalMessage() -> str: pass
 def LastObject() -> int: pass
 def LastStatus() -> int: pass
 def LastTarget() -> int: pass
-def Life() -> int: pass
 def LineCount() -> int: pass
 def LineID() -> int: pass
 def LineIndex() -> int: pass
@@ -273,7 +275,6 @@ def LineTime() -> datetime: pass
 def LineType() -> int: pass
 def LowJournal() -> int: pass
 def Luck() -> int: pass
-def MaxLife() -> int: pass
 def MaxWeight() -> int: pass
 def MenuHookPresent() -> bool: pass
 def MenuPresent() -> bool: pass
@@ -335,7 +336,7 @@ def SetAutoBuyDelay(Value: int) -> None: pass
 def SetAutoSellDelay(Value: int) -> None: pass
 def SetBadLocation(X: int, Y: int) -> None: pass
 def SetBadObject(ObjType: int, Color: int, Radius: int) -> None: pass
-def SetCatchBag(ObjID: int) -> bool: pass
+def SetCatchBag(ObjID: int) -> int: pass
 def SetContextMenuHook(MenuID: int, EntryNumber: int) -> None: pass
 def SetDress() -> None: pass
 def SetDressSpeed(Value: int) -> None: pass
@@ -345,7 +346,7 @@ def SetEventCallback(EventIndex: int) -> None: pass
 def SetFindDistance(Value: int) -> None: pass
 def SetFindInNulPoint(Value: bool) -> None: pass
 def SetFindVertical(Value: int) -> None: pass
-def SetGlobal(GlobalRegion: str, VarName: str, VarValue: str) -> None: pass
+def SetGlobal(GlobalRegion: int, VarName: str, VarValue: str) -> None: pass
 def SetGoodLocation(X: int, Y: int) -> None: pass
 def SetJournalLine(StringIndex: int, Text: str) -> None: pass
 def SetMoveBetweenTwoCorners(Value: bool) -> None: pass
@@ -399,7 +400,7 @@ def UseSecondaryAbility() -> None: pass
 def UseSelfPaperdollScroll() -> None: pass
 def UseSkill(SkillID: int) -> None: pass
 def UseType(ObjType: int, Color: int) -> int: pass
-def UseVirtue(VirtueName: str) -> None: pass
+def UseVirtue(VirtueID: int) -> None: pass
 def WaitGump(Value: int) -> None: pass
 def WaitMenu(MenuCaption: str, ElementCaption: str) -> None: pass
 def WaitTargetGround(ObjType: int) -> None: pass

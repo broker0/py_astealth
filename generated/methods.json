@@ -341,7 +341,7 @@
         "result": "I32"
     },
     {
-        "name": "Life",
+        "name": "GetSelfLife",
         "id": 52,
         "args": [],
         "result": "I32"
@@ -359,7 +359,7 @@
         "result": "I32"
     },
     {
-        "name": "MaxLife",
+        "name": "GetSelfMaxLife",
         "id": 55,
         "args": [],
         "result": "I32"
@@ -371,7 +371,7 @@
         "result": "I32"
     },
     {
-        "name": "GetMaxStam",
+        "name": "GetSelfMaxStam",
         "id": 57,
         "args": [],
         "result": "I32"
@@ -727,8 +727,8 @@
         "id": 95,
         "args": [
             {
-                "name": "VirtueName",
-                "type": "String"
+                "name": "VirtueID",
+                "type": "U32"
             }
         ],
         "result": "None"
@@ -749,8 +749,8 @@
         "id": 98,
         "args": [
             {
-                "name": "SpellName",
-                "type": "String"
+                "name": "SpellID",
+                "type": "I32"
             }
         ],
         "result": "Bool"
@@ -764,7 +764,7 @@
                 "type": "U32"
             }
         ],
-        "result": "Bool"
+        "result": "U8"
     },
     {
         "name": "UnsetCatchBag",
@@ -1402,6 +1402,17 @@
     {
         "name": "GetStam",
         "id": 167,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "I32"
+    },
+    {
+        "name": "GetMaxStam",
+        "id": 168,
         "args": [
             {
                 "name": "ObjID",
@@ -2895,7 +2906,7 @@
         "args": [
             {
                 "name": "GlobalRegion",
-                "type": "String"
+                "type": "U8"
             },
             {
                 "name": "VarName",
@@ -2914,7 +2925,7 @@
         "args": [
             {
                 "name": "GlobalRegion",
-                "type": "String"
+                "type": "U8"
             },
             {
                 "name": "VarName",
@@ -3600,7 +3611,7 @@
                 "type": "I32"
             }
         ],
-        "result": "U8"
+        "result": "I8"
     },
     {
         "name": "EquipLastWeapon",
@@ -3693,10 +3704,10 @@
         "args": [
             {
                 "name": "statNum",
-                "type": "U8"
+                "type": "I8"
             }
         ],
-        "result": "U8"
+        "result": "I8"
     },
     {
         "name": "BookGetPageText",

@@ -123,7 +123,7 @@ async def GetFindDistance() -> int: pass
 async def GetFindInNulPoint() -> bool: pass
 async def GetFindVertical() -> int: pass
 async def GetFindedList() -> list[int]: pass
-async def GetGlobal(GlobalRegion: str, VarName: str) -> str: pass
+async def GetGlobal(GlobalRegion: int, VarName: str) -> str: pass
 async def GetGumpButtonsDescription(GumpIndex: int) -> list[str]: pass
 async def GetGumpFullLines(GumpIndex: int) -> list[str]: pass
 async def GetGumpID(GumpIndex: int) -> int: pass
@@ -145,7 +145,7 @@ async def GetLineTime() -> datetime: pass
 async def GetMana(ObjID: int) -> int: pass
 async def GetMaxHP(ObjID: int) -> int: pass
 async def GetMaxMana(ObjID: int) -> int: pass
-async def GetMaxStam() -> int: pass
+async def GetMaxStam(ObjID: int) -> int: pass
 async def GetMenuItems(Caption: str) -> list[str]: pass
 async def GetMenuItemsEx(Caption: str) -> list[MenuItem]: pass
 async def GetMoveBetweenTwoCorners() -> bool: pass
@@ -180,8 +180,11 @@ async def GetScriptsCount() -> int: pass
 async def GetScriptsList() -> list[ScriptInfo]: pass
 async def GetSelfDex() -> int: pass
 async def GetSelfInt() -> int: pass
+async def GetSelfLife() -> int: pass
 async def GetSelfMana() -> int: pass
+async def GetSelfMaxLife() -> int: pass
 async def GetSelfMaxMana() -> int: pass
+async def GetSelfMaxStam() -> int: pass
 async def GetSelfStam() -> int: pass
 async def GetSelfStr() -> int: pass
 async def GetShopList() -> list[str]: pass
@@ -235,7 +238,7 @@ async def InJournal(Str: str) -> int: pass
 async def InJournalBetweenTimes(Str: str, TimeBegin: datetime, TimeEnd: datetime) -> int: pass
 async def InParty() -> bool: pass
 async def InviteToParty(ObjID: int) -> None: pass
-async def IsActiveSpellAbility(SpellName: str) -> bool: pass
+async def IsActiveSpellAbility(SpellID: int) -> bool: pass
 async def IsCheckLagEnd() -> bool: pass
 async def IsContainer(ObjID: int) -> bool: pass
 async def IsDead(ObjID: int) -> bool: pass
@@ -261,7 +264,6 @@ async def LastJournalMessage() -> str: pass
 async def LastObject() -> int: pass
 async def LastStatus() -> int: pass
 async def LastTarget() -> int: pass
-async def Life() -> int: pass
 async def LineCount() -> int: pass
 async def LineID() -> int: pass
 async def LineIndex() -> int: pass
@@ -273,7 +275,6 @@ async def LineTime() -> datetime: pass
 async def LineType() -> int: pass
 async def LowJournal() -> int: pass
 async def Luck() -> int: pass
-async def MaxLife() -> int: pass
 async def MaxWeight() -> int: pass
 async def MenuHookPresent() -> bool: pass
 async def MenuPresent() -> bool: pass
@@ -335,7 +336,7 @@ async def SetAutoBuyDelay(Value: int) -> None: pass
 async def SetAutoSellDelay(Value: int) -> None: pass
 async def SetBadLocation(X: int, Y: int) -> None: pass
 async def SetBadObject(ObjType: int, Color: int, Radius: int) -> None: pass
-async def SetCatchBag(ObjID: int) -> bool: pass
+async def SetCatchBag(ObjID: int) -> int: pass
 async def SetContextMenuHook(MenuID: int, EntryNumber: int) -> None: pass
 async def SetDress() -> None: pass
 async def SetDressSpeed(Value: int) -> None: pass
@@ -345,7 +346,7 @@ async def SetEventCallback(EventIndex: int) -> None: pass
 async def SetFindDistance(Value: int) -> None: pass
 async def SetFindInNulPoint(Value: bool) -> None: pass
 async def SetFindVertical(Value: int) -> None: pass
-async def SetGlobal(GlobalRegion: str, VarName: str, VarValue: str) -> None: pass
+async def SetGlobal(GlobalRegion: int, VarName: str, VarValue: str) -> None: pass
 async def SetGoodLocation(X: int, Y: int) -> None: pass
 async def SetJournalLine(StringIndex: int, Text: str) -> None: pass
 async def SetMoveBetweenTwoCorners(Value: bool) -> None: pass
@@ -399,7 +400,7 @@ async def UseSecondaryAbility() -> None: pass
 async def UseSelfPaperdollScroll() -> None: pass
 async def UseSkill(SkillID: int) -> None: pass
 async def UseType(ObjType: int, Color: int) -> int: pass
-async def UseVirtue(VirtueName: str) -> None: pass
+async def UseVirtue(VirtueID: int) -> None: pass
 async def WaitGump(Value: int) -> None: pass
 async def WaitMenu(MenuCaption: str, ElementCaption: str) -> None: pass
 async def WaitTargetGround(ObjType: int) -> None: pass

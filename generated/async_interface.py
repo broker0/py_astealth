@@ -125,7 +125,7 @@ class AsyncInterface:
     async def GetFindInNulPoint(self) -> bool: pass
     async def GetFindVertical(self) -> int: pass
     async def GetFindedList(self) -> list[int]: pass
-    async def GetGlobal(self, GlobalRegion: str, VarName: str) -> str: pass
+    async def GetGlobal(self, GlobalRegion: int, VarName: str) -> str: pass
     async def GetGumpButtonsDescription(self, GumpIndex: int) -> list[str]: pass
     async def GetGumpFullLines(self, GumpIndex: int) -> list[str]: pass
     async def GetGumpID(self, GumpIndex: int) -> int: pass
@@ -147,7 +147,7 @@ class AsyncInterface:
     async def GetMana(self, ObjID: int) -> int: pass
     async def GetMaxHP(self, ObjID: int) -> int: pass
     async def GetMaxMana(self, ObjID: int) -> int: pass
-    async def GetMaxStam(self) -> int: pass
+    async def GetMaxStam(self, ObjID: int) -> int: pass
     async def GetMenuItems(self, Caption: str) -> list[str]: pass
     async def GetMenuItemsEx(self, Caption: str) -> list[MenuItem]: pass
     async def GetMoveBetweenTwoCorners(self) -> bool: pass
@@ -182,8 +182,11 @@ class AsyncInterface:
     async def GetScriptsList(self) -> list[ScriptInfo]: pass
     async def GetSelfDex(self) -> int: pass
     async def GetSelfInt(self) -> int: pass
+    async def GetSelfLife(self) -> int: pass
     async def GetSelfMana(self) -> int: pass
+    async def GetSelfMaxLife(self) -> int: pass
     async def GetSelfMaxMana(self) -> int: pass
+    async def GetSelfMaxStam(self) -> int: pass
     async def GetSelfStam(self) -> int: pass
     async def GetSelfStr(self) -> int: pass
     async def GetShopList(self) -> list[str]: pass
@@ -237,7 +240,7 @@ class AsyncInterface:
     async def InJournalBetweenTimes(self, Str: str, TimeBegin: datetime, TimeEnd: datetime) -> int: pass
     async def InParty(self) -> bool: pass
     async def InviteToParty(self, ObjID: int) -> None: pass
-    async def IsActiveSpellAbility(self, SpellName: str) -> bool: pass
+    async def IsActiveSpellAbility(self, SpellID: int) -> bool: pass
     async def IsCheckLagEnd(self) -> bool: pass
     async def IsContainer(self, ObjID: int) -> bool: pass
     async def IsDead(self, ObjID: int) -> bool: pass
@@ -263,7 +266,6 @@ class AsyncInterface:
     async def LastObject(self) -> int: pass
     async def LastStatus(self) -> int: pass
     async def LastTarget(self) -> int: pass
-    async def Life(self) -> int: pass
     async def LineCount(self) -> int: pass
     async def LineID(self) -> int: pass
     async def LineIndex(self) -> int: pass
@@ -275,7 +277,6 @@ class AsyncInterface:
     async def LineType(self) -> int: pass
     async def LowJournal(self) -> int: pass
     async def Luck(self) -> int: pass
-    async def MaxLife(self) -> int: pass
     async def MaxWeight(self) -> int: pass
     async def MenuHookPresent(self) -> bool: pass
     async def MenuPresent(self) -> bool: pass
@@ -337,7 +338,7 @@ class AsyncInterface:
     async def SetAutoSellDelay(self, Value: int) -> None: pass
     async def SetBadLocation(self, X: int, Y: int) -> None: pass
     async def SetBadObject(self, ObjType: int, Color: int, Radius: int) -> None: pass
-    async def SetCatchBag(self, ObjID: int) -> bool: pass
+    async def SetCatchBag(self, ObjID: int) -> int: pass
     async def SetContextMenuHook(self, MenuID: int, EntryNumber: int) -> None: pass
     async def SetDress(self) -> None: pass
     async def SetDressSpeed(self, Value: int) -> None: pass
@@ -347,7 +348,7 @@ class AsyncInterface:
     async def SetFindDistance(self, Value: int) -> None: pass
     async def SetFindInNulPoint(self, Value: bool) -> None: pass
     async def SetFindVertical(self, Value: int) -> None: pass
-    async def SetGlobal(self, GlobalRegion: str, VarName: str, VarValue: str) -> None: pass
+    async def SetGlobal(self, GlobalRegion: int, VarName: str, VarValue: str) -> None: pass
     async def SetGoodLocation(self, X: int, Y: int) -> None: pass
     async def SetJournalLine(self, StringIndex: int, Text: str) -> None: pass
     async def SetMoveBetweenTwoCorners(self, Value: bool) -> None: pass
@@ -401,7 +402,7 @@ class AsyncInterface:
     async def UseSelfPaperdollScroll(self) -> None: pass
     async def UseSkill(self, SkillID: int) -> None: pass
     async def UseType(self, ObjType: int, Color: int) -> int: pass
-    async def UseVirtue(self, VirtueName: str) -> None: pass
+    async def UseVirtue(self, VirtueID: int) -> None: pass
     async def WaitGump(self, Value: int) -> None: pass
     async def WaitMenu(self, MenuCaption: str, ElementCaption: str) -> None: pass
     async def WaitTargetGround(self, ObjType: int) -> None: pass

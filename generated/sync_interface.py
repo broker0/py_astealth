@@ -125,7 +125,7 @@ class SyncInterface:
     def GetFindInNulPoint(self) -> bool: pass
     def GetFindVertical(self) -> int: pass
     def GetFindedList(self) -> list[int]: pass
-    def GetGlobal(self, GlobalRegion: str, VarName: str) -> str: pass
+    def GetGlobal(self, GlobalRegion: int, VarName: str) -> str: pass
     def GetGumpButtonsDescription(self, GumpIndex: int) -> list[str]: pass
     def GetGumpFullLines(self, GumpIndex: int) -> list[str]: pass
     def GetGumpID(self, GumpIndex: int) -> int: pass
@@ -147,7 +147,7 @@ class SyncInterface:
     def GetMana(self, ObjID: int) -> int: pass
     def GetMaxHP(self, ObjID: int) -> int: pass
     def GetMaxMana(self, ObjID: int) -> int: pass
-    def GetMaxStam(self) -> int: pass
+    def GetMaxStam(self, ObjID: int) -> int: pass
     def GetMenuItems(self, Caption: str) -> list[str]: pass
     def GetMenuItemsEx(self, Caption: str) -> list[MenuItem]: pass
     def GetMoveBetweenTwoCorners(self) -> bool: pass
@@ -182,8 +182,11 @@ class SyncInterface:
     def GetScriptsList(self) -> list[ScriptInfo]: pass
     def GetSelfDex(self) -> int: pass
     def GetSelfInt(self) -> int: pass
+    def GetSelfLife(self) -> int: pass
     def GetSelfMana(self) -> int: pass
+    def GetSelfMaxLife(self) -> int: pass
     def GetSelfMaxMana(self) -> int: pass
+    def GetSelfMaxStam(self) -> int: pass
     def GetSelfStam(self) -> int: pass
     def GetSelfStr(self) -> int: pass
     def GetShopList(self) -> list[str]: pass
@@ -237,7 +240,7 @@ class SyncInterface:
     def InJournalBetweenTimes(self, Str: str, TimeBegin: datetime, TimeEnd: datetime) -> int: pass
     def InParty(self) -> bool: pass
     def InviteToParty(self, ObjID: int) -> None: pass
-    def IsActiveSpellAbility(self, SpellName: str) -> bool: pass
+    def IsActiveSpellAbility(self, SpellID: int) -> bool: pass
     def IsCheckLagEnd(self) -> bool: pass
     def IsContainer(self, ObjID: int) -> bool: pass
     def IsDead(self, ObjID: int) -> bool: pass
@@ -263,7 +266,6 @@ class SyncInterface:
     def LastObject(self) -> int: pass
     def LastStatus(self) -> int: pass
     def LastTarget(self) -> int: pass
-    def Life(self) -> int: pass
     def LineCount(self) -> int: pass
     def LineID(self) -> int: pass
     def LineIndex(self) -> int: pass
@@ -275,7 +277,6 @@ class SyncInterface:
     def LineType(self) -> int: pass
     def LowJournal(self) -> int: pass
     def Luck(self) -> int: pass
-    def MaxLife(self) -> int: pass
     def MaxWeight(self) -> int: pass
     def MenuHookPresent(self) -> bool: pass
     def MenuPresent(self) -> bool: pass
@@ -337,7 +338,7 @@ class SyncInterface:
     def SetAutoSellDelay(self, Value: int) -> None: pass
     def SetBadLocation(self, X: int, Y: int) -> None: pass
     def SetBadObject(self, ObjType: int, Color: int, Radius: int) -> None: pass
-    def SetCatchBag(self, ObjID: int) -> bool: pass
+    def SetCatchBag(self, ObjID: int) -> int: pass
     def SetContextMenuHook(self, MenuID: int, EntryNumber: int) -> None: pass
     def SetDress(self) -> None: pass
     def SetDressSpeed(self, Value: int) -> None: pass
@@ -347,7 +348,7 @@ class SyncInterface:
     def SetFindDistance(self, Value: int) -> None: pass
     def SetFindInNulPoint(self, Value: bool) -> None: pass
     def SetFindVertical(self, Value: int) -> None: pass
-    def SetGlobal(self, GlobalRegion: str, VarName: str, VarValue: str) -> None: pass
+    def SetGlobal(self, GlobalRegion: int, VarName: str, VarValue: str) -> None: pass
     def SetGoodLocation(self, X: int, Y: int) -> None: pass
     def SetJournalLine(self, StringIndex: int, Text: str) -> None: pass
     def SetMoveBetweenTwoCorners(self, Value: bool) -> None: pass
@@ -401,7 +402,7 @@ class SyncInterface:
     def UseSelfPaperdollScroll(self) -> None: pass
     def UseSkill(self, SkillID: int) -> None: pass
     def UseType(self, ObjType: int, Color: int) -> int: pass
-    def UseVirtue(self, VirtueName: str) -> None: pass
+    def UseVirtue(self, VirtueID: int) -> None: pass
     def WaitGump(self, Value: int) -> None: pass
     def WaitMenu(self, MenuCaption: str, ElementCaption: str) -> None: pass
     def WaitTargetGround(self, ObjType: int) -> None: pass

@@ -204,14 +204,6 @@ class StealthApi(ApiSpecification):
     def ShardName(self) -> String:
         pass
 
-    @ApiSpecification.method(52)
-    def Life(self) -> I32:
-        pass
-
-    @ApiSpecification.method(55)
-    def MaxLife(self) -> I32:
-        pass
-
     @ApiSpecification.method(58)
     def Luck(self) -> U16:
         pass
@@ -616,7 +608,7 @@ class StealthApi(ApiSpecification):
         pass
 
     @ApiSpecification.method(369)
-    def GetSkillLockState(self, SkillID: I32) -> U8:
+    def GetSkillLockState(self, SkillID: I32) -> I8:
         pass
 
     ####################################################################################################################
@@ -1356,7 +1348,7 @@ class StealthApi(ApiSpecification):
         pass
 
     @ApiSpecification.method(98)
-    def IsActiveSpellAbility(self, SpellName: String) -> Bool:
+    def IsActiveSpellAbility(self, SpellID: I32) -> Bool:
         pass
 
 
@@ -1411,7 +1403,7 @@ class StealthApi(ApiSpecification):
         pass
 
     @ApiSpecification.method(99)
-    def SetCatchBag(self, ObjID: U32) -> Bool:
+    def SetCatchBag(self, ObjID: U32) -> U8:
         pass
 
     @ApiSpecification.method(100)
@@ -1462,7 +1454,7 @@ class StealthApi(ApiSpecification):
         pass
 
     @ApiSpecification.method(372)
-    def GetStatLockState(self, statNum: U8) -> U8:
+    def GetStatLockState(self, statNum: I8) -> I8:
         pass
 
     @ApiSpecification.method(255)
@@ -1486,11 +1478,11 @@ class StealthApi(ApiSpecification):
         pass
 
     @ApiSpecification.method(310)
-    def SetGlobal(self, GlobalRegion: String, VarName: String, VarValue: String) -> None:
+    def SetGlobal(self, GlobalRegion: U8, VarName: String, VarValue: String) -> None:
         pass
 
     @ApiSpecification.method(311)
-    def GetGlobal(self, GlobalRegion: String, VarName: String) -> String:
+    def GetGlobal(self, GlobalRegion: U8, VarName: String) -> String:
         pass
 
     @ApiSpecification.method(312)
@@ -1537,17 +1529,23 @@ class StealthApi(ApiSpecification):
     @ApiSpecification.method(51)
     def GetSelfDex(self) -> I32:
         pass
+    @ApiSpecification.method(52)
+    def GetSelfLife(self) -> I32:
+        pass
     @ApiSpecification.method(53)
     def GetSelfMana(self) -> I32:
         pass
     @ApiSpecification.method(54)
     def GetSelfStam(self) -> I32:
         pass
+    @ApiSpecification.method(55)
+    def GetSelfMaxLife(self) -> I32:
+        pass
     @ApiSpecification.method(56)
     def GetSelfMaxMana(self) -> I32:
         pass
     @ApiSpecification.method(57)
-    def GetMaxStam(self) -> I32:
+    def GetSelfMaxStam(self) -> I32:
         pass
     @ApiSpecification.method(89)
     def GetSkillID(self, SkillName: String) -> I32:
