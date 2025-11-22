@@ -74,6 +74,27 @@ class ApiSpecification:
 
         return str(type_obj)
 
+    @staticmethod
+    def get_original_type_name(type_obj: Any) -> str:
+        """returns the original type name without applying _mapping transformation"""
+        if type_obj is type(None):
+            return ""
+
+        origin = typing.get_origin(type_obj)
+        if origin is list:  # list special case
+            arg_list = []
+            for arg in typing.get_args(type_obj):
+                arg_list.append(f"{ApiSpecification.get_original_type_name(arg)}")
+
+            inner_types = ", ".join(arg_list)
+            return f"{origin.__name__}[{inner_types}]"
+
+        # Do NOT apply type mapping - keep original type name
+        if hasattr(type_obj, '__name__'):
+            return type_obj.__name__
+
+        return str(type_obj)
+
     @classmethod
     def get_methods(cls) -> list[MethodSpec]:
         """
@@ -85,6 +106,53 @@ class ApiSpecification:
             for _, member in inspect.getmembers(cls)
             if hasattr(member, 'method_spec')  # We are only interested in those who have 'method_spec' field
         ]
+
+
+    @classmethod
+    def generate_json(cls, output_path):
+        """
+        Generate JSON file with API specification in the format:
+        [
+            {
+                "name": "MethodName",
+                "id": 123,
+                "args": [{"name": "ArgName", "type": "ArgType"}],
+                "result": "ResultType"
+            },
+            ...
+        ]
+        """
+        import json
+        
+        methods_data = []
+        
+        for spec in cls.get_methods():
+            # Build args list
+            args_list = []
+            for arg in spec.args:
+                args_list.append({
+                    "name": arg.name,
+                    "type": cls.get_original_type_name(arg.type)
+                })
+            
+            # Build method entry
+            method_entry = {
+                "name": spec.name,
+                "id": spec.id,
+                "args": args_list,
+                "result": cls.get_original_type_name(spec.result.type)
+            }
+            
+            methods_data.append(method_entry)
+        
+        # Sort by id for better readability
+        methods_data.sort(key=lambda x: x["id"])
+        
+        # Write to file
+        with open(output_path, "w", encoding="utf-8") as f:
+            json.dump(methods_data, f, indent=4, ensure_ascii=False)
+        
+        print(f"JSON API specification '{cls.__name__}' generated in '{output_path}'")
 
 
     @classmethod
