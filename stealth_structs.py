@@ -527,6 +527,52 @@ class GumpItemProperty(StructType):
 
 @StructType.register
 @dataclass
+class GumpPicInPic(StructType):
+    X: I32
+    Y: I32
+    Graphic: I32
+    StartX: I32
+    StartY: I32
+    Width: I32
+    Height: I32
+    ElemNum: I32
+
+
+@StructType.register
+@dataclass
+class GumpTilePicAsGumpPic(StructType):
+    X: I32
+    Y: I32
+    Graphic: I32
+    Color: I32
+    Race: I32
+    BodyID: I32
+    ElemNum: I32
+
+
+@StructType.register
+@dataclass
+class GumpToggleUpperWordCase(StructType):
+    Argument: String
+    ElemNum: I32
+
+
+@StructType.register
+@dataclass
+class GumpToggleCroppedText(StructType):
+    Argument: String
+    ElemNum: I32
+
+
+@StructType.register
+@dataclass
+class GumpECHandleInput(StructType):
+    Argument: String
+    ElemNum: I32
+
+
+@StructType.register
+@dataclass
 class Gump(StructType):
     Serial: U32
     GumpID: U32
@@ -566,7 +612,11 @@ class GumpInfo(StructType):
     XmfHtmlHued: list[GumpXmfHTMLColor]
     XmfHtmlToks: list[GumpXmfHTMLTok]
     Properties: list[GumpItemProperty]
-
+    PicInPics: list[GumpPicInPic]
+    TilePicsAsGumpPics: list[GumpTilePicAsGumpPic]
+    ToggleUpperWordCases: list[GumpToggleUpperWordCase]
+    ToggleCroppedTexts: list[GumpToggleCroppedText]
+    ECHandleInputs: list[GumpECHandleInput]
 
 
 # TODO other Stealth struct-types
