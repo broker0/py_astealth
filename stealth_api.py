@@ -1183,7 +1183,7 @@ class StealthApi(ApiSpecification):
         pass
 
     @ApiSpecification.method(292)
-    def DropItem(self, MoveIntoID: U32, X: I32, Y: I32, Z: I32) -> Bool:
+    def DropItem(self, MoveIntoID: U32, X: I32, Y: I32, Z: I8) -> Bool:
         pass
 
     @ApiSpecification.method(403)
