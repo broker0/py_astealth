@@ -60,99 +60,62 @@
         "result": "None"
     },
     {
-        "name": "ProfileName",
-        "id": 11,
-        "args": [],
-        "result": "String"
-    },
-    {
         "name": "Connected",
-        "id": 12,
+        "id": 20,
         "args": [],
         "result": "Bool"
     },
     {
-        "name": "AddToSystemJournal",
-        "id": 13,
-        "args": [
-            {
-                "name": "Text",
-                "type": "String"
-            }
-        ],
+        "name": "ConnectedTime",
+        "id": 21,
+        "args": [],
+        "result": "DateTime"
+    },
+    {
+        "name": "DisconnectedTime",
+        "id": 22,
+        "args": [],
+        "result": "DateTime"
+    },
+    {
+        "name": "Connect",
+        "id": 23,
+        "args": [],
         "result": "None"
     },
     {
-        "name": "Self",
-        "id": 14,
+        "name": "Disconnect",
+        "id": 24,
         "args": [],
-        "result": "U32"
+        "result": "None"
     },
     {
-        "name": "GetX",
-        "id": 15,
-        "args": [
-            {
-                "name": "ID",
-                "type": "U32"
-            }
-        ],
-        "result": "U16"
-    },
-    {
-        "name": "GetY",
-        "id": 16,
-        "args": [
-            {
-                "name": "ID",
-                "type": "U32"
-            }
-        ],
-        "result": "U16"
-    },
-    {
-        "name": "GetZ",
-        "id": 17,
-        "args": [
-            {
-                "name": "ID",
-                "type": "U32"
-            }
-        ],
-        "result": "I8"
-    },
-    {
-        "name": "WorldNum",
-        "id": 18,
-        "args": [],
-        "result": "U8"
-    },
-    {
-        "name": "CharName",
-        "id": 19,
+        "name": "ProxyIP",
+        "id": 25,
         "args": [],
         "result": "String"
     },
     {
-        "name": "ChangeProfile",
-        "id": 20,
-        "args": [
-            {
-                "name": "Name",
-                "type": "String"
-            }
-        ],
-        "result": "I32"
+        "name": "ProxyPort",
+        "id": 26,
+        "args": [],
+        "result": "U16"
+    },
+    {
+        "name": "UseProxy",
+        "id": 27,
+        "args": [],
+        "result": "Bool"
     },
     {
         "name": "GetARStatus",
-        "id": 21,
+        "id": 28,
         "args": [],
         "result": "Bool"
     },
     {
         "name": "SetARStatus",
-        "id": 22,
+        "id": 29,
         "args": [
             {
                 "name": "Value",
@@ -163,13 +126,13 @@
     },
     {
         "name": "GetPauseScriptOnDisconnectStatus",
-        "id": 23,
+        "id": 30,
         "args": [],
         "result": "Bool"
     },
     {
         "name": "SetPauseScriptOnDisconnectStatus",
-        "id": 24,
+        "id": 31,
         "args": [
             {
                 "name": "Value",
@@ -179,266 +142,813 @@
         "result": "None"
     },
     {
-        "name": "Sex",
-        "id": 25,
-        "args": [],
-        "result": "U8"
-    },
-    {
-        "name": "CharTitle",
-        "id": 26,
-        "args": [],
-        "result": "String"
-    },
-    {
-        "name": "Gold",
-        "id": 27,
-        "args": [],
-        "result": "U32"
-    },
-    {
-        "name": "Armor",
-        "id": 28,
-        "args": [],
-        "result": "U16"
-    },
-    {
-        "name": "Weight",
-        "id": 29,
-        "args": [],
-        "result": "U16"
-    },
-    {
-        "name": "MaxWeight",
-        "id": 30,
-        "args": [],
-        "result": "U16"
-    },
-    {
-        "name": "Race",
-        "id": 31,
-        "args": [],
-        "result": "U8"
-    },
-    {
-        "name": "PetsMax",
+        "name": "CharName",
         "id": 32,
         "args": [],
-        "result": "U8"
-    },
-    {
-        "name": "PetsCurrent",
-        "id": 33,
-        "args": [],
-        "result": "U8"
-    },
-    {
-        "name": "FireResist",
-        "id": 34,
-        "args": [],
-        "result": "U16"
-    },
-    {
-        "name": "ColdResist",
-        "id": 35,
-        "args": [],
-        "result": "U16"
-    },
-    {
-        "name": "PoisonResist",
-        "id": 36,
-        "args": [],
-        "result": "U16"
-    },
-    {
-        "name": "EnergyResist",
-        "id": 37,
-        "args": [],
-        "result": "U16"
-    },
-    {
-        "name": "ConnectedTime",
-        "id": 38,
-        "args": [],
-        "result": "DateTime"
-    },
-    {
-        "name": "DisconnectedTime",
-        "id": 39,
-        "args": [],
-        "result": "DateTime"
-    },
-    {
-        "name": "LastContainer",
-        "id": 40,
-        "args": [],
-        "result": "U32"
-    },
-    {
-        "name": "LastTarget",
-        "id": 41,
-        "args": [],
-        "result": "U32"
-    },
-    {
-        "name": "LastAttack",
-        "id": 42,
-        "args": [],
-        "result": "U32"
-    },
-    {
-        "name": "LastStatus",
-        "id": 43,
-        "args": [],
-        "result": "U32"
-    },
-    {
-        "name": "LastObject",
-        "id": 44,
-        "args": [],
-        "result": "U32"
-    },
-    {
-        "name": "Connect",
-        "id": 45,
-        "args": [],
-        "result": "None"
-    },
-    {
-        "name": "Disconnect",
-        "id": 46,
-        "args": [],
-        "result": "None"
+        "result": "String"
     },
     {
         "name": "ShardName",
-        "id": 47,
+        "id": 33,
         "args": [],
         "result": "String"
     },
     {
-        "name": "Backpack",
-        "id": 48,
+        "name": "ProfileName",
+        "id": 34,
         "args": [],
-        "result": "U32"
+        "result": "String"
     },
     {
-        "name": "GetSelfStr",
+        "name": "ChangeProfile",
+        "id": 35,
+        "args": [
+            {
+                "name": "Name",
+                "type": "String"
+            }
+        ],
+        "result": "I32"
+    },
+    {
+        "name": "StealthPath",
+        "id": 36,
+        "args": [],
+        "result": "String"
+    },
+    {
+        "name": "StealthProfilePath",
+        "id": 37,
+        "args": [],
+        "result": "String"
+    },
+    {
+        "name": "ShardPath",
+        "id": 38,
+        "args": [],
+        "result": "String"
+    },
+    {
+        "name": "AddToSystemJournal",
+        "id": 39,
+        "args": [
+            {
+                "name": "Text",
+                "type": "String"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "AddToSystemJournalEx",
+        "id": 40,
+        "args": [
+            {
+                "name": "value",
+                "type": "String"
+            },
+            {
+                "name": "textcolor",
+                "type": "I32"
+            },
+            {
+                "name": "bgcolor",
+                "type": "I32"
+            },
+            {
+                "name": "fontsize",
+                "type": "I32"
+            },
+            {
+                "name": "fontname",
+                "type": "String"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "ClearSystemJournal",
+        "id": 41,
+        "args": [],
+        "result": "None"
+    },
+    {
+        "name": "AddToJournal",
+        "id": 42,
+        "args": [
+            {
+                "name": "Text",
+                "type": "String"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "ClearJournal",
+        "id": 43,
+        "args": [],
+        "result": "None"
+    },
+    {
+        "name": "LastJournalMessage",
+        "id": 44,
+        "args": [],
+        "result": "String"
+    },
+    {
+        "name": "InJournal",
+        "id": 45,
+        "args": [
+            {
+                "name": "Str",
+                "type": "String"
+            }
+        ],
+        "result": "I32"
+    },
+    {
+        "name": "InJournalBetweenTimes",
+        "id": 46,
+        "args": [
+            {
+                "name": "Str",
+                "type": "String"
+            },
+            {
+                "name": "TimeBegin",
+                "type": "DateTime"
+            },
+            {
+                "name": "TimeEnd",
+                "type": "DateTime"
+            }
+        ],
+        "result": "I32"
+    },
+    {
+        "name": "Journal",
+        "id": 47,
+        "args": [
+            {
+                "name": "StringIndex",
+                "type": "I32"
+            }
+        ],
+        "result": "String"
+    },
+    {
+        "name": "SetJournalLine",
+        "id": 48,
+        "args": [
+            {
+                "name": "StringIndex",
+                "type": "I32"
+            },
+            {
+                "name": "Text",
+                "type": "String"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "LowJournal",
         "id": 49,
         "args": [],
         "result": "I32"
     },
     {
-        "name": "GetSelfInt",
+        "name": "HighJournal",
         "id": 50,
         "args": [],
         "result": "I32"
     },
     {
-        "name": "GetSelfDex",
+        "name": "FoundedParamID",
         "id": 51,
         "args": [],
         "result": "I32"
     },
     {
-        "name": "GetSelfLife",
+        "name": "LineID",
         "id": 52,
         "args": [],
-        "result": "I32"
+        "result": "U32"
     },
     {
-        "name": "GetSelfMana",
+        "name": "LineType",
         "id": 53,
-        "args": [],
-        "result": "I32"
-    },
-    {
-        "name": "GetSelfStam",
-        "id": 54,
-        "args": [],
-        "result": "I32"
-    },
-    {
-        "name": "GetSelfMaxLife",
-        "id": 55,
-        "args": [],
-        "result": "I32"
-    },
-    {
-        "name": "GetSelfMaxMana",
-        "id": 56,
-        "args": [],
-        "result": "I32"
-    },
-    {
-        "name": "GetSelfMaxStam",
-        "id": 57,
-        "args": [],
-        "result": "I32"
-    },
-    {
-        "name": "Luck",
-        "id": 58,
         "args": [],
         "result": "U16"
     },
     {
-        "name": "GetExtInfo",
-        "id": 59,
+        "name": "GetLineTime",
+        "id": 54,
         "args": [],
-        "result": "ExtendedInfo"
+        "result": "DateTime"
     },
     {
-        "name": "ProxyIP",
+        "name": "LineTime",
+        "id": 54,
+        "args": [],
+        "result": "DateTime"
+    },
+    {
+        "name": "LineMsgType",
+        "id": 55,
+        "args": [],
+        "result": "U8"
+    },
+    {
+        "name": "LineTextColor",
+        "id": 56,
+        "args": [],
+        "result": "U16"
+    },
+    {
+        "name": "LineTextFont",
+        "id": 57,
+        "args": [],
+        "result": "U16"
+    },
+    {
+        "name": "LineIndex",
+        "id": 58,
+        "args": [],
+        "result": "I32"
+    },
+    {
+        "name": "LineCount",
+        "id": 59,
+        "args": [],
+        "result": "I32"
+    },
+    {
+        "name": "LineName",
         "id": 60,
         "args": [],
         "result": "String"
     },
     {
-        "name": "ProxyPort",
+        "name": "HTTP_Get",
         "id": 61,
+        "args": [
+            {
+                "name": "URL",
+                "type": "String"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "HTTP_Post",
+        "id": 62,
+        "args": [
+            {
+                "name": "URL",
+                "type": "String"
+            },
+            {
+                "name": "PostData",
+                "type": "String"
+            }
+        ],
+        "result": "String"
+    },
+    {
+        "name": "HTTP_Body",
+        "id": 63,
+        "args": [],
+        "result": "String"
+    },
+    {
+        "name": "HTTP_Header",
+        "id": 64,
+        "args": [],
+        "result": "String"
+    },
+    {
+        "name": "SetGlobal",
+        "id": 65,
+        "args": [
+            {
+                "name": "GlobalRegion",
+                "type": "U8"
+            },
+            {
+                "name": "VarName",
+                "type": "String"
+            },
+            {
+                "name": "VarValue",
+                "type": "String"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "GetGlobal",
+        "id": 66,
+        "args": [
+            {
+                "name": "GlobalRegion",
+                "type": "U8"
+            },
+            {
+                "name": "VarName",
+                "type": "String"
+            }
+        ],
+        "result": "String"
+    },
+    {
+        "name": "GetScriptsCount",
+        "id": 67,
         "args": [],
         "result": "U16"
     },
     {
-        "name": "UseProxy",
-        "id": 62,
+        "name": "GetScriptPath",
+        "id": 68,
+        "args": [
+            {
+                "name": "ScriptIndex",
+                "type": "U16"
+            }
+        ],
+        "result": "String"
+    },
+    {
+        "name": "GetScriptState",
+        "id": 69,
+        "args": [
+            {
+                "name": "ScriptIndex",
+                "type": "U16"
+            }
+        ],
+        "result": "U8"
+    },
+    {
+        "name": "StartScript",
+        "id": 70,
+        "args": [
+            {
+                "name": "ScriptPath",
+                "type": "String"
+            }
+        ],
+        "result": "U16"
+    },
+    {
+        "name": "StopScript",
+        "id": 71,
+        "args": [
+            {
+                "name": "ScriptIndex",
+                "type": "U16"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "PauseResumeSelScript",
+        "id": 72,
+        "args": [
+            {
+                "name": "ScriptIndex",
+                "type": "U16"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "StopAllScripts",
+        "id": 73,
         "args": [],
+        "result": "None"
+    },
+    {
+        "name": "SetScriptName",
+        "id": 74,
+        "args": [
+            {
+                "name": "ScriptIndex",
+                "type": "U16"
+            },
+            {
+                "name": "Value",
+                "type": "String"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "GetScriptName",
+        "id": 75,
+        "args": [
+            {
+                "name": "ScriptIndex",
+                "type": "U16"
+            }
+        ],
+        "result": "String"
+    },
+    {
+        "name": "GetScriptParams",
+        "id": 76,
+        "args": [],
+        "result": "U32"
+    },
+    {
+        "name": "GetScriptsList",
+        "id": 77,
+        "args": [],
+        "result": "list[ScriptInfo]"
+    },
+    {
+        "name": "GetShowIPCExceptionWindow",
+        "id": 78,
+        "args": [
+            {
+                "name": "Value",
+                "type": "Bool"
+            }
+        ],
+        "result": "F64"
+    },
+    {
+        "name": "SetShowIPCExceptionWindow",
+        "id": 79,
+        "args": [],
+        "result": "F64"
+    },
+    {
+        "name": "Messenger_GetConnected",
+        "id": 80,
+        "args": [
+            {
+                "name": "MesID",
+                "type": "U8"
+            }
+        ],
         "result": "Bool"
     },
     {
-        "name": "Hidden",
-        "id": 63,
+        "name": "Messenger_SetConnected",
+        "id": 81,
+        "args": [
+            {
+                "name": "MesID",
+                "type": "U8"
+            },
+            {
+                "name": "Value",
+                "type": "Bool"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "Messenger_GetToken",
+        "id": 82,
+        "args": [
+            {
+                "name": "MesID",
+                "type": "U8"
+            }
+        ],
+        "result": "String"
+    },
+    {
+        "name": "Messenger_SetToken",
+        "id": 83,
+        "args": [
+            {
+                "name": "MesID",
+                "type": "U8"
+            },
+            {
+                "name": "Value",
+                "type": "String"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "Messenger_GetName",
+        "id": 84,
+        "args": [
+            {
+                "name": "MesID",
+                "type": "U8"
+            }
+        ],
+        "result": "String"
+    },
+    {
+        "name": "Messenger_SendMessage",
+        "id": 85,
+        "args": [
+            {
+                "name": "MesID",
+                "type": "U8"
+            },
+            {
+                "name": "Msg",
+                "type": "String"
+            },
+            {
+                "name": "UserID",
+                "type": "String"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "GetStealthInfo",
+        "id": 86,
         "args": [],
+        "result": "AboutData"
+    },
+    {
+        "name": "IsObjectExists",
+        "id": 87,
+        "args": [
+            {
+                "name": "ID",
+                "type": "U32"
+            }
+        ],
         "result": "Bool"
     },
     {
-        "name": "Poisoned",
-        "id": 64,
-        "args": [],
-        "result": "Bool"
+        "name": "PrintScriptMethodsList",
+        "id": 88,
+        "args": [
+            {
+                "name": "FileName",
+                "type": "String"
+            },
+            {
+                "name": "SortedList",
+                "type": "Bool"
+            }
+        ],
+        "result": "None"
     },
     {
-        "name": "Paralyzed",
-        "id": 65,
+        "name": "SetAlarm",
+        "id": 89,
         "args": [],
-        "result": "Bool"
+        "result": "None"
     },
     {
-        "name": "Dead",
-        "id": 66,
+        "name": "GetNowUnix",
+        "id": 90,
         "args": [],
-        "result": "Bool"
+        "result": "I64"
+    },
+    {
+        "name": "GetNow",
+        "id": 91,
+        "args": [],
+        "result": "DateTime"
+    },
+    {
+        "name": "Self",
+        "id": 200,
+        "args": [],
+        "result": "U32"
+    },
+    {
+        "name": "GetX",
+        "id": 201,
+        "args": [
+            {
+                "name": "ID",
+                "type": "U32"
+            }
+        ],
+        "result": "U16"
+    },
+    {
+        "name": "GetY",
+        "id": 202,
+        "args": [
+            {
+                "name": "ID",
+                "type": "U32"
+            }
+        ],
+        "result": "U16"
+    },
+    {
+        "name": "GetZ",
+        "id": 203,
+        "args": [
+            {
+                "name": "ID",
+                "type": "U32"
+            }
+        ],
+        "result": "I8"
+    },
+    {
+        "name": "WorldNum",
+        "id": 204,
+        "args": [],
+        "result": "U8"
+    },
+    {
+        "name": "Sex",
+        "id": 205,
+        "args": [],
+        "result": "U8"
+    },
+    {
+        "name": "CharTitle",
+        "id": 206,
+        "args": [],
+        "result": "String"
+    },
+    {
+        "name": "Gold",
+        "id": 207,
+        "args": [],
+        "result": "U32"
+    },
+    {
+        "name": "Armor",
+        "id": 208,
+        "args": [],
+        "result": "U16"
+    },
+    {
+        "name": "Weight",
+        "id": 209,
+        "args": [],
+        "result": "U16"
+    },
+    {
+        "name": "MaxWeight",
+        "id": 210,
+        "args": [],
+        "result": "U16"
+    },
+    {
+        "name": "Race",
+        "id": 211,
+        "args": [],
+        "result": "U8"
+    },
+    {
+        "name": "PetsMax",
+        "id": 212,
+        "args": [],
+        "result": "U8"
+    },
+    {
+        "name": "PetsCurrent",
+        "id": 213,
+        "args": [],
+        "result": "U8"
+    },
+    {
+        "name": "FireResist",
+        "id": 214,
+        "args": [],
+        "result": "U16"
+    },
+    {
+        "name": "ColdResist",
+        "id": 215,
+        "args": [],
+        "result": "U16"
+    },
+    {
+        "name": "PoisonResist",
+        "id": 216,
+        "args": [],
+        "result": "U16"
+    },
+    {
+        "name": "EnergyResist",
+        "id": 217,
+        "args": [],
+        "result": "U16"
+    },
+    {
+        "name": "GetSelfStr",
+        "id": 218,
+        "args": [],
+        "result": "I32"
+    },
+    {
+        "name": "GetSelfInt",
+        "id": 219,
+        "args": [],
+        "result": "I32"
+    },
+    {
+        "name": "GetSelfDex",
+        "id": 220,
+        "args": [],
+        "result": "I32"
+    },
+    {
+        "name": "GetSelfLife",
+        "id": 221,
+        "args": [],
+        "result": "I32"
+    },
+    {
+        "name": "GetSelfMana",
+        "id": 222,
+        "args": [],
+        "result": "I32"
+    },
+    {
+        "name": "GetSelfStam",
+        "id": 223,
+        "args": [],
+        "result": "I32"
+    },
+    {
+        "name": "GetSelfMaxLife",
+        "id": 224,
+        "args": [],
+        "result": "I32"
+    },
+    {
+        "name": "GetSelfMaxMana",
+        "id": 225,
+        "args": [],
+        "result": "I32"
+    },
+    {
+        "name": "GetSelfMaxStam",
+        "id": 226,
+        "args": [],
+        "result": "I32"
+    },
+    {
+        "name": "Luck",
+        "id": 227,
+        "args": [],
+        "result": "U16"
+    },
+    {
+        "name": "Backpack",
+        "id": 228,
+        "args": [],
+        "result": "U32"
+    },
+    {
+        "name": "GetBuffBarInfo",
+        "id": 229,
+        "args": [],
+        "result": "list[BuffBarInfo]"
+    },
+    {
+        "name": "LastContainer",
+        "id": 230,
+        "args": [],
+        "result": "U32"
+    },
+    {
+        "name": "LastTarget",
+        "id": 231,
+        "args": [],
+        "result": "U32"
+    },
+    {
+        "name": "LastAttack",
+        "id": 232,
+        "args": [],
+        "result": "U32"
+    },
+    {
+        "name": "LastStatus",
+        "id": 233,
+        "args": [],
+        "result": "U32"
+    },
+    {
+        "name": "LastObject",
+        "id": 234,
+        "args": [],
+        "result": "U32"
     },
     {
         "name": "WarTargetID",
-        "id": 67,
+        "id": 235,
         "args": [],
         "result": "U32"
     },
     {
         "name": "SetWarMode",
-        "id": 68,
+        "id": 236,
         "args": [
             {
                 "name": "Value",
@@ -449,7 +959,7 @@
     },
     {
         "name": "Attack",
-        "id": 69,
+        "id": 237,
         "args": [
             {
                 "name": "ObjID",
@@ -460,13 +970,13 @@
     },
     {
         "name": "UseSelfPaperdollScroll",
-        "id": 70,
+        "id": 238,
         "args": [],
         "result": "None"
     },
     {
         "name": "UseOtherPaperdollScroll",
-        "id": 71,
+        "id": 239,
         "args": [
             {
                 "name": "ObjID",
@@ -477,19 +987,19 @@
     },
     {
         "name": "TargetID",
-        "id": 72,
+        "id": 240,
         "args": [],
         "result": "U32"
     },
     {
         "name": "CancelTarget",
-        "id": 73,
+        "id": 241,
         "args": [],
         "result": "None"
     },
     {
         "name": "TargetToObject",
-        "id": 74,
+        "id": 242,
         "args": [
             {
                 "name": "ObjID",
@@ -500,7 +1010,7 @@
     },
     {
         "name": "TargetToXYZ",
-        "id": 75,
+        "id": 243,
         "args": [
             {
                 "name": "X",
@@ -519,7 +1029,7 @@
     },
     {
         "name": "TargetToTile",
-        "id": 76,
+        "id": 244,
         "args": [
             {
                 "name": "Tile",
@@ -542,7 +1052,7 @@
     },
     {
         "name": "WaitTargetObject",
-        "id": 77,
+        "id": 245,
         "args": [
             {
                 "name": "ObjID",
@@ -553,7 +1063,7 @@
     },
     {
         "name": "WaitTargetTile",
-        "id": 78,
+        "id": 246,
         "args": [
             {
                 "name": "Tile",
@@ -576,7 +1086,7 @@
     },
     {
         "name": "WaitTargetXYZ",
-        "id": 79,
+        "id": 247,
         "args": [
             {
                 "name": "X",
@@ -595,13 +1105,13 @@
     },
     {
         "name": "WaitTargetSelf",
-        "id": 80,
+        "id": 248,
         "args": [],
         "result": "None"
     },
     {
         "name": "WaitTargetType",
-        "id": 81,
+        "id": 249,
         "args": [
             {
                 "name": "ObjType",
@@ -612,13 +1122,13 @@
     },
     {
         "name": "CancelWaitTarget",
-        "id": 82,
+        "id": 250,
         "args": [],
         "result": "None"
     },
     {
         "name": "WaitTargetGround",
-        "id": 83,
+        "id": 251,
         "args": [
             {
                 "name": "ObjType",
@@ -629,59 +1139,50 @@
     },
     {
         "name": "WaitTargetLast",
-        "id": 84,
+        "id": 252,
         "args": [],
         "result": "None"
     },
     {
-        "name": "UsePrimaryAbility",
-        "id": 85,
-        "args": [],
-        "result": "None"
-    },
-    {
-        "name": "UseSecondaryAbility",
-        "id": 86,
-        "args": [],
-        "result": "None"
-    },
-    {
-        "name": "GetActiveAbility",
-        "id": 87,
-        "args": [],
-        "result": "String"
-    },
-    {
-        "name": "ToggleFly",
-        "id": 88,
-        "args": [],
-        "result": "None"
-    },
-    {
-        "name": "GetSkillID",
-        "id": 89,
+        "name": "GetStatLockState",
+        "id": 253,
         "args": [
             {
-                "name": "SkillName",
-                "type": "String"
+                "name": "statNum",
+                "type": "I8"
             }
         ],
-        "result": "I32"
+        "result": "I8"
     },
     {
-        "name": "UseSkill",
-        "id": 90,
+        "name": "SetStatState",
+        "id": 254,
+        "args": [
+            {
+                "name": "statNum",
+                "type": "U8"
+            },
+            {
+                "name": "statState",
+                "type": "U8"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "GetSkillLockState",
+        "id": 255,
         "args": [
             {
                 "name": "SkillID",
                 "type": "I32"
             }
         ],
-        "result": "None"
+        "result": "I8"
     },
     {
         "name": "SetSkillLockState",
-        "id": 91,
+        "id": 256,
         "args": [
             {
                 "name": "SkillID",
@@ -695,8 +1196,19 @@
         "result": "None"
     },
     {
+        "name": "GetSkillCurrentValue",
+        "id": 257,
+        "args": [
+            {
+                "name": "SkillID",
+                "type": "I32"
+            }
+        ],
+        "result": "F64"
+    },
+    {
         "name": "GetSkillCap",
-        "id": 92,
+        "id": 258,
         "args": [
             {
                 "name": "SkillID",
@@ -707,7 +1219,7 @@
     },
     {
         "name": "GetSkillValue",
-        "id": 93,
+        "id": 259,
         "args": [
             {
                 "name": "SkillID",
@@ -717,25 +1229,30 @@
         "result": "F64"
     },
     {
-        "name": "ReqVirtuesGump",
-        "id": 94,
-        "args": [],
-        "result": "None"
-    },
-    {
-        "name": "UseVirtue",
-        "id": 95,
+        "name": "GetSkillID",
+        "id": 260,
         "args": [
             {
-                "name": "VirtueID",
-                "type": "U32"
+                "name": "SkillName",
+                "type": "String"
+            }
+        ],
+        "result": "I32"
+    },
+    {
+        "name": "UseSkill",
+        "id": 261,
+        "args": [
+            {
+                "name": "SkillID",
+                "type": "I32"
             }
         ],
         "result": "None"
     },
     {
         "name": "Cast",
-        "id": 96,
+        "id": 262,
         "args": [
             {
                 "name": "SpellID",
@@ -746,7 +1263,7 @@
     },
     {
         "name": "IsActiveSpellAbility",
-        "id": 98,
+        "id": 263,
         "args": [
             {
                 "name": "SpellID",
@@ -756,25 +1273,72 @@
         "result": "Bool"
     },
     {
-        "name": "SetCatchBag",
-        "id": 99,
+        "name": "UsePrimaryAbility",
+        "id": 264,
+        "args": [],
+        "result": "None"
+    },
+    {
+        "name": "UseSecondaryAbility",
+        "id": 265,
+        "args": [],
+        "result": "None"
+    },
+    {
+        "name": "GetActiveAbility",
+        "id": 266,
+        "args": [],
+        "result": "String"
+    },
+    {
+        "name": "RequestStats",
+        "id": 267,
         "args": [
             {
                 "name": "ObjID",
                 "type": "U32"
             }
         ],
-        "result": "U8"
+        "result": "None"
     },
     {
-        "name": "UnsetCatchBag",
-        "id": 100,
+        "name": "HelpRequest",
+        "id": 268,
         "args": [],
         "result": "None"
     },
     {
+        "name": "QuestRequest",
+        "id": 269,
+        "args": [],
+        "result": "None"
+    },
+    {
+        "name": "ToggleFly",
+        "id": 270,
+        "args": [],
+        "result": "None"
+    },
+    {
+        "name": "ReqVirtuesGump",
+        "id": 271,
+        "args": [],
+        "result": "None"
+    },
+    {
+        "name": "UseVirtue",
+        "id": 272,
+        "args": [
+            {
+                "name": "VirtueID",
+                "type": "U32"
+            }
+        ],
+        "result": "None"
+    },
+    {
         "name": "UseObject",
-        "id": 101,
+        "id": 273,
         "args": [
             {
                 "name": "ObjID",
@@ -785,7 +1349,7 @@
     },
     {
         "name": "UseType",
-        "id": 102,
+        "id": 274,
         "args": [
             {
                 "name": "ObjType",
@@ -800,7 +1364,7 @@
     },
     {
         "name": "UseFromGround",
-        "id": 103,
+        "id": 275,
         "args": [
             {
                 "name": "ObjType",
@@ -815,7 +1379,7 @@
     },
     {
         "name": "ClickOnObject",
-        "id": 104,
+        "id": 276,
         "args": [
             {
                 "name": "ObjID",
@@ -825,772 +1389,85 @@
         "result": "None"
     },
     {
-        "name": "FoundedParamID",
-        "id": 105,
-        "args": [],
-        "result": "I32"
-    },
-    {
-        "name": "LineID",
-        "id": 106,
-        "args": [],
-        "result": "U32"
-    },
-    {
-        "name": "LineType",
-        "id": 107,
-        "args": [],
-        "result": "U16"
-    },
-    {
-        "name": "GetLineTime",
-        "id": 108,
-        "args": [],
-        "result": "DateTime"
-    },
-    {
-        "name": "LineTime",
-        "id": 108,
-        "args": [],
-        "result": "DateTime"
-    },
-    {
-        "name": "LineMsgType",
-        "id": 109,
-        "args": [],
-        "result": "U8"
-    },
-    {
-        "name": "LineTextColor",
-        "id": 110,
-        "args": [],
-        "result": "U16"
-    },
-    {
-        "name": "LineTextFont",
-        "id": 111,
-        "args": [],
-        "result": "U16"
-    },
-    {
-        "name": "LineIndex",
-        "id": 112,
-        "args": [],
-        "result": "I32"
-    },
-    {
-        "name": "LineCount",
-        "id": 113,
-        "args": [],
-        "result": "I32"
-    },
-    {
-        "name": "LineName",
-        "id": 114,
-        "args": [],
-        "result": "String"
-    },
-    {
-        "name": "AddJournalIgnore",
-        "id": 115,
+        "name": "UseItemOnMobile",
+        "id": 277,
         "args": [
             {
-                "name": "Str",
-                "type": "String"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "ClearJournalIgnore",
-        "id": 116,
-        "args": [],
-        "result": "None"
-    },
-    {
-        "name": "AddChatUserIgnore",
-        "id": 117,
-        "args": [
-            {
-                "name": "Mobile",
-                "type": "String"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "ClearChatUserIgnore",
-        "id": 118,
-        "args": [],
-        "result": "None"
-    },
-    {
-        "name": "ClearJournal",
-        "id": 119,
-        "args": [],
-        "result": "None"
-    },
-    {
-        "name": "LastJournalMessage",
-        "id": 120,
-        "args": [],
-        "result": "String"
-    },
-    {
-        "name": "InJournal",
-        "id": 121,
-        "args": [
-            {
-                "name": "Str",
-                "type": "String"
-            }
-        ],
-        "result": "I32"
-    },
-    {
-        "name": "InJournalBetweenTimes",
-        "id": 122,
-        "args": [
-            {
-                "name": "Str",
-                "type": "String"
+                "name": "ItemSerial",
+                "type": "U32"
             },
             {
-                "name": "TimeBegin",
-                "type": "DateTime"
-            },
-            {
-                "name": "TimeEnd",
-                "type": "DateTime"
-            }
-        ],
-        "result": "I32"
-    },
-    {
-        "name": "Journal",
-        "id": 123,
-        "args": [
-            {
-                "name": "StringIndex",
-                "type": "I32"
-            }
-        ],
-        "result": "String"
-    },
-    {
-        "name": "SetJournalLine",
-        "id": 124,
-        "args": [
-            {
-                "name": "StringIndex",
-                "type": "I32"
-            },
-            {
-                "name": "Text",
-                "type": "String"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "LowJournal",
-        "id": 125,
-        "args": [],
-        "result": "I32"
-    },
-    {
-        "name": "HighJournal",
-        "id": 126,
-        "args": [],
-        "result": "I32"
-    },
-    {
-        "name": "SetFindDistance",
-        "id": 127,
-        "args": [
-            {
-                "name": "Value",
+                "name": "TargetSerial",
                 "type": "U32"
             }
         ],
         "result": "None"
     },
     {
-        "name": "GetFindDistance",
-        "id": 128,
+        "name": "BandageSelf",
+        "id": 278,
         "args": [],
-        "result": "U32"
-    },
-    {
-        "name": "SetFindVertical",
-        "id": 129,
-        "args": [
-            {
-                "name": "Value",
-                "type": "U32"
-            }
-        ],
         "result": "None"
     },
     {
-        "name": "GetFindVertical",
-        "id": 130,
-        "args": [],
-        "result": "U32"
-    },
-    {
-        "name": "FindTypeEx",
-        "id": 131,
+        "name": "TargetByResource",
+        "id": 279,
         "args": [
             {
-                "name": "ObjType",
-                "type": "U16"
-            },
-            {
-                "name": "Color",
-                "type": "U16"
-            },
-            {
-                "name": "Container",
+                "name": "ObjID",
                 "type": "U32"
             },
             {
-                "name": "InSub",
-                "type": "Bool"
-            }
-        ],
-        "result": "U32"
-    },
-    {
-        "name": "FindNotoriety",
-        "id": 132,
-        "args": [
-            {
-                "name": "ObjType",
-                "type": "U16"
-            },
-            {
-                "name": "Notoriety",
-                "type": "U8"
-            }
-        ],
-        "result": "U32"
-    },
-    {
-        "name": "FindAtCoord",
-        "id": 133,
-        "args": [
-            {
-                "name": "X",
-                "type": "U16"
-            },
-            {
-                "name": "Y",
+                "name": "Resource",
                 "type": "U16"
             }
         ],
-        "result": "U32"
-    },
-    {
-        "name": "Ignore",
-        "id": 134,
-        "args": [
-            {
-                "name": "ID",
-                "type": "U32"
-            }
-        ],
         "result": "None"
-    },
-    {
-        "name": "IgnoreOff",
-        "id": 135,
-        "args": [
-            {
-                "name": "ID",
-                "type": "U32"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "IgnoreReset",
-        "id": 136,
-        "args": [],
-        "result": "None"
-    },
-    {
-        "name": "GetIgnoreList",
-        "id": 137,
-        "args": [],
-        "result": "list[U32]"
-    },
-    {
-        "name": "GetFindedList",
-        "id": 138,
-        "args": [],
-        "result": "list[U32]"
-    },
-    {
-        "name": "FindItem",
-        "id": 139,
-        "args": [],
-        "result": "U32"
-    },
-    {
-        "name": "FindCount",
-        "id": 140,
-        "args": [],
-        "result": "I32"
-    },
-    {
-        "name": "FindQuantity",
-        "id": 141,
-        "args": [],
-        "result": "I32"
-    },
-    {
-        "name": "FindFullQuantity",
-        "id": 142,
-        "args": [],
-        "result": "I32"
-    },
-    {
-        "name": "PredictedX",
-        "id": 143,
-        "args": [],
-        "result": "U16"
-    },
-    {
-        "name": "PredictedY",
-        "id": 144,
-        "args": [],
-        "result": "U16"
-    },
-    {
-        "name": "PredictedZ",
-        "id": 145,
-        "args": [],
-        "result": "I8"
-    },
-    {
-        "name": "PredictedDirection",
-        "id": 146,
-        "args": [],
-        "result": "U8"
-    },
-    {
-        "name": "GetName",
-        "id": 147,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "String"
-    },
-    {
-        "name": "GetAltName",
-        "id": 148,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "String"
-    },
-    {
-        "name": "GetTitle",
-        "id": 149,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "String"
-    },
-    {
-        "name": "GetTooltip",
-        "id": 150,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "String"
-    },
-    {
-        "name": "GetType",
-        "id": 151,
-        "args": [
-            {
-                "name": "ID",
-                "type": "U32"
-            }
-        ],
-        "result": "U16"
-    },
-    {
-        "name": "GetTooltipRec",
-        "id": 152,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "list[ClilocRec]"
-    },
-    {
-        "name": "GetClilocByID",
-        "id": 153,
-        "args": [
-            {
-                "name": "ClilocID",
-                "type": "U32"
-            }
-        ],
-        "result": "String"
-    },
-    {
-        "name": "GetQuantity",
-        "id": 154,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "I32"
-    },
-    {
-        "name": "IsObjectExists",
-        "id": 155,
-        "args": [
-            {
-                "name": "ID",
-                "type": "U32"
-            }
-        ],
-        "result": "Bool"
-    },
-    {
-        "name": "GetPrice",
-        "id": 156,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "U32"
-    },
-    {
-        "name": "GetDirection",
-        "id": 157,
-        "args": [
-            {
-                "name": "ID",
-                "type": "U32"
-            }
-        ],
-        "result": "U8"
-    },
-    {
-        "name": "GetDistance",
-        "id": 158,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "I32"
-    },
-    {
-        "name": "GetColor",
-        "id": 159,
-        "args": [
-            {
-                "name": "ID",
-                "type": "U32"
-            }
-        ],
-        "result": "U16"
-    },
-    {
-        "name": "GetStr",
-        "id": 160,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "I32"
-    },
-    {
-        "name": "GetInt",
-        "id": 161,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "I32"
-    },
-    {
-        "name": "GetDex",
-        "id": 162,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "I32"
-    },
-    {
-        "name": "GetHP",
-        "id": 163,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "I32"
-    },
-    {
-        "name": "GetMaxHP",
-        "id": 164,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "I32"
-    },
-    {
-        "name": "GetMana",
-        "id": 165,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "I32"
-    },
-    {
-        "name": "GetMaxMana",
-        "id": 166,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "I32"
-    },
-    {
-        "name": "GetStam",
-        "id": 167,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "I32"
-    },
-    {
-        "name": "GetMaxStam",
-        "id": 168,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "I32"
-    },
-    {
-        "name": "GetNotoriety",
-        "id": 169,
-        "args": [
-            {
-                "name": "ID",
-                "type": "U32"
-            }
-        ],
-        "result": "U8"
-    },
-    {
-        "name": "GetParent",
-        "id": 170,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "U32"
-    },
-    {
-        "name": "IsWarMode",
-        "id": 171,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "Bool"
-    },
-    {
-        "name": "IsNPC",
-        "id": 172,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "Bool"
-    },
-    {
-        "name": "IsDead",
-        "id": 173,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "Bool"
-    },
-    {
-        "name": "IsRunning",
-        "id": 174,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "Bool"
-    },
-    {
-        "name": "IsContainer",
-        "id": 175,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "Bool"
-    },
-    {
-        "name": "IsHidden",
-        "id": 176,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "Bool"
-    },
-    {
-        "name": "IsMovable",
-        "id": 177,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "Bool"
-    },
-    {
-        "name": "IsYellowHits",
-        "id": 178,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "Bool"
-    },
-    {
-        "name": "IsPoisoned",
-        "id": 179,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "Bool"
-    },
-    {
-        "name": "IsParalyzed",
-        "id": 180,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "Bool"
-    },
-    {
-        "name": "IsFemale",
-        "id": 181,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "Bool"
     },
     {
         "name": "OpenDoor",
-        "id": 182,
+        "id": 280,
         "args": [],
         "result": "None"
     },
     {
         "name": "Bow",
-        "id": 183,
+        "id": 281,
         "args": [],
         "result": "None"
     },
     {
         "name": "Salute",
-        "id": 184,
+        "id": 282,
+        "args": [],
+        "result": "None"
+    },
+    {
+        "name": "SetCatchBag",
+        "id": 283,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "U8"
+    },
+    {
+        "name": "UnsetCatchBag",
+        "id": 284,
         "args": [],
         "result": "None"
     },
     {
         "name": "GetPickupedItem",
-        "id": 185,
+        "id": 285,
         "args": [],
         "result": "U32"
     },
     {
         "name": "SetPickupedItem",
-        "id": 186,
+        "id": 286,
         "args": [
             {
                 "name": "ID",
@@ -1601,13 +1478,13 @@
     },
     {
         "name": "GetDropCheckCoord",
-        "id": 187,
+        "id": 287,
         "args": [],
         "result": "Bool"
     },
     {
         "name": "SetDropCheckCoord",
-        "id": 188,
+        "id": 288,
         "args": [
             {
                 "name": "Value",
@@ -1618,13 +1495,13 @@
     },
     {
         "name": "GetDropDelay",
-        "id": 189,
+        "id": 289,
         "args": [],
         "result": "U32"
     },
     {
         "name": "SetDropDelay",
-        "id": 190,
+        "id": 290,
         "args": [
             {
                 "name": "Value",
@@ -1635,7 +1512,7 @@
     },
     {
         "name": "DragItem",
-        "id": 191,
+        "id": 291,
         "args": [
             {
                 "name": "ObjID",
@@ -1650,7 +1527,7 @@
     },
     {
         "name": "DropItem",
-        "id": 192,
+        "id": 292,
         "args": [
             {
                 "name": "MoveIntoID",
@@ -1672,8 +1549,659 @@
         "result": "Bool"
     },
     {
+        "name": "AddJournalIgnore",
+        "id": 293,
+        "args": [
+            {
+                "name": "Str",
+                "type": "String"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "ClearJournalIgnore",
+        "id": 294,
+        "args": [],
+        "result": "None"
+    },
+    {
+        "name": "AddChatUserIgnore",
+        "id": 295,
+        "args": [
+            {
+                "name": "Mobile",
+                "type": "String"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "ClearChatUserIgnore",
+        "id": 296,
+        "args": [],
+        "result": "None"
+    },
+    {
+        "name": "SetFindDistance",
+        "id": 297,
+        "args": [
+            {
+                "name": "Value",
+                "type": "U32"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "GetFindDistance",
+        "id": 298,
+        "args": [],
+        "result": "U32"
+    },
+    {
+        "name": "SetFindVertical",
+        "id": 299,
+        "args": [
+            {
+                "name": "Value",
+                "type": "U32"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "GetFindVertical",
+        "id": 300,
+        "args": [],
+        "result": "U32"
+    },
+    {
+        "name": "FindTypeEx",
+        "id": 301,
+        "args": [
+            {
+                "name": "ObjType",
+                "type": "U16"
+            },
+            {
+                "name": "Color",
+                "type": "U16"
+            },
+            {
+                "name": "Container",
+                "type": "U32"
+            },
+            {
+                "name": "InSub",
+                "type": "Bool"
+            }
+        ],
+        "result": "U32"
+    },
+    {
+        "name": "FindTypesArrayEx",
+        "id": 302,
+        "args": [
+            {
+                "name": "ObjTypes",
+                "type": "list[U16]"
+            },
+            {
+                "name": "Colors",
+                "type": "list[U16]"
+            },
+            {
+                "name": "Containers",
+                "type": "list[U32]"
+            },
+            {
+                "name": "InSub",
+                "type": "Bool"
+            }
+        ],
+        "result": "U32"
+    },
+    {
+        "name": "FindNotoriety",
+        "id": 303,
+        "args": [
+            {
+                "name": "ObjType",
+                "type": "U16"
+            },
+            {
+                "name": "Notoriety",
+                "type": "U8"
+            }
+        ],
+        "result": "U32"
+    },
+    {
+        "name": "FindAtCoord",
+        "id": 304,
+        "args": [
+            {
+                "name": "X",
+                "type": "U16"
+            },
+            {
+                "name": "Y",
+                "type": "U16"
+            }
+        ],
+        "result": "U32"
+    },
+    {
+        "name": "Ignore",
+        "id": 305,
+        "args": [
+            {
+                "name": "ID",
+                "type": "U32"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "IgnoreOff",
+        "id": 306,
+        "args": [
+            {
+                "name": "ID",
+                "type": "U32"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "IgnoreReset",
+        "id": 307,
+        "args": [],
+        "result": "None"
+    },
+    {
+        "name": "GetIgnoreList",
+        "id": 308,
+        "args": [],
+        "result": "list[U32]"
+    },
+    {
+        "name": "GetFindedList",
+        "id": 309,
+        "args": [],
+        "result": "list[U32]"
+    },
+    {
+        "name": "FindItem",
+        "id": 310,
+        "args": [],
+        "result": "U32"
+    },
+    {
+        "name": "FindCount",
+        "id": 311,
+        "args": [],
+        "result": "I32"
+    },
+    {
+        "name": "FindQuantity",
+        "id": 312,
+        "args": [],
+        "result": "I32"
+    },
+    {
+        "name": "FindFullQuantity",
+        "id": 313,
+        "args": [],
+        "result": "I32"
+    },
+    {
+        "name": "SetFindInNulPoint",
+        "id": 314,
+        "args": [
+            {
+                "name": "Value",
+                "type": "Bool"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "GetFindInNulPoint",
+        "id": 315,
+        "args": [],
+        "result": "Bool"
+    },
+    {
+        "name": "GetPlayerStatusText",
+        "id": 316,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "String"
+    },
+    {
+        "name": "GetExtInfo",
+        "id": 317,
+        "args": [],
+        "result": "ExtendedInfo"
+    },
+    {
+        "name": "Hidden",
+        "id": 318,
+        "args": [],
+        "result": "Bool"
+    },
+    {
+        "name": "Poisoned",
+        "id": 319,
+        "args": [],
+        "result": "Bool"
+    },
+    {
+        "name": "Paralyzed",
+        "id": 320,
+        "args": [],
+        "result": "Bool"
+    },
+    {
+        "name": "Dead",
+        "id": 321,
+        "args": [],
+        "result": "Bool"
+    },
+    {
+        "name": "GetName",
+        "id": 322,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "String"
+    },
+    {
+        "name": "GetAltName",
+        "id": 323,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "String"
+    },
+    {
+        "name": "GetTitle",
+        "id": 324,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "String"
+    },
+    {
+        "name": "GetTooltip",
+        "id": 325,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "String"
+    },
+    {
+        "name": "GetType",
+        "id": 326,
+        "args": [
+            {
+                "name": "ID",
+                "type": "U32"
+            }
+        ],
+        "result": "U16"
+    },
+    {
+        "name": "GetTooltipRec",
+        "id": 327,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "list[ClilocRec]"
+    },
+    {
+        "name": "GetClilocByID",
+        "id": 328,
+        "args": [
+            {
+                "name": "ClilocID",
+                "type": "U32"
+            }
+        ],
+        "result": "String"
+    },
+    {
+        "name": "GetQuantity",
+        "id": 329,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "I32"
+    },
+    {
+        "name": "GetPrice",
+        "id": 330,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "U32"
+    },
+    {
+        "name": "GetDirection",
+        "id": 331,
+        "args": [
+            {
+                "name": "ID",
+                "type": "U32"
+            }
+        ],
+        "result": "U8"
+    },
+    {
+        "name": "GetDistance",
+        "id": 332,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "I32"
+    },
+    {
+        "name": "GetColor",
+        "id": 333,
+        "args": [
+            {
+                "name": "ID",
+                "type": "U32"
+            }
+        ],
+        "result": "U16"
+    },
+    {
+        "name": "GetStr",
+        "id": 334,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "I32"
+    },
+    {
+        "name": "GetInt",
+        "id": 335,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "I32"
+    },
+    {
+        "name": "GetDex",
+        "id": 336,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "I32"
+    },
+    {
+        "name": "GetHP",
+        "id": 337,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "I32"
+    },
+    {
+        "name": "GetMaxHP",
+        "id": 338,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "I32"
+    },
+    {
+        "name": "GetMana",
+        "id": 339,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "I32"
+    },
+    {
+        "name": "GetMaxMana",
+        "id": 340,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "I32"
+    },
+    {
+        "name": "GetStam",
+        "id": 341,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "I32"
+    },
+    {
+        "name": "GetMaxStam",
+        "id": 342,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "I32"
+    },
+    {
+        "name": "GetNotoriety",
+        "id": 343,
+        "args": [
+            {
+                "name": "ID",
+                "type": "U32"
+            }
+        ],
+        "result": "U8"
+    },
+    {
+        "name": "GetParent",
+        "id": 344,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "U32"
+    },
+    {
+        "name": "IsWarMode",
+        "id": 345,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "Bool"
+    },
+    {
+        "name": "IsNPC",
+        "id": 346,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "Bool"
+    },
+    {
+        "name": "IsDead",
+        "id": 347,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "Bool"
+    },
+    {
+        "name": "IsRunning",
+        "id": 348,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "Bool"
+    },
+    {
+        "name": "IsContainer",
+        "id": 349,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "Bool"
+    },
+    {
+        "name": "IsHidden",
+        "id": 350,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "Bool"
+    },
+    {
+        "name": "IsMovable",
+        "id": 351,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "Bool"
+    },
+    {
+        "name": "IsYellowHits",
+        "id": 352,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "Bool"
+    },
+    {
+        "name": "IsPoisoned",
+        "id": 353,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "Bool"
+    },
+    {
+        "name": "IsParalyzed",
+        "id": 354,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "Bool"
+    },
+    {
+        "name": "IsFemale",
+        "id": 355,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "Bool"
+    },
+    {
+        "name": "IsHouse",
+        "id": 356,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "Bool"
+    },
+    {
         "name": "RequestContextMenu",
-        "id": 193,
+        "id": 357,
         "args": [
             {
                 "name": "ObjID",
@@ -1684,7 +2212,7 @@
     },
     {
         "name": "SetContextMenuHook",
-        "id": 194,
+        "id": 358,
         "args": [
             {
                 "name": "MenuID",
@@ -1699,25 +2227,31 @@
     },
     {
         "name": "GetContextMenu",
-        "id": 195,
+        "id": 359,
         "args": [],
         "result": "list[String]"
     },
     {
         "name": "ClearContextMenu",
-        "id": 196,
+        "id": 360,
         "args": [],
         "result": "None"
     },
     {
+        "name": "GetContextMenuRec",
+        "id": 361,
+        "args": [],
+        "result": "ContextMenuRec"
+    },
+    {
         "name": "IsTrade",
-        "id": 197,
+        "id": 362,
         "args": [],
         "result": "Bool"
     },
     {
         "name": "GetTradeContainer",
-        "id": 198,
+        "id": 363,
         "args": [
             {
                 "name": "TradeNum",
@@ -1732,7 +2266,7 @@
     },
     {
         "name": "GetTradeOpponent",
-        "id": 199,
+        "id": 364,
         "args": [
             {
                 "name": "TradeNum",
@@ -1743,13 +2277,13 @@
     },
     {
         "name": "TradeCount",
-        "id": 200,
+        "id": 365,
         "args": [],
         "result": "U8"
     },
     {
         "name": "GetTradeOpponentName",
-        "id": 201,
+        "id": 366,
         "args": [
             {
                 "name": "TradeNum",
@@ -1759,8 +2293,14 @@
         "result": "String"
     },
     {
+        "name": "DumpObjectsCache",
+        "id": 367,
+        "args": [],
+        "result": "None"
+    },
+    {
         "name": "TradeCheck",
-        "id": 202,
+        "id": 367,
         "args": [
             {
                 "name": "TradeNum",
@@ -1775,7 +2315,7 @@
     },
     {
         "name": "ConfirmTrade",
-        "id": 203,
+        "id": 368,
         "args": [
             {
                 "name": "TradeNum",
@@ -1786,7 +2326,7 @@
     },
     {
         "name": "CancelTrade",
-        "id": 204,
+        "id": 369,
         "args": [
             {
                 "name": "TradeNum",
@@ -1797,7 +2337,7 @@
     },
     {
         "name": "WaitMenu",
-        "id": 205,
+        "id": 370,
         "args": [
             {
                 "name": "MenuCaption",
@@ -1812,7 +2352,7 @@
     },
     {
         "name": "AutoMenu",
-        "id": 206,
+        "id": 371,
         "args": [
             {
                 "name": "MenuCaption",
@@ -1827,31 +2367,59 @@
     },
     {
         "name": "MenuHookPresent",
-        "id": 207,
+        "id": 372,
         "args": [],
         "result": "Bool"
     },
     {
         "name": "MenuPresent",
-        "id": 208,
+        "id": 373,
         "args": [],
         "result": "Bool"
     },
     {
         "name": "CancelMenu",
-        "id": 209,
+        "id": 374,
         "args": [],
         "result": "None"
     },
     {
         "name": "CloseMenu",
-        "id": 210,
+        "id": 375,
         "args": [],
         "result": "None"
     },
     {
+        "name": "GetMenuItems",
+        "id": 376,
+        "args": [
+            {
+                "name": "Caption",
+                "type": "String"
+            }
+        ],
+        "result": "list[String]"
+    },
+    {
+        "name": "GetMenuItemsEx",
+        "id": 377,
+        "args": [
+            {
+                "name": "Caption",
+                "type": "String"
+            }
+        ],
+        "result": "list[MenuItem]"
+    },
+    {
+        "name": "GetLastMenuItems",
+        "id": 378,
+        "args": [],
+        "result": "list[String]"
+    },
+    {
         "name": "WaitGump",
-        "id": 211,
+        "id": 379,
         "args": [
             {
                 "name": "Value",
@@ -1862,7 +2430,7 @@
     },
     {
         "name": "WaitTextEntry",
-        "id": 212,
+        "id": 380,
         "args": [
             {
                 "name": "Value",
@@ -1873,7 +2441,7 @@
     },
     {
         "name": "GumpAutoTextEntry",
-        "id": 213,
+        "id": 381,
         "args": [
             {
                 "name": "TextEntryID",
@@ -1888,7 +2456,7 @@
     },
     {
         "name": "GumpAutoRadiobutton",
-        "id": 214,
+        "id": 382,
         "args": [
             {
                 "name": "RadiobuttonID",
@@ -1903,7 +2471,7 @@
     },
     {
         "name": "GumpAutoCheckBox",
-        "id": 215,
+        "id": 383,
         "args": [
             {
                 "name": "CheckBoxID",
@@ -1918,7 +2486,7 @@
     },
     {
         "name": "NumGumpButton",
-        "id": 216,
+        "id": 384,
         "args": [
             {
                 "name": "GumpIndex",
@@ -1933,7 +2501,7 @@
     },
     {
         "name": "NumGumpTextEntry",
-        "id": 217,
+        "id": 385,
         "args": [
             {
                 "name": "GumpIndex",
@@ -1952,7 +2520,7 @@
     },
     {
         "name": "NumGumpRadiobutton",
-        "id": 218,
+        "id": 386,
         "args": [
             {
                 "name": "GumpIndex",
@@ -1971,7 +2539,7 @@
     },
     {
         "name": "NumGumpCheckBox",
-        "id": 219,
+        "id": 387,
         "args": [
             {
                 "name": "GumpIndex",
@@ -1990,13 +2558,13 @@
     },
     {
         "name": "GetGumpsCount",
-        "id": 220,
+        "id": 388,
         "args": [],
         "result": "U16"
     },
     {
         "name": "CloseSimpleGump",
-        "id": 221,
+        "id": 389,
         "args": [
             {
                 "name": "GumpIndex",
@@ -2007,7 +2575,7 @@
     },
     {
         "name": "GetGumpSerial",
-        "id": 222,
+        "id": 390,
         "args": [
             {
                 "name": "GumpIndex",
@@ -2018,7 +2586,7 @@
     },
     {
         "name": "GetGumpID",
-        "id": 223,
+        "id": 391,
         "args": [
             {
                 "name": "GumpIndex",
@@ -2029,7 +2597,7 @@
     },
     {
         "name": "IsGumpCanBeClosed",
-        "id": 224,
+        "id": 392,
         "args": [
             {
                 "name": "GumpIndex",
@@ -2040,7 +2608,7 @@
     },
     {
         "name": "GetGumpTextLines",
-        "id": 225,
+        "id": 393,
         "args": [
             {
                 "name": "GumpIndex",
@@ -2051,7 +2619,7 @@
     },
     {
         "name": "GetGumpFullLines",
-        "id": 226,
+        "id": 394,
         "args": [
             {
                 "name": "GumpIndex",
@@ -2062,7 +2630,7 @@
     },
     {
         "name": "GetGumpShortLines",
-        "id": 227,
+        "id": 395,
         "args": [
             {
                 "name": "GumpIndex",
@@ -2073,7 +2641,7 @@
     },
     {
         "name": "GetGumpButtonsDescription",
-        "id": 228,
+        "id": 396,
         "args": [
             {
                 "name": "GumpIndex",
@@ -2084,7 +2652,7 @@
     },
     {
         "name": "GetGumpInfo",
-        "id": 229,
+        "id": 397,
         "args": [
             {
                 "name": "GumpIndex",
@@ -2095,7 +2663,7 @@
     },
     {
         "name": "AddGumpIgnoreByID",
-        "id": 230,
+        "id": 398,
         "args": [
             {
                 "name": "ID",
@@ -2106,7 +2674,7 @@
     },
     {
         "name": "AddGumpIgnoreBySerial",
-        "id": 231,
+        "id": 399,
         "args": [
             {
                 "name": "Serial",
@@ -2117,13 +2685,13 @@
     },
     {
         "name": "ClearGumpsIgnore",
-        "id": 232,
+        "id": 400,
         "args": [],
         "result": "None"
     },
     {
         "name": "ObjAtLayerEx",
-        "id": 233,
+        "id": 401,
         "args": [
             {
                 "name": "LayerType",
@@ -2138,7 +2706,7 @@
     },
     {
         "name": "GetLayer",
-        "id": 234,
+        "id": 402,
         "args": [
             {
                 "name": "ObjID",
@@ -2149,7 +2717,7 @@
     },
     {
         "name": "WearItem",
-        "id": 235,
+        "id": 403,
         "args": [
             {
                 "name": "Layer",
@@ -2164,13 +2732,13 @@
     },
     {
         "name": "GetDressSpeed",
-        "id": 236,
+        "id": 404,
         "args": [],
         "result": "U16"
     },
     {
         "name": "SetDressSpeed",
-        "id": 237,
+        "id": 405,
         "args": [
             {
                 "name": "Value",
@@ -2181,19 +2749,37 @@
     },
     {
         "name": "SetDress",
-        "id": 238,
+        "id": 406,
         "args": [],
         "result": "None"
     },
     {
         "name": "GetDressSet",
-        "id": 239,
+        "id": 407,
         "args": [],
         "result": "list[LayerObject]"
     },
     {
+        "name": "UnequipItemsSetMacro",
+        "id": 408,
+        "args": [],
+        "result": "None"
+    },
+    {
+        "name": "EquipItemsSetMacro",
+        "id": 409,
+        "args": [],
+        "result": "None"
+    },
+    {
+        "name": "EquipLastWeapon",
+        "id": 410,
+        "args": [],
+        "result": "None"
+    },
+    {
         "name": "AutoBuy",
-        "id": 240,
+        "id": 411,
         "args": [
             {
                 "name": "ItemType",
@@ -2212,19 +2798,19 @@
     },
     {
         "name": "GetShopList",
-        "id": 241,
+        "id": 412,
         "args": [],
         "result": "list[String]"
     },
     {
         "name": "ClearShopList",
-        "id": 242,
+        "id": 413,
         "args": [],
         "result": "None"
     },
     {
         "name": "AutoBuyEx",
-        "id": 243,
+        "id": 414,
         "args": [
             {
                 "name": "ItemType",
@@ -2251,13 +2837,13 @@
     },
     {
         "name": "GetAutoBuyDelay",
-        "id": 244,
+        "id": 415,
         "args": [],
         "result": "U16"
     },
     {
         "name": "SetAutoBuyDelay",
-        "id": 245,
+        "id": 416,
         "args": [
             {
                 "name": "Value",
@@ -2268,13 +2854,13 @@
     },
     {
         "name": "GetAutoSellDelay",
-        "id": 246,
+        "id": 417,
         "args": [],
         "result": "U16"
     },
     {
         "name": "SetAutoSellDelay",
-        "id": 247,
+        "id": 418,
         "args": [
             {
                 "name": "Value",
@@ -2285,7 +2871,7 @@
     },
     {
         "name": "AutoSell",
-        "id": 248,
+        "id": 419,
         "args": [
             {
                 "name": "ItemType",
@@ -2303,31 +2889,8 @@
         "result": "None"
     },
     {
-        "name": "RequestStats",
-        "id": 249,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "HelpRequest",
-        "id": 250,
-        "args": [],
-        "result": "None"
-    },
-    {
-        "name": "QuestRequest",
-        "id": 251,
-        "args": [],
-        "result": "None"
-    },
-    {
         "name": "RenameMobile",
-        "id": 252,
+        "id": 420,
         "args": [
             {
                 "name": "MobID",
@@ -2342,7 +2905,7 @@
     },
     {
         "name": "MobileCanBeRenamed",
-        "id": 253,
+        "id": 421,
         "args": [
             {
                 "name": "MobID",
@@ -2352,97 +2915,8 @@
         "result": "Bool"
     },
     {
-        "name": "SetStatState",
-        "id": 254,
-        "args": [
-            {
-                "name": "statNum",
-                "type": "U8"
-            },
-            {
-                "name": "statState",
-                "type": "U8"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "GetStaticArt",
-        "id": 255,
-        "args": [
-            {
-                "name": "ObjType",
-                "type": "U32"
-            },
-            {
-                "name": "Hue",
-                "type": "U16"
-            }
-        ],
-        "result": "list[U8]"
-    },
-    {
-        "name": "PrintScriptMethodsList",
-        "id": 256,
-        "args": [
-            {
-                "name": "FileName",
-                "type": "String"
-            },
-            {
-                "name": "SortedList",
-                "type": "Bool"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "SetAlarm",
-        "id": 257,
-        "args": [],
-        "result": "None"
-    },
-    {
-        "name": "HTTP_Get",
-        "id": 258,
-        "args": [
-            {
-                "name": "URL",
-                "type": "String"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "HTTP_Post",
-        "id": 259,
-        "args": [
-            {
-                "name": "URL",
-                "type": "String"
-            },
-            {
-                "name": "PostData",
-                "type": "String"
-            }
-        ],
-        "result": "String"
-    },
-    {
-        "name": "HTTP_Body",
-        "id": 260,
-        "args": [],
-        "result": "String"
-    },
-    {
-        "name": "HTTP_Header",
-        "id": 261,
-        "args": [],
-        "result": "String"
-    },
-    {
         "name": "InviteToParty",
-        "id": 262,
+        "id": 422,
         "args": [
             {
                 "name": "ObjID",
@@ -2453,7 +2927,7 @@
     },
     {
         "name": "RemoveFromParty",
-        "id": 263,
+        "id": 423,
         "args": [
             {
                 "name": "ObjID",
@@ -2464,7 +2938,7 @@
     },
     {
         "name": "PartyPrivateMessageTo",
-        "id": 264,
+        "id": 424,
         "args": [
             {
                 "name": "ObjID",
@@ -2479,7 +2953,7 @@
     },
     {
         "name": "PartySay",
-        "id": 265,
+        "id": 425,
         "args": [
             {
                 "name": "Msg",
@@ -2490,7 +2964,7 @@
     },
     {
         "name": "PartyCanLootMe",
-        "id": 266,
+        "id": 426,
         "args": [
             {
                 "name": "Value",
@@ -2501,37 +2975,37 @@
     },
     {
         "name": "PartyAcceptInvite",
-        "id": 267,
+        "id": 427,
         "args": [],
         "result": "None"
     },
     {
         "name": "PartyDeclineInvite",
-        "id": 268,
+        "id": 428,
         "args": [],
         "result": "None"
     },
     {
         "name": "PartyLeave",
-        "id": 269,
+        "id": 429,
         "args": [],
         "result": "None"
     },
     {
         "name": "PartyMembersList",
-        "id": 270,
+        "id": 430,
         "args": [],
         "result": "list[U32]"
     },
     {
         "name": "InParty",
-        "id": 271,
+        "id": 431,
         "args": [],
         "result": "Bool"
     },
     {
         "name": "GetTileFlags",
-        "id": 278,
+        "id": 432,
         "args": [
             {
                 "name": "Group",
@@ -2546,7 +3020,7 @@
     },
     {
         "name": "GetLandTileData",
-        "id": 280,
+        "id": 433,
         "args": [
             {
                 "name": "Tile",
@@ -2557,7 +3031,7 @@
     },
     {
         "name": "GetStaticTileData",
-        "id": 281,
+        "id": 434,
         "args": [
             {
                 "name": "Tile",
@@ -2568,7 +3042,7 @@
     },
     {
         "name": "GetLayerCount",
-        "id": 282,
+        "id": 435,
         "args": [
             {
                 "name": "x",
@@ -2587,7 +3061,7 @@
     },
     {
         "name": "ReadStaticsXY",
-        "id": 283,
+        "id": 436,
         "args": [
             {
                 "name": "X",
@@ -2606,7 +3080,7 @@
     },
     {
         "name": "GetSurfaceZ",
-        "id": 284,
+        "id": 437,
         "args": [
             {
                 "name": "X",
@@ -2625,7 +3099,7 @@
     },
     {
         "name": "IsWorldCellPassable",
-        "id": 285,
+        "id": 438,
         "args": [
             {
                 "name": "CurrX",
@@ -2660,7 +3134,7 @@
     },
     {
         "name": "GetStaticTilesArray",
-        "id": 286,
+        "id": 439,
         "args": [
             {
                 "name": "Xmin",
@@ -2691,7 +3165,7 @@
     },
     {
         "name": "GetLandTilesArray",
-        "id": 287,
+        "id": 440,
         "args": [
             {
                 "name": "Xmin",
@@ -2721,8 +3195,79 @@
         "result": "list[FoundTile]"
     },
     {
+        "name": "GetCell",
+        "id": 441,
+        "args": [
+            {
+                "name": "X",
+                "type": "U16"
+            },
+            {
+                "name": "Y",
+                "type": "U16"
+            },
+            {
+                "name": "WorldNum",
+                "type": "U8"
+            }
+        ],
+        "result": "MapCell"
+    },
+    {
+        "name": "ConvertIntegerToFlags",
+        "id": 442,
+        "args": [
+            {
+                "name": "Group",
+                "type": "U8"
+            },
+            {
+                "name": "Flags",
+                "type": "U32"
+            }
+        ],
+        "result": "list[String]"
+    },
+    {
+        "name": "GetStaticArt",
+        "id": 443,
+        "args": [
+            {
+                "name": "ObjType",
+                "type": "U32"
+            },
+            {
+                "name": "Hue",
+                "type": "U16"
+            }
+        ],
+        "result": "list[U8]"
+    },
+    {
+        "name": "CloseClientGump",
+        "id": 444,
+        "args": [
+            {
+                "name": "ID",
+                "type": "U32"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "ClientHide",
+        "id": 445,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "Bool"
+    },
+    {
         "name": "ClientPrint",
-        "id": 289,
+        "id": 446,
         "args": [
             {
                 "name": "Text",
@@ -2733,7 +3278,7 @@
     },
     {
         "name": "ClientPrintEx",
-        "id": 290,
+        "id": 447,
         "args": [
             {
                 "name": "SenderID",
@@ -2756,7 +3301,7 @@
     },
     {
         "name": "CloseClientUIWindow",
-        "id": 291,
+        "id": 448,
         "args": [
             {
                 "name": "UIWindowType",
@@ -2771,55 +3316,55 @@
     },
     {
         "name": "ClientRequestObjectTarget",
-        "id": 292,
+        "id": 449,
         "args": [],
         "result": "None"
     },
     {
         "name": "ClientRequestTileTarget",
-        "id": 293,
+        "id": 450,
         "args": [],
         "result": "None"
     },
     {
         "name": "ClientTargetResponsePresent",
-        "id": 294,
+        "id": 451,
         "args": [],
         "result": "Bool"
     },
     {
         "name": "ClientTargetResponse",
-        "id": 295,
+        "id": 452,
         "args": [],
         "result": "TargetInfo"
     },
     {
         "name": "CheckLagBegin",
-        "id": 297,
+        "id": 453,
         "args": [],
         "result": "None"
     },
     {
         "name": "CheckLagEnd",
-        "id": 298,
+        "id": 454,
         "args": [],
         "result": "None"
     },
     {
         "name": "IsCheckLagEnd",
-        "id": 299,
+        "id": 455,
         "args": [],
         "result": "Bool"
     },
     {
         "name": "GetQuestArrow",
-        "id": 300,
+        "id": 456,
         "args": [],
         "result": "Point"
     },
     {
         "name": "SetSilentMode",
-        "id": 301,
+        "id": 457,
         "args": [
             {
                 "name": "Value",
@@ -2830,53 +3375,13 @@
     },
     {
         "name": "GetSilentMode",
-        "id": 302,
+        "id": 458,
         "args": [],
         "result": "Bool"
     },
     {
-        "name": "FillInfoWindow",
-        "id": 303,
-        "args": [
-            {
-                "name": "s",
-                "type": "String"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "AddToJournal",
-        "id": 304,
-        "args": [
-            {
-                "name": "Text",
-                "type": "String"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "StealthPath",
-        "id": 305,
-        "args": [],
-        "result": "String"
-    },
-    {
-        "name": "StealthProfilePath",
-        "id": 306,
-        "args": [],
-        "result": "String"
-    },
-    {
-        "name": "ShardPath",
-        "id": 307,
-        "args": [],
-        "result": "String"
-    },
-    {
         "name": "UOSay",
-        "id": 308,
+        "id": 459,
         "args": [
             {
                 "name": "Text",
@@ -2887,7 +3392,7 @@
     },
     {
         "name": "UOSayColor",
-        "id": 309,
+        "id": 460,
         "args": [
             {
                 "name": "Text",
@@ -2901,42 +3406,8 @@
         "result": "None"
     },
     {
-        "name": "SetGlobal",
-        "id": 310,
-        "args": [
-            {
-                "name": "GlobalRegion",
-                "type": "U8"
-            },
-            {
-                "name": "VarName",
-                "type": "String"
-            },
-            {
-                "name": "VarValue",
-                "type": "String"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "GetGlobal",
-        "id": 311,
-        "args": [
-            {
-                "name": "GlobalRegion",
-                "type": "U8"
-            },
-            {
-                "name": "VarName",
-                "type": "String"
-            }
-        ],
-        "result": "String"
-    },
-    {
         "name": "ConsoleEntryReply",
-        "id": 312,
+        "id": 461,
         "args": [
             {
                 "name": "Text",
@@ -2947,7 +3418,7 @@
     },
     {
         "name": "ConsoleEntryUnicodeReply",
-        "id": 313,
+        "id": 462,
         "args": [
             {
                 "name": "Text",
@@ -2957,8 +3428,151 @@
         "result": "None"
     },
     {
+        "name": "PredictedX",
+        "id": 463,
+        "args": [],
+        "result": "U16"
+    },
+    {
+        "name": "PredictedY",
+        "id": 464,
+        "args": [],
+        "result": "U16"
+    },
+    {
+        "name": "PredictedZ",
+        "id": 465,
+        "args": [],
+        "result": "I8"
+    },
+    {
+        "name": "PredictedDirection",
+        "id": 466,
+        "args": [],
+        "result": "U8"
+    },
+    {
+        "name": "SetMoveOpenDoor",
+        "id": 467,
+        "args": [
+            {
+                "name": "Value",
+                "type": "Bool"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "GetMoveOpenDoor",
+        "id": 468,
+        "args": [],
+        "result": "Bool"
+    },
+    {
+        "name": "SetMoveThroughNPC",
+        "id": 469,
+        "args": [
+            {
+                "name": "Value",
+                "type": "U16"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "GetMoveThroughNPC",
+        "id": 470,
+        "args": [],
+        "result": "U16"
+    },
+    {
+        "name": "SetMoveThroughCorner",
+        "id": 471,
+        "args": [
+            {
+                "name": "Value",
+                "type": "Bool"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "GetMoveThroughCorner",
+        "id": 472,
+        "args": [],
+        "result": "Bool"
+    },
+    {
+        "name": "SetMoveHeuristicMult",
+        "id": 473,
+        "args": [
+            {
+                "name": "Value",
+                "type": "I32"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "GetMoveHeuristicMult",
+        "id": 474,
+        "args": [],
+        "result": "I32"
+    },
+    {
+        "name": "SetMoveCheckStamina",
+        "id": 475,
+        "args": [
+            {
+                "name": "Value",
+                "type": "U16"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "GetMoveCheckStamina",
+        "id": 476,
+        "args": [],
+        "result": "U16"
+    },
+    {
+        "name": "SetMoveTurnCost",
+        "id": 477,
+        "args": [
+            {
+                "name": "Value",
+                "type": "I32"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "GetMoveTurnCost",
+        "id": 478,
+        "args": [],
+        "result": "I32"
+    },
+    {
+        "name": "SetMoveBetweenTwoCorners",
+        "id": 479,
+        "args": [
+            {
+                "name": "Value",
+                "type": "Bool"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "GetMoveBetweenTwoCorners",
+        "id": 480,
+        "args": [],
+        "result": "Bool"
+    },
+    {
         "name": "SetRunUnmountTimer",
-        "id": 316,
+        "id": 481,
         "args": [
             {
                 "name": "Value",
@@ -2969,7 +3583,7 @@
     },
     {
         "name": "SetWalkMountTimer",
-        "id": 317,
+        "id": 482,
         "args": [
             {
                 "name": "Value",
@@ -2980,7 +3594,7 @@
     },
     {
         "name": "SetRunMountTimer",
-        "id": 318,
+        "id": 483,
         "args": [
             {
                 "name": "Value",
@@ -2991,7 +3605,7 @@
     },
     {
         "name": "SetWalkUnmountTimer",
-        "id": 319,
+        "id": 484,
         "args": [
             {
                 "name": "Value",
@@ -3002,31 +3616,62 @@
     },
     {
         "name": "GetRunMountTimer",
-        "id": 320,
+        "id": 485,
         "args": [],
         "result": "U16"
     },
     {
         "name": "GetWalkMountTimer",
-        "id": 321,
+        "id": 486,
         "args": [],
         "result": "U16"
     },
     {
         "name": "GetRunUnmountTimer",
-        "id": 322,
+        "id": 487,
         "args": [],
         "result": "U16"
     },
     {
         "name": "GetWalkUnmountTimer",
-        "id": 323,
+        "id": 488,
         "args": [],
         "result": "U16"
     },
     {
+        "name": "GetNextStepZ",
+        "id": 489,
+        "args": [
+            {
+                "name": "CurrX",
+                "type": "U16"
+            },
+            {
+                "name": "CurrY",
+                "type": "U16"
+            },
+            {
+                "name": "DestX",
+                "type": "U16"
+            },
+            {
+                "name": "DestY",
+                "type": "U16"
+            },
+            {
+                "name": "WorldNum",
+                "type": "U8"
+            },
+            {
+                "name": "CurrZ",
+                "type": "I8"
+            }
+        ],
+        "result": "I8"
+    },
+    {
         "name": "Step",
-        "id": 324,
+        "id": 490,
         "args": [
             {
                 "name": "Direction",
@@ -3041,7 +3686,7 @@
     },
     {
         "name": "StepQ",
-        "id": 325,
+        "id": 491,
         "args": [
             {
                 "name": "Direction",
@@ -3056,7 +3701,7 @@
     },
     {
         "name": "MoveXYZ",
-        "id": 326,
+        "id": 492,
         "args": [
             {
                 "name": "Xdst",
@@ -3087,7 +3732,7 @@
     },
     {
         "name": "MoveXY",
-        "id": 327,
+        "id": 493,
         "args": [
             {
                 "name": "Xdst",
@@ -3114,7 +3759,7 @@
     },
     {
         "name": "SetBadLocation",
-        "id": 328,
+        "id": 494,
         "args": [
             {
                 "name": "X",
@@ -3129,7 +3774,7 @@
     },
     {
         "name": "SetGoodLocation",
-        "id": 329,
+        "id": 495,
         "args": [
             {
                 "name": "X",
@@ -3144,13 +3789,13 @@
     },
     {
         "name": "ClearBadLocationList",
-        "id": 330,
+        "id": 496,
         "args": [],
         "result": "None"
     },
     {
         "name": "SetBadObject",
-        "id": 331,
+        "id": 497,
         "args": [
             {
                 "name": "ObjType",
@@ -3169,13 +3814,13 @@
     },
     {
         "name": "ClearBadObjectList",
-        "id": 332,
+        "id": 498,
         "args": [],
         "result": "None"
     },
     {
         "name": "CheckLOS",
-        "id": 333,
+        "id": 499,
         "args": [
             {
                 "name": "Xfrom",
@@ -3210,7 +3855,7 @@
     },
     {
         "name": "GetPathArray",
-        "id": 334,
+        "id": 500,
         "args": [
             {
                 "name": "Xdst",
@@ -3233,7 +3878,7 @@
     },
     {
         "name": "GetPathArray3D",
-        "id": 335,
+        "id": 501,
         "args": [
             {
                 "name": "StartX",
@@ -3279,150 +3924,254 @@
         "result": "list[WorldPoint]"
     },
     {
-        "name": "SetFindInNulPoint",
-        "id": 336,
-        "args": [
-            {
-                "name": "Value",
-                "type": "Bool"
-            }
-        ],
+        "name": "MoverStop",
+        "id": 502,
+        "args": [],
         "result": "None"
-    },
-    {
-        "name": "GetFindInNulPoint",
-        "id": 337,
-        "args": [],
-        "result": "Bool"
-    },
-    {
-        "name": "GetMenuItems",
-        "id": 338,
-        "args": [
-            {
-                "name": "Caption",
-                "type": "String"
-            }
-        ],
-        "result": "list[String]"
-    },
-    {
-        "name": "GetLastMenuItems",
-        "id": 339,
-        "args": [],
-        "result": "list[String]"
-    },
-    {
-        "name": "FindTypesArrayEx",
-        "id": 340,
-        "args": [
-            {
-                "name": "ObjTypes",
-                "type": "list[U16]"
-            },
-            {
-                "name": "Colors",
-                "type": "list[U16]"
-            },
-            {
-                "name": "Containers",
-                "type": "list[U32]"
-            },
-            {
-                "name": "InSub",
-                "type": "Bool"
-            }
-        ],
-        "result": "U32"
-    },
-    {
-        "name": "GameServerIPString",
-        "id": 341,
-        "args": [],
-        "result": "String"
-    },
-    {
-        "name": "CloseClientGump",
-        "id": 342,
-        "args": [
-            {
-                "name": "ID",
-                "type": "U32"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "ProfileShardName",
-        "id": 343,
-        "args": [],
-        "result": "String"
     },
     {
         "name": "GetLastStepQUsedDoor",
-        "id": 344,
+        "id": 503,
         "args": [],
         "result": "U32"
     },
     {
-        "name": "GetContextMenuRec",
-        "id": 345,
-        "args": [],
-        "result": "ContextMenuRec"
+        "name": "BookGetPageText",
+        "id": 504,
+        "args": [
+            {
+                "name": "Page",
+                "type": "U16"
+            }
+        ],
+        "result": "String"
     },
     {
-        "name": "ClearSystemJournal",
-        "id": 346,
+        "name": "BookSetText",
+        "id": 505,
+        "args": [
+            {
+                "name": "Text",
+                "type": "String"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "BookSetPageText",
+        "id": 506,
+        "args": [
+            {
+                "name": "Page",
+                "type": "U16"
+            },
+            {
+                "name": "Text",
+                "type": "String"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "BookClearText",
+        "id": 507,
+        "args": [],
+        "result": "None"
+    },
+    {
+        "name": "BookSetHeader",
+        "id": 508,
+        "args": [
+            {
+                "name": "Title",
+                "type": "String"
+            },
+            {
+                "name": "Author",
+                "type": "String"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "GlobalChatJoinChannel",
+        "id": 509,
+        "args": [
+            {
+                "name": "ChName",
+                "type": "String"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "GlobalChatLeaveChannel",
+        "id": 510,
+        "args": [],
+        "result": "None"
+    },
+    {
+        "name": "GlobalChatSendMsg",
+        "id": 511,
+        "args": [
+            {
+                "name": "MsgText",
+                "type": "String"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "GlobalChatActiveChannel",
+        "id": 512,
+        "args": [],
+        "result": "String"
+    },
+    {
+        "name": "GlobalChatChannelsList",
+        "id": 513,
+        "args": [],
+        "result": "list[String]"
+    },
+    {
+        "name": "FillInfoWindow",
+        "id": 514,
+        "args": [
+            {
+                "name": "s",
+                "type": "String"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "ClearInfoWindow",
+        "id": 515,
         "args": [],
         "result": "None"
     },
     {
         "name": "GetMultis",
-        "id": 347,
+        "id": 516,
         "args": [],
         "result": "list[Multi]"
     },
     {
-        "name": "ClearInfoWindow",
-        "id": 348,
+        "name": "GetMultiPartsAtPosition",
+        "id": 517,
+        "args": [
+            {
+                "name": "X",
+                "type": "U16"
+            },
+            {
+                "name": "Y",
+                "type": "U16"
+            }
+        ],
+        "result": "list[MultiPart]"
+    },
+    {
+        "name": "GetMultiAllParts",
+        "id": 518,
+        "args": [
+            {
+                "name": "MultiID",
+                "type": "U32"
+            }
+        ],
+        "result": "list[MultiPart]"
+    },
+    {
+        "name": "AddUserStatic",
+        "id": 519,
+        "args": [
+            {
+                "name": "StaticItem",
+                "type": "UserStaticItem"
+            },
+            {
+                "name": "WorldNum",
+                "type": "U8"
+            }
+        ],
+        "result": "I32"
+    },
+    {
+        "name": "RemoveUserStatic",
+        "id": 520,
+        "args": [
+            {
+                "name": "ID",
+                "type": "I32"
+            }
+        ],
+        "result": "Bool"
+    },
+    {
+        "name": "ClearUserStatics",
+        "id": 521,
         "args": [],
         "result": "None"
     },
     {
-        "name": "GetBuffBarInfo",
-        "id": 349,
-        "args": [],
-        "result": "list[BuffBarInfo]"
-    },
-    {
-        "name": "ConvertIntegerToFlags",
-        "id": 350,
+        "name": "AddFigure",
+        "id": 522,
         "args": [
             {
-                "name": "Group",
-                "type": "U8"
-            },
+                "name": "figure",
+                "type": "MapFigure"
+            }
+        ],
+        "result": "U32"
+    },
+    {
+        "name": "RemoveFigure",
+        "id": 523,
+        "args": [
             {
-                "name": "Flags",
+                "name": "FigureID",
                 "type": "U32"
             }
         ],
-        "result": "list[String]"
+        "result": "Bool"
     },
     {
-        "name": "GetSkillCurrentValue",
-        "id": 351,
+        "name": "UpdateFigure",
+        "id": 524,
         "args": [
             {
-                "name": "SkillID",
-                "type": "I32"
+                "name": "FigureID",
+                "type": "U32"
+            },
+            {
+                "name": "figure",
+                "type": "MapFigure"
             }
         ],
-        "result": "F64"
+        "result": "Bool"
+    },
+    {
+        "name": "ClearFigures",
+        "id": 525,
+        "args": [],
+        "result": "None"
+    },
+    {
+        "name": "GameServerIPString",
+        "id": 526,
+        "args": [],
+        "result": "String"
+    },
+    {
+        "name": "ProfileShardName",
+        "id": 527,
+        "args": [],
+        "result": "String"
     },
     {
         "name": "ExtChangeProfile",
-        "id": 352,
+        "id": 528,
         "args": [
             {
                 "name": "ProfileName",
@@ -3440,14 +4189,8 @@
         "result": "I32"
     },
     {
-        "name": "MoverStop",
-        "id": 353,
-        "args": [],
-        "result": "None"
-    },
-    {
         "name": "SetARExtParams",
-        "id": 354,
+        "id": 529,
         "args": [
             {
                 "name": "ShardName",
@@ -3465,163 +4208,8 @@
         "result": "None"
     },
     {
-        "name": "GetClientVersionInt",
-        "id": 355,
-        "args": [],
-        "result": "I32"
-    },
-    {
-        "name": "UnequipItemsSetMacro",
-        "id": 356,
-        "args": [],
-        "result": "None"
-    },
-    {
-        "name": "EquipItemsSetMacro",
-        "id": 357,
-        "args": [],
-        "result": "None"
-    },
-    {
-        "name": "GetMenuItemsEx",
-        "id": 358,
-        "args": [
-            {
-                "name": "Caption",
-                "type": "String"
-            }
-        ],
-        "result": "list[MenuItem]"
-    },
-    {
-        "name": "UseItemOnMobile",
-        "id": 359,
-        "args": [
-            {
-                "name": "ItemSerial",
-                "type": "U32"
-            },
-            {
-                "name": "TargetSerial",
-                "type": "U32"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "BandageSelf",
-        "id": 360,
-        "args": [],
-        "result": "None"
-    },
-    {
-        "name": "GlobalChatJoinChannel",
-        "id": 361,
-        "args": [
-            {
-                "name": "ChName",
-                "type": "String"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "GlobalChatLeaveChannel",
-        "id": 362,
-        "args": [],
-        "result": "None"
-    },
-    {
-        "name": "GlobalChatSendMsg",
-        "id": 363,
-        "args": [
-            {
-                "name": "MsgText",
-                "type": "String"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "GlobalChatActiveChannel",
-        "id": 364,
-        "args": [],
-        "result": "String"
-    },
-    {
-        "name": "GlobalChatChannelsList",
-        "id": 365,
-        "args": [],
-        "result": "list[String]"
-    },
-    {
-        "name": "GetNextStepZ",
-        "id": 366,
-        "args": [
-            {
-                "name": "CurrX",
-                "type": "U16"
-            },
-            {
-                "name": "CurrY",
-                "type": "U16"
-            },
-            {
-                "name": "DestX",
-                "type": "U16"
-            },
-            {
-                "name": "DestY",
-                "type": "U16"
-            },
-            {
-                "name": "WorldNum",
-                "type": "U8"
-            },
-            {
-                "name": "CurrZ",
-                "type": "I8"
-            }
-        ],
-        "result": "I8"
-    },
-    {
-        "name": "DumpObjectsCache",
-        "id": 367,
-        "args": [],
-        "result": "None"
-    },
-    {
-        "name": "ClientHide",
-        "id": 368,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "Bool"
-    },
-    {
-        "name": "GetSkillLockState",
-        "id": 369,
-        "args": [
-            {
-                "name": "SkillID",
-                "type": "I32"
-            }
-        ],
-        "result": "I8"
-    },
-    {
-        "name": "EquipLastWeapon",
-        "id": 370,
-        "args": [],
-        "result": "None"
-    },
-    {
         "name": "CreateChar",
-        "id": 371,
+        "id": 530,
         "args": [
             {
                 "name": "ProfileName",
@@ -3699,568 +4287,15 @@
         "result": "None"
     },
     {
-        "name": "GetStatLockState",
-        "id": 372,
-        "args": [
-            {
-                "name": "statNum",
-                "type": "I8"
-            }
-        ],
-        "result": "I8"
-    },
-    {
-        "name": "BookGetPageText",
-        "id": 373,
-        "args": [
-            {
-                "name": "Page",
-                "type": "U16"
-            }
-        ],
-        "result": "String"
-    },
-    {
-        "name": "BookSetText",
-        "id": 374,
-        "args": [
-            {
-                "name": "Text",
-                "type": "String"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "BookSetPageText",
-        "id": 375,
-        "args": [
-            {
-                "name": "Page",
-                "type": "U16"
-            },
-            {
-                "name": "Text",
-                "type": "String"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "BookClearText",
-        "id": 376,
+        "name": "GetCharsListForShard",
+        "id": 531,
         "args": [],
-        "result": "None"
+        "result": "list[String]"
     },
     {
-        "name": "BookSetHeader",
-        "id": 377,
-        "args": [
-            {
-                "name": "Title",
-                "type": "String"
-            },
-            {
-                "name": "Author",
-                "type": "String"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "GetMultiPartsAtPosition",
-        "id": 380,
-        "args": [
-            {
-                "name": "X",
-                "type": "U16"
-            },
-            {
-                "name": "Y",
-                "type": "U16"
-            }
-        ],
-        "result": "list[MultiPart]"
-    },
-    {
-        "name": "GetMultiAllParts",
-        "id": 381,
-        "args": [
-            {
-                "name": "MultiID",
-                "type": "U32"
-            }
-        ],
-        "result": "list[MultiPart]"
-    },
-    {
-        "name": "IsHouse",
-        "id": 382,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "Bool"
-    },
-    {
-        "name": "AddUserStatic",
-        "id": 383,
-        "args": [
-            {
-                "name": "StaticItem",
-                "type": "UserStaticItem"
-            },
-            {
-                "name": "WorldNum",
-                "type": "U8"
-            }
-        ],
-        "result": "I32"
-    },
-    {
-        "name": "RemoveUserStatic",
-        "id": 384,
-        "args": [
-            {
-                "name": "ID",
-                "type": "I32"
-            }
-        ],
-        "result": "Bool"
-    },
-    {
-        "name": "ClearUserStatics",
-        "id": 385,
-        "args": [],
-        "result": "None"
-    },
-    {
-        "name": "AddToSystemJournalEx",
-        "id": 386,
-        "args": [
-            {
-                "name": "value",
-                "type": "String"
-            },
-            {
-                "name": "textcolor",
-                "type": "I32"
-            },
-            {
-                "name": "bgcolor",
-                "type": "I32"
-            },
-            {
-                "name": "fontsize",
-                "type": "I32"
-            },
-            {
-                "name": "fontname",
-                "type": "String"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "GetStealthInfo",
-        "id": 387,
-        "args": [],
-        "result": "AboutData"
-    },
-    {
-        "name": "GetCell",
-        "id": 388,
-        "args": [
-            {
-                "name": "X",
-                "type": "U16"
-            },
-            {
-                "name": "Y",
-                "type": "U16"
-            },
-            {
-                "name": "WorldNum",
-                "type": "U8"
-            }
-        ],
-        "result": "MapCell"
-    },
-    {
-        "name": "TargetByResource",
-        "id": 389,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            },
-            {
-                "name": "Resource",
-                "type": "U16"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "GetPlayerStatusText",
-        "id": 390,
-        "args": [
-            {
-                "name": "ObjID",
-                "type": "U32"
-            }
-        ],
-        "result": "String"
-    },
-    {
-        "name": "SetMoveOpenDoor",
-        "id": 400,
-        "args": [
-            {
-                "name": "Value",
-                "type": "Bool"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "GetMoveOpenDoor",
-        "id": 401,
-        "args": [],
-        "result": "Bool"
-    },
-    {
-        "name": "SetMoveThroughNPC",
-        "id": 402,
-        "args": [
-            {
-                "name": "Value",
-                "type": "U16"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "GetMoveThroughNPC",
-        "id": 403,
-        "args": [],
-        "result": "U16"
-    },
-    {
-        "name": "SetMoveThroughCorner",
-        "id": 404,
-        "args": [
-            {
-                "name": "Value",
-                "type": "Bool"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "GetMoveThroughCorner",
-        "id": 405,
-        "args": [],
-        "result": "Bool"
-    },
-    {
-        "name": "SetMoveHeuristicMult",
-        "id": 406,
-        "args": [
-            {
-                "name": "Value",
-                "type": "I32"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "GetMoveHeuristicMult",
-        "id": 407,
+        "name": "GetClientVersionInt",
+        "id": 532,
         "args": [],
         "result": "I32"
-    },
-    {
-        "name": "SetMoveCheckStamina",
-        "id": 408,
-        "args": [
-            {
-                "name": "Value",
-                "type": "U16"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "GetMoveCheckStamina",
-        "id": 409,
-        "args": [],
-        "result": "U16"
-    },
-    {
-        "name": "SetMoveTurnCost",
-        "id": 410,
-        "args": [
-            {
-                "name": "Value",
-                "type": "I32"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "GetMoveTurnCost",
-        "id": 411,
-        "args": [],
-        "result": "I32"
-    },
-    {
-        "name": "SetMoveBetweenTwoCorners",
-        "id": 412,
-        "args": [
-            {
-                "name": "Value",
-                "type": "Bool"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "GetMoveBetweenTwoCorners",
-        "id": 413,
-        "args": [],
-        "result": "Bool"
-    },
-    {
-        "name": "GetScriptsCount",
-        "id": 450,
-        "args": [],
-        "result": "U16"
-    },
-    {
-        "name": "GetScriptPath",
-        "id": 451,
-        "args": [
-            {
-                "name": "ScriptIndex",
-                "type": "U16"
-            }
-        ],
-        "result": "String"
-    },
-    {
-        "name": "GetScriptState",
-        "id": 452,
-        "args": [
-            {
-                "name": "ScriptIndex",
-                "type": "U16"
-            }
-        ],
-        "result": "U8"
-    },
-    {
-        "name": "StartScript",
-        "id": 453,
-        "args": [
-            {
-                "name": "ScriptPath",
-                "type": "String"
-            }
-        ],
-        "result": "U16"
-    },
-    {
-        "name": "StopScript",
-        "id": 454,
-        "args": [
-            {
-                "name": "ScriptIndex",
-                "type": "U16"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "PauseResumeSelScript",
-        "id": 455,
-        "args": [
-            {
-                "name": "ScriptIndex",
-                "type": "U16"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "StopAllScripts",
-        "id": 456,
-        "args": [],
-        "result": "None"
-    },
-    {
-        "name": "SetScriptName",
-        "id": 457,
-        "args": [
-            {
-                "name": "ScriptIndex",
-                "type": "U16"
-            },
-            {
-                "name": "Value",
-                "type": "String"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "GetScriptName",
-        "id": 458,
-        "args": [
-            {
-                "name": "ScriptIndex",
-                "type": "U16"
-            }
-        ],
-        "result": "String"
-    },
-    {
-        "name": "GetScriptParams",
-        "id": 459,
-        "args": [],
-        "result": "U32"
-    },
-    {
-        "name": "GetScriptsList",
-        "id": 460,
-        "args": [],
-        "result": "list[ScriptInfo]"
-    },
-    {
-        "name": "Messenger_GetConnected",
-        "id": 501,
-        "args": [
-            {
-                "name": "MesID",
-                "type": "U8"
-            }
-        ],
-        "result": "Bool"
-    },
-    {
-        "name": "Messenger_SetConnected",
-        "id": 502,
-        "args": [
-            {
-                "name": "MesID",
-                "type": "U8"
-            },
-            {
-                "name": "Value",
-                "type": "Bool"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "Messenger_GetToken",
-        "id": 503,
-        "args": [
-            {
-                "name": "MesID",
-                "type": "U8"
-            }
-        ],
-        "result": "String"
-    },
-    {
-        "name": "Messenger_SetToken",
-        "id": 504,
-        "args": [
-            {
-                "name": "MesID",
-                "type": "U8"
-            },
-            {
-                "name": "Value",
-                "type": "String"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "Messenger_GetName",
-        "id": 505,
-        "args": [
-            {
-                "name": "MesID",
-                "type": "U8"
-            }
-        ],
-        "result": "String"
-    },
-    {
-        "name": "Messenger_SendMessage",
-        "id": 506,
-        "args": [
-            {
-                "name": "MesID",
-                "type": "U8"
-            },
-            {
-                "name": "Msg",
-                "type": "String"
-            },
-            {
-                "name": "UserID",
-                "type": "String"
-            }
-        ],
-        "result": "None"
-    },
-    {
-        "name": "AddFigure",
-        "id": 550,
-        "args": [
-            {
-                "name": "figure",
-                "type": "MapFigure"
-            }
-        ],
-        "result": "U32"
-    },
-    {
-        "name": "RemoveFigure",
-        "id": 551,
-        "args": [
-            {
-                "name": "FigureID",
-                "type": "U32"
-            }
-        ],
-        "result": "Bool"
-    },
-    {
-        "name": "UpdateFigure",
-        "id": 552,
-        "args": [
-            {
-                "name": "FigureID",
-                "type": "U32"
-            },
-            {
-                "name": "figure",
-                "type": "MapFigure"
-            }
-        ],
-        "result": "Bool"
-    },
-    {
-        "name": "ClearFigures",
-        "id": 553,
-        "args": [],
-        "result": "None"
     }
 ]

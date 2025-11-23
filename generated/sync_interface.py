@@ -108,6 +108,7 @@ class SyncInterface:
     def GetAutoSellDelay(self) -> int: pass
     def GetBuffBarInfo(self) -> list[BuffBarInfo]: pass
     def GetCell(self, X: int, Y: int, WorldNum: int) -> MapCell: pass
+    def GetCharsListForShard(self) -> list[str]: pass
     def GetClientVersionInt(self) -> int: pass
     def GetClilocByID(self, ClilocID: int) -> str: pass
     def GetColor(self, ID: int) -> int: pass
@@ -163,6 +164,8 @@ class SyncInterface:
     def GetName(self, ObjID: int) -> str: pass
     def GetNextStepZ(self, CurrX: int, CurrY: int, DestX: int, DestY: int, WorldNum: int, CurrZ: int) -> int: pass
     def GetNotoriety(self, ID: int) -> int: pass
+    def GetNow(self) -> datetime: pass
+    def GetNowUnix(self) -> int: pass
     def GetParent(self, ObjID: int) -> int: pass
     def GetPathArray(self, Xdst: int, Ydst: int, Optimized: bool, Accuracy: int) -> list[WorldPoint]: pass
     def GetPathArray3D(self, StartX: int, StartY: int, StartZ: int, FinishX: int, FinishY: int, FinishZ: int, WorldNum: int, AccuracyXY: int, AccuracyZ: int, Run: bool) -> list[WorldPoint]: pass
@@ -190,6 +193,7 @@ class SyncInterface:
     def GetSelfStam(self) -> int: pass
     def GetSelfStr(self) -> int: pass
     def GetShopList(self) -> list[str]: pass
+    def GetShowIPCExceptionWindow(self, Value: bool) -> float: pass
     def GetSilentMode(self) -> bool: pass
     def GetSkillCap(self, SkillID: int) -> float: pass
     def GetSkillCurrentValue(self, SkillID: int) -> float: pass
@@ -363,6 +367,7 @@ class SyncInterface:
     def SetRunMountTimer(self, Value: int) -> None: pass
     def SetRunUnmountTimer(self, Value: int) -> None: pass
     def SetScriptName(self, ScriptIndex: int, Value: str) -> None: pass
+    def SetShowIPCExceptionWindow(self) -> float: pass
     def SetSilentMode(self, Value: bool) -> None: pass
     def SetSkillLockState(self, SkillID: int, skillState: int) -> None: pass
     def SetStatState(self, statNum: int, statState: int) -> None: pass

@@ -108,6 +108,7 @@ class AsyncInterface:
     async def GetAutoSellDelay(self) -> int: pass
     async def GetBuffBarInfo(self) -> list[BuffBarInfo]: pass
     async def GetCell(self, X: int, Y: int, WorldNum: int) -> MapCell: pass
+    async def GetCharsListForShard(self) -> list[str]: pass
     async def GetClientVersionInt(self) -> int: pass
     async def GetClilocByID(self, ClilocID: int) -> str: pass
     async def GetColor(self, ID: int) -> int: pass
@@ -163,6 +164,8 @@ class AsyncInterface:
     async def GetName(self, ObjID: int) -> str: pass
     async def GetNextStepZ(self, CurrX: int, CurrY: int, DestX: int, DestY: int, WorldNum: int, CurrZ: int) -> int: pass
     async def GetNotoriety(self, ID: int) -> int: pass
+    async def GetNow(self) -> datetime: pass
+    async def GetNowUnix(self) -> int: pass
     async def GetParent(self, ObjID: int) -> int: pass
     async def GetPathArray(self, Xdst: int, Ydst: int, Optimized: bool, Accuracy: int) -> list[WorldPoint]: pass
     async def GetPathArray3D(self, StartX: int, StartY: int, StartZ: int, FinishX: int, FinishY: int, FinishZ: int, WorldNum: int, AccuracyXY: int, AccuracyZ: int, Run: bool) -> list[WorldPoint]: pass
@@ -190,6 +193,7 @@ class AsyncInterface:
     async def GetSelfStam(self) -> int: pass
     async def GetSelfStr(self) -> int: pass
     async def GetShopList(self) -> list[str]: pass
+    async def GetShowIPCExceptionWindow(self, Value: bool) -> float: pass
     async def GetSilentMode(self) -> bool: pass
     async def GetSkillCap(self, SkillID: int) -> float: pass
     async def GetSkillCurrentValue(self, SkillID: int) -> float: pass
@@ -363,6 +367,7 @@ class AsyncInterface:
     async def SetRunMountTimer(self, Value: int) -> None: pass
     async def SetRunUnmountTimer(self, Value: int) -> None: pass
     async def SetScriptName(self, ScriptIndex: int, Value: str) -> None: pass
+    async def SetShowIPCExceptionWindow(self) -> float: pass
     async def SetSilentMode(self, Value: bool) -> None: pass
     async def SetSkillLockState(self, SkillID: int, skillState: int) -> None: pass
     async def SetStatState(self, statNum: int, statState: int) -> None: pass

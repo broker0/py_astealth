@@ -106,6 +106,7 @@ async def GetAutoBuyDelay() -> int: pass
 async def GetAutoSellDelay() -> int: pass
 async def GetBuffBarInfo() -> list[BuffBarInfo]: pass
 async def GetCell(X: int, Y: int, WorldNum: int) -> MapCell: pass
+async def GetCharsListForShard() -> list[str]: pass
 async def GetClientVersionInt() -> int: pass
 async def GetClilocByID(ClilocID: int) -> str: pass
 async def GetColor(ID: int) -> int: pass
@@ -161,6 +162,8 @@ async def GetMultis() -> list[Multi]: pass
 async def GetName(ObjID: int) -> str: pass
 async def GetNextStepZ(CurrX: int, CurrY: int, DestX: int, DestY: int, WorldNum: int, CurrZ: int) -> int: pass
 async def GetNotoriety(ID: int) -> int: pass
+async def GetNow() -> datetime: pass
+async def GetNowUnix() -> int: pass
 async def GetParent(ObjID: int) -> int: pass
 async def GetPathArray(Xdst: int, Ydst: int, Optimized: bool, Accuracy: int) -> list[WorldPoint]: pass
 async def GetPathArray3D(StartX: int, StartY: int, StartZ: int, FinishX: int, FinishY: int, FinishZ: int, WorldNum: int, AccuracyXY: int, AccuracyZ: int, Run: bool) -> list[WorldPoint]: pass
@@ -188,6 +191,7 @@ async def GetSelfMaxStam() -> int: pass
 async def GetSelfStam() -> int: pass
 async def GetSelfStr() -> int: pass
 async def GetShopList() -> list[str]: pass
+async def GetShowIPCExceptionWindow(Value: bool) -> float: pass
 async def GetSilentMode() -> bool: pass
 async def GetSkillCap(SkillID: int) -> float: pass
 async def GetSkillCurrentValue(SkillID: int) -> float: pass
@@ -361,6 +365,7 @@ async def SetPickupedItem(ID: int) -> None: pass
 async def SetRunMountTimer(Value: int) -> None: pass
 async def SetRunUnmountTimer(Value: int) -> None: pass
 async def SetScriptName(ScriptIndex: int, Value: str) -> None: pass
+async def SetShowIPCExceptionWindow() -> float: pass
 async def SetSilentMode(Value: bool) -> None: pass
 async def SetSkillLockState(SkillID: int, skillState: int) -> None: pass
 async def SetStatState(statNum: int, statState: int) -> None: pass
