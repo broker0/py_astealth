@@ -4,8 +4,20 @@ from enum import IntEnum
 from dataclasses import dataclass
 from py_astealth.core.base_types import PrimitiveType, RPCType
 
-__all__ = ['Bool', 'U8', 'I8', 'U16', 'I16', 'U32', 'I32', 'U64', 'I64', 'F32', 'F64', 'DateTime', 'String', 'EventType', 'StealthEvent',
-           'Buffer', 'TypedTuple']
+__all__ = ['Buffer', 'Bool', 'U8', 'I8', 'U16', 'I16', 'U32', 'I32', 'U64', 'I64', 'F32', 'F64',
+           'DateTime', 'String', 'EventType', 'StealthEvent', 'TypedTuple']
+
+
+class Buffer(RPCType):
+    _mapping = bytes
+
+    @classmethod
+    def pack_simple_value(cls, stream: BinaryIO, value: Any):
+        stream.write(value)
+
+    @classmethod
+    def unpack_simple_value(cls, stream: BinaryIO) -> Any:
+        return stream.read()
 
 
 class Bool(PrimitiveType):
@@ -102,18 +114,6 @@ class String(RPCType):
         # cls.mapping is not used here either, so decode returns a string
         decoded_value = data.decode(cls.STEALTH_CODEC)
         return decoded_value
-
-
-class Buffer(RPCType):
-    _mapping = bytes
-
-    @classmethod
-    def pack_simple_value(cls, stream: BinaryIO, value: Any):
-        stream.write(value)
-
-    @classmethod
-    def unpack_simple_value(cls, stream: BinaryIO) -> Any:
-        return stream.read()
 
 
 class EventType(IntEnum):

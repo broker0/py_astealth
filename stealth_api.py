@@ -62,7 +62,6 @@ class StealthApi(ApiSpecification):
     @ApiSpecification.method(24)
     def Disconnect(self) -> None: ...
 
-
     ####################################################################################################################
     # events
     ####################################################################################################################
@@ -194,8 +193,6 @@ class StealthApi(ApiSpecification):
 
     @ApiSpecification.method(321)
     def Dead(self) -> Bool: ...
-
-
 
     ####################################################################################################################
     # object information
@@ -334,8 +331,6 @@ class StealthApi(ApiSpecification):
 
     @ApiSpecification.method(234)
     def LastObject(self) -> U32: ...
-
-
 
     ####################################################################################################################
     # journal
@@ -635,7 +630,6 @@ class StealthApi(ApiSpecification):
     @ApiSpecification.method(498)
     def ClearBadObjectList(self) -> None: ...
 
-
     ####################################################################################################################
     # map, statics
     ####################################################################################################################
@@ -732,7 +726,6 @@ class StealthApi(ApiSpecification):
     @ApiSpecification.method(400)
     def ClearGumpsIgnore(self) -> None: ...
 
-
     ####################################################################################################################
     # menu
     ####################################################################################################################
@@ -816,7 +809,7 @@ class StealthApi(ApiSpecification):
 
     @ApiSpecification.method(77)
     def GetScriptsList(self) -> list[ScriptInfo]: ...
-    #
+
     ####################################################################################################################
     # map drawing
     ####################################################################################################################
@@ -927,7 +920,6 @@ class StealthApi(ApiSpecification):
 
     @ApiSpecification.method(279)
     def TargetByResource(self, ObjID: U32, Resource: U16) -> None: ...
-
 
     ####################################################################################################################
     # item manipulations
@@ -1217,7 +1209,6 @@ class StealthApi(ApiSpecification):
     @ApiSpecification.method(442)
     def ConvertIntegerToFlags(self, Group: U8, Flags: U32) -> list[String]: ...
 
-
     @ApiSpecification.method(367)
     def DumpObjectsCache(self) -> None: ...
 
@@ -1294,7 +1285,6 @@ class StealthApi(ApiSpecification):
     def UnequipItemsSetMacro(self) -> None: ...
     @ApiSpecification.method(409)
     def EquipItemsSetMacro(self) -> None: ...
-
     @ApiSpecification.method(530)
     def CreateChar(self,
                    ProfileName: String,
@@ -1306,6 +1296,7 @@ class StealthApi(ApiSpecification):
                    Skill1: String, Skill2: String, Skill3: String, Skill4: String,
                    SkillValue1: I32, SkillValue2: I32, SkillValue3: I32, SkillValue4: I32,
                    City: I8, Slot: U32) -> None: ...
+
     @ApiSpecification.method(40)
     def AddToSystemJournalEx(self, value: String, textcolor: I32, bgcolor: I32, fontsize: I32, fontname: String) -> None: ...
     @ApiSpecification.method(467)
