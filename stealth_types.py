@@ -4,7 +4,8 @@ from enum import IntEnum
 from dataclasses import dataclass
 from py_astealth.core.base_types import PrimitiveType, RPCType
 
-__all__ = ['Bool', 'U8', 'I8', 'U16', 'I16', 'U32', 'I32', 'U64', 'I64', 'F32', 'F64', 'DateTime', 'String', 'EventType', 'StealthEvent']
+__all__ = ['Bool', 'U8', 'I8', 'U16', 'I16', 'U32', 'I32', 'U64', 'I64', 'F32', 'F64', 'DateTime', 'String', 'EventType', 'StealthEvent',
+           'Buffer', 'TypedTuple']
 
 
 class Bool(PrimitiveType):
@@ -103,6 +104,18 @@ class String(RPCType):
         return decoded_value
 
 
+class Buffer(RPCType):
+    _mapping = bytes
+
+    @classmethod
+    def pack_simple_value(cls, stream: BinaryIO, value: Any):
+        stream.write(value)
+
+    @classmethod
+    def unpack_simple_value(cls, stream: BinaryIO) -> Any:
+        return stream.read()
+
+
 class EventType(IntEnum):
     EvItemInfo = 0
     EvItemDeleted = 1
@@ -152,3 +165,21 @@ class EventType(IntEnum):
 class StealthEvent:
     id: EventType
     arguments: list
+
+
+class TypedTuple(RPCType):
+    _mapping = tuple
+    TYPE_MAP = (String, U32, I32, U16, I16, U8, I8, Bool)
+
+    @classmethod
+    def unpack_simple_value(cls, stream: BinaryIO) -> list[Any]:
+        count = U8.unpack_simple_value(stream)
+        args = []
+        for _ in range(count):
+            arg_type_idx = U8.unpack_simple_value(stream)
+            if 0 <= arg_type_idx < len(TypedTuple.TYPE_MAP):
+                arg_type = TypedTuple.TYPE_MAP[arg_type_idx]
+                args.append(arg_type.unpack_simple_value(stream))
+            else:
+                raise ValueError(f"Unknown event argument type index: {arg_type_idx}")
+        return args

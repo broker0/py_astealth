@@ -65,8 +65,6 @@ class StealthRPCEncoder:
     Serialize and deserialize arguments, results and callbacks
     """
 
-    # encoding of event argument data types 0..7
-    EVENT_TYPES = (String, U32, I32, U16, I16, U8, I8, Bool)
 
     @staticmethod
     def encode_arguments(method_spec: MethodSpec, *args) -> bytes:
@@ -121,35 +119,12 @@ class StealthRPCEncoder:
         ret_type = method_spec.result.type
         return RPCType.unpack_value(stream, ret_type)
 
-    @staticmethod
-    def decode_event(stream: io.BytesIO) -> (EventType, list):
-        """
-        decode server events (callbacks) id and arguments
-        """
-        event_id, arg_count = U8.unpack_simple_value(stream), U8.unpack_simple_value(stream)
-
-        # read all event arguments from the stream
-        event_payload = []
-        for _ in range(arg_count):
-            arg_type = U8.unpack_simple_value(stream)
-            event_payload.append(StealthRPCEncoder.EVENT_TYPES[arg_type].unpack_simple_value(stream))
-
-        return EventType(event_id), event_payload
 
 
 class AsyncStealthClient(AsyncRPCClient):
     """
         implementation of a specific Stealth client protocol
     """
-
-    # possible types of packets from the server
-    class ServerMethod(IntEnum):
-        FUNCTION_RESULT = 1
-        STOP_SCRIPT = 2
-        CLIENT_VERSION = 3
-        TOGGLE_PAUSE = 4
-        EVENT = 6
-        REQ_SCRIPT_PATH = 9
 
     def __init__(self, host: str, port: int):
         self.host = host
@@ -161,13 +136,6 @@ class AsyncStealthClient(AsyncRPCClient):
         self.call_id = 0
         self._pending_replies: dict[int, asyncio.Future] = {}
         self.events: asyncio.Queue[StealthEvent] = asyncio.Queue()
-
-        self._handlers = {
-            self.ServerMethod.FUNCTION_RESULT: self._handle_function_result,
-            self.ServerMethod.EVENT: self._handle_event,
-            self.ServerMethod.STOP_SCRIPT: self._handle_stop_script,
-            self.ServerMethod.REQ_SCRIPT_PATH: self._handle_req_script_path,
-        }
 
     async def connect(self):
         """establishing a connection with the Stealth-client and sending a packet with the version of our protocol"""
@@ -244,37 +212,40 @@ class AsyncStealthClient(AsyncRPCClient):
             stream = io.BytesIO(payload)
             method_id = U16.unpack_simple_value(stream)
             
-            # First check if it's a known server method in StealthApi
-            method_spec = StealthApi.get_method_by_id(method_id)
-            if method_spec:
-                args = StealthRPCEncoder.decode_arguments(method_spec, stream)
-                handler_name = f"_handle_{method_spec.name}"
-                handler = getattr(self, handler_name, None)
-                if handler:
-                    handler(*args)
-                else:
-                    print(f"[Info] No handler for method: {method_spec.name} (ID: {method_id})")
-                return
+            # Handle known server methods
+            if method_id == StealthApi.FunctionResult.method_spec.id:
+                args = StealthRPCEncoder.decode_arguments(StealthApi.FunctionResult.method_spec, stream)
+                self._handle_FunctionResult(*args)
 
-            # Fallback for special cases or unmapped methods
-            method_enum = AsyncStealthClient.ServerMethod(method_id)
-            handler = self._handlers.get(method_enum)
-            if handler:
-                handler(stream)
+            elif method_id == StealthApi.StopScript.method_spec.id:
+                self._handle_StopScript()
+
+            elif method_id == StealthApi.Event.method_spec.id:
+                args = StealthRPCEncoder.decode_arguments(StealthApi.Event.method_spec, stream)
+                self._handle_Event(*args)
+
+            elif method_id == StealthApi.ReqScriptPath.method_spec.id:
+                self._handle_ReqScriptPath()
+            
             else:
-                print(f"[Info] Received packet of unknown or unhandled type: {method_enum.name}")
+                print(f"[Info] Received packet of unknown or unhandled type: ID {method_id}")
 
         except (struct.error, ValueError, KeyError) as e:
-            # KeyError - if an unknown PacketType arrives
             # struct.error, ValueError - if the packet is "broken" (unexpected end)
             print(f"[Error] Error parsing packet: {e}. Payload (hex): {payload.hex(' ')}")
             # TODO strict mode
             # raise ConnectionError("[Error] Error parsing packet: {e}. Payload (hex): {payload.hex(' ')}")
 
-    def _handle_FunctionResult(self, stream: io.BytesIO):
-        # This might be called if we add FunctionResult to StealthApi, 
-        # but for now it's handled by fallback or we need to rename the handler to match the spec name if we add it.
-        pass
+    def _handle_FunctionResult(self, call_id: int, result_payload: bytes):
+        if call_id in self._pending_replies:
+            future = self._pending_replies.pop(call_id)
+            future.set_result(result_payload)
+        else:
+            print(f"[Warning] Result received for unknown reply_id: {call_id}")
+
+    def _handle_Event(self, event_id: int, arguments: list):
+        event = StealthEvent(id=EventType(event_id), arguments=arguments)
+        self.events.put_nowait(event)
 
     def _handle_StopScript(self):
         print(f"[Info] Received StopScript, close connection, stopping client")
@@ -284,30 +255,6 @@ class AsyncStealthClient(AsyncRPCClient):
         script_name = os.path.realpath(sys.argv[0])
         packet = StealthRPCEncoder.encode_method(StealthApi.ScriptPath.method_spec, 0, script_name)
         self.send_packet(packet)
-
-    def _handle_function_result(self, stream: io.BytesIO):
-        call_id = U16.unpack_simple_value(stream)
-        if call_id in self._pending_replies:
-            future = self._pending_replies.pop(call_id)
-
-            # all that remains in the stream is the payload of the result
-            result_payload = stream.read()
-            future.set_result(result_payload)
-        else:
-            print(f"[Warning] Result received for unknown reply_id: {call_id}")
-
-    def _handle_event(self, stream: io.BytesIO):
-        event_id, event_payload = StealthRPCEncoder.decode_event(stream)
-        event = StealthEvent(id=event_id, arguments=event_payload)
-        self.events.put_nowait(event)
-
-    def _handle_stop_script(self, stream: io.BytesIO):
-        # Legacy handler, kept for fallback if needed, but logic moved to _handle_StopScript
-        self._handle_StopScript()
-
-    def _handle_req_script_path(self, stream: io.BytesIO):
-        # Legacy handler
-        self._handle_ReqScriptPath()
 
     @staticmethod
     def get_stealth_port(host: str = DEFAULT_STEALTH_HOST, port: int = DEFAULT_STEALTH_PORT) -> [str, int]:

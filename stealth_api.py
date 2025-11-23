@@ -14,8 +14,24 @@ class StealthApi(ApiSpecification):
     ####################################################################################################################
     # special callback methods
     ####################################################################################################################
+    @ApiSpecification.method(1)
+    def FunctionResult(self, CallId: U16, Result: Buffer) -> None:
+        pass
+
+    @ApiSpecification.method(2)
+    def StopScript(self) -> None:
+        pass
+
     @ApiSpecification.method(5)
     def LangVersion(self, Lang: U8, Major: U8, Minor: U8, Revision: U8, Build: U8):
+        pass
+
+    @ApiSpecification.method(6)
+    def Event(self, EventId: U8, Arguments: TypedTuple) -> None:
+        pass
+
+    @ApiSpecification.method(9)
+    def ReqScriptPath(self) -> None:
         pass
 
     @ApiSpecification.method(10)
@@ -25,13 +41,8 @@ class StealthApi(ApiSpecification):
     ####################################################################################################################
     # server methods (incoming)
     ####################################################################################################################
-    @ApiSpecification.method(2)
-    def StopScript(self) -> None:
-        pass
 
-    @ApiSpecification.method(9)
-    def ReqScriptPath(self) -> None:
-        pass
+
 
     ####################################################################################################################
     # connection management
