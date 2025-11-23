@@ -230,7 +230,6 @@ class LayerObject(StructType):
     ObjID: U32
 
 
-
 @StructType.register
 @dataclass
 class ContextMenuEntry(StructType):
@@ -238,6 +237,7 @@ class ContextMenuEntry(StructType):
     IntLocID: U32
     Flags: U16
     Color: U16
+
 
 @StructType.register
 @dataclass

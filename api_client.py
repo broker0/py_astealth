@@ -159,5 +159,3 @@ class SyncStealthApiClient(SyncInterface):
             return None
         except Exception as e:
             raise e
-
-
