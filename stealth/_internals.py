@@ -6,7 +6,7 @@ import atexit
 from py_astealth.api_client import AsyncStealthApiClient
 from py_astealth.core.api_specification import MethodSpec
 
-from py_astealth.stealth_client import get_stealth_port
+from py_astealth.utilites.connection import get_stealth_port
 
 
 class _ThreadLocalClientProxy:
