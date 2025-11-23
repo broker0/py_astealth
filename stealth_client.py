@@ -5,7 +5,6 @@ import socket
 import time
 import struct
 import sys
-from dataclasses import dataclass
 from enum import IntEnum
 from typing import Any
 
@@ -61,57 +60,6 @@ class AsyncStealthRPCProtocol(asyncio.Protocol):
     def close(self):
         if self.transport:
             self.transport.close()
-
-
-class EventType(IntEnum):
-    EvItemInfo = 0
-    EvItemDeleted = 1
-    EvSpeech = 2
-    EvDrawGamePlayer = 3
-    EvMoveRejection = 4
-    EvDrawContainer = 5
-    EvAddItemToContainer = 6
-    EvAddMultipleItemsInCont = 7
-    EvRejectMoveItem = 8
-    EvUpdateChar = 9
-    EvDrawObject = 10
-    EvMenu = 11
-    EvMapMessage = 12
-    EvAllowRefuseAttack = 13
-    EvClilocSpeech = 14
-    EvClilocSpeechAffix = 15
-    EvUnicodeSpeech = 16
-    EvBuffDebuffSystem = 17
-    EvClientSendResync = 18
-    EvCharAnimation = 19
-    EvIcqDisconnect = 20
-    EvIcqConnect = 21
-    EvIcqIncomingText = 22
-    EvIcqError = 23
-    EvIncomingGump = 24
-    EvTimer1 = 25
-    EvTimer2 = 26
-    EvWindowsMessage = 27
-    EvSound = 28
-    EvDeath = 29
-    EvQuestArrow = 30
-    EvPartyInvite = 31
-    EvMapPin = 32
-    EvGumpTextEntry = 33
-    EvGraphicalEffect = 34
-    EvIrcIncomingText = 35
-    EvMessengerEvent = 36
-    EvSetGlobalVar = 37
-    EvUpdateObjStats = 38
-    EvGlobalChat = 39
-    EvWarDamage = 40
-    EvContextMenu = 41
-
-
-@dataclass
-class StealthEvent:
-    id: EventType
-    arguments: list
 
 
 class StealthRPCEncoder:
