@@ -107,6 +107,16 @@ class ApiSpecification:
             if hasattr(member, 'method_spec')  # We are only interested in those who have 'method_spec' field
         ]
 
+    @classmethod
+    def get_method_by_id(cls, method_id: int) -> MethodSpec | None:
+        """
+        Find a method specification by its ID.
+        """
+        for spec in cls.get_methods():
+            if spec.id == method_id:
+                return spec
+        return None
+
 
     @classmethod
     def generate_json(cls, output_path):
