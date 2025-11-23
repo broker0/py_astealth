@@ -21,7 +21,7 @@ def classic_sync_stealth():
 
 
 async def modern_async_stealth():
-    client = AsyncStealthApiClient(*get_stealth_port())
+    client = AsyncStealthApiClient()
     await client.connect()
 
     start_time = datetime.now()
@@ -35,7 +35,7 @@ async def modern_async_stealth():
 
 
 def modern_sync_stealth():
-    client = SyncStealthApiClient(*get_stealth_port())
+    client = SyncStealthApiClient()
     client.connect()
 
     start_time = datetime.now()
@@ -49,7 +49,7 @@ def modern_sync_stealth():
 
 
 def modern_fast_sync_stealth():
-    client = SyncStealthApiClientFast(*get_stealth_port())
+    client = SyncStealthApiClientFast()
     client.connect()
 
     start_time = datetime.now()

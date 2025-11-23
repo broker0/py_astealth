@@ -5,11 +5,10 @@ import py_stealth
 import stealth
 from py_astealth.api_client import AsyncStealthApiClient
 from py_astealth.examples.example_lib import graceful_shutdown
-from py_astealth.utilites.connection import get_stealth_port
 
 
 class StealthBot(AsyncStealthApiClient):
-    def __init__(self, host, port):
+    def __init__(self, host: str = None, port: int = None):
         super().__init__(host, port)
         self._tasks = []
 
@@ -62,7 +61,7 @@ class StealthBot(AsyncStealthApiClient):
 
 
 async def main():
-    bot = StealthBot(*get_stealth_port())
+    bot = StealthBot()
     await bot.connect()
     await bot.run()
     bot.close()

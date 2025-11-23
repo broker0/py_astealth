@@ -6,7 +6,7 @@ from py_stealth.protocol import get_port
 
 
 def main():
-    client = SyncStealthApiClientFast("127.0.0.1", get_port())
+    client = SyncStealthApiClientFast()
     client.connect()
     client.SetEventCallback(EventType.EvSpeech)
     client.SetEventCallback(EventType.EvItemInfo)

@@ -5,7 +5,6 @@ from datetime import datetime
 from py_astealth.api_client import AsyncStealthApiClient
 from py_astealth.stealth_client import EventType
 from py_astealth.examples.example_lib import graceful_shutdown
-from py_stealth.protocol import get_port
 
 
 @graceful_shutdown
@@ -29,7 +28,7 @@ async def clicker(client: AsyncStealthApiClient):
 
 
 async def main():
-    client = AsyncStealthApiClient("127.0.0.1", get_port())
+    client = AsyncStealthApiClient()
     try:
         await client.connect()
         await client.SetEventCallback(EventType.EvSpeech)
