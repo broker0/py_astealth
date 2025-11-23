@@ -748,11 +748,11 @@ class StealthApi(ApiSpecification):
     ####################################################################################################################
 
     @ApiSpecification.method(438)
-    def IsWorldCellPassable(self, CurrX: U16, CurrY: U16, CurrZ: I16, DestX: U16, DestY: U16, DestZ: I16, WorldNum: U8) -> Bool:
+    def IsWorldCellPassable(self, CurrX: U16, CurrY: U16, CurrZ: I8, DestX: U16, DestY: U16, DestZ: I8, WorldNum: U8) -> Bool:
         pass
 
     @ApiSpecification.method(499)
-    def CheckLOS(self, Xfrom: U16, Yfrom: U16, Zfrom: I16, Xto: I32, Yto: I32, Zto: I16, WorldNum: U8) -> Bool:
+    def CheckLOS(self, Xfrom: U16, Yfrom: U16, Zfrom: I8, Xto: I32, Yto: I32, Zto: I8, WorldNum: U8) -> Bool:
         pass
 
     @ApiSpecification.method(500)
@@ -1349,7 +1349,7 @@ class StealthApi(ApiSpecification):
         pass
 
     @ApiSpecification.method(520)
-    def RemoveUserStatic(self, ID: I32) -> Bool:
+    def RemoveUserStatic(self, StaticID: I32) -> Bool:
         pass
 
     @ApiSpecification.method(521)
@@ -1493,7 +1493,7 @@ class StealthApi(ApiSpecification):
         pass
 
     @ApiSpecification.method(253)
-    def GetStatLockState(self, statNum: I8) -> I8:
+    def GetStatLockState(self, statNum: U8) -> I8:
         pass
 
     @ApiSpecification.method(443)
