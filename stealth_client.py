@@ -1,11 +1,8 @@
 import asyncio
 import io
 import os
-import socket
-import time
 import struct
 import sys
-from enum import IntEnum
 from typing import Any
 
 from py_astealth.core.api_specification import MethodSpec
@@ -13,10 +10,7 @@ from py_astealth.core.base_types import RPCType
 from py_astealth.core.rpc_client import AsyncRPCClient
 from py_astealth.stealth_types import *
 from py_astealth.stealth_api import StealthApi
-
-
-from py_astealth.config import DEFAULT_STEALTH_HOST, DEFAULT_STEALTH_PORT, VERSION
-from py_astealth.utilites.connection import get_stealth_port
+from py_astealth.config import VERSION
 
 
 class AsyncStealthRPCProtocol(asyncio.Protocol):
@@ -64,7 +58,6 @@ class StealthRPCEncoder:
     """
     Serialize and deserialize arguments, results and callbacks
     """
-
 
     @staticmethod
     def encode_arguments(method_spec: MethodSpec, *args) -> bytes:
@@ -118,7 +111,6 @@ class StealthRPCEncoder:
         stream = io.BytesIO(payload)
         ret_type = method_spec.result.type
         return RPCType.unpack_value(stream, ret_type)
-
 
 
 class AsyncStealthClient(AsyncRPCClient):
@@ -255,7 +247,3 @@ class AsyncStealthClient(AsyncRPCClient):
         script_name = os.path.realpath(sys.argv[0])
         packet = StealthRPCEncoder.encode_method(StealthApi.ScriptPath.method_spec, 0, script_name)
         self.send_packet(packet)
-
-    @staticmethod
-    def get_stealth_port(host: str = DEFAULT_STEALTH_HOST, port: int = DEFAULT_STEALTH_PORT) -> [str, int]:
-        return get_stealth_port(host, port)

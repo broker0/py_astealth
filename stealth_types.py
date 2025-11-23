@@ -175,6 +175,7 @@ class TypedTuple(RPCType):
     def unpack_simple_value(cls, stream: BinaryIO) -> list[Any]:
         count = U8.unpack_simple_value(stream)
         args = []
+
         for _ in range(count):
             arg_type_idx = U8.unpack_simple_value(stream)
             if 0 <= arg_type_idx < len(TypedTuple.TYPE_MAP):
@@ -182,4 +183,5 @@ class TypedTuple(RPCType):
                 args.append(arg_type.unpack_simple_value(stream))
             else:
                 raise ValueError(f"Unknown event argument type index: {arg_type_idx}")
+
         return args
