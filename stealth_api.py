@@ -12,37 +12,35 @@ class StealthApi(ApiSpecification):
     """
 
     ####################################################################################################################
-    # special callback methods
+    # special and callback methods
     ####################################################################################################################
     @ApiSpecification.method(1)
-    def FunctionResult(self, CallId: U16, Result: Buffer) -> None:
+    def _FunctionResult(self, CallId: U16, Result: Buffer) -> None:
         pass
 
     @ApiSpecification.method(2)
-    def StopScript(self) -> None:
+    def _StopScript(self) -> None:
         pass
 
     @ApiSpecification.method(5)
-    def LangVersion(self, Lang: U8, Major: U8, Minor: U8, Revision: U8, Build: U8):
+    def _LangVersion(self, Lang: U8, Major: U8, Minor: U8, Revision: U8, Build: U8):
         pass
 
     @ApiSpecification.method(6)
-    def Event(self, EventId: U8, Arguments: TypedTuple) -> None:
+    def _EventCallback(self, EventId: U8, Arguments: TypedTuple) -> None:
         pass
 
     @ApiSpecification.method(9)
-    def ReqScriptPath(self) -> None:
+    def _ScriptPathRequest(self) -> None:
         pass
 
     @ApiSpecification.method(10)
-    def ScriptPath(self, ScriptName: String) -> None:
+    def _ScriptPath(self, ScriptName: String) -> None:
         pass
 
-    ####################################################################################################################
-    # server methods (incoming)
-    ####################################################################################################################
-
-
+    @ApiSpecification.method(11)
+    def _SelectProfile(self, ProfileName: String) -> None:
+        pass
 
     ####################################################################################################################
     # connection management
@@ -999,7 +997,7 @@ class StealthApi(ApiSpecification):
         pass
 
     @ApiSpecification.method(71)
-    def StopScript(self, ScriptIndex: U16) -> None:
+    def _StopScript(self, ScriptIndex: U16) -> None:
         pass
 
     @ApiSpecification.method(72)
