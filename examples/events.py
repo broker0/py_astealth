@@ -24,7 +24,7 @@ async def clicker(client: AsyncStealthApiClient):
         await asyncio.sleep(random.random()*3.0+2.0)
         # await client.FindTypeEx(0xFFFF, 0xFFFF, 0, True)
         # item = random.choice(await client.GetFindedList())
-        item = await client.GetSelfID()
+        item = await client.Self()
         await client.ClickOnObject(item)
 
 

@@ -2,7 +2,7 @@ import asyncio
 from datetime import datetime
 
 from py_astealth.api_client import AsyncStealthApiClient, SyncStealthApiClient, SyncStealthApiClientFast
-from py_astealth.stealth_client import get_stealth_port
+from py_astealth.utilites.connection import get_stealth_port
 import py_stealth as stealth
 
 from py_astealth import stealth as nstealth
