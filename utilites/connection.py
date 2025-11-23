@@ -7,13 +7,13 @@ import struct
 from py_astealth.config import DEFAULT_STEALTH_HOST, DEFAULT_STEALTH_PORT, SOCK_TIMEOUT, GET_PORT_ATTEMPT_COUNT
 
 
-def get_stealth_port(host: str = DEFAULT_STEALTH_HOST, port: int = DEFAULT_STEALTH_PORT) -> [str, int]:
+def get_stealth_port(host: str = DEFAULT_STEALTH_HOST, port: int = DEFAULT_STEALTH_PORT) -> int:
     """
     Synchronously retrieves the script port from the Stealth client.
     """
     # Check command line arguments first (standard behavior)
     if len(sys.argv) >= 3 and sys.argv[2].isdigit():
-        return host, int(sys.argv[2])
+        return int(sys.argv[2])
 
     for i in range(GET_PORT_ATTEMPT_COUNT):
         sock = None
@@ -46,7 +46,7 @@ def get_stealth_port(host: str = DEFAULT_STEALTH_HOST, port: int = DEFAULT_STEAL
 
             if len(payload_data) >= 2:
                 script_port = struct.unpack_from('<H', payload_data, 0)[0]
-                return host, script_port
+                return script_port
 
         except (OSError, struct.error, ConnectionError):
             # If we can't connect to the main Stealth port, we can't get the script port
@@ -68,13 +68,13 @@ def get_stealth_port(host: str = DEFAULT_STEALTH_HOST, port: int = DEFAULT_STEAL
     raise RuntimeError("Failed to retrieve script port from Stealth")
 
 
-async def async_get_stealth_port(host: str = DEFAULT_STEALTH_HOST, port: int = DEFAULT_STEALTH_PORT) -> [str, int]:
+async def async_get_stealth_port(host: str = DEFAULT_STEALTH_HOST, port: int = DEFAULT_STEALTH_PORT) -> int:
     """
     Asynchronously retrieves the script port from the Stealth client.
     """
     # Check command line arguments first (standard behavior)
     if len(sys.argv) >= 3 and sys.argv[2].isdigit():
-        return host, int(sys.argv[2])
+        return int(sys.argv[2])
 
     for i in range(GET_PORT_ATTEMPT_COUNT):
         reader = None
@@ -101,7 +101,7 @@ async def async_get_stealth_port(host: str = DEFAULT_STEALTH_HOST, port: int = D
 
             if len(payload_data) >= 2:
                 script_port = struct.unpack_from('<H', payload_data, 0)[0]
-                return host, script_port
+                return script_port
 
         except (OSError, struct.error, asyncio.TimeoutError, asyncio.IncompleteReadError):
             # If we can't connect to the main Stealth port, we can't get the script port

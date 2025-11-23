@@ -10,7 +10,8 @@ from py_astealth.core.base_types import RPCType
 from py_astealth.core.rpc_client import AsyncRPCClient
 from py_astealth.stealth_types import *
 from py_astealth.stealth_api import StealthApi
-from py_astealth.config import VERSION
+from py_astealth.config import VERSION, DEFAULT_STEALTH_HOST
+from py_astealth.utilites.connection import async_get_stealth_port
 
 
 class AsyncStealthRPCProtocol(asyncio.Protocol):
@@ -118,7 +119,7 @@ class AsyncStealthClient(AsyncRPCClient):
         implementation of a specific Stealth client protocol
     """
 
-    def __init__(self, host: str, port: int):
+    def __init__(self, host: str = None, port: int = None):
         self.host = host
         self.port = port
         self._transport = None
@@ -129,8 +130,14 @@ class AsyncStealthClient(AsyncRPCClient):
         self._pending_replies: dict[int, asyncio.Future] = {}
         self.events: asyncio.Queue[StealthEvent] = asyncio.Queue()
 
-    async def connect(self):
+    async def connect(self, profile: str = None):
         """establishing a connection with the Stealth-client and sending a packet with the version of our protocol"""
+        if self.host is None:
+            self.host = DEFAULT_STEALTH_HOST
+
+        if self.port is None:
+            self.port = await async_get_stealth_port(self.host)
+
         loop = asyncio.get_running_loop()
         try:
             self._transport, self._protocol = await loop.create_connection(
@@ -141,6 +148,9 @@ class AsyncStealthClient(AsyncRPCClient):
             # packet = StealthRPCEncoder.encode_method(StealthApi.LangVersion.method_spec, 0, 1, *VERSION)
             # self.send_packet(packet)
             await self.call_method(StealthApi._LangVersion.method_spec, 1, *VERSION)
+
+            if profile is not None:
+                await self.call_method(StealthApi._SelectProfile.method_spec, profile)
 
         except ConnectionRefusedError:
             print(f"Unable to connect to {self.host}:{self.port}. Connection refused.")

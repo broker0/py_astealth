@@ -52,9 +52,7 @@ class _StealthManager:
             if self._is_shutting_down:
                 raise RuntimeError("Stealth manager is shutting down.")
 
-            host, port = get_stealth_port()
-            print("port", port)
-            client = AsyncStealthApiClient(host, port)
+            client = AsyncStealthApiClient()
 
             future = asyncio.run_coroutine_threadsafe(client.connect(), self._loop)
             future.result(timeout=10)
