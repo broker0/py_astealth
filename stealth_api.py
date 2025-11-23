@@ -1427,11 +1427,11 @@ class StealthApi(ApiSpecification):
         pass
 
     @ApiSpecification.method(78)
-    def GetShowIPCExceptionWindow(self, Value: Bool) -> F64:
+    def GetShowIPCExceptionWindow(self) -> Bool:
         pass
 
     @ApiSpecification.method(79)
-    def SetShowIPCExceptionWindow(self) -> F64:
+    def SetShowIPCExceptionWindow(self, Value: Bool) -> None:
         pass
 
     @ApiSpecification.method(327)

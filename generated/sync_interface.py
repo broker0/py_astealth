@@ -193,7 +193,7 @@ class SyncInterface:
     def GetSelfStam(self) -> int: pass
     def GetSelfStr(self) -> int: pass
     def GetShopList(self) -> list[str]: pass
-    def GetShowIPCExceptionWindow(self, Value: bool) -> float: pass
+    def GetShowIPCExceptionWindow(self) -> bool: pass
     def GetSilentMode(self) -> bool: pass
     def GetSkillCap(self, SkillID: int) -> float: pass
     def GetSkillCurrentValue(self, SkillID: int) -> float: pass
@@ -367,7 +367,7 @@ class SyncInterface:
     def SetRunMountTimer(self, Value: int) -> None: pass
     def SetRunUnmountTimer(self, Value: int) -> None: pass
     def SetScriptName(self, ScriptIndex: int, Value: str) -> None: pass
-    def SetShowIPCExceptionWindow(self) -> float: pass
+    def SetShowIPCExceptionWindow(self, Value: bool) -> None: pass
     def SetSilentMode(self, Value: bool) -> None: pass
     def SetSkillLockState(self, SkillID: int, skillState: int) -> None: pass
     def SetStatState(self, statNum: int, statState: int) -> None: pass

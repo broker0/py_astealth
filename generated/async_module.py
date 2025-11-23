@@ -191,7 +191,7 @@ async def GetSelfMaxStam() -> int: pass
 async def GetSelfStam() -> int: pass
 async def GetSelfStr() -> int: pass
 async def GetShopList() -> list[str]: pass
-async def GetShowIPCExceptionWindow(Value: bool) -> float: pass
+async def GetShowIPCExceptionWindow() -> bool: pass
 async def GetSilentMode() -> bool: pass
 async def GetSkillCap(SkillID: int) -> float: pass
 async def GetSkillCurrentValue(SkillID: int) -> float: pass
@@ -365,7 +365,7 @@ async def SetPickupedItem(ID: int) -> None: pass
 async def SetRunMountTimer(Value: int) -> None: pass
 async def SetRunUnmountTimer(Value: int) -> None: pass
 async def SetScriptName(ScriptIndex: int, Value: str) -> None: pass
-async def SetShowIPCExceptionWindow() -> float: pass
+async def SetShowIPCExceptionWindow(Value: bool) -> None: pass
 async def SetSilentMode(Value: bool) -> None: pass
 async def SetSkillLockState(SkillID: int, skillState: int) -> None: pass
 async def SetStatState(statNum: int, statState: int) -> None: pass

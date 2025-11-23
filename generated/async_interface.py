@@ -193,7 +193,7 @@ class AsyncInterface:
     async def GetSelfStam(self) -> int: pass
     async def GetSelfStr(self) -> int: pass
     async def GetShopList(self) -> list[str]: pass
-    async def GetShowIPCExceptionWindow(self, Value: bool) -> float: pass
+    async def GetShowIPCExceptionWindow(self) -> bool: pass
     async def GetSilentMode(self) -> bool: pass
     async def GetSkillCap(self, SkillID: int) -> float: pass
     async def GetSkillCurrentValue(self, SkillID: int) -> float: pass
@@ -367,7 +367,7 @@ class AsyncInterface:
     async def SetRunMountTimer(self, Value: int) -> None: pass
     async def SetRunUnmountTimer(self, Value: int) -> None: pass
     async def SetScriptName(self, ScriptIndex: int, Value: str) -> None: pass
-    async def SetShowIPCExceptionWindow(self) -> float: pass
+    async def SetShowIPCExceptionWindow(self, Value: bool) -> None: pass
     async def SetSilentMode(self, Value: bool) -> None: pass
     async def SetSkillLockState(self, SkillID: int, skillState: int) -> None: pass
     async def SetStatState(self, statNum: int, statState: int) -> None: pass

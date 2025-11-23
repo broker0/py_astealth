@@ -569,19 +569,19 @@
     {
         "name": "GetShowIPCExceptionWindow",
         "id": 78,
+        "args": [],
+        "result": "Bool"
+    },
+    {
+        "name": "SetShowIPCExceptionWindow",
+        "id": 79,
         "args": [
             {
                 "name": "Value",
                 "type": "Bool"
             }
         ],
-        "result": "F64"
-    },
-    {
-        "name": "SetShowIPCExceptionWindow",
-        "id": 79,
-        "args": [],
-        "result": "F64"
+        "result": "None"
     },
     {
         "name": "Messenger_GetConnected",
