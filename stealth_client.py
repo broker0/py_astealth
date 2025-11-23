@@ -140,7 +140,7 @@ class AsyncStealthClient(AsyncRPCClient):
 
             # packet = StealthRPCEncoder.encode_method(StealthApi.LangVersion.method_spec, 0, 1, *VERSION)
             # self.send_packet(packet)
-            await self.call_method(StealthApi.LangVersion.method_spec, 1, *VERSION)
+            await self.call_method(StealthApi._LangVersion.method_spec, 1, *VERSION)
 
         except ConnectionRefusedError:
             print(f"Unable to connect to {self.host}:{self.port}. Connection refused.")
@@ -205,19 +205,19 @@ class AsyncStealthClient(AsyncRPCClient):
             method_id = U16.unpack_simple_value(stream)
             
             # Handle known server methods
-            if method_id == StealthApi.FunctionResult.method_spec.id:
-                args = StealthRPCEncoder.decode_arguments(StealthApi.FunctionResult.method_spec, stream)
+            if method_id == StealthApi._FunctionResult.method_spec.id:
+                args = StealthRPCEncoder.decode_arguments(StealthApi._FunctionResult.method_spec, stream)
                 self._handle_FunctionResult(*args)
 
-            elif method_id == StealthApi.StopScript.method_spec.id:
+            elif method_id == StealthApi._StopScript.method_spec.id:
                 self._handle_StopScript()
 
-            elif method_id == StealthApi.Event.method_spec.id:
-                args = StealthRPCEncoder.decode_arguments(StealthApi.Event.method_spec, stream)
-                self._handle_Event(*args)
+            elif method_id == StealthApi._EventCallback.method_spec.id:
+                args = StealthRPCEncoder.decode_arguments(StealthApi._EventCallback.method_spec, stream)
+                self._handle_EventCallback(*args)
 
-            elif method_id == StealthApi.ReqScriptPath.method_spec.id:
-                self._handle_ReqScriptPath()
+            elif method_id == StealthApi._ScriptPathRequest.method_spec.id:
+                self._handle_ScriptPathRequest()
             
             else:
                 print(f"[Info] Received packet of unknown or unhandled type: ID {method_id}")
@@ -235,7 +235,7 @@ class AsyncStealthClient(AsyncRPCClient):
         else:
             print(f"[Warning] Result received for unknown reply_id: {call_id}")
 
-    def _handle_Event(self, event_id: int, arguments: list):
+    def _handle_EventCallback(self, event_id: int, arguments: list):
         event = StealthEvent(id=EventType(event_id), arguments=arguments)
         self.events.put_nowait(event)
 
@@ -243,7 +243,7 @@ class AsyncStealthClient(AsyncRPCClient):
         print(f"[Info] Received StopScript, close connection, stopping client")
         self.close()
 
-    def _handle_ReqScriptPath(self):
+    def _handle_ScriptPathRequest(self):
         script_name = os.path.realpath(sys.argv[0])
-        packet = StealthRPCEncoder.encode_method(StealthApi.ScriptPath.method_spec, 0, script_name)
+        packet = StealthRPCEncoder.encode_method(StealthApi._ScriptPath.method_spec, 0, script_name)
         self.send_packet(packet)
