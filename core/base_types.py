@@ -29,17 +29,15 @@ class RPCType(ABC):
         # # if this is a list we write the list as an array of elements
         origin = typing.get_origin(type_obj)
         if origin is list:
-            from py_astealth.stealth_types import U32   # local import prevent circular module import
-
             if not value:   # empty list
-                U32.pack_simple_value(stream, 0)  # array length is 0 elements
+                stream.write(struct.pack('<I', 0))  # array length is 0 elements
                 return
 
             # type of the first element of the list
             inner_type = typing.get_args(type_obj)[0]
 
             # write array length
-            U32.pack_simple_value(stream, len(value))
+            stream.write(struct.pack('<I', len(value)))
 
             # we pack each element
             for item in value:
@@ -62,9 +60,11 @@ class RPCType(ABC):
         # Processing the list
         origin = typing.get_origin(type_obj)
         if origin is list:
-            from py_astealth.stealth_types import U32
             # read the number of array elements
-            count = U32.unpack_simple_value(stream)
+            data = stream.read(4)
+            if len(data) < 4:
+                raise ValueError("Stream ended while reading list length")
+            count, = struct.unpack('<I', data)
 
             # we read the required number of elements and return the list
             inner_type = typing.get_args(type_obj)[0]
@@ -109,22 +109,21 @@ class ParameterSpec:
 
 class StructType(RPCType):
     # '_fields' is a list of structure fields to be serialized.
-    # The first element of the tuple is the field name, the second element is the field type.
     _fields: list[ParameterSpec] = []
 
     @classmethod
     def pack_simple_value(cls, stream: BinaryIO, value: Any):
         # We go through the fields from the list and serialize each value with the required type.
-        for field_name, field_type in cls._fields:
-            field_value = getattr(value, field_name)
-            RPCType.pack_value(stream, field_value, field_type)
+        for field in cls._fields:
+            field_value = getattr(value, field.name)
+            RPCType.pack_value(stream, field_value, field.type)
 
     @classmethod
     def unpack_simple_value(cls, stream: BinaryIO) -> Any:
         # We create a list of values by deserializing the value of each field.
         unpacked_args = []
-        for _, field_type in cls._fields:
-            unpacked_args.append(RPCType.unpack_value(stream, field_type))
+        for field in cls._fields:
+            unpacked_args.append(RPCType.unpack_value(stream, field.type))
 
         # TODO maybe add validation of constructor arguments and types of unboxed values or is this too complicated?
         # We pass this list as arguments to the class constructor and return the created object.
@@ -143,7 +142,7 @@ class StructType(RPCType):
         fields_list = []
         for field_name in params:
             if field_name in hints:
-                fields_list.append((field_name, hints[field_name]))
+                fields_list.append(ParameterSpec(field_name, hints[field_name]))
 
         # attach list of fields to the class itself
         cls._fields = fields_list
