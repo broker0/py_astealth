@@ -78,12 +78,7 @@ class StealthRPCEncoder:
         if len(args) != len(method_spec.args):
             raise TypeError(f"{method_spec.name}() takes {len(method_spec.args)} arguments but {len(args)} were given")
 
-        with io.BytesIO() as stream:
-            arg_types = [arg.type for arg in method_spec.args]
-            for arg_value, arg_type in zip(args, arg_types):
-                RPCType.pack_value(stream, arg_value, arg_type)
-
-            return stream.getvalue()
+        return StealthRPCEncoder.encode_tuple(*zip(args, (arg.type for arg in method_spec.args)))
 
     @staticmethod
     def encode_tuple(*items) -> bytes:
@@ -287,7 +282,7 @@ def get_stealth_port(host: str = DEFAULT_STEALTH_HOST, port: int = DEFAULT_STEAL
             # Packet structure:
             # Type: 2 bytes (unsigned short) = 4
             # Value: 4 bytes (unsigned int) = 0xDEADBEEF
-            packet = struct.pack('<HI', 4, 0xDEADBEEF)
+            packet = StealthRPCEncoder.encode_tuple((4, U16), (0xDEADBEEF, U32))
             sock.sendall(packet)
 
             # Read length first (2 bytes)
