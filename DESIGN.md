@@ -74,9 +74,9 @@ Synchronous Clients
 
 While `AsyncStealthApiClient` provides the core asynchronous interface, the library also includes wrappers for synchronous usage, which can be more convenient for simple scripts or those migrating from `py_stealth`.
 
-`SyncStealthApiClient` - A thread-safe synchronous adapter. It runs the asyncio event loop in a separate background thread. This allows you to use the client in a standard blocking manner from your main thread.
-
-`SyncStealthApiClientFast` - A single-threaded synchronous adapter. It manages the event loop within the current thread. It is not thread-safe and should be used when you want to avoid the overhead of a separate thread but still want a blocking interface.
+`SyncStealthApiClient` - A unified synchronous adapter that can operate in two modes:
+1.  **Threaded** (`threaded=True`, default): Runs the asyncio event loop in a separate background thread. This is thread-safe and allows using the client in a standard blocking manner from your main thread.
+2.  **Non-threaded** (`threaded=False`): Runs the asyncio event loop in the current thread. This is not thread-safe and should be used when you want to avoid the overhead of a separate thread but still want a blocking interface (e.g., in a single-threaded script).
 
 Event Handling
 ==============
@@ -97,11 +97,11 @@ import asyncio
 from py_astealth.api_client import AsyncStealthApiClient
 
 async def main():
-    client = AsyncStealthApiClient('localhost', 47602)
+    client = AsyncStealthApiClient()
     await client.connect()
     
     # Call an API method
-    self_id = await client.GetSelfID()
+    self_id = await client.Self()
     print(f"My ID: {self_id}")
     
     # Event loop
@@ -121,7 +121,7 @@ if __name__ == '__main__':
 from py_astealth.api_client import SyncStealthApiClient
 
 # Using context manager for automatic connection/disconnection
-with SyncStealthApiClient('localhost', 47602) as client:
+with SyncStealthApiClient() as client:
     if client.Connected():
         print("Connected to Stealth!")
         

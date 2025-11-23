@@ -43,15 +43,48 @@ class AsyncStealthApiClient(AsyncInterface, AsyncStealthClient):
             return None
 
 
-class SyncApiAdapter:
+def create_sync_proxy_method(method_spec: MethodSpec) -> Callable:
     """
-    A synchronous adapter for an asynchronous client.
-    Manages the asyncio event loop on a background thread.
-    It seems to be thread-safe
+    sync method implementation factory
     """
-    def __init__(self, async_client_class, host: str, port: int):
+
+    def sync_proxy_impl(self, *args, **kwargs):
+        # get an asynchronous method from the '_async_client'
+        async_method = getattr(self._async_client, method_spec.name)
+        # we create a coroutine method with arguments
+        coro = async_method(*args, **kwargs)
+
+        if self._threaded:
+            if self._loop is None or not self._loop.is_running():
+                raise ConnectionError("Client not connected")
+
+            future = asyncio.run_coroutine_threadsafe(coro, self._loop)
+            try:
+                return future.result(timeout=30)
+            except Exception as e:
+                raise e
+        else:
+            if self._loop is None:  # or self._loop.is_running(): # is_running check might be tricky if we are inside the loop? No, we are sync.
+                raise ConnectionError("Client not connected")
+            return self._loop.run_until_complete(coro)
+
+    sync_proxy_impl.__name__ = method_spec.name
+    sync_proxy_impl.__doc__ = f"Sync proxy for API method {method_spec.name}(...)"
+    return sync_proxy_impl
+
+
+@implement_api(StealthApi, method_factory=create_sync_proxy_method)
+class SyncStealthApiClient(SyncInterface):
+    """
+    Stealth synchronous client.
+    Can operate in two modes:
+    1. Threaded (threaded=True): Runs the asyncio loop in a background thread. Thread-safe.
+    2. Non-threaded (threaded=False): Runs the asyncio loop in the current thread. Not thread-safe.
+    """
+    def __init__(self, host: str = None, port: int = None, threaded: bool = True):
+        self._async_client = AsyncStealthApiClient(host, port)
+        self._threaded = threaded
         self._lock = threading.Lock()
-        self._async_client = async_client_class(host, port)
         self._loop = None
         self._thread = None
         self._ready_event = threading.Event()
@@ -62,6 +95,47 @@ class SyncApiAdapter:
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.close()
+
+    def connect(self):
+        if self._threaded:
+            with self._lock:
+                if self._thread is not None:
+                    raise RuntimeError("Already connected")
+                self._thread = threading.Thread(target=self._run_event_loop, daemon=True)
+                self._thread.start()
+                if not self._ready_event.wait(timeout=10):
+                    raise ConnectionError("Cannot connect")
+        else:
+            if self._loop is not None:
+                 raise RuntimeError("Already connected")
+            self._loop = asyncio.new_event_loop()
+            self._loop.run_until_complete(self._async_client.connect())
+
+    def close(self):
+        if self._threaded:
+            with self._lock:
+                if self._thread is None or self._loop is None or not self._loop.is_running():
+                    return
+                self._loop.call_soon_threadsafe(self._async_client.close)
+                self._loop.call_soon_threadsafe(self._loop.stop)
+                self._thread.join()
+                self._thread = None
+                self._loop = None
+                self._ready_event.clear()
+        else:
+            if self._loop is None:
+                return
+            if not self._loop.is_closed():
+                self._async_client.close()
+                self._loop.close()
+            self._loop = None
+
+    def get_event(self) -> Optional[StealthEvent]:
+        coro = self._async_client.get_event()
+        if self._threaded:
+             return self._execute_coro_in_loop(coro, timeout=1.0)
+        else:
+             return self._loop.run_until_complete(coro)
 
     def _run_event_loop(self):
         try:
@@ -86,128 +160,4 @@ class SyncApiAdapter:
         except Exception as e:
             raise e
 
-    def connect(self):
-        with self._lock:
-            if self._thread is not None:
-                raise RuntimeError("Already connected")
-            self._thread = threading.Thread(target=self._run_event_loop, daemon=True)
-            self._thread.start()
-            if not self._ready_event.wait(timeout=10):
-                raise ConnectionError("Cannot connect")
 
-    def get_event(self) -> Optional[StealthEvent]:
-        return self._execute_coro_in_loop(self._async_client.get_event(), timeout=1.0)
-
-    def close(self):
-        with self._lock:
-            if self._thread is None or self._loop is None or not self._loop.is_running():
-                return
-            self._loop.call_soon_threadsafe(self._async_client.close)
-            self._loop.call_soon_threadsafe(self._loop.stop)
-            self._thread.join()
-            self._thread = None
-            self._loop = None
-            self._ready_event.clear()
-
-
-def create_sync_proxy_method(method_spec: MethodSpec) -> Callable:
-    """
-    sync method implementation
-    """
-    def sync_proxy_impl(self: SyncApiAdapter, *args, **kwargs):
-        if self._loop is None or not self._loop.is_running():
-            raise ConnectionError("Client not connected")
-
-        # get an asynchronous method from the '_async_client'
-        async_method = getattr(self._async_client, method_spec.name)
-
-        # we create a coroutine method with arguments and pass it for execution
-        coro = async_method(*args, **kwargs)
-
-        future = asyncio.run_coroutine_threadsafe(coro, self._loop)
-        try:
-            return future.result(timeout=30)
-        except Exception as e:
-            raise e
-
-        # return asyncio.run_coroutine_threadsafe(coro, self._loop)
-
-    sync_proxy_impl.__name__ = method_spec.name
-    sync_proxy_impl.__doc__ = f"Sync proxy for API method {method_spec.name}(...)"
-    return sync_proxy_impl
-
-
-@implement_api(StealthApi, method_factory=create_sync_proxy_method)
-class SyncStealthApiClient(SyncInterface, SyncApiAdapter):
-    """
-    Stealth synchronous client. All API methods are generated by a decorator,
-    using the create_sync_proxy_method factory, which creates a proxy
-    for AsyncStealthApiClient methods.
-    """
-    def __init__(self, host: str = None, port: int = None):
-        super().__init__(async_client_class=AsyncStealthApiClient, host=host, port=port)
-
-
-class SyncApiAdapterFast:
-    """
-    A fast synchronous adapter for an asynchronous client.
-    Manages the asyncio event loop in the current thread.
-    Not thread-safe; should only be used in a single thread
-    without already running event loop.
-    """
-    def __init__(self, async_client_class, host: str, port: int):
-        self._async_client = async_client_class(host, port)
-        self._loop = asyncio.new_event_loop()
-
-    def __enter__(self):
-        self.connect()
-        return self
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        self.close()
-
-    def connect(self):
-        self._loop.run_until_complete(self._async_client.connect())
-
-    def get_event(self, timeout: Optional[float] = None) -> Optional[StealthEvent]:
-        return self._loop.run_until_complete(self._async_client.get_event())
-
-    def close(self):
-        if self._loop is None or not self._loop.is_running():
-            return
-
-        self._loop.run_until_complete(self._async_client.close())
-        self._loop.stop()
-        self._loop.close()
-
-
-def create_sync_proxy_method_fast(method_spec: MethodSpec) -> Callable:
-    """
-    fast sync method implementation, run function in current thread
-    using method `run_until_complete`
-    """
-    def sync_proxy_impl(self: SyncApiAdapterFast, *args, **kwargs):
-        if self._loop is None or self._loop.is_running():
-            raise ConnectionError("No loop or loop already is running")
-
-        # get an asynchronous method from the '_async_client'
-        async_method = getattr(self._async_client, method_spec.name)
-
-        # we create a coroutine method with arguments and pass it for execution
-        coro = async_method(*args, **kwargs)
-        return self._loop.run_until_complete(coro)
-
-    sync_proxy_impl.__name__ = method_spec.name
-    sync_proxy_impl.__doc__ = f"Sync proxy for API method {method_spec.name}(...)"
-    return sync_proxy_impl
-
-
-@implement_api(StealthApi, method_factory=create_sync_proxy_method_fast)
-class SyncStealthApiClientFast(SyncInterface, SyncApiAdapterFast):
-    """
-    Stealth synchronous client. All API methods are generated by a decorator,
-    using the create_sync_proxy_method_fast factory, which creates a proxy
-    for AsyncStealthApiClient methods.
-    """
-    def __init__(self, host: str = None, port: int = None):
-        super().__init__(async_client_class=AsyncStealthApiClient, host=host, port=port)
