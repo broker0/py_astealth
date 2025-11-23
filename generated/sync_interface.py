@@ -263,7 +263,6 @@ class SyncInterface:
     def IsWorldCellPassable(self, CurrX: int, CurrY: int, CurrZ: int, DestX: int, DestY: int, DestZ: int, WorldNum: int) -> bool: pass
     def IsYellowHits(self, ObjID: int) -> bool: pass
     def Journal(self, StringIndex: int) -> str: pass
-    def LangVersion(self, Lang: int, Major: int, Minor: int, Revision: int, Build: int) -> None: pass
     def LastAttack(self) -> int: pass
     def LastContainer(self) -> int: pass
     def LastJournalMessage(self) -> str: pass
@@ -327,13 +326,12 @@ class SyncInterface:
     def ReadStaticsXY(self, X: int, Y: int, WorldNum: int) -> list[StaticItemRealXY]: pass
     def RemoveFigure(self, FigureID: int) -> bool: pass
     def RemoveFromParty(self, ObjID: int) -> None: pass
-    def RemoveUserStatic(self, ID: int) -> bool: pass
+    def RemoveUserStatic(self, StaticID: int) -> bool: pass
     def RenameMobile(self, MobID: int, NewName: str) -> None: pass
     def ReqVirtuesGump(self) -> None: pass
     def RequestContextMenu(self, ObjID: int) -> None: pass
     def RequestStats(self, ObjID: int) -> None: pass
     def Salute(self) -> None: pass
-    def ScriptPath(self, ScriptName: str) -> None: pass
     def Self(self) -> int: pass
     def SetARExtParams(self, ShardName: str, CharName: str, UseAtEveryConnect: bool) -> None: pass
     def SetARStatus(self, Value: bool) -> None: pass
@@ -383,7 +381,6 @@ class SyncInterface:
     def Step(self, Direction: int, Running: bool) -> int: pass
     def StepQ(self, Direction: int, Running: bool) -> int: pass
     def StopAllScripts(self) -> None: pass
-    def StopScript(self, ScriptIndex: int) -> None: pass
     def TargetByResource(self, ObjID: int, Resource: int) -> None: pass
     def TargetID(self) -> int: pass
     def TargetToObject(self, ObjID: int) -> None: pass
@@ -422,3 +419,10 @@ class SyncInterface:
     def WearItem(self, Layer: int, ObjID: int) -> bool: pass
     def Weight(self) -> int: pass
     def WorldNum(self) -> int: pass
+    def _EventCallback(self, EventId: int, Arguments: tuple) -> None: pass
+    def _FunctionResult(self, CallId: int, Result: bytes) -> None: pass
+    def _LangVersion(self, Lang: int, Major: int, Minor: int, Revision: int, Build: int) -> None: pass
+    def _ScriptPath(self, ScriptName: str) -> None: pass
+    def _ScriptPathRequest(self) -> None: pass
+    def _SelectProfile(self, ProfileName: str) -> None: pass
+    def _StopScript(self, ScriptIndex: int) -> None: pass

@@ -261,7 +261,6 @@ def IsWarMode(ObjID: int) -> bool: pass
 def IsWorldCellPassable(CurrX: int, CurrY: int, CurrZ: int, DestX: int, DestY: int, DestZ: int, WorldNum: int) -> bool: pass
 def IsYellowHits(ObjID: int) -> bool: pass
 def Journal(StringIndex: int) -> str: pass
-def LangVersion(Lang: int, Major: int, Minor: int, Revision: int, Build: int) -> None: pass
 def LastAttack() -> int: pass
 def LastContainer() -> int: pass
 def LastJournalMessage() -> str: pass
@@ -325,13 +324,12 @@ def Race() -> int: pass
 def ReadStaticsXY(X: int, Y: int, WorldNum: int) -> list[StaticItemRealXY]: pass
 def RemoveFigure(FigureID: int) -> bool: pass
 def RemoveFromParty(ObjID: int) -> None: pass
-def RemoveUserStatic(ID: int) -> bool: pass
+def RemoveUserStatic(StaticID: int) -> bool: pass
 def RenameMobile(MobID: int, NewName: str) -> None: pass
 def ReqVirtuesGump() -> None: pass
 def RequestContextMenu(ObjID: int) -> None: pass
 def RequestStats(ObjID: int) -> None: pass
 def Salute() -> None: pass
-def ScriptPath(ScriptName: str) -> None: pass
 def Self() -> int: pass
 def SetARExtParams(ShardName: str, CharName: str, UseAtEveryConnect: bool) -> None: pass
 def SetARStatus(Value: bool) -> None: pass
@@ -381,7 +379,6 @@ def StealthProfilePath() -> str: pass
 def Step(Direction: int, Running: bool) -> int: pass
 def StepQ(Direction: int, Running: bool) -> int: pass
 def StopAllScripts() -> None: pass
-def StopScript(ScriptIndex: int) -> None: pass
 def TargetByResource(ObjID: int, Resource: int) -> None: pass
 def TargetID() -> int: pass
 def TargetToObject(ObjID: int) -> None: pass
@@ -420,3 +417,10 @@ def WarTargetID() -> int: pass
 def WearItem(Layer: int, ObjID: int) -> bool: pass
 def Weight() -> int: pass
 def WorldNum() -> int: pass
+def _EventCallback(EventId: int, Arguments: tuple) -> None: pass
+def _FunctionResult(CallId: int, Result: bytes) -> None: pass
+def _LangVersion(Lang: int, Major: int, Minor: int, Revision: int, Build: int) -> None: pass
+def _ScriptPath(ScriptName: str) -> None: pass
+def _ScriptPathRequest() -> None: pass
+def _SelectProfile(ProfileName: str) -> None: pass
+def _StopScript(ScriptIndex: int) -> None: pass

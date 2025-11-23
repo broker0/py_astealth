@@ -1,6 +1,21 @@
 [
     {
-        "name": "LangVersion",
+        "name": "_FunctionResult",
+        "id": 1,
+        "args": [
+            {
+                "name": "CallId",
+                "type": "U16"
+            },
+            {
+                "name": "Result",
+                "type": "Buffer"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "_LangVersion",
         "id": 5,
         "args": [
             {
@@ -22,6 +37,21 @@
             {
                 "name": "Build",
                 "type": "U8"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "_EventCallback",
+        "id": 6,
+        "args": [
+            {
+                "name": "EventId",
+                "type": "U8"
+            },
+            {
+                "name": "Arguments",
+                "type": "TypedTuple"
             }
         ],
         "result": "None"
@@ -49,11 +79,28 @@
         "result": "None"
     },
     {
-        "name": "ScriptPath",
+        "name": "_ScriptPathRequest",
+        "id": 9,
+        "args": [],
+        "result": "None"
+    },
+    {
+        "name": "_ScriptPath",
         "id": 10,
         "args": [
             {
                 "name": "ScriptName",
+                "type": "String"
+            }
+        ],
+        "result": "None"
+    },
+    {
+        "name": "_SelectProfile",
+        "id": 11,
+        "args": [
+            {
+                "name": "ProfileName",
                 "type": "String"
             }
         ],
@@ -501,7 +548,7 @@
         "result": "U16"
     },
     {
-        "name": "StopScript",
+        "name": "_StopScript",
         "id": 71,
         "args": [
             {
@@ -1149,7 +1196,7 @@
         "args": [
             {
                 "name": "statNum",
-                "type": "I8"
+                "type": "U8"
             }
         ],
         "result": "I8"
@@ -1543,7 +1590,7 @@
             },
             {
                 "name": "Z",
-                "type": "I32"
+                "type": "I8"
             }
         ],
         "result": "Bool"
@@ -3111,7 +3158,7 @@
             },
             {
                 "name": "CurrZ",
-                "type": "I16"
+                "type": "I8"
             },
             {
                 "name": "DestX",
@@ -3123,7 +3170,7 @@
             },
             {
                 "name": "DestZ",
-                "type": "I16"
+                "type": "I8"
             },
             {
                 "name": "WorldNum",
@@ -3832,7 +3879,7 @@
             },
             {
                 "name": "Zfrom",
-                "type": "I16"
+                "type": "I8"
             },
             {
                 "name": "Xto",
@@ -3844,7 +3891,7 @@
             },
             {
                 "name": "Zto",
-                "type": "I16"
+                "type": "I8"
             },
             {
                 "name": "WorldNum",
@@ -4102,7 +4149,7 @@
         "id": 520,
         "args": [
             {
-                "name": "ID",
+                "name": "StaticID",
                 "type": "I32"
             }
         ],

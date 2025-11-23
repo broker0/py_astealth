@@ -261,7 +261,6 @@ async def IsWarMode(ObjID: int) -> bool: pass
 async def IsWorldCellPassable(CurrX: int, CurrY: int, CurrZ: int, DestX: int, DestY: int, DestZ: int, WorldNum: int) -> bool: pass
 async def IsYellowHits(ObjID: int) -> bool: pass
 async def Journal(StringIndex: int) -> str: pass
-async def LangVersion(Lang: int, Major: int, Minor: int, Revision: int, Build: int) -> None: pass
 async def LastAttack() -> int: pass
 async def LastContainer() -> int: pass
 async def LastJournalMessage() -> str: pass
@@ -325,13 +324,12 @@ async def Race() -> int: pass
 async def ReadStaticsXY(X: int, Y: int, WorldNum: int) -> list[StaticItemRealXY]: pass
 async def RemoveFigure(FigureID: int) -> bool: pass
 async def RemoveFromParty(ObjID: int) -> None: pass
-async def RemoveUserStatic(ID: int) -> bool: pass
+async def RemoveUserStatic(StaticID: int) -> bool: pass
 async def RenameMobile(MobID: int, NewName: str) -> None: pass
 async def ReqVirtuesGump() -> None: pass
 async def RequestContextMenu(ObjID: int) -> None: pass
 async def RequestStats(ObjID: int) -> None: pass
 async def Salute() -> None: pass
-async def ScriptPath(ScriptName: str) -> None: pass
 async def Self() -> int: pass
 async def SetARExtParams(ShardName: str, CharName: str, UseAtEveryConnect: bool) -> None: pass
 async def SetARStatus(Value: bool) -> None: pass
@@ -381,7 +379,6 @@ async def StealthProfilePath() -> str: pass
 async def Step(Direction: int, Running: bool) -> int: pass
 async def StepQ(Direction: int, Running: bool) -> int: pass
 async def StopAllScripts() -> None: pass
-async def StopScript(ScriptIndex: int) -> None: pass
 async def TargetByResource(ObjID: int, Resource: int) -> None: pass
 async def TargetID() -> int: pass
 async def TargetToObject(ObjID: int) -> None: pass
@@ -420,3 +417,10 @@ async def WarTargetID() -> int: pass
 async def WearItem(Layer: int, ObjID: int) -> bool: pass
 async def Weight() -> int: pass
 async def WorldNum() -> int: pass
+async def _EventCallback(EventId: int, Arguments: tuple) -> None: pass
+async def _FunctionResult(CallId: int, Result: bytes) -> None: pass
+async def _LangVersion(Lang: int, Major: int, Minor: int, Revision: int, Build: int) -> None: pass
+async def _ScriptPath(ScriptName: str) -> None: pass
+async def _ScriptPathRequest() -> None: pass
+async def _SelectProfile(ProfileName: str) -> None: pass
+async def _StopScript(ScriptIndex: int) -> None: pass

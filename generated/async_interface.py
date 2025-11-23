@@ -263,7 +263,6 @@ class AsyncInterface:
     async def IsWorldCellPassable(self, CurrX: int, CurrY: int, CurrZ: int, DestX: int, DestY: int, DestZ: int, WorldNum: int) -> bool: pass
     async def IsYellowHits(self, ObjID: int) -> bool: pass
     async def Journal(self, StringIndex: int) -> str: pass
-    async def LangVersion(self, Lang: int, Major: int, Minor: int, Revision: int, Build: int) -> None: pass
     async def LastAttack(self) -> int: pass
     async def LastContainer(self) -> int: pass
     async def LastJournalMessage(self) -> str: pass
@@ -327,13 +326,12 @@ class AsyncInterface:
     async def ReadStaticsXY(self, X: int, Y: int, WorldNum: int) -> list[StaticItemRealXY]: pass
     async def RemoveFigure(self, FigureID: int) -> bool: pass
     async def RemoveFromParty(self, ObjID: int) -> None: pass
-    async def RemoveUserStatic(self, ID: int) -> bool: pass
+    async def RemoveUserStatic(self, StaticID: int) -> bool: pass
     async def RenameMobile(self, MobID: int, NewName: str) -> None: pass
     async def ReqVirtuesGump(self) -> None: pass
     async def RequestContextMenu(self, ObjID: int) -> None: pass
     async def RequestStats(self, ObjID: int) -> None: pass
     async def Salute(self) -> None: pass
-    async def ScriptPath(self, ScriptName: str) -> None: pass
     async def Self(self) -> int: pass
     async def SetARExtParams(self, ShardName: str, CharName: str, UseAtEveryConnect: bool) -> None: pass
     async def SetARStatus(self, Value: bool) -> None: pass
@@ -383,7 +381,6 @@ class AsyncInterface:
     async def Step(self, Direction: int, Running: bool) -> int: pass
     async def StepQ(self, Direction: int, Running: bool) -> int: pass
     async def StopAllScripts(self) -> None: pass
-    async def StopScript(self, ScriptIndex: int) -> None: pass
     async def TargetByResource(self, ObjID: int, Resource: int) -> None: pass
     async def TargetID(self) -> int: pass
     async def TargetToObject(self, ObjID: int) -> None: pass
@@ -422,3 +419,10 @@ class AsyncInterface:
     async def WearItem(self, Layer: int, ObjID: int) -> bool: pass
     async def Weight(self) -> int: pass
     async def WorldNum(self) -> int: pass
+    async def _EventCallback(self, EventId: int, Arguments: tuple) -> None: pass
+    async def _FunctionResult(self, CallId: int, Result: bytes) -> None: pass
+    async def _LangVersion(self, Lang: int, Major: int, Minor: int, Revision: int, Build: int) -> None: pass
+    async def _ScriptPath(self, ScriptName: str) -> None: pass
+    async def _ScriptPathRequest(self) -> None: pass
+    async def _SelectProfile(self, ProfileName: str) -> None: pass
+    async def _StopScript(self, ScriptIndex: int) -> None: pass
