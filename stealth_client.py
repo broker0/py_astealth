@@ -126,9 +126,19 @@ class AsyncStealthClient(AsyncRPCClient):
         self._protocol = None
         self._connected = asyncio.Event()
 
+        self._sending_allowed = asyncio.Event()
+        self._sending_allowed.set()
         self.call_id = 0
         self._pending_replies: dict[int, asyncio.Future] = {}
         self.events: asyncio.Queue[StealthEvent] = asyncio.Queue()
+
+        self._packet_handlers = {
+            StealthApi._FunctionResultCallback.method_spec.id: self._handle_FunctionResultCallback,
+            StealthApi._EventCallback.method_spec.id: self._handle_EventCallback,
+            StealthApi._ScriptTogglePauseCallback.method_spec.id: self._handle_ScriptTogglePauseCallback,
+            StealthApi._StopScriptCallback.method_spec.id: self._handle_StopScriptCallback,
+            StealthApi._ScriptPathCallback.method_spec.id: self._handle_ScriptPathCallback,
+        }
 
     async def connect(self, profile: str = None):
         """establishing a connection with the Stealth-client and sending a packet with the version of our protocol"""
@@ -166,6 +176,7 @@ class AsyncStealthClient(AsyncRPCClient):
 
     async def call_method(self, method_spec: MethodSpec, *args) -> Any:
         # call_method receives the method_spec and arguments
+        await self._sending_allowed.wait()
 
         # for methods with a return value, we assign a new call_id
         ret_type = method_spec.result.type
@@ -215,20 +226,11 @@ class AsyncStealthClient(AsyncRPCClient):
             method_id = U16.unpack_simple_value(stream)
             
             # Handle known server methods
-            if method_id == StealthApi._FunctionResult.method_spec.id:
-                args = StealthRPCEncoder.decode_arguments(StealthApi._FunctionResult.method_spec, stream)
-                self._handle_FunctionResult(*args)
-
-            elif method_id == StealthApi._StopScriptRequest.method_spec.id:
-                self._handle_StopScript()
-
-            elif method_id == StealthApi._EventCallback.method_spec.id:
-                args = StealthRPCEncoder.decode_arguments(StealthApi._EventCallback.method_spec, stream)
-                self._handle_EventCallback(*args)
-
-            elif method_id == StealthApi._ScriptPathRequest.method_spec.id:
-                self._handle_ScriptPathRequest()
-            
+            handler = self._packet_handlers.get(method_id)
+            if handler:
+                method_spec = StealthApi.get_method_by_id(method_id)
+                args = StealthRPCEncoder.decode_arguments(method_spec, stream)
+                handler(*args)
             else:
                 print(f"[Info] Received packet of unknown or unhandled type: ID {method_id}")
 
@@ -238,7 +240,7 @@ class AsyncStealthClient(AsyncRPCClient):
             # TODO strict mode
             # raise ConnectionError("[Error] Error parsing packet: {e}. Payload (hex): {payload.hex(' ')}")
 
-    def _handle_FunctionResult(self, call_id: int, result_payload: bytes):
+    def _handle_FunctionResultCallback(self, call_id: int, result_payload: bytes):
         if call_id in self._pending_replies:
             future = self._pending_replies.pop(call_id)
             future.set_result(result_payload)
@@ -249,11 +251,19 @@ class AsyncStealthClient(AsyncRPCClient):
         event = StealthEvent(id=EventType(event_id), arguments=arguments)
         self.events.put_nowait(event)
 
-    def _handle_StopScript(self):
+    def _handle_StopScriptCallback(self):
         print(f"[Info] Received StopScript, close connection, stopping client")
         self.close()
 
-    def _handle_ScriptPathRequest(self):
+    def _handle_ScriptTogglePauseCallback(self):
+        if self._sending_allowed.is_set():
+            print(f"[Info] Received ScriptTogglePauseRequest, PAUSED")
+            self._sending_allowed.clear()
+        else:
+            print(f"[Info] Received ScriptTogglePauseRequest, resume")
+            self._sending_allowed.set()
+
+    def _handle_ScriptPathCallback(self):
         script_name = os.path.realpath(sys.argv[0])
         packet = StealthRPCEncoder.encode_method(StealthApi._ScriptPath.method_spec, 0, script_name)
         self.send_packet(packet)
