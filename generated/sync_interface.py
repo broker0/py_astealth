@@ -42,7 +42,7 @@ class SyncInterface:
     def ChangeProfile(self, Name: str) -> int: pass
     def CharName(self) -> str: pass
     def CharTitle(self) -> str: pass
-    def CheckLOS(self, Xfrom: int, Yfrom: int, Zfrom: int, Xto: int, Yto: int, Zto: int, WorldNum: int) -> bool: pass
+    def CheckLOS(self, Xfrom: int, Yfrom: int, Zfrom: int, Xto: int, Yto: int, Zto: int, WorldNum: int, CheckType: int, Options: int) -> bool: pass
     def CheckLagBegin(self) -> None: pass
     def CheckLagEnd(self) -> None: pass
     def ClearBadLocationList(self) -> None: pass

@@ -40,7 +40,7 @@ async def Cast(SpellID: int) -> None: pass
 async def ChangeProfile(Name: str) -> int: pass
 async def CharName() -> str: pass
 async def CharTitle() -> str: pass
-async def CheckLOS(Xfrom: int, Yfrom: int, Zfrom: int, Xto: int, Yto: int, Zto: int, WorldNum: int) -> bool: pass
+async def CheckLOS(Xfrom: int, Yfrom: int, Zfrom: int, Xto: int, Yto: int, Zto: int, WorldNum: int, CheckType: int, Options: int) -> bool: pass
 async def CheckLagBegin() -> None: pass
 async def CheckLagEnd() -> None: pass
 async def ClearBadLocationList() -> None: pass

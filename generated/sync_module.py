@@ -40,7 +40,7 @@ def Cast(SpellID: int) -> None: pass
 def ChangeProfile(Name: str) -> int: pass
 def CharName() -> str: pass
 def CharTitle() -> str: pass
-def CheckLOS(Xfrom: int, Yfrom: int, Zfrom: int, Xto: int, Yto: int, Zto: int, WorldNum: int) -> bool: pass
+def CheckLOS(Xfrom: int, Yfrom: int, Zfrom: int, Xto: int, Yto: int, Zto: int, WorldNum: int, CheckType: int, Options: int) -> bool: pass
 def CheckLagBegin() -> None: pass
 def CheckLagEnd() -> None: pass
 def ClearBadLocationList() -> None: pass

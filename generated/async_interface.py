@@ -42,7 +42,7 @@ class AsyncInterface:
     async def ChangeProfile(self, Name: str) -> int: pass
     async def CharName(self) -> str: pass
     async def CharTitle(self) -> str: pass
-    async def CheckLOS(self, Xfrom: int, Yfrom: int, Zfrom: int, Xto: int, Yto: int, Zto: int, WorldNum: int) -> bool: pass
+    async def CheckLOS(self, Xfrom: int, Yfrom: int, Zfrom: int, Xto: int, Yto: int, Zto: int, WorldNum: int, CheckType: int, Options: int) -> bool: pass
     async def CheckLagBegin(self) -> None: pass
     async def CheckLagEnd(self) -> None: pass
     async def ClearBadLocationList(self) -> None: pass

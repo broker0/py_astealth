@@ -3889,11 +3889,11 @@
             },
             {
                 "name": "Xto",
-                "type": "I32"
+                "type": "U16"
             },
             {
                 "name": "Yto",
-                "type": "I32"
+                "type": "U16"
             },
             {
                 "name": "Zto",
@@ -3902,6 +3902,14 @@
             {
                 "name": "WorldNum",
                 "type": "U8"
+            },
+            {
+                "name": "CheckType",
+                "type": "U8"
+            },
+            {
+                "name": "Options",
+                "type": "U32"
             }
         ],
         "result": "Bool"
