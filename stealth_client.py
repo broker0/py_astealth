@@ -228,7 +228,7 @@ class AsyncStealthClient(AsyncRPCClient):
             # Handle known server methods
             handler = self._packet_handlers.get(method_id)
             if handler:
-                method_spec = StealthApi.get_method_by_id(method_id)
+                method_spec = StealthApi.get_method(method_id)
                 args = StealthRPCEncoder.decode_arguments(method_spec, stream)
                 handler(*args)
             else:

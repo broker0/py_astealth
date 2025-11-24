@@ -1,9 +1,10 @@
-from py_astealth.core.api_specification import ApiSpecification
+from py_astealth.core.api_specification import ApiSpecification, register_api
 from py_astealth.stealth_types import *
 from py_astealth.stealth_structs import *
 
 
 # TODO declare all other Stealth api methods
+@register_api
 class StealthApi(ApiSpecification):
     """
     Declarative API description using decorators.

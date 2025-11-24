@@ -42,7 +42,6 @@ class ApiSpecification:
                 result=ParameterSpec("Result", return_type),
             )
 
-            # cls._methods.append(method_spec)
             func.method_spec = method_spec
 
             return func
@@ -52,24 +51,36 @@ class ApiSpecification:
     @classmethod
     def get_methods(cls) -> list[MethodSpec]:
         """
-        Dynamically collect methods specifications from class attributes.
+        Return collected methods specifications.
         """
-
-        return [
-            member.method_spec
-            for _, member in inspect.getmembers(cls)
-            if hasattr(member, 'method_spec')  # We are only interested in those who have 'method_spec' field
-        ]
+        return getattr(cls, '_methods_list', [])
 
     @classmethod
-    def get_method_by_id(cls, method_id: int) -> MethodSpec | None:
+    def get_method(cls, method_id: int) -> MethodSpec | None:
         """
-        Find a method specification by its ID.
+        Find a method specification by its ID using a pre-calculated dictionary.
         """
-        for spec in cls.get_methods():
-            if spec.id == method_id:
-                return spec
-        return None
+        return getattr(cls, '_methods_dict', {}).get(method_id)
+
+
+def register_api(cls):
+    """
+    Class decorator that scans the class for methods with 'method_spec' attribute
+    and creates _methods_list and _methods_dict for efficient lookup.
+    """
+    methods_list = []
+    methods_dict = {}
+
+    for _, member in inspect.getmembers(cls):
+        if hasattr(member, 'method_spec'):
+            spec = member.method_spec
+            methods_list.append(spec)
+            methods_dict[spec.id] = spec
+
+    setattr(cls, '_methods_list', methods_list)
+    setattr(cls, '_methods_dict', methods_dict)
+
+    return cls
 
 
 def implement_api(api_spec: type[ApiSpecification], method_factory: Callable[[MethodSpec], Callable]):
