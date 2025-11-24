@@ -1,8 +1,8 @@
 from datetime import datetime, timedelta
 from typing import Any, BinaryIO
-from enum import IntEnum
 from dataclasses import dataclass
 from py_astealth.core.base_types import PrimitiveType, RPCType
+from py_astealth.stealth_enums import EventType
 
 __all__ = ['Buffer', 'Bool', 'U8', 'I8', 'U16', 'I16', 'U32', 'I32', 'U64', 'I64', 'F32', 'F64',
            'DateTime', 'String', 'EventType', 'StealthEvent', 'TypedTuple']
@@ -114,51 +114,6 @@ class String(RPCType):
         # cls.mapping is not used here either, so decode returns a string
         decoded_value = data.decode(cls.STEALTH_CODEC)
         return decoded_value
-
-
-class EventType(IntEnum):
-    EvItemInfo = 0
-    EvItemDeleted = 1
-    EvSpeech = 2
-    EvDrawGamePlayer = 3
-    EvMoveRejection = 4
-    EvDrawContainer = 5
-    EvAddItemToContainer = 6
-    EvAddMultipleItemsInCont = 7
-    EvRejectMoveItem = 8
-    EvUpdateChar = 9
-    EvDrawObject = 10
-    EvMenu = 11
-    EvMapMessage = 12
-    EvAllowRefuseAttack = 13
-    EvClilocSpeech = 14
-    EvClilocSpeechAffix = 15
-    EvUnicodeSpeech = 16
-    EvBuffDebuffSystem = 17
-    EvClientSendResync = 18
-    EvCharAnimation = 19
-    EvIcqDisconnect = 20
-    EvIcqConnect = 21
-    EvIcqIncomingText = 22
-    EvIcqError = 23
-    EvIncomingGump = 24
-    EvTimer1 = 25
-    EvTimer2 = 26
-    EvWindowsMessage = 27
-    EvSound = 28
-    EvDeath = 29
-    EvQuestArrow = 30
-    EvPartyInvite = 31
-    EvMapPin = 32
-    EvGumpTextEntry = 33
-    EvGraphicalEffect = 34
-    EvIrcIncomingText = 35
-    EvMessengerEvent = 36
-    EvSetGlobalVar = 37
-    EvUpdateObjStats = 38
-    EvGlobalChat = 39
-    EvWarDamage = 40
-    EvContextMenu = 41
 
 
 @dataclass
