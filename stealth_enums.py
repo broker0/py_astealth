@@ -1,6 +1,30 @@
 from enum import IntEnum
 
 
+class FigureKind(IntEnum):
+    fkLine = 0
+    fkEllipse = 1
+    fkRectangle = 2
+    fkDirection = 3
+    fkText = 4
+
+
+class FigureCoord(IntEnum):
+    fcWorld = 0
+    fcScreen = 1
+
+
+class BrushStyle(IntEnum):
+    bsSolid = 0
+    bsClear = 1
+    bsHorizontal = 2
+    bsVertical = 3
+    bsFDiagonal = 4
+    bsBDiagonal = 5
+    bsCross = 6
+    bsDiagCross = 7
+
+
 class Layer(IntEnum):
     RhandLayer = 0x01
     LhandLayer = 0x02
