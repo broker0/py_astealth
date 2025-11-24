@@ -13,7 +13,7 @@ class SyncInterface:
 
     def AddChatUserIgnore(self, Mobile: str) -> None: pass
     def AddFigure(self, Figure: MapFigure) -> int: pass
-    def AddGumpIgnoreByID(self, ID: int) -> None: pass
+    def AddGumpIgnoreByID(self, ObjID: int) -> None: pass
     def AddGumpIgnoreBySerial(self, Serial: int) -> None: pass
     def AddJournalIgnore(self, Str: str) -> None: pass
     def AddToJournal(self, Text: str) -> None: pass
@@ -111,11 +111,11 @@ class SyncInterface:
     def GetCharsListForShard(self) -> list[str]: pass
     def GetClientVersionInt(self) -> int: pass
     def GetClilocByID(self, ClilocID: int) -> str: pass
-    def GetColor(self, ID: int) -> int: pass
+    def GetColor(self, ObjID: int) -> int: pass
     def GetContextMenu(self) -> list[str]: pass
     def GetContextMenuRec(self) -> ContextMenuRec: pass
     def GetDex(self, ObjID: int) -> int: pass
-    def GetDirection(self, ID: int) -> int: pass
+    def GetDirection(self, ObjID: int) -> int: pass
     def GetDistance(self, ObjID: int) -> int: pass
     def GetDressSet(self) -> list[LayerObject]: pass
     def GetDressSpeed(self) -> int: pass
@@ -163,7 +163,7 @@ class SyncInterface:
     def GetMultis(self) -> list[Multi]: pass
     def GetName(self, ObjID: int) -> str: pass
     def GetNextStepZ(self, CurrX: int, CurrY: int, DestX: int, DestY: int, WorldNum: int, CurrZ: int) -> int: pass
-    def GetNotoriety(self, ID: int) -> int: pass
+    def GetNotoriety(self, ObjID: int) -> int: pass
     def GetNow(self) -> datetime: pass
     def GetNowUnix(self) -> int: pass
     def GetParent(self, ObjID: int) -> int: pass
@@ -215,12 +215,12 @@ class SyncInterface:
     def GetTradeContainer(self, TradeNum: int, Num: int) -> int: pass
     def GetTradeOpponent(self, TradeNum: int) -> int: pass
     def GetTradeOpponentName(self, TradeNum: int) -> str: pass
-    def GetType(self, ID: int) -> int: pass
+    def GetType(self, ObjID: int) -> int: pass
     def GetWalkMountTimer(self) -> int: pass
     def GetWalkUnmountTimer(self) -> int: pass
-    def GetX(self, ID: int) -> int: pass
-    def GetY(self, ID: int) -> int: pass
-    def GetZ(self, ID: int) -> int: pass
+    def GetX(self, ObjID: int) -> int: pass
+    def GetY(self, ObjID: int) -> int: pass
+    def GetZ(self, ObjID: int) -> int: pass
     def GlobalChatActiveChannel(self) -> str: pass
     def GlobalChatChannelsList(self) -> list[str]: pass
     def GlobalChatJoinChannel(self, ChName: str) -> None: pass
@@ -237,8 +237,8 @@ class SyncInterface:
     def HelpRequest(self) -> None: pass
     def Hidden(self) -> bool: pass
     def HighJournal(self) -> int: pass
-    def Ignore(self, ID: int) -> None: pass
-    def IgnoreOff(self, ID: int) -> None: pass
+    def Ignore(self, ObjID: int) -> None: pass
+    def IgnoreOff(self, ObjID: int) -> None: pass
     def IgnoreReset(self) -> None: pass
     def InJournal(self, Str: str) -> int: pass
     def InJournalBetweenTimes(self, Str: str, TimeBegin: datetime, TimeEnd: datetime) -> int: pass
@@ -254,7 +254,7 @@ class SyncInterface:
     def IsHouse(self, ObjID: int) -> bool: pass
     def IsMovable(self, ObjID: int) -> bool: pass
     def IsNPC(self, ObjID: int) -> bool: pass
-    def IsObjectExists(self, ID: int) -> bool: pass
+    def IsObjectExists(self, ObjID: int) -> bool: pass
     def IsParalyzed(self, ObjID: int) -> bool: pass
     def IsPoisoned(self, ObjID: int) -> bool: pass
     def IsRunning(self, ObjID: int) -> bool: pass
@@ -361,7 +361,7 @@ class SyncInterface:
     def SetMoveThroughNPC(self, Value: int) -> None: pass
     def SetMoveTurnCost(self, Value: int) -> None: pass
     def SetPauseScriptOnDisconnectStatus(self, Value: bool) -> None: pass
-    def SetPickupedItem(self, ID: int) -> None: pass
+    def SetPickupedItem(self, ObjID: int) -> None: pass
     def SetRunMountTimer(self, Value: int) -> None: pass
     def SetRunUnmountTimer(self, Value: int) -> None: pass
     def SetScriptName(self, ScriptIndex: int, Value: str) -> None: pass

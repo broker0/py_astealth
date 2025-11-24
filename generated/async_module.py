@@ -11,7 +11,7 @@ from datetime import datetime
 
 async def AddChatUserIgnore(Mobile: str) -> None: pass
 async def AddFigure(Figure: MapFigure) -> int: pass
-async def AddGumpIgnoreByID(ID: int) -> None: pass
+async def AddGumpIgnoreByID(ObjID: int) -> None: pass
 async def AddGumpIgnoreBySerial(Serial: int) -> None: pass
 async def AddJournalIgnore(Str: str) -> None: pass
 async def AddToJournal(Text: str) -> None: pass
@@ -109,11 +109,11 @@ async def GetCell(X: int, Y: int, WorldNum: int) -> MapCell: pass
 async def GetCharsListForShard() -> list[str]: pass
 async def GetClientVersionInt() -> int: pass
 async def GetClilocByID(ClilocID: int) -> str: pass
-async def GetColor(ID: int) -> int: pass
+async def GetColor(ObjID: int) -> int: pass
 async def GetContextMenu() -> list[str]: pass
 async def GetContextMenuRec() -> ContextMenuRec: pass
 async def GetDex(ObjID: int) -> int: pass
-async def GetDirection(ID: int) -> int: pass
+async def GetDirection(ObjID: int) -> int: pass
 async def GetDistance(ObjID: int) -> int: pass
 async def GetDressSet() -> list[LayerObject]: pass
 async def GetDressSpeed() -> int: pass
@@ -161,7 +161,7 @@ async def GetMultiPartsAtPosition(X: int, Y: int) -> list[MultiPart]: pass
 async def GetMultis() -> list[Multi]: pass
 async def GetName(ObjID: int) -> str: pass
 async def GetNextStepZ(CurrX: int, CurrY: int, DestX: int, DestY: int, WorldNum: int, CurrZ: int) -> int: pass
-async def GetNotoriety(ID: int) -> int: pass
+async def GetNotoriety(ObjID: int) -> int: pass
 async def GetNow() -> datetime: pass
 async def GetNowUnix() -> int: pass
 async def GetParent(ObjID: int) -> int: pass
@@ -213,12 +213,12 @@ async def GetTooltipRec(ObjID: int) -> list[ClilocRec]: pass
 async def GetTradeContainer(TradeNum: int, Num: int) -> int: pass
 async def GetTradeOpponent(TradeNum: int) -> int: pass
 async def GetTradeOpponentName(TradeNum: int) -> str: pass
-async def GetType(ID: int) -> int: pass
+async def GetType(ObjID: int) -> int: pass
 async def GetWalkMountTimer() -> int: pass
 async def GetWalkUnmountTimer() -> int: pass
-async def GetX(ID: int) -> int: pass
-async def GetY(ID: int) -> int: pass
-async def GetZ(ID: int) -> int: pass
+async def GetX(ObjID: int) -> int: pass
+async def GetY(ObjID: int) -> int: pass
+async def GetZ(ObjID: int) -> int: pass
 async def GlobalChatActiveChannel() -> str: pass
 async def GlobalChatChannelsList() -> list[str]: pass
 async def GlobalChatJoinChannel(ChName: str) -> None: pass
@@ -235,8 +235,8 @@ async def HTTP_Post(URL: str, PostData: str) -> str: pass
 async def HelpRequest() -> None: pass
 async def Hidden() -> bool: pass
 async def HighJournal() -> int: pass
-async def Ignore(ID: int) -> None: pass
-async def IgnoreOff(ID: int) -> None: pass
+async def Ignore(ObjID: int) -> None: pass
+async def IgnoreOff(ObjID: int) -> None: pass
 async def IgnoreReset() -> None: pass
 async def InJournal(Str: str) -> int: pass
 async def InJournalBetweenTimes(Str: str, TimeBegin: datetime, TimeEnd: datetime) -> int: pass
@@ -252,7 +252,7 @@ async def IsHidden(ObjID: int) -> bool: pass
 async def IsHouse(ObjID: int) -> bool: pass
 async def IsMovable(ObjID: int) -> bool: pass
 async def IsNPC(ObjID: int) -> bool: pass
-async def IsObjectExists(ID: int) -> bool: pass
+async def IsObjectExists(ObjID: int) -> bool: pass
 async def IsParalyzed(ObjID: int) -> bool: pass
 async def IsPoisoned(ObjID: int) -> bool: pass
 async def IsRunning(ObjID: int) -> bool: pass
@@ -359,7 +359,7 @@ async def SetMoveThroughCorner(Value: bool) -> None: pass
 async def SetMoveThroughNPC(Value: int) -> None: pass
 async def SetMoveTurnCost(Value: int) -> None: pass
 async def SetPauseScriptOnDisconnectStatus(Value: bool) -> None: pass
-async def SetPickupedItem(ID: int) -> None: pass
+async def SetPickupedItem(ObjID: int) -> None: pass
 async def SetRunMountTimer(Value: int) -> None: pass
 async def SetRunUnmountTimer(Value: int) -> None: pass
 async def SetScriptName(ScriptIndex: int, Value: str) -> None: pass

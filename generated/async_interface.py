@@ -13,7 +13,7 @@ class AsyncInterface:
 
     async def AddChatUserIgnore(self, Mobile: str) -> None: pass
     async def AddFigure(self, Figure: MapFigure) -> int: pass
-    async def AddGumpIgnoreByID(self, ID: int) -> None: pass
+    async def AddGumpIgnoreByID(self, ObjID: int) -> None: pass
     async def AddGumpIgnoreBySerial(self, Serial: int) -> None: pass
     async def AddJournalIgnore(self, Str: str) -> None: pass
     async def AddToJournal(self, Text: str) -> None: pass
@@ -111,11 +111,11 @@ class AsyncInterface:
     async def GetCharsListForShard(self) -> list[str]: pass
     async def GetClientVersionInt(self) -> int: pass
     async def GetClilocByID(self, ClilocID: int) -> str: pass
-    async def GetColor(self, ID: int) -> int: pass
+    async def GetColor(self, ObjID: int) -> int: pass
     async def GetContextMenu(self) -> list[str]: pass
     async def GetContextMenuRec(self) -> ContextMenuRec: pass
     async def GetDex(self, ObjID: int) -> int: pass
-    async def GetDirection(self, ID: int) -> int: pass
+    async def GetDirection(self, ObjID: int) -> int: pass
     async def GetDistance(self, ObjID: int) -> int: pass
     async def GetDressSet(self) -> list[LayerObject]: pass
     async def GetDressSpeed(self) -> int: pass
@@ -163,7 +163,7 @@ class AsyncInterface:
     async def GetMultis(self) -> list[Multi]: pass
     async def GetName(self, ObjID: int) -> str: pass
     async def GetNextStepZ(self, CurrX: int, CurrY: int, DestX: int, DestY: int, WorldNum: int, CurrZ: int) -> int: pass
-    async def GetNotoriety(self, ID: int) -> int: pass
+    async def GetNotoriety(self, ObjID: int) -> int: pass
     async def GetNow(self) -> datetime: pass
     async def GetNowUnix(self) -> int: pass
     async def GetParent(self, ObjID: int) -> int: pass
@@ -215,12 +215,12 @@ class AsyncInterface:
     async def GetTradeContainer(self, TradeNum: int, Num: int) -> int: pass
     async def GetTradeOpponent(self, TradeNum: int) -> int: pass
     async def GetTradeOpponentName(self, TradeNum: int) -> str: pass
-    async def GetType(self, ID: int) -> int: pass
+    async def GetType(self, ObjID: int) -> int: pass
     async def GetWalkMountTimer(self) -> int: pass
     async def GetWalkUnmountTimer(self) -> int: pass
-    async def GetX(self, ID: int) -> int: pass
-    async def GetY(self, ID: int) -> int: pass
-    async def GetZ(self, ID: int) -> int: pass
+    async def GetX(self, ObjID: int) -> int: pass
+    async def GetY(self, ObjID: int) -> int: pass
+    async def GetZ(self, ObjID: int) -> int: pass
     async def GlobalChatActiveChannel(self) -> str: pass
     async def GlobalChatChannelsList(self) -> list[str]: pass
     async def GlobalChatJoinChannel(self, ChName: str) -> None: pass
@@ -237,8 +237,8 @@ class AsyncInterface:
     async def HelpRequest(self) -> None: pass
     async def Hidden(self) -> bool: pass
     async def HighJournal(self) -> int: pass
-    async def Ignore(self, ID: int) -> None: pass
-    async def IgnoreOff(self, ID: int) -> None: pass
+    async def Ignore(self, ObjID: int) -> None: pass
+    async def IgnoreOff(self, ObjID: int) -> None: pass
     async def IgnoreReset(self) -> None: pass
     async def InJournal(self, Str: str) -> int: pass
     async def InJournalBetweenTimes(self, Str: str, TimeBegin: datetime, TimeEnd: datetime) -> int: pass
@@ -254,7 +254,7 @@ class AsyncInterface:
     async def IsHouse(self, ObjID: int) -> bool: pass
     async def IsMovable(self, ObjID: int) -> bool: pass
     async def IsNPC(self, ObjID: int) -> bool: pass
-    async def IsObjectExists(self, ID: int) -> bool: pass
+    async def IsObjectExists(self, ObjID: int) -> bool: pass
     async def IsParalyzed(self, ObjID: int) -> bool: pass
     async def IsPoisoned(self, ObjID: int) -> bool: pass
     async def IsRunning(self, ObjID: int) -> bool: pass
@@ -361,7 +361,7 @@ class AsyncInterface:
     async def SetMoveThroughNPC(self, Value: int) -> None: pass
     async def SetMoveTurnCost(self, Value: int) -> None: pass
     async def SetPauseScriptOnDisconnectStatus(self, Value: bool) -> None: pass
-    async def SetPickupedItem(self, ID: int) -> None: pass
+    async def SetPickupedItem(self, ObjID: int) -> None: pass
     async def SetRunMountTimer(self, Value: int) -> None: pass
     async def SetRunUnmountTimer(self, Value: int) -> None: pass
     async def SetScriptName(self, ScriptIndex: int, Value: str) -> None: pass

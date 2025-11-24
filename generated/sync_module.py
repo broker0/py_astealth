@@ -11,7 +11,7 @@ from datetime import datetime
 
 def AddChatUserIgnore(Mobile: str) -> None: pass
 def AddFigure(Figure: MapFigure) -> int: pass
-def AddGumpIgnoreByID(ID: int) -> None: pass
+def AddGumpIgnoreByID(ObjID: int) -> None: pass
 def AddGumpIgnoreBySerial(Serial: int) -> None: pass
 def AddJournalIgnore(Str: str) -> None: pass
 def AddToJournal(Text: str) -> None: pass
@@ -109,11 +109,11 @@ def GetCell(X: int, Y: int, WorldNum: int) -> MapCell: pass
 def GetCharsListForShard() -> list[str]: pass
 def GetClientVersionInt() -> int: pass
 def GetClilocByID(ClilocID: int) -> str: pass
-def GetColor(ID: int) -> int: pass
+def GetColor(ObjID: int) -> int: pass
 def GetContextMenu() -> list[str]: pass
 def GetContextMenuRec() -> ContextMenuRec: pass
 def GetDex(ObjID: int) -> int: pass
-def GetDirection(ID: int) -> int: pass
+def GetDirection(ObjID: int) -> int: pass
 def GetDistance(ObjID: int) -> int: pass
 def GetDressSet() -> list[LayerObject]: pass
 def GetDressSpeed() -> int: pass
@@ -161,7 +161,7 @@ def GetMultiPartsAtPosition(X: int, Y: int) -> list[MultiPart]: pass
 def GetMultis() -> list[Multi]: pass
 def GetName(ObjID: int) -> str: pass
 def GetNextStepZ(CurrX: int, CurrY: int, DestX: int, DestY: int, WorldNum: int, CurrZ: int) -> int: pass
-def GetNotoriety(ID: int) -> int: pass
+def GetNotoriety(ObjID: int) -> int: pass
 def GetNow() -> datetime: pass
 def GetNowUnix() -> int: pass
 def GetParent(ObjID: int) -> int: pass
@@ -213,12 +213,12 @@ def GetTooltipRec(ObjID: int) -> list[ClilocRec]: pass
 def GetTradeContainer(TradeNum: int, Num: int) -> int: pass
 def GetTradeOpponent(TradeNum: int) -> int: pass
 def GetTradeOpponentName(TradeNum: int) -> str: pass
-def GetType(ID: int) -> int: pass
+def GetType(ObjID: int) -> int: pass
 def GetWalkMountTimer() -> int: pass
 def GetWalkUnmountTimer() -> int: pass
-def GetX(ID: int) -> int: pass
-def GetY(ID: int) -> int: pass
-def GetZ(ID: int) -> int: pass
+def GetX(ObjID: int) -> int: pass
+def GetY(ObjID: int) -> int: pass
+def GetZ(ObjID: int) -> int: pass
 def GlobalChatActiveChannel() -> str: pass
 def GlobalChatChannelsList() -> list[str]: pass
 def GlobalChatJoinChannel(ChName: str) -> None: pass
@@ -235,8 +235,8 @@ def HTTP_Post(URL: str, PostData: str) -> str: pass
 def HelpRequest() -> None: pass
 def Hidden() -> bool: pass
 def HighJournal() -> int: pass
-def Ignore(ID: int) -> None: pass
-def IgnoreOff(ID: int) -> None: pass
+def Ignore(ObjID: int) -> None: pass
+def IgnoreOff(ObjID: int) -> None: pass
 def IgnoreReset() -> None: pass
 def InJournal(Str: str) -> int: pass
 def InJournalBetweenTimes(Str: str, TimeBegin: datetime, TimeEnd: datetime) -> int: pass
@@ -252,7 +252,7 @@ def IsHidden(ObjID: int) -> bool: pass
 def IsHouse(ObjID: int) -> bool: pass
 def IsMovable(ObjID: int) -> bool: pass
 def IsNPC(ObjID: int) -> bool: pass
-def IsObjectExists(ID: int) -> bool: pass
+def IsObjectExists(ObjID: int) -> bool: pass
 def IsParalyzed(ObjID: int) -> bool: pass
 def IsPoisoned(ObjID: int) -> bool: pass
 def IsRunning(ObjID: int) -> bool: pass
@@ -359,7 +359,7 @@ def SetMoveThroughCorner(Value: bool) -> None: pass
 def SetMoveThroughNPC(Value: int) -> None: pass
 def SetMoveTurnCost(Value: int) -> None: pass
 def SetPauseScriptOnDisconnectStatus(Value: bool) -> None: pass
-def SetPickupedItem(ID: int) -> None: pass
+def SetPickupedItem(ObjID: int) -> None: pass
 def SetRunMountTimer(Value: int) -> None: pass
 def SetRunUnmountTimer(Value: int) -> None: pass
 def SetScriptName(ScriptIndex: int, Value: str) -> None: pass
