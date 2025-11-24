@@ -174,7 +174,6 @@ class TargetInfo(StructType):
 @dataclass
 class UserStaticItem(StructType):
     Tile: U16
-    Tile: U16
     X: U16
     Y: U16
     Z: I8
