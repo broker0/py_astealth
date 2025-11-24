@@ -10,13 +10,13 @@ from datetime import datetime
 
 
 def AddChatUserIgnore(Mobile: str) -> None: pass
-def AddFigure(figure: MapFigure) -> int: pass
+def AddFigure(Figure: MapFigure) -> int: pass
 def AddGumpIgnoreByID(ID: int) -> None: pass
 def AddGumpIgnoreBySerial(Serial: int) -> None: pass
 def AddJournalIgnore(Str: str) -> None: pass
 def AddToJournal(Text: str) -> None: pass
 def AddToSystemJournal(Text: str) -> None: pass
-def AddToSystemJournalEx(value: str, textcolor: int, bgcolor: int, fontsize: int, fontname: str) -> None: pass
+def AddToSystemJournalEx(Text: str, TextColor: int, BgColor: int, FontSize: int, FontName: str) -> None: pass
 def AddUserStatic(StaticItem: UserStaticItem, WorldNum: int) -> int: pass
 def Armor() -> int: pass
 def Attack(ObjID: int) -> None: pass
@@ -87,7 +87,7 @@ def EnergyResist() -> int: pass
 def EquipItemsSetMacro() -> None: pass
 def EquipLastWeapon() -> None: pass
 def ExtChangeProfile(ProfileName: str, ShardName: str, CharName: str) -> int: pass
-def FillInfoWindow(s: str) -> None: pass
+def FillInfoWindow(Text: str) -> None: pass
 def FindAtCoord(X: int, Y: int) -> int: pass
 def FindCount() -> int: pass
 def FindFullQuantity() -> int: pass
@@ -141,7 +141,7 @@ def GetLandTilesArray(Xmin: int, Ymin: int, Xmax: int, Ymax: int, WorldNum: int,
 def GetLastMenuItems() -> list[str]: pass
 def GetLastStepQUsedDoor() -> int: pass
 def GetLayer(ObjID: int) -> int: pass
-def GetLayerCount(x: int, y: int, WorldNum: int) -> int: pass
+def GetLayerCount(X: int, Y: int, WorldNum: int) -> int: pass
 def GetLineTime() -> datetime: pass
 def GetMana(ObjID: int) -> int: pass
 def GetMaxHP(ObjID: int) -> int: pass
@@ -379,6 +379,7 @@ def StealthProfilePath() -> str: pass
 def Step(Direction: int, Running: bool) -> int: pass
 def StepQ(Direction: int, Running: bool) -> int: pass
 def StopAllScripts() -> None: pass
+def StopScript(ScriptIndex: int) -> None: pass
 def TargetByResource(ObjID: int, Resource: int) -> None: pass
 def TargetID() -> int: pass
 def TargetToObject(ObjID: int) -> None: pass
@@ -391,7 +392,7 @@ def UOSay(Text: str) -> None: pass
 def UOSayColor(Text: str, Color: int) -> None: pass
 def UnequipItemsSetMacro() -> None: pass
 def UnsetCatchBag() -> None: pass
-def UpdateFigure(FigureID: int, figure: MapFigure) -> bool: pass
+def UpdateFigure(FigureID: int, Figure: MapFigure) -> bool: pass
 def UseFromGround(ObjType: int, Color: int) -> int: pass
 def UseItemOnMobile(ItemSerial: int, TargetSerial: int) -> None: pass
 def UseObject(ObjID: int) -> None: pass
@@ -423,4 +424,4 @@ def _LangVersion(Lang: int, Major: int, Minor: int, Revision: int, Build: int) -
 def _ScriptPath(ScriptName: str) -> None: pass
 def _ScriptPathRequest() -> None: pass
 def _SelectProfile(ProfileName: str) -> None: pass
-def _StopScript(ScriptIndex: int) -> None: pass
+def _StopScriptRequest() -> None: pass

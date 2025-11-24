@@ -10,13 +10,13 @@ from datetime import datetime
 
 
 async def AddChatUserIgnore(Mobile: str) -> None: pass
-async def AddFigure(figure: MapFigure) -> int: pass
+async def AddFigure(Figure: MapFigure) -> int: pass
 async def AddGumpIgnoreByID(ID: int) -> None: pass
 async def AddGumpIgnoreBySerial(Serial: int) -> None: pass
 async def AddJournalIgnore(Str: str) -> None: pass
 async def AddToJournal(Text: str) -> None: pass
 async def AddToSystemJournal(Text: str) -> None: pass
-async def AddToSystemJournalEx(value: str, textcolor: int, bgcolor: int, fontsize: int, fontname: str) -> None: pass
+async def AddToSystemJournalEx(Text: str, TextColor: int, BgColor: int, FontSize: int, FontName: str) -> None: pass
 async def AddUserStatic(StaticItem: UserStaticItem, WorldNum: int) -> int: pass
 async def Armor() -> int: pass
 async def Attack(ObjID: int) -> None: pass
@@ -87,7 +87,7 @@ async def EnergyResist() -> int: pass
 async def EquipItemsSetMacro() -> None: pass
 async def EquipLastWeapon() -> None: pass
 async def ExtChangeProfile(ProfileName: str, ShardName: str, CharName: str) -> int: pass
-async def FillInfoWindow(s: str) -> None: pass
+async def FillInfoWindow(Text: str) -> None: pass
 async def FindAtCoord(X: int, Y: int) -> int: pass
 async def FindCount() -> int: pass
 async def FindFullQuantity() -> int: pass
@@ -141,7 +141,7 @@ async def GetLandTilesArray(Xmin: int, Ymin: int, Xmax: int, Ymax: int, WorldNum
 async def GetLastMenuItems() -> list[str]: pass
 async def GetLastStepQUsedDoor() -> int: pass
 async def GetLayer(ObjID: int) -> int: pass
-async def GetLayerCount(x: int, y: int, WorldNum: int) -> int: pass
+async def GetLayerCount(X: int, Y: int, WorldNum: int) -> int: pass
 async def GetLineTime() -> datetime: pass
 async def GetMana(ObjID: int) -> int: pass
 async def GetMaxHP(ObjID: int) -> int: pass
@@ -379,6 +379,7 @@ async def StealthProfilePath() -> str: pass
 async def Step(Direction: int, Running: bool) -> int: pass
 async def StepQ(Direction: int, Running: bool) -> int: pass
 async def StopAllScripts() -> None: pass
+async def StopScript(ScriptIndex: int) -> None: pass
 async def TargetByResource(ObjID: int, Resource: int) -> None: pass
 async def TargetID() -> int: pass
 async def TargetToObject(ObjID: int) -> None: pass
@@ -391,7 +392,7 @@ async def UOSay(Text: str) -> None: pass
 async def UOSayColor(Text: str, Color: int) -> None: pass
 async def UnequipItemsSetMacro() -> None: pass
 async def UnsetCatchBag() -> None: pass
-async def UpdateFigure(FigureID: int, figure: MapFigure) -> bool: pass
+async def UpdateFigure(FigureID: int, Figure: MapFigure) -> bool: pass
 async def UseFromGround(ObjType: int, Color: int) -> int: pass
 async def UseItemOnMobile(ItemSerial: int, TargetSerial: int) -> None: pass
 async def UseObject(ObjID: int) -> None: pass
@@ -423,4 +424,4 @@ async def _LangVersion(Lang: int, Major: int, Minor: int, Revision: int, Build: 
 async def _ScriptPath(ScriptName: str) -> None: pass
 async def _ScriptPathRequest() -> None: pass
 async def _SelectProfile(ProfileName: str) -> None: pass
-async def _StopScript(ScriptIndex: int) -> None: pass
+async def _StopScriptRequest() -> None: pass

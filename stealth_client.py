@@ -219,7 +219,7 @@ class AsyncStealthClient(AsyncRPCClient):
                 args = StealthRPCEncoder.decode_arguments(StealthApi._FunctionResult.method_spec, stream)
                 self._handle_FunctionResult(*args)
 
-            elif method_id == StealthApi._StopScript.method_spec.id:
+            elif method_id == StealthApi._StopScriptRequest.method_spec.id:
                 self._handle_StopScript()
 
             elif method_id == StealthApi._EventCallback.method_spec.id:

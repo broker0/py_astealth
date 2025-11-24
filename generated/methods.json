@@ -15,6 +15,12 @@
         "result": "None"
     },
     {
+        "name": "_StopScriptRequest",
+        "id": 2,
+        "args": [],
+        "result": "None"
+    },
+    {
         "name": "_LangVersion",
         "id": 5,
         "args": [
@@ -251,23 +257,23 @@
         "id": 40,
         "args": [
             {
-                "name": "value",
+                "name": "Text",
                 "type": "String"
             },
             {
-                "name": "textcolor",
+                "name": "TextColor",
                 "type": "I32"
             },
             {
-                "name": "bgcolor",
+                "name": "BgColor",
                 "type": "I32"
             },
             {
-                "name": "fontsize",
+                "name": "FontSize",
                 "type": "I32"
             },
             {
-                "name": "fontname",
+                "name": "FontName",
                 "type": "String"
             }
         ],
@@ -548,7 +554,7 @@
         "result": "U16"
     },
     {
-        "name": "_StopScript",
+        "name": "StopScript",
         "id": 71,
         "args": [
             {
@@ -3092,11 +3098,11 @@
         "id": 435,
         "args": [
             {
-                "name": "x",
+                "name": "X",
                 "type": "U16"
             },
             {
-                "name": "y",
+                "name": "Y",
                 "type": "U16"
             },
             {
@@ -4085,7 +4091,7 @@
         "id": 514,
         "args": [
             {
-                "name": "s",
+                "name": "Text",
                 "type": "String"
             }
         ],
@@ -4166,7 +4172,7 @@
         "id": 522,
         "args": [
             {
-                "name": "figure",
+                "name": "Figure",
                 "type": "MapFigure"
             }
         ],
@@ -4192,7 +4198,7 @@
                 "type": "U32"
             },
             {
-                "name": "figure",
+                "name": "Figure",
                 "type": "MapFigure"
             }
         ],

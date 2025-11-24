@@ -12,13 +12,13 @@ class AsyncInterface:
     """base class defining the interface of StealthApi."""
 
     async def AddChatUserIgnore(self, Mobile: str) -> None: pass
-    async def AddFigure(self, figure: MapFigure) -> int: pass
+    async def AddFigure(self, Figure: MapFigure) -> int: pass
     async def AddGumpIgnoreByID(self, ID: int) -> None: pass
     async def AddGumpIgnoreBySerial(self, Serial: int) -> None: pass
     async def AddJournalIgnore(self, Str: str) -> None: pass
     async def AddToJournal(self, Text: str) -> None: pass
     async def AddToSystemJournal(self, Text: str) -> None: pass
-    async def AddToSystemJournalEx(self, value: str, textcolor: int, bgcolor: int, fontsize: int, fontname: str) -> None: pass
+    async def AddToSystemJournalEx(self, Text: str, TextColor: int, BgColor: int, FontSize: int, FontName: str) -> None: pass
     async def AddUserStatic(self, StaticItem: UserStaticItem, WorldNum: int) -> int: pass
     async def Armor(self) -> int: pass
     async def Attack(self, ObjID: int) -> None: pass
@@ -89,7 +89,7 @@ class AsyncInterface:
     async def EquipItemsSetMacro(self) -> None: pass
     async def EquipLastWeapon(self) -> None: pass
     async def ExtChangeProfile(self, ProfileName: str, ShardName: str, CharName: str) -> int: pass
-    async def FillInfoWindow(self, s: str) -> None: pass
+    async def FillInfoWindow(self, Text: str) -> None: pass
     async def FindAtCoord(self, X: int, Y: int) -> int: pass
     async def FindCount(self) -> int: pass
     async def FindFullQuantity(self) -> int: pass
@@ -143,7 +143,7 @@ class AsyncInterface:
     async def GetLastMenuItems(self) -> list[str]: pass
     async def GetLastStepQUsedDoor(self) -> int: pass
     async def GetLayer(self, ObjID: int) -> int: pass
-    async def GetLayerCount(self, x: int, y: int, WorldNum: int) -> int: pass
+    async def GetLayerCount(self, X: int, Y: int, WorldNum: int) -> int: pass
     async def GetLineTime(self) -> datetime: pass
     async def GetMana(self, ObjID: int) -> int: pass
     async def GetMaxHP(self, ObjID: int) -> int: pass
@@ -381,6 +381,7 @@ class AsyncInterface:
     async def Step(self, Direction: int, Running: bool) -> int: pass
     async def StepQ(self, Direction: int, Running: bool) -> int: pass
     async def StopAllScripts(self) -> None: pass
+    async def StopScript(self, ScriptIndex: int) -> None: pass
     async def TargetByResource(self, ObjID: int, Resource: int) -> None: pass
     async def TargetID(self) -> int: pass
     async def TargetToObject(self, ObjID: int) -> None: pass
@@ -393,7 +394,7 @@ class AsyncInterface:
     async def UOSayColor(self, Text: str, Color: int) -> None: pass
     async def UnequipItemsSetMacro(self) -> None: pass
     async def UnsetCatchBag(self) -> None: pass
-    async def UpdateFigure(self, FigureID: int, figure: MapFigure) -> bool: pass
+    async def UpdateFigure(self, FigureID: int, Figure: MapFigure) -> bool: pass
     async def UseFromGround(self, ObjType: int, Color: int) -> int: pass
     async def UseItemOnMobile(self, ItemSerial: int, TargetSerial: int) -> None: pass
     async def UseObject(self, ObjID: int) -> None: pass
@@ -425,4 +426,4 @@ class AsyncInterface:
     async def _ScriptPath(self, ScriptName: str) -> None: pass
     async def _ScriptPathRequest(self) -> None: pass
     async def _SelectProfile(self, ProfileName: str) -> None: pass
-    async def _StopScript(self, ScriptIndex: int) -> None: pass
+    async def _StopScriptRequest(self) -> None: pass

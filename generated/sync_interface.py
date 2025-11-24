@@ -12,13 +12,13 @@ class SyncInterface:
     """base class defining the interface of StealthApi."""
 
     def AddChatUserIgnore(self, Mobile: str) -> None: pass
-    def AddFigure(self, figure: MapFigure) -> int: pass
+    def AddFigure(self, Figure: MapFigure) -> int: pass
     def AddGumpIgnoreByID(self, ID: int) -> None: pass
     def AddGumpIgnoreBySerial(self, Serial: int) -> None: pass
     def AddJournalIgnore(self, Str: str) -> None: pass
     def AddToJournal(self, Text: str) -> None: pass
     def AddToSystemJournal(self, Text: str) -> None: pass
-    def AddToSystemJournalEx(self, value: str, textcolor: int, bgcolor: int, fontsize: int, fontname: str) -> None: pass
+    def AddToSystemJournalEx(self, Text: str, TextColor: int, BgColor: int, FontSize: int, FontName: str) -> None: pass
     def AddUserStatic(self, StaticItem: UserStaticItem, WorldNum: int) -> int: pass
     def Armor(self) -> int: pass
     def Attack(self, ObjID: int) -> None: pass
@@ -89,7 +89,7 @@ class SyncInterface:
     def EquipItemsSetMacro(self) -> None: pass
     def EquipLastWeapon(self) -> None: pass
     def ExtChangeProfile(self, ProfileName: str, ShardName: str, CharName: str) -> int: pass
-    def FillInfoWindow(self, s: str) -> None: pass
+    def FillInfoWindow(self, Text: str) -> None: pass
     def FindAtCoord(self, X: int, Y: int) -> int: pass
     def FindCount(self) -> int: pass
     def FindFullQuantity(self) -> int: pass
@@ -143,7 +143,7 @@ class SyncInterface:
     def GetLastMenuItems(self) -> list[str]: pass
     def GetLastStepQUsedDoor(self) -> int: pass
     def GetLayer(self, ObjID: int) -> int: pass
-    def GetLayerCount(self, x: int, y: int, WorldNum: int) -> int: pass
+    def GetLayerCount(self, X: int, Y: int, WorldNum: int) -> int: pass
     def GetLineTime(self) -> datetime: pass
     def GetMana(self, ObjID: int) -> int: pass
     def GetMaxHP(self, ObjID: int) -> int: pass
@@ -381,6 +381,7 @@ class SyncInterface:
     def Step(self, Direction: int, Running: bool) -> int: pass
     def StepQ(self, Direction: int, Running: bool) -> int: pass
     def StopAllScripts(self) -> None: pass
+    def StopScript(self, ScriptIndex: int) -> None: pass
     def TargetByResource(self, ObjID: int, Resource: int) -> None: pass
     def TargetID(self) -> int: pass
     def TargetToObject(self, ObjID: int) -> None: pass
@@ -393,7 +394,7 @@ class SyncInterface:
     def UOSayColor(self, Text: str, Color: int) -> None: pass
     def UnequipItemsSetMacro(self) -> None: pass
     def UnsetCatchBag(self) -> None: pass
-    def UpdateFigure(self, FigureID: int, figure: MapFigure) -> bool: pass
+    def UpdateFigure(self, FigureID: int, Figure: MapFigure) -> bool: pass
     def UseFromGround(self, ObjType: int, Color: int) -> int: pass
     def UseItemOnMobile(self, ItemSerial: int, TargetSerial: int) -> None: pass
     def UseObject(self, ObjID: int) -> None: pass
@@ -425,4 +426,4 @@ class SyncInterface:
     def _ScriptPath(self, ScriptName: str) -> None: pass
     def _ScriptPathRequest(self) -> None: pass
     def _SelectProfile(self, ProfileName: str) -> None: pass
-    def _StopScript(self, ScriptIndex: int) -> None: pass
+    def _StopScriptRequest(self) -> None: pass
