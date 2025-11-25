@@ -342,6 +342,47 @@ def CancelTarget() -> None:
         Wait(10)
 
 
+# CatchBag helpers
+def SetCatchBag(obj_id: int) -> int:
+    """
+    Set the catch bag for auto-looting with validation.
+    
+    Args:
+        obj_id: Object ID of the bag (0 to clear)
+        
+    Returns:
+        0 if cleared, 1 if object not found, 2 if set successfully
+    """
+    if obj_id == 0:
+        api.UnsetCatchBag()
+        return 0
+    elif not api.IsObjectExists(obj_id):
+        AddToSystemJournal(f'SetCatchBag Error: Object {hex(obj_id)} not found.')
+        return 1
+    else:
+        api.SetCatchBag(obj_id)
+        return 2
+
+
+def UnsetCatchBag() -> None:
+    """Clear the catch bag."""
+    api.UnsetCatchBag()
+
+
+# UseType helpers
+def UseType2(obj_type: int) -> int:
+    """
+    Use an item of the specified type (any color).
+    
+    Args:
+        obj_type: Object type to use
+        
+    Returns:
+        Object ID of used item, or 0 if not found
+    """
+    return api.UseType(obj_type, 0xFFFF)
+
+
 __all__ = [
     'AddToSystemJournal',
     'GetEvent',
@@ -363,5 +404,9 @@ __all__ = [
     # Find and Click helpers
     'Ground', 'FindType', 'FindTypeEx', 'ClickOnObject',
     # Target helpers
-    'TargetPresent', 'WaitForTarget', 'CancelTarget'
+    'TargetPresent', 'WaitForTarget', 'CancelTarget',
+    # CatchBag helpers
+    'SetCatchBag', 'UnsetCatchBag',
+    # UseType helpers
+    'UseType2'
 ]
