@@ -1,13 +1,16 @@
 from datetime import datetime, timedelta
 from time import sleep
 
-from py_astealth.stealth_api import StealthApi
-from ._internals import _manager, _create_global_proxy
+from . import api
+from ._internals import _manager
 
-# Create internal proxies for API methods used by helpers
-_AddToSystemJournal = _create_global_proxy(StealthApi.AddToSystemJournal.method_spec)
-_SetEventCallback = _create_global_proxy(StealthApi.SetEventCallback.method_spec)
-_ClearEventCallback = _create_global_proxy(StealthApi.ClearEventCallback.method_spec)
+
+def _get_skill_id(skill_name: str) -> int:
+    """Convert skill name to skill ID, raises ValueError if invalid."""
+    skill_id = api.GetSkillID(skill_name)
+    if skill_id < 0:
+        raise ValueError(f'Unknown skill name: "{skill_name}"')
+    return skill_id
 
 
 def AddToSystemJournal(*args, **kwargs):
@@ -16,7 +19,7 @@ def AddToSystemJournal(*args, **kwargs):
     s_args = sep.join((str(arg) for arg in args))
     s_kwargs = sep.join((str(k) + '=' + str(v) for k, v in kwargs.items()))
     text = s_args + (sep if s_args and s_kwargs else '') + s_kwargs + end
-    _AddToSystemJournal(text)
+    api.AddToSystemJournal(text)
 
 
 def GetEvent():
@@ -25,9 +28,9 @@ def GetEvent():
 
 def SetEventProc(event_type, handler):
     if handler:
-        _SetEventCallback(event_type)
+        api.SetEventCallback(event_type)
     else:
-        _ClearEventCallback(event_type)
+        api.ClearEventCallback(event_type)
 
     _manager.set_handler_for_thread(event_type, handler)
 
@@ -98,6 +101,39 @@ def NRstkLayer(): return Layer.NRstkLayer
 def SellLayer(): return Layer.SellLayer
 def BankLayer(): return Layer.BankLayer
 
+
+# Skill helper functions
+def UseSkill(skill_name: str) -> bool:
+    """Use a skill by name. Example: UseSkill('Animal Lore')"""
+    api.UseSkill(_get_skill_id(skill_name))
+    return True
+
+
+def GetSkillValue(skill_name: str) -> float:
+    """Get the skill value by name."""
+    return api.GetSkillValue(_get_skill_id(skill_name))
+
+
+def GetSkillCurrentValue(skill_name: str) -> float:
+    """Get the current skill value by name."""
+    return api.GetSkillCurrentValue(_get_skill_id(skill_name))
+
+
+def GetSkillCap(skill_name: str) -> float:
+    """Get the skill cap by name."""
+    return api.GetSkillCap(_get_skill_id(skill_name))
+
+
+def SetSkillLockState(skill_name: str, state: int) -> None:
+    """Set the skill lock state by name. State: 0=up, 1=down, 2=locked"""
+    api.SetSkillLockState(_get_skill_id(skill_name), state)
+
+
+def GetSkillLockState(skill_name: str) -> int:
+    """Get the skill lock state by name."""
+    return api.GetSkillLockState(_get_skill_id(skill_name))
+
+
 __all__ = [
     'AddToSystemJournal',
     'GetEvent',
@@ -108,5 +144,8 @@ __all__ = [
     'GlovesLayer', 'RingLayer', 'TalismanLayer', 'NeckLayer', 'HairLayer', 'WaistLayer',
     'TorsoLayer', 'BraceLayer', 'BeardLayer', 'TorsoHLayer', 'EarLayer', 'ArmsLayer',
     'CloakLayer', 'BpackLayer', 'RobeLayer', 'EggsLayer', 'LegsLayer', 'HorseLayer',
-    'RstkLayer', 'NRstkLayer', 'SellLayer', 'BankLayer'
+    'RstkLayer', 'NRstkLayer', 'SellLayer', 'BankLayer',
+    # Skill helpers
+    'UseSkill', 'GetSkillValue', 'GetSkillCurrentValue', 'GetSkillCap',
+    'SetSkillLockState', 'GetSkillLockState'
 ]
