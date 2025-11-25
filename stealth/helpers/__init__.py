@@ -6,6 +6,7 @@ from .targeting import *
 from .communication import *
 from .equipment import *
 from .utils import *
+from .mover import *
 
 from . import base
 from . import character
@@ -14,6 +15,7 @@ from . import targeting
 from . import communication
 from . import equipment
 from . import utils
+from . import mover
 
 
 __all__ = (
@@ -23,5 +25,6 @@ __all__ = (
     targeting.__all__ +
     communication.__all__ +
     equipment.__all__ +
-    utils.__all__
+    utils.__all__ +
+    mover.__all__
 )

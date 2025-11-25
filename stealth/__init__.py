@@ -1,7 +1,7 @@
 # import all methods from generated interface file to help the IDE
 from py_astealth.generated.sync_module import *
 
-from ._internals import _create_global_proxy
+from py_astealth.stealth._internals import _create_global_proxy
 from py_astealth.stealth_api import StealthApi
 from . import methods
 
@@ -24,7 +24,7 @@ def _populate_module():
 _populate_module()
 
 # Import helpers, overriding any API methods if names collide (e.g. AddToSystemJournal)
-from .methods import *
+from py_astealth.stealth.methods import *
 
 # Add helpers to __all__
 __all__.extend(methods.__all__)
