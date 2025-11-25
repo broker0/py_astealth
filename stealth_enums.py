@@ -344,3 +344,18 @@ class Spell(IntEnum):
     Boarding = 745
     CombatTraining = 744
 
+
+class LOSCheckType(IntEnum):
+    Sphere = 1
+    SphereAdv = 2
+    Pol = 3
+    RunUO = 4
+
+
+class LOSCheckOption(IntEnum):
+    NoOptions = 0
+    SphereCheckCorners = 0x100
+    PolUseNoShoot = 0x200
+    PolLosThroughWindow = 0x400
+
+

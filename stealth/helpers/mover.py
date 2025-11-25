@@ -1,6 +1,9 @@
 """Mover settings and helper functions."""
 from py_astealth.stealth import api
 
+from .base import Wait
+from .utils import CalcDir
+
 
 class MoverSettings:
     """Wrapper for mover configuration settings."""
@@ -110,65 +113,6 @@ class MoverSettings:
 Mover = MoverSettings()
 
 
-# LOS helpers
-def CheckLOS(xf, yf, zf, xt, yt, zt, world_num, check_type='Sphere', options=None) -> bool:
-    """
-    Check Line Of Sight between two points.
-    
-    Args:
-        xf, yf, zf: From coordinates
-        xt, yt, zt: To coordinates
-        world_num: World number
-        check_type: 'Sphere', 'SphereAdv', 'Pol', or 'RunUO'
-        options: List of options or single option string
-                 ('SphereCheckCorners', 'PolUseNoShoot', 'PolLosThroughWindow')
-                 
-    Returns:
-        True if LOS exists, False otherwise
-    """
-    # Map string types to integers
-    los_types = {
-        'sphere': 1, 'lossphere': 1,
-        'sphereadv': 2, 'lossphereadv': 2,
-        'pol': 3, 'lospol': 3,
-        'runuo': 4, 'losrunuo': 4, 'servuo': 4
-    }
-    
-    los_options = {
-        'spherecheckcorners': 0x100, 'losspherecheckcorners': 0x100,
-        'polusenoshoot': 0x200, 'lospolusenoshoot': 0x200,
-        'pollosthroughwindow': 0x400, 'lospollosthroughwindow': 0x400
-    }
-
-    # Process check_type
-    if isinstance(check_type, str):
-        check_type = check_type.lower()
-    
-    type_id = los_types.get(check_type)
-    if type_id is None:
-        if isinstance(check_type, int) and check_type in los_types.values():
-            type_id = check_type
-        else:
-            raise ValueError('CheckLOS: Invalid check_type')
-
-    # Process options
-    opts_mask = 0
-    if options:
-        if isinstance(options, str):
-            options = [options]
-        
-        for opt in options:
-            if isinstance(opt, str):
-                opt = opt.lower()
-                val = los_options.get(opt)
-                if val:
-                    opts_mask |= val
-            elif isinstance(opt, int):
-                opts_mask |= opt
-
-    return api.CheckLOS(xf, yf, zf, xt, yt, zt, world_num, type_id, opts_mask)
-
-
 # Movement helpers
 def MoveXYZ(x_dst: int, y_dst: int, z_dst: int, accuracy_xy: int, accuracy_z: int, running: bool) -> bool:
     """
@@ -183,10 +127,7 @@ def MoveXYZ(x_dst: int, y_dst: int, z_dst: int, accuracy_xy: int, accuracy_z: in
     Returns:
         True if reached destination, False otherwise
     """
-    from .base import Wait, AddToSystemJournal
-    from .utils import CalcDir
-    from .character import GetSkillValue
-    
+
     # Simple implementation wrapper around NewMoveXYZ logic
     # Note: Full implementation of NewMoveXYZ is complex and depends on many API calls.
     # For now, we can implement a simplified version or port the full logic.
@@ -209,7 +150,6 @@ def MoveXYZ(x_dst: int, y_dst: int, z_dst: int, accuracy_xy: int, accuracy_z: in
         
     # Follow path
     for point in path:
-
         next_x, next_y, next_z = point.X, point.Y, point.Z
         
         # Move step
@@ -226,4 +166,4 @@ def MoveXYZ(x_dst: int, y_dst: int, z_dst: int, accuracy_xy: int, accuracy_z: in
     return True
 
 
-__all__ = ['MoverSettings', 'Mover', 'CheckLOS', 'MoveXYZ']
+__all__ = ['MoverSettings', 'Mover', 'MoveXYZ']
