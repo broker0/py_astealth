@@ -8,7 +8,7 @@ describing the UO Stealth Client API.
 of the UO Stealth Client RPC protocol.
 
 `RPCType` - a base data type interface that provides methods for serialization and deserialization.
-It implements serialization of lists (arrays) of identical elements.
+It implements serialization of lists (arrays) of identical elements and tuples (sequences of elements).
 
 `PrimitiveType` - a primitive data type representing only one value, 
 implements serialization methods using the `struct` module.
@@ -44,6 +44,10 @@ class StealthApi(ApiSpecification):
     @ApiSpecification.method(381)
     def GetMultiAllParts(self, MultiID: U32) -> list[MultiPart]:
         pass
+
+    @ApiSpecification.method(438)
+    def IsWorldCellPassable(self, CurrX: U16, CurrY: U16, CurrZ: I8, DestX: U16, DestY: U16, WorldNum: U8) -> tuple[Bool, I8]:
+        pass
 ```
 
 `stealth_client.py` -
@@ -58,6 +62,8 @@ and their results over this connection.
 Method - `call_method` receives the method specification and its argument list, 
 packs them into bytes, and sends them to the UO Stealth Client. 
 It also waits for the method's execution result, if necessary, and decodes the result.
+
+`StealthRPCEncoder` - A helper class responsible for encoding arguments into binary format and decoding binary results back into Python types. It handles the low-level details of packing and unpacking data according to the protocol.
 
 `api_client.py` -
 
