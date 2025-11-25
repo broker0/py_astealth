@@ -256,6 +256,59 @@ def WaitJournalLineSystem(start_time: datetime, text: str, max_wait_ms: int = 0)
     return _wait_journal_line_internal(start_time, text, max_wait_ms, check_system=True)
 
 
+# Find and Click helpers
+def Ground() -> int:
+    """Returns the ground container constant (0)."""
+    return 0
+
+
+def FindType(obj_type: int, container: int = None) -> int:
+    """
+    Find an object by type in the specified container (simplified version).
+    
+    Args:
+        obj_type: Object type to search for
+        container: Container ID to search in (default: Backpack)
+        
+    Returns:
+        Object ID if found, 0 if not found
+    """
+    if container is None:
+        container = api.Backpack()
+    return api.FindTypeEx(obj_type, 0xFFFF, container, False)
+
+
+def FindTypeEx(obj_type: int, color: int, container: int = None, in_sub: bool = True) -> int:
+    """
+    Find an object by type and color in the specified container.
+    
+    Args:
+        obj_type: Object type to search for
+        color: Object color (0xFFFF for any color)
+        container: Container ID to search in (default: Backpack)
+        in_sub: Search in sub-containers
+        
+    Returns:
+        Object ID if found, 0 if not found
+    """
+    if container is None:
+        container = api.Backpack()
+    return api.FindTypeEx(obj_type, color, container, in_sub)
+
+
+def ClickOnObject(obj_id: int) -> None:
+    """
+    Click on an object (with existence check).
+    
+    Args:
+        obj_id: Object ID to click on
+    """
+    if not api.IsObjectExists(obj_id):
+        AddToSystemJournal(f'ClickOnObject error: Object {hex(obj_id)} not found.')
+    else:
+        api.ClickOnObject(obj_id)
+
+
 __all__ = [
     'AddToSystemJournal',
     'GetEvent',
@@ -273,5 +326,7 @@ __all__ = [
     # Spell helpers
     'Cast', 'CastToObj', 'CastToObject', 'IsActiveSpellAbility',
     # Journal helpers
-    'WaitJournalLine', 'WaitJournalLineSystem'
+    'WaitJournalLine', 'WaitJournalLineSystem',
+    # Find and Click helpers
+    'Ground', 'FindType', 'FindTypeEx', 'ClickOnObject'
 ]
