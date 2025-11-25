@@ -9,9 +9,9 @@ from datetime import datetime
 
 
 
-def AddChatUserIgnore(Mobile: str) -> None: pass
+def AddChatUserIgnore(UserName: str) -> None: pass
 def AddFigure(Figure: MapFigure) -> int: pass
-def AddGumpIgnoreByID(ObjID: int) -> None: pass
+def AddGumpIgnoreByID(GumpID: int) -> None: pass
 def AddGumpIgnoreBySerial(Serial: int) -> None: pass
 def AddJournalIgnore(Str: str) -> None: pass
 def AddToJournal(Text: str) -> None: pass
@@ -108,7 +108,7 @@ def GetBuffBarInfo() -> list[BuffBarInfo]: pass
 def GetCell(X: int, Y: int, WorldNum: int) -> MapCell: pass
 def GetCharsListForShard() -> list[str]: pass
 def GetClientVersionInt() -> int: pass
-def GetClilocByID(ClilocID: int) -> str: pass
+def GetClilocByID(ClilocID: int, Params: list[str]) -> str: pass
 def GetColor(ObjID: int) -> int: pass
 def GetContextMenu() -> list[str]: pass
 def GetContextMenuRec() -> ContextMenuRec: pass
@@ -258,7 +258,7 @@ def IsPoisoned(ObjID: int) -> bool: pass
 def IsRunning(ObjID: int) -> bool: pass
 def IsTrade() -> bool: pass
 def IsWarMode(ObjID: int) -> bool: pass
-def IsWorldCellPassable(CurrX: int, CurrY: int, CurrZ: int, DestX: int, DestY: int, DestZ: int, WorldNum: int) -> bool: pass
+def IsWorldCellPassable(CurrX: int, CurrY: int, CurrZ: int, DestX: int, DestY: int, WorldNum: int) -> bool: pass
 def IsYellowHits(ObjID: int) -> bool: pass
 def Journal(StringIndex: int) -> str: pass
 def LastAttack() -> int: pass
@@ -419,9 +419,10 @@ def WearItem(Layer: int, ObjID: int) -> bool: pass
 def Weight() -> int: pass
 def WorldNum() -> int: pass
 def _EventCallback(EventId: int, Arguments: tuple) -> None: pass
-def _FunctionResult(CallId: int, Result: bytes) -> None: pass
+def _FunctionResultCallback(CallId: int, Result: bytes) -> None: pass
 def _LangVersion(Lang: int, Major: int, Minor: int, Revision: int, Build: int) -> None: pass
 def _ScriptPath(ScriptName: str) -> None: pass
-def _ScriptPathRequest() -> None: pass
+def _ScriptPathCallback() -> None: pass
+def _ScriptTogglePauseCallback() -> None: pass
 def _SelectProfile(ProfileName: str) -> None: pass
-def _StopScriptRequest() -> None: pass
+def _StopScriptCallback() -> None: pass

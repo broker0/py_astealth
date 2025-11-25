@@ -11,9 +11,9 @@ from datetime import datetime
 class AsyncInterface:
     """base class defining the interface of StealthApi."""
 
-    async def AddChatUserIgnore(self, Mobile: str) -> None: pass
+    async def AddChatUserIgnore(self, UserName: str) -> None: pass
     async def AddFigure(self, Figure: MapFigure) -> int: pass
-    async def AddGumpIgnoreByID(self, ObjID: int) -> None: pass
+    async def AddGumpIgnoreByID(self, GumpID: int) -> None: pass
     async def AddGumpIgnoreBySerial(self, Serial: int) -> None: pass
     async def AddJournalIgnore(self, Str: str) -> None: pass
     async def AddToJournal(self, Text: str) -> None: pass
@@ -110,7 +110,7 @@ class AsyncInterface:
     async def GetCell(self, X: int, Y: int, WorldNum: int) -> MapCell: pass
     async def GetCharsListForShard(self) -> list[str]: pass
     async def GetClientVersionInt(self) -> int: pass
-    async def GetClilocByID(self, ClilocID: int) -> str: pass
+    async def GetClilocByID(self, ClilocID: int, Params: list[str]) -> str: pass
     async def GetColor(self, ObjID: int) -> int: pass
     async def GetContextMenu(self) -> list[str]: pass
     async def GetContextMenuRec(self) -> ContextMenuRec: pass
@@ -260,7 +260,7 @@ class AsyncInterface:
     async def IsRunning(self, ObjID: int) -> bool: pass
     async def IsTrade(self) -> bool: pass
     async def IsWarMode(self, ObjID: int) -> bool: pass
-    async def IsWorldCellPassable(self, CurrX: int, CurrY: int, CurrZ: int, DestX: int, DestY: int, DestZ: int, WorldNum: int) -> bool: pass
+    async def IsWorldCellPassable(self, CurrX: int, CurrY: int, CurrZ: int, DestX: int, DestY: int, WorldNum: int) -> bool: pass
     async def IsYellowHits(self, ObjID: int) -> bool: pass
     async def Journal(self, StringIndex: int) -> str: pass
     async def LastAttack(self) -> int: pass
@@ -421,9 +421,10 @@ class AsyncInterface:
     async def Weight(self) -> int: pass
     async def WorldNum(self) -> int: pass
     async def _EventCallback(self, EventId: int, Arguments: tuple) -> None: pass
-    async def _FunctionResult(self, CallId: int, Result: bytes) -> None: pass
+    async def _FunctionResultCallback(self, CallId: int, Result: bytes) -> None: pass
     async def _LangVersion(self, Lang: int, Major: int, Minor: int, Revision: int, Build: int) -> None: pass
     async def _ScriptPath(self, ScriptName: str) -> None: pass
-    async def _ScriptPathRequest(self) -> None: pass
+    async def _ScriptPathCallback(self) -> None: pass
+    async def _ScriptTogglePauseCallback(self) -> None: pass
     async def _SelectProfile(self, ProfileName: str) -> None: pass
-    async def _StopScriptRequest(self) -> None: pass
+    async def _StopScriptCallback(self) -> None: pass

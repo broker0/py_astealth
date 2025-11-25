@@ -11,9 +11,9 @@ from datetime import datetime
 class SyncInterface:
     """base class defining the interface of StealthApi."""
 
-    def AddChatUserIgnore(self, Mobile: str) -> None: pass
+    def AddChatUserIgnore(self, UserName: str) -> None: pass
     def AddFigure(self, Figure: MapFigure) -> int: pass
-    def AddGumpIgnoreByID(self, ObjID: int) -> None: pass
+    def AddGumpIgnoreByID(self, GumpID: int) -> None: pass
     def AddGumpIgnoreBySerial(self, Serial: int) -> None: pass
     def AddJournalIgnore(self, Str: str) -> None: pass
     def AddToJournal(self, Text: str) -> None: pass
@@ -110,7 +110,7 @@ class SyncInterface:
     def GetCell(self, X: int, Y: int, WorldNum: int) -> MapCell: pass
     def GetCharsListForShard(self) -> list[str]: pass
     def GetClientVersionInt(self) -> int: pass
-    def GetClilocByID(self, ClilocID: int) -> str: pass
+    def GetClilocByID(self, ClilocID: int, Params: list[str]) -> str: pass
     def GetColor(self, ObjID: int) -> int: pass
     def GetContextMenu(self) -> list[str]: pass
     def GetContextMenuRec(self) -> ContextMenuRec: pass
@@ -260,7 +260,7 @@ class SyncInterface:
     def IsRunning(self, ObjID: int) -> bool: pass
     def IsTrade(self) -> bool: pass
     def IsWarMode(self, ObjID: int) -> bool: pass
-    def IsWorldCellPassable(self, CurrX: int, CurrY: int, CurrZ: int, DestX: int, DestY: int, DestZ: int, WorldNum: int) -> bool: pass
+    def IsWorldCellPassable(self, CurrX: int, CurrY: int, CurrZ: int, DestX: int, DestY: int, WorldNum: int) -> bool: pass
     def IsYellowHits(self, ObjID: int) -> bool: pass
     def Journal(self, StringIndex: int) -> str: pass
     def LastAttack(self) -> int: pass
@@ -421,9 +421,10 @@ class SyncInterface:
     def Weight(self) -> int: pass
     def WorldNum(self) -> int: pass
     def _EventCallback(self, EventId: int, Arguments: tuple) -> None: pass
-    def _FunctionResult(self, CallId: int, Result: bytes) -> None: pass
+    def _FunctionResultCallback(self, CallId: int, Result: bytes) -> None: pass
     def _LangVersion(self, Lang: int, Major: int, Minor: int, Revision: int, Build: int) -> None: pass
     def _ScriptPath(self, ScriptName: str) -> None: pass
-    def _ScriptPathRequest(self) -> None: pass
+    def _ScriptPathCallback(self) -> None: pass
+    def _ScriptTogglePauseCallback(self) -> None: pass
     def _SelectProfile(self, ProfileName: str) -> None: pass
-    def _StopScriptRequest(self) -> None: pass
+    def _StopScriptCallback(self) -> None: pass

@@ -9,9 +9,9 @@ from datetime import datetime
 
 
 
-async def AddChatUserIgnore(Mobile: str) -> None: pass
+async def AddChatUserIgnore(UserName: str) -> None: pass
 async def AddFigure(Figure: MapFigure) -> int: pass
-async def AddGumpIgnoreByID(ObjID: int) -> None: pass
+async def AddGumpIgnoreByID(GumpID: int) -> None: pass
 async def AddGumpIgnoreBySerial(Serial: int) -> None: pass
 async def AddJournalIgnore(Str: str) -> None: pass
 async def AddToJournal(Text: str) -> None: pass
@@ -108,7 +108,7 @@ async def GetBuffBarInfo() -> list[BuffBarInfo]: pass
 async def GetCell(X: int, Y: int, WorldNum: int) -> MapCell: pass
 async def GetCharsListForShard() -> list[str]: pass
 async def GetClientVersionInt() -> int: pass
-async def GetClilocByID(ClilocID: int) -> str: pass
+async def GetClilocByID(ClilocID: int, Params: list[str]) -> str: pass
 async def GetColor(ObjID: int) -> int: pass
 async def GetContextMenu() -> list[str]: pass
 async def GetContextMenuRec() -> ContextMenuRec: pass
@@ -258,7 +258,7 @@ async def IsPoisoned(ObjID: int) -> bool: pass
 async def IsRunning(ObjID: int) -> bool: pass
 async def IsTrade() -> bool: pass
 async def IsWarMode(ObjID: int) -> bool: pass
-async def IsWorldCellPassable(CurrX: int, CurrY: int, CurrZ: int, DestX: int, DestY: int, DestZ: int, WorldNum: int) -> bool: pass
+async def IsWorldCellPassable(CurrX: int, CurrY: int, CurrZ: int, DestX: int, DestY: int, WorldNum: int) -> bool: pass
 async def IsYellowHits(ObjID: int) -> bool: pass
 async def Journal(StringIndex: int) -> str: pass
 async def LastAttack() -> int: pass
@@ -419,9 +419,10 @@ async def WearItem(Layer: int, ObjID: int) -> bool: pass
 async def Weight() -> int: pass
 async def WorldNum() -> int: pass
 async def _EventCallback(EventId: int, Arguments: tuple) -> None: pass
-async def _FunctionResult(CallId: int, Result: bytes) -> None: pass
+async def _FunctionResultCallback(CallId: int, Result: bytes) -> None: pass
 async def _LangVersion(Lang: int, Major: int, Minor: int, Revision: int, Build: int) -> None: pass
 async def _ScriptPath(ScriptName: str) -> None: pass
-async def _ScriptPathRequest() -> None: pass
+async def _ScriptPathCallback() -> None: pass
+async def _ScriptTogglePauseCallback() -> None: pass
 async def _SelectProfile(ProfileName: str) -> None: pass
-async def _StopScriptRequest() -> None: pass
+async def _StopScriptCallback() -> None: pass
