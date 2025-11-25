@@ -1,8 +1,10 @@
 from datetime import datetime, timedelta
 from time import sleep
+from typing import Union
 
 from . import api
 from ._internals import _manager
+from py_astealth.stealth_enums import Spell
 
 
 def _get_skill_id(skill_name: str) -> int:
@@ -11,6 +13,32 @@ def _get_skill_id(skill_name: str) -> int:
     if skill_id < 0:
         raise ValueError(f'Unknown skill name: "{skill_name}"')
     return skill_id
+
+
+def _get_spell_id(spell: Union[str, int, Spell]) -> int:
+    """
+    Convert spell to spell ID.
+    Accepts:
+    - str: spell name (case-insensitive, spaces/underscores ignored)
+    - int: spell ID directly
+    - Spell: enum member
+    Returns: int spell ID
+    """
+    if isinstance(spell, int):
+        return spell
+    elif isinstance(spell, Spell):
+        return spell.value
+    elif isinstance(spell, str):
+        # Normalize: lowercase, remove spaces and underscores
+        normalized = spell.lower().replace(' ', '').replace('_', '')
+        # Try to find matching Spell enum member
+        for spell_enum in Spell:
+            enum_normalized = spell_enum.name.lower()
+            if enum_normalized == normalized:
+                return spell_enum.value
+        raise ValueError(f'Unknown spell name: "{spell}"')
+    else:
+        raise TypeError(f'Invalid spell type: {type(spell)}. Expected str, int, or Spell enum')
 
 
 def AddToSystemJournal(*args, **kwargs):
@@ -134,6 +162,54 @@ def GetSkillLockState(skill_name: str) -> int:
     return api.GetSkillLockState(_get_skill_id(skill_name))
 
 
+# Spell helper functions
+def Cast(spell: Union[str, int, Spell]) -> bool:
+    """
+    Cast a spell.
+    
+    Args:
+        spell: Spell name (str), ID (int), or Spell enum member
+        
+    Examples:
+        Cast("Magic Arrow")  # old style
+        Cast(Spell.MagicArrow)  # new style with enum
+        Cast(5)  # direct ID
+    """
+    api.Cast(_get_spell_id(spell))
+    return True
+
+
+def CastToObj(spell: Union[str, int, Spell], obj_id: int) -> None:
+    """
+    Cast a spell on a target object.
+    
+    Args:
+        spell: Spell name (str), ID (int), or Spell enum member
+        obj_id: Target object ID
+    """
+    api.WaitTargetObject(obj_id)
+    api.Cast(_get_spell_id(spell))
+
+
+# Alias for CastToObj
+def CastToObject(spell: Union[str, int, Spell], obj_id: int) -> None:
+    """Alias for CastToObj."""
+    CastToObj(spell, obj_id)
+
+
+def IsActiveSpellAbility(spell: Union[str, int, Spell]) -> bool:
+    """
+    Check if a spell or ability is currently active.
+    
+    Args:
+        spell: Spell name (str), ID (int), or Spell enum member
+        
+    Returns:
+        True if the spell/ability is active, False otherwise
+    """
+    return api.IsActiveSpellAbility(_get_spell_id(spell))
+
+
 __all__ = [
     'AddToSystemJournal',
     'GetEvent',
@@ -147,5 +223,7 @@ __all__ = [
     'RstkLayer', 'NRstkLayer', 'SellLayer', 'BankLayer',
     # Skill helpers
     'UseSkill', 'GetSkillValue', 'GetSkillCurrentValue', 'GetSkillCap',
-    'SetSkillLockState', 'GetSkillLockState'
+    'SetSkillLockState', 'GetSkillLockState',
+    # Spell helpers
+    'Cast', 'CastToObj', 'CastToObject', 'IsActiveSpellAbility'
 ]
