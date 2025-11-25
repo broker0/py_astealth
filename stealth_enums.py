@@ -1,6 +1,13 @@
 from enum import IntEnum
 
 
+class Messenger(IntEnum):
+    """Messenger types for notifications."""
+    Telegram = 1
+    Viber = 2
+    Discord = 3
+
+
 class FigureKind(IntEnum):
     fkLine = 0
     fkEllipse = 1

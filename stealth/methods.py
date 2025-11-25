@@ -2,9 +2,9 @@ from datetime import datetime, timedelta
 from time import sleep
 from typing import Union
 
-from . import api
-from ._internals import _manager
-from py_astealth.stealth_enums import Spell
+from py_astealth.stealth import api
+from py_astealth.stealth._internals import _manager
+from py_astealth.stealth_enums import Spell, Messenger, Layer
 
 
 def _get_skill_id(skill_name: str) -> int:
@@ -39,6 +39,32 @@ def _get_spell_id(spell: Union[str, int, Spell]) -> int:
         raise ValueError(f'Unknown spell name: "{spell}"')
     else:
         raise TypeError(f'Invalid spell type: {type(spell)}. Expected str, int, or Spell enum')
+
+
+def _get_messenger_id(messenger: Union[str, int, Messenger]) -> int:
+    """
+    Convert messenger to messenger ID.
+    Accepts:
+    - str: messenger name (case-insensitive: 'Telegram', 'Viber', 'Discord')
+    - int: messenger ID directly (1, 2, 3) or 0 for default (Telegram)
+    - Messenger: enum member
+    Returns: int messenger ID
+    """
+    if isinstance(messenger, int):
+        # 0 means default (Telegram)
+        return 1 if messenger == 0 else messenger
+    elif isinstance(messenger, Messenger):
+        return messenger.value
+    elif isinstance(messenger, str):
+        # Normalize: lowercase
+        normalized = messenger.lower()
+        # Try to find matching Messenger enum member
+        for mes_enum in Messenger:
+            if mes_enum.name.lower() == normalized:
+                return mes_enum.value
+        raise ValueError(f'Unknown messenger name: "{messenger}". Must be "Telegram", "Viber", or "Discord"')
+    else:
+        raise TypeError(f'Invalid messenger type: {type(messenger)}. Expected str, int, or Messenger enum')
 
 
 def AddToSystemJournal(*args, **kwargs):
@@ -97,7 +123,6 @@ def Wait(delay):
         event = WaitForEvent(delay)
 
 
-from py_astealth.stealth_enums import Layer
 
 # Layer constants/functions
 def RhandLayer(): return Layer.RhandLayer
@@ -383,6 +408,80 @@ def UseType2(obj_type: int) -> int:
     return api.UseType(obj_type, 0xFFFF)
 
 
+# Messenger helpers
+def MessengerGetConnected(messenger: Union[str, int, Messenger]) -> bool:
+    """
+    Check if messenger is connected.
+    
+    Args:
+        messenger: Messenger name (str), ID (int), or Messenger enum
+        
+    Returns:
+        True if connected, False otherwise
+    """
+    return api.Messenger_GetConnected(_get_messenger_id(messenger))
+
+
+def MessengerSetConnected(messenger: Union[str, int, Messenger], value: bool) -> None:
+    """
+    Set messenger connection status.
+    
+    Args:
+        messenger: Messenger name (str), ID (int), or Messenger enum
+        value: Connection status
+    """
+    api.Messenger_SetConnected(_get_messenger_id(messenger), value)
+
+
+def MessengerGetToken(messenger: Union[str, int, Messenger]) -> str:
+    """
+    Get messenger token.
+    
+    Args:
+        messenger: Messenger name (str), ID (int), or Messenger enum
+        
+    Returns:
+        Messenger token
+    """
+    return api.Messenger_GetToken(_get_messenger_id(messenger))
+
+
+def MessengerSetToken(messenger: Union[str, int, Messenger], token: str) -> None:
+    """
+    Set messenger token.
+    
+    Args:
+        messenger: Messenger name (str), ID (int), or Messenger enum
+        token: Authentication token
+    """
+    api.Messenger_SetToken(_get_messenger_id(messenger), token)
+
+
+def MessengerGetName(messenger: Union[str, int, Messenger]) -> str:
+    """
+    Get messenger name.
+    
+    Args:
+        messenger: Messenger name (str), ID (int), or Messenger enum
+        
+    Returns:
+        Messenger name
+    """
+    return api.Messenger_GetName(_get_messenger_id(messenger))
+
+
+def MessengerSendMessage(messenger: Union[str, int, Messenger], msg: str, user_id: str) -> None:
+    """
+    Send a message via messenger.
+    
+    Args:
+        messenger: Messenger name (str), ID (int), or Messenger enum
+        msg: Message text
+        user_id: Recipient user ID
+    """
+    api.Messenger_SendMessage(_get_messenger_id(messenger), msg, user_id)
+
+
 __all__ = [
     'AddToSystemJournal',
     'GetEvent',
@@ -408,5 +507,8 @@ __all__ = [
     # CatchBag helpers
     'SetCatchBag', 'UnsetCatchBag',
     # UseType helpers
-    'UseType2'
+    'UseType2',
+    # Messenger helpers
+    'MessengerGetConnected', 'MessengerSetConnected', 'MessengerGetToken',
+    'MessengerSetToken', 'MessengerGetName', 'MessengerSendMessage'
 ]
