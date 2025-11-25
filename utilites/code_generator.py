@@ -23,6 +23,14 @@ class CodeGenerator:
             inner_types = ", ".join(arg_list)
             return f"{origin.__name__}[{inner_types}]"
 
+        if origin is tuple:
+            arg_list = []
+            for arg in typing.get_args(type_obj):
+                arg_list.append(f"{CodeGenerator.get_type_name(arg)}")
+
+            inner_types = ", ".join(arg_list)
+            return f"{origin.__name__}[{inner_types}]"
+
         # apply type mapping, for example 'I8' will be replaced with 'int'
         if hasattr(type_obj, '_mapping') and type_obj._mapping is not None:
             type_obj = type_obj._mapping
@@ -40,6 +48,14 @@ class CodeGenerator:
 
         origin = typing.get_origin(type_obj)
         if origin is list:  # list special case
+            arg_list = []
+            for arg in typing.get_args(type_obj):
+                arg_list.append(f"{CodeGenerator.get_original_type_name(arg)}")
+
+            inner_types = ", ".join(arg_list)
+            return f"{origin.__name__}[{inner_types}]"
+
+        if origin is tuple:
             arg_list = []
             for arg in typing.get_args(type_obj):
                 arg_list.append(f"{CodeGenerator.get_original_type_name(arg)}")

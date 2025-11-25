@@ -260,7 +260,7 @@ class SyncInterface:
     def IsRunning(self, ObjID: int) -> bool: pass
     def IsTrade(self) -> bool: pass
     def IsWarMode(self, ObjID: int) -> bool: pass
-    def IsWorldCellPassable(self, CurrX: int, CurrY: int, CurrZ: int, DestX: int, DestY: int, WorldNum: int) -> bool: pass
+    def IsWorldCellPassable(self, CurrX: int, CurrY: int, CurrZ: int, DestX: int, DestY: int, WorldNum: int) -> tuple[bool, int]: pass
     def IsYellowHits(self, ObjID: int) -> bool: pass
     def Journal(self, StringIndex: int) -> str: pass
     def LastAttack(self) -> int: pass

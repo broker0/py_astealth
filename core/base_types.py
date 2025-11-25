@@ -44,6 +44,13 @@ class RPCType(ABC):
                 RPCType.pack_value(stream, item, inner_type)
             return
 
+        # if this is a tuple we write the tuple elements sequentially
+        if origin is tuple:
+            inner_types = typing.get_args(type_obj)
+            for item, item_type in zip(value, inner_types):
+                RPCType.pack_value(stream, item, item_type)
+            return
+
         # If the type is inherited from StealthType, then we call its pack method
         if inspect.isclass(type_obj) and issubclass(type_obj, RPCType):
             type_obj.pack_simple_value(stream, value)
@@ -69,6 +76,11 @@ class RPCType(ABC):
             # we read the required number of elements and return the list
             inner_type = typing.get_args(type_obj)[0]
             return [RPCType.unpack_value(stream, inner_type) for _ in range(count)]
+
+        # Processing the tuple
+        if origin is tuple:
+            inner_types = typing.get_args(type_obj)
+            return tuple(RPCType.unpack_value(stream, t) for t in inner_types)
 
         # If the type is inherited from StealthType, then we call its unpack method
         if inspect.isclass(type_obj) and issubclass(type_obj, RPCType):

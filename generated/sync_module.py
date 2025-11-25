@@ -258,7 +258,7 @@ def IsPoisoned(ObjID: int) -> bool: pass
 def IsRunning(ObjID: int) -> bool: pass
 def IsTrade() -> bool: pass
 def IsWarMode(ObjID: int) -> bool: pass
-def IsWorldCellPassable(CurrX: int, CurrY: int, CurrZ: int, DestX: int, DestY: int, WorldNum: int) -> bool: pass
+def IsWorldCellPassable(CurrX: int, CurrY: int, CurrZ: int, DestX: int, DestY: int, WorldNum: int) -> tuple[bool, int]: pass
 def IsYellowHits(ObjID: int) -> bool: pass
 def Journal(StringIndex: int) -> str: pass
 def LastAttack() -> int: pass

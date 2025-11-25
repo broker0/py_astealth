@@ -598,9 +598,8 @@ class StealthApi(ApiSpecification):
     # pathfinding, los
     ####################################################################################################################
 
-    # TODO real result format is tuple (Bool, I8)
     @ApiSpecification.method(438)
-    def IsWorldCellPassable(self, CurrX: U16, CurrY: U16, CurrZ: I8, DestX: U16, DestY: U16, WorldNum: U8) -> Bool: ...
+    def IsWorldCellPassable(self, CurrX: U16, CurrY: U16, CurrZ: I8, DestX: U16, DestY: U16, WorldNum: U8) -> tuple[Bool, I8]: ...
 
     @ApiSpecification.method(499)
     def CheckLOS(self, Xfrom: U16, Yfrom: U16, Zfrom: I8, Xto: U16, Yto: U16, Zto: I8, WorldNum: U8, CheckType: U8, Options: U32) -> Bool: ...

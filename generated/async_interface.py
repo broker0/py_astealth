@@ -260,7 +260,7 @@ class AsyncInterface:
     async def IsRunning(self, ObjID: int) -> bool: pass
     async def IsTrade(self) -> bool: pass
     async def IsWarMode(self, ObjID: int) -> bool: pass
-    async def IsWorldCellPassable(self, CurrX: int, CurrY: int, CurrZ: int, DestX: int, DestY: int, WorldNum: int) -> bool: pass
+    async def IsWorldCellPassable(self, CurrX: int, CurrY: int, CurrZ: int, DestX: int, DestY: int, WorldNum: int) -> tuple[bool, int]: pass
     async def IsYellowHits(self, ObjID: int) -> bool: pass
     async def Journal(self, StringIndex: int) -> str: pass
     async def LastAttack(self) -> int: pass

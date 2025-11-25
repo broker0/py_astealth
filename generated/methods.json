@@ -3189,7 +3189,7 @@
                 "type": "U8"
             }
         ],
-        "result": "Bool"
+        "result": "tuple[Bool, I8]"
     },
     {
         "name": "GetStaticTilesArray",
