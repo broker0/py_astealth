@@ -2,7 +2,7 @@
 from typing import Union
 
 from py_astealth.stealth import api
-from py_astealth.stealth_enums import Spell, Messenger
+from py_astealth.stealth_enums import Spell, Messenger, Global
 
 
 def _get_skill_id(skill_name: str) -> int:
@@ -63,3 +63,29 @@ def _get_messenger_id(messenger: Union[str, int, Messenger]) -> int:
         raise ValueError(f'Unknown messenger name: "{messenger}". Must be "Telegram", "Viber", or "Discord"')
     else:
         raise TypeError(f'Invalid messenger type: {type(messenger)}. Expected str, int, or Messenger enum')
+
+
+def _get_global_region_id(region: Union[str, int, Global]) -> int:
+    """
+    Convert global region to region ID.
+    Accepts:
+    - str: region name (case-insensitive: 'Stealth', 'Char')
+    - int: region ID directly (0, 1)
+    - GlobalRegion: enum member
+    Returns: int region ID
+    """
+
+    if isinstance(region, int):
+        return region
+    elif isinstance(region, Global):
+        return region.value
+    elif isinstance(region, str):
+        # Normalize: lowercase
+        normalized = region.lower()
+        # Try to find matching Global enum member
+        for reg_enum in Global:
+            if reg_enum.name.lower() == normalized:
+                return reg_enum.value
+        raise ValueError(f'Unknown global region: "{region}". Must be "Stealth" or "Char"')
+    else:
+        raise TypeError(f'Invalid global region type: {type(region)}. Expected str, int, or GlobalRegion enum')

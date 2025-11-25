@@ -5,6 +5,7 @@ from time import sleep
 from py_astealth.stealth import api
 from py_astealth.stealth._internals import _manager
 from py_astealth.stealth_enums import Layer
+from py_astealth.stealth.helpers._converters import _get_global_region_id
 
 
 def AddToSystemJournal(*args, **kwargs):
@@ -71,6 +72,33 @@ def SellLayer(): return Layer.SellLayer
 def BankLayer(): return Layer.BankLayer
 
 
+# Global variables
+def SetGlobal(region, var_name: str, var_value: str) -> None:
+    """
+    Set a global variable in specified region.
+    
+    Args:
+        region: Region ('Stealth'/'Char', 0/1, or GlobalRegion enum)
+        var_name: Variable name
+        var_value: Variable value
+    """
+    api.SetGlobal(_get_global_region_id(region), var_name, var_value)
+
+
+def GetGlobal(region, var_name: str) -> str:
+    """
+    Get a global variable from specified region.
+    
+    Args:
+        region: Region ('Stealth'/'Char', 0/1, or GlobalRegion enum)
+        var_name: Variable name
+        
+    Returns:
+        Variable value
+    """
+    return api.GetGlobal(_get_global_region_id(region), var_name)
+
+
 __all__ = [
     'AddToSystemJournal',
     'GetEvent',
@@ -82,4 +110,5 @@ __all__ = [
     'TorsoLayer', 'BraceLayer', 'BeardLayer', 'TorsoHLayer', 'EarLayer', 'ArmsLayer',
     'CloakLayer', 'BpackLayer', 'RobeLayer', 'EggsLayer', 'LegsLayer', 'HorseLayer',
     'RstkLayer', 'NRstkLayer', 'SellLayer', 'BankLayer',
+    'SetGlobal', 'GetGlobal',
 ]

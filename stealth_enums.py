@@ -8,6 +8,12 @@ class Messenger(IntEnum):
     Discord = 3
 
 
+class Global(IntEnum):
+    """Global variable storage regions."""
+    Stealth = 0
+    Char = 1
+
+
 class FigureKind(IntEnum):
     fkLine = 0
     fkEllipse = 1
