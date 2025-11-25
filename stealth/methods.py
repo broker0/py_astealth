@@ -210,6 +210,52 @@ def IsActiveSpellAbility(spell: Union[str, int, Spell]) -> bool:
     return api.IsActiveSpellAbility(_get_spell_id(spell))
 
 
+# Journal helper functions
+def _wait_journal_line_internal(start_time: datetime, text: str, max_wait_ms: int, check_system: bool) -> bool:
+    """Internal helper for waiting journal lines."""
+    if max_wait_ms:
+        stop_time = start_time + timedelta(milliseconds=max_wait_ms)
+    else:
+        stop_time = datetime.max
+    
+    while datetime.now() <= stop_time:
+        if api.InJournalBetweenTimes(text, start_time, stop_time) >= 0:
+            if not check_system or api.GetLineName() == 'System':
+                return True
+        Wait(10)
+    return False
+
+
+def WaitJournalLine(start_time: datetime, text: str, max_wait_ms: int = 0) -> bool:
+    """
+    Wait for a journal line containing the specified text.
+    
+    Args:
+        start_time: Starting time for the search window (datetime object)
+        text: Text to search for in journal
+        max_wait_ms: Maximum wait time in milliseconds (0 = wait indefinitely)
+        
+    Returns:
+        True if text was found, False if timeout
+    """
+    return _wait_journal_line_internal(start_time, text, max_wait_ms, check_system=False)
+
+
+def WaitJournalLineSystem(start_time: datetime, text: str, max_wait_ms: int = 0) -> bool:
+    """
+    Wait for a system journal line containing the specified text.
+    
+    Args:
+        start_time: Starting time for the search window (datetime object)
+        text: Text to search for in journal
+        max_wait_ms: Maximum wait time in milliseconds (0 = wait indefinitely)
+        
+    Returns:
+        True if system message with text was found, False if timeout
+    """
+    return _wait_journal_line_internal(start_time, text, max_wait_ms, check_system=True)
+
+
 __all__ = [
     'AddToSystemJournal',
     'GetEvent',
@@ -225,5 +271,7 @@ __all__ = [
     'UseSkill', 'GetSkillValue', 'GetSkillCurrentValue', 'GetSkillCap',
     'SetSkillLockState', 'GetSkillLockState',
     # Spell helpers
-    'Cast', 'CastToObj', 'CastToObject', 'IsActiveSpellAbility'
+    'Cast', 'CastToObj', 'CastToObject', 'IsActiveSpellAbility',
+    # Journal helpers
+    'WaitJournalLine', 'WaitJournalLineSystem'
 ]
