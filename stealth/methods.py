@@ -309,6 +309,39 @@ def ClickOnObject(obj_id: int) -> None:
         api.ClickOnObject(obj_id)
 
 
+# Target helpers
+def TargetPresent() -> bool:
+    """Check if target cursor is present."""
+    return bool(api.TargetID())
+
+
+def WaitForTarget(max_wait_ms: int) -> bool:
+    """
+    Wait for target cursor to appear.
+    
+    Args:
+        max_wait_ms: Maximum wait time in milliseconds
+        
+    Returns:
+        True if target appeared, False if timeout
+    """
+    from time import time
+    start_time = time()
+    end_time = start_time + max_wait_ms / 1000
+    
+    while not api.TargetID() and time() < end_time:
+        Wait(10)
+    
+    return time() < end_time
+
+
+def CancelTarget() -> None:
+    """Cancel target cursor and wait until it disappears."""
+    api.CancelTarget()
+    while api.TargetID():
+        Wait(10)
+
+
 __all__ = [
     'AddToSystemJournal',
     'GetEvent',
@@ -328,5 +361,7 @@ __all__ = [
     # Journal helpers
     'WaitJournalLine', 'WaitJournalLineSystem',
     # Find and Click helpers
-    'Ground', 'FindType', 'FindTypeEx', 'ClickOnObject'
+    'Ground', 'FindType', 'FindTypeEx', 'ClickOnObject',
+    # Target helpers
+    'TargetPresent', 'WaitForTarget', 'CancelTarget'
 ]
