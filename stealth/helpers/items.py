@@ -1,6 +1,52 @@
 """Item-related helpers: finding, clicking, and moving items."""
 from py_astealth.stealth import api
+from py_astealth.stealth_enums import Reagent
 from .common import Wait, AddToSystemJournal
+
+
+class FinderSettings:
+    """
+    Helper class for managing Find-related settings similar to MoverSettings.
+    
+    Usage:
+        # Set settings
+        FinderSettings.FindDistance = 20
+        FinderSettings.FindInNulPoint = True
+    """
+    
+    @property
+    def FindDistance(self) -> int:
+        """Get current find distance."""
+        return api.GetFindDistance()
+    
+    @FindDistance.setter
+    def FindDistance(self, value: int) -> None:
+        """Set find distance."""
+        api.SetFindDistance(value)
+
+    @property
+    def FindVertical(self) -> int:
+        """Get current find vertical distance."""
+        return api.GetFindVertical()
+
+    @FindDistance.setter
+    def FindVertical(self, value: int) -> None:
+        """Set find vertical distance."""
+        api.SetFindVertical(value)
+    
+    @property
+    def FindInNulPoint(self) -> bool:
+        """Get whether to search at null point (0, 0, 0)."""
+        return api.GetFindInNulPoint()
+    
+    @FindInNulPoint.setter
+    def FindInNulPoint(self, value: bool) -> None:
+        """Set whether to search at null point (0, 0, 0)."""
+        api.SetFindInNulPoint(value)
+
+
+# Create a singleton instance
+Finder = FinderSettings()
 
 
 # Find and Click helpers
@@ -172,7 +218,63 @@ def EmptyContainer(container: int, dest_container: int, delay_ms: int) -> bool:
     return MoveItems(container, -1, -1, dest_container, 0xFFFF, 0xFFFF, 0, delay_ms)
 
 
+# Count helpers
+def Count(obj_type: int) -> int:
+    """Count items of type in backpack."""
+    FindType(obj_type, api.Backpack())
+    return api.FindFullQuantity()
+
+
+def CountGround(obj_type: int) -> int:
+    """Count items of type on ground."""
+    FindType(obj_type, Ground())
+    return api.FindFullQuantity()
+
+
+def CountEx(obj_type: int, color: int, container: int) -> int:
+    """Count items of type and color in container."""
+    FindTypeEx(obj_type, color, container, False)
+    return api.FindFullQuantity()
+
+
+# Reagent count helpers
+def BPCount() -> int:
+    """Count Black Pearl in backpack."""
+    return CountEx(Reagent.BlackPearl, 0, api.Backpack())
+
+def BMCount() -> int:
+    """Count Blood Moss in backpack."""
+    return CountEx(Reagent.BloodMoss, 0, api.Backpack())
+
+def GACount() -> int:
+    """Count Garlic in backpack."""
+    return CountEx(Reagent.Garlic, 0, api.Backpack())
+
+def GSCount() -> int:
+    """Count Ginseng in backpack."""
+    return CountEx(Reagent.Ginseng, 0, api.Backpack())
+
+def MRCount() -> int:
+    """Count Mandrake Root in backpack."""
+    return CountEx(Reagent.MandrakeRoot, 0, api.Backpack())
+
+def NSCount() -> int:
+    """Count Nightshade in backpack."""
+    return CountEx(Reagent.Nightshade, 0, api.Backpack())
+
+def SACount() -> int:
+    """Count Sulfurous Ash in backpack."""
+    return CountEx(Reagent.SulfurousAsh, 0, api.Backpack())
+
+def SSCount() -> int:
+    """Count Spider's Silk in backpack."""
+    return CountEx(Reagent.SpidersSilk, 0, api.Backpack())
+
+
 __all__ = [
+    'FinderSettings', 'Finder',
     'Ground', 'FindType', 'FindTypeEx', 'ClickOnObject',
     'MoveItem', 'Grab', 'Drop', 'DropHere', 'MoveItems', 'EmptyContainer',
+    'Count', 'CountGround', 'CountEx',
+    'BPCount', 'BMCount', 'GACount', 'GSCount', 'MRCount', 'NSCount', 'SACount', 'SSCount',
 ]
