@@ -85,6 +85,10 @@ def CheckLag(timeout_ms=10000):
     return False
 
 
+def IsGump() -> bool:
+    """Check if any gump is present."""
+    return api.GetGumpsCount() > 0
+
 
 __all__ = [
     'AddToSystemJournal',
@@ -95,4 +99,5 @@ __all__ = [
     'Wait',
     'SetGlobal', 'GetGlobal',
     'CheckLag',
+    'IsGump'
 ]
