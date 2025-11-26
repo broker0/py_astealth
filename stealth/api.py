@@ -9,6 +9,8 @@ using the global client manager to handle threading and async operations.
 from py_astealth.stealth_api import StealthApi
 from ._internals import _create_global_proxy
 
+from py_astealth.generated.sync_module import *
+
 # Auto-generate synchronous wrappers for all API methods
 __all__ = []
 

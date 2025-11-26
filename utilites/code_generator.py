@@ -2,7 +2,10 @@ import inspect
 import typing
 import json
 from typing import Any, Type
+
 from py_astealth.core.api_specification import ApiSpecification, MethodSpec
+from py_astealth.stealth_api import StealthApi
+
 
 class CodeGenerator:
     def __init__(self, api_spec: Type[ApiSpecification]):
@@ -111,6 +114,7 @@ class CodeGenerator:
             "", "",
             f"from py_astealth.stealth_types import *",
             f"from py_astealth.stealth_structs import *",
+            f"from py_astealth.stealth_enum import *",
             f"from datetime import datetime",
             "", "",
             ""
@@ -143,6 +147,7 @@ class CodeGenerator:
             "", "",
             f"from py_astealth.stealth_types import *",
             f"from py_astealth.stealth_structs import *",
+            f"from py_astealth.stealth_enum import *",
             f"from datetime import datetime",
             "", "",
             f"class {class_name}:",
@@ -165,3 +170,16 @@ class CodeGenerator:
             f.write("\n".join(lines))
 
         print(f"{prefix}interface '{self.api_spec.__name__}' generated in '{output_path}'")
+
+
+def main():
+    generator = CodeGenerator(StealthApi)
+    generator.generate_base_class("../generated/sync_interface.py", "SyncInterface", True)
+    generator.generate_base_class("../generated/async_interface.py", "AsyncInterface", False)
+    generator.generate_module("../generated/async_module.py", False)
+    generator.generate_module("../generated/sync_module.py", True)
+    generator.generate_json('../generated/methods.json')
+
+
+if __name__ == "__main__":
+    main()
