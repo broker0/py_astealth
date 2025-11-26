@@ -345,6 +345,32 @@ class Spell(IntEnum):
     CombatTraining = 744
 
 
+class Reagent(IntEnum):
+    """Reagent item types for UO."""
+    BlackPearl = 0x0F7A
+    BloodMoss = 0x0F7B
+    Garlic = 0x0F84
+    Ginseng = 0x0F85
+    MandrakeRoot = 0x0F86
+    Nightshade = 0x0F88
+    SulfurousAsh = 0x0F8C
+    SpidersSilk = 0x0F8D
+
+
+class TileGroup(IntEnum):
+    """Tile group types for GetTileFlags and related functions."""
+    Land = 0
+    Static = 1
+
+
+class UIWindowType(IntEnum):
+    """UI window types for CloseClientUIWindow."""
+    Paperdoll = 0
+    Status = 1
+    CharProfile = 2
+    Container = 3
+
+
 class LOSCheckType(IntEnum):
     Sphere = 1
     SphereAdv = 2
