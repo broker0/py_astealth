@@ -51,35 +51,6 @@ class CodeGenerator:
         return str(type_obj)
 
 
-    @staticmethod
-    def get_original_type_name(type_obj: Any) -> str:
-        """returns the original type name without applying _mapping transformation"""
-        if type_obj is type(None):
-            return "None"
-
-        origin = typing.get_origin(type_obj)
-        if origin is list:  # list special case
-            arg_list = []
-            for arg in typing.get_args(type_obj):
-                arg_list.append(f"{CodeGenerator.get_original_type_name(arg)}")
-
-            inner_types = ", ".join(arg_list)
-            return f"{origin.__name__}[{inner_types}]"
-
-        if origin is tuple:
-            arg_list = []
-            for arg in typing.get_args(type_obj):
-                arg_list.append(f"{CodeGenerator.get_original_type_name(arg)}")
-
-            inner_types = ", ".join(arg_list)
-            return f"{origin.__name__}[{inner_types}]"
-
-        # Do NOT apply type mapping - keep original type name
-        if hasattr(type_obj, '__name__'):
-            return type_obj.__name__
-
-        return str(type_obj)
-
     def generate_json(self, output_path):
         """Generate JSON file with API specification"""
         methods_data = []
