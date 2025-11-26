@@ -1,4 +1,6 @@
 """Base helper functions for events, logging, and layer constants."""
+import threading
+from collections import deque
 from datetime import datetime, timedelta
 from time import sleep
 
@@ -17,27 +19,76 @@ def AddToSystemJournal(*args, **kwargs):
     api.AddToSystemJournal(text)
 
 
-def GetEvent(event_type: int, delay: int):
-    """Get event from client."""
-    return _manager.get_event(event_type, delay)
+# Event related
+class ThreadContext(threading.local):
+    """
+    A data store unique to each thread.
+    __init__ will be called the first time it is accessed in a new thread.
+    """
+    def __init__(self):
+        super().__init__()
+        self.event_buffer = deque()
 
 
-def SetEventProc(event_name: str, handler):
-    """Set event processor for specified event."""
-    return _manager.set_event_proc(event_name, handler)
+_context = ThreadContext()
 
 
-def WaitForEvent(delay: int):
-    """Wait for any event."""
-    return _manager.wait_for_event(delay)
+def GetEvent():
+    return _manager.get_event_for_thread()
+
+
+def SetEventProc(event_type, handler):
+    _manager.set_handler_for_thread(event_type, handler)
+
+    if handler:
+        api.SetEventCallback(event_type)
+    else:
+        api.ClearEventCallback(event_type)
+
+
+def WaitForEvent(delay_ms: int = 0):
+    """
+    Waits for an event within the specified time (max_wait), specified in milliseconds.
+    If an event occurs, its handler is called, if one exists, and the function returns the event.
+    If the event is not received within the max_wait time, None is returned.
+    if max_wait==0 | None - wait forever
+    """
+    end_time = datetime.now() + timedelta(milliseconds=delay_ms) if delay_ms else datetime.max
+
+    while datetime.now() < end_time:
+        if _context.event_buffer:
+            return _context.event_buffer.popleft()
+
+        event = _manager.get_event_for_thread()
+        if event:
+            handler = _manager.get_handler_for_thread(event.id)
+            if handler:
+                handler(*event.arguments)
+                return event
+            else:
+                return event
+
+        sleep(1/1000)
+
+    return None
 
 
 def Wait(delay_ms: int):
     """Sleep for specified milliseconds."""
-    if delay_ms > 0:
-        sleep(delay_ms / 1000)
-    else:
-        event = WaitForEvent(delay_ms)
+    end_time = datetime.now() + timedelta(milliseconds=delay_ms)
+
+    while datetime.now() <= end_time:
+        event = _manager.get_event_for_thread()
+
+        if event:
+            handler = _manager.get_handler_for_thread(event.id)
+
+            if handler:
+                handler(*event.arguments)
+            else:
+                _context.event_buffer.append(event)
+
+        sleep(1/1000)
 
 
 # Global variables

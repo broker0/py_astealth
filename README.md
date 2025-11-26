@@ -14,7 +14,7 @@ after tuning, I was able to achieve just over 1,000 calls per second.
 This implementation increases the number of calls per second by 3-5 times.
 
 
-## Declarative Design
+### Declarative Design
 
 I tried to minimize the effort required to add new methods and types (structures) in the future.
 
