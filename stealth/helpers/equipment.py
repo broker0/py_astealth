@@ -1,6 +1,7 @@
 """Equipment helpers: managing character equipment."""
 from py_astealth.stealth import api
 from .items import FindType, MoveItem
+from .common import Wait
 from py_astealth.stealth_enums import Layer
 
 
@@ -117,8 +118,59 @@ def Disarm() -> bool:
     return all(results) if results else True
 
 
+def Undress() -> bool:
+    """
+    Undress all layers.
+    """
+    dress_set = []
+    client_version_int = api.GetClientVersionInt()
+    if client_version_int < 7007400:
+        delay = api.GetDressSpeed()
+        char = api.Self()
+        backpack = api.Backpack()
+        wearable_layers = (
+            RhandLayer(), LhandLayer(), ShoesLayer(), PantsLayer(),
+            ShirtLayer(), HatLayer(), GlovesLayer(), RingLayer(),
+            NeckLayer(), WaistLayer(), TorsoLayer(), BraceLayer(),
+            TorsoHLayer(), EarLayer(), ArmsLayer(), CloakLayer(),
+            RobeLayer(), EggsLayer(), LegsLayer()
+        )
+        for layer in wearable_layers:
+            item = api.ObjAtLayerEx(layer, char)
+            if item:
+                dress_set.append(MoveItem(item, 1, backpack, 0, 0, 0))
+                Wait(delay)
+    else:
+        api.UnequipItemsSetMacro()
+        dress_set.append(True)
+    return all(dress_set)
+
+
+def EquipDressSet() -> bool:
+    """Equip the saved dress set."""
+    res = []
+    client_version_int = api.GetClientVersionInt()
+    if client_version_int < 7007400:
+        delay = api.GetDressSpeed()
+        dress_set = api.GetDressSet()
+        for layer_obj in dress_set:
+            if layer_obj.ObjID:
+                res.append(Equip(layer_obj.Layer, layer_obj.ObjID))
+                Wait(delay)
+    else:
+        api.EquipItemsSetMacro()
+        res.append(True)
+    return all(res)
+
+
+def DressSavedSet() -> None:
+    """Alias for EquipDressSet."""
+    EquipDressSet()
+
+
 __all__ = [
     'ObjAtLayer', 'Equip', 'Equipt', 'UnEquip', 'Disarm',
+    'Undress', 'EquipDressSet', 'DressSavedSet',
     'RhandLayer', 'LhandLayer', 'ShoesLayer', 'PantsLayer', 'ShirtLayer', 'HatLayer',
     'GlovesLayer', 'RingLayer', 'TalismanLayer', 'NeckLayer', 'HairLayer', 'WaistLayer',
     'TorsoLayer', 'BraceLayer', 'BeardLayer', 'TorsoHLayer', 'EarLayer', 'ArmsLayer',
