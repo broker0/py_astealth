@@ -21,6 +21,7 @@ class AsyncInterface:
     async def AddToSystemJournal(self, Text: str) -> None: pass
     async def AddToSystemJournalEx(self, Text: str, TextColor: int, BgColor: int, FontSize: int, FontName: str) -> None: pass
     async def AddUserStatic(self, StaticItem: UserStaticItem, WorldNum: int) -> int: pass
+    async def Alarm(self) -> None: pass
     async def Armor(self) -> int: pass
     async def Attack(self, ObjID: int) -> None: pass
     async def AutoBuy(self, ItemType: int, ItemColor: int, Quantity: int) -> None: pass
@@ -41,8 +42,8 @@ class AsyncInterface:
     async def CancelWaitTarget(self) -> None: pass
     async def Cast(self, SpellID: int) -> None: pass
     async def ChangeProfile(self, Name: str) -> int: pass
+    async def ChangeProfileEx(self, ProfileName: str, ShardName: str, CharName: str) -> int: pass
     async def CharName(self) -> str: pass
-    async def CharTitle(self) -> str: pass
     async def CheckLOS(self, Xfrom: int, Yfrom: int, Zfrom: int, Xto: int, Yto: int, Zto: int, WorldNum: int, CheckType: int, Options: int) -> bool: pass
     async def CheckLagBegin(self) -> None: pass
     async def CheckLagEnd(self) -> None: pass
@@ -81,6 +82,7 @@ class AsyncInterface:
     async def ConvertIntegerToFlags(self, Group: int, Flags: int) -> list[str]: pass
     async def CreateChar(self, ProfileName: str, ShardName: str, CharName: str, Gender: bool, Race: int, Strn: int, Dex: int, Int: int, Skill1: str, Skill2: str, Skill3: str, Skill4: str, SkillValue1: int, SkillValue2: int, SkillValue3: int, SkillValue4: int, City: int, Slot: int) -> None: pass
     async def Dead(self) -> bool: pass
+    async def Dex(self) -> int: pass
     async def Disconnect(self) -> None: pass
     async def DisconnectedTime(self) -> datetime: pass
     async def DragItem(self, ObjID: int, Count: int) -> bool: pass
@@ -89,8 +91,7 @@ class AsyncInterface:
     async def EnergyResist(self) -> int: pass
     async def EquipItemsSetMacro(self) -> None: pass
     async def EquipLastWeapon(self) -> None: pass
-    async def ExtChangeProfile(self, ProfileName: str, ShardName: str, CharName: str) -> int: pass
-    async def FillInfoWindow(self, Text: str) -> None: pass
+    async def FillNewWindow(self, Text: str) -> None: pass
     async def FindAtCoord(self, X: int, Y: int) -> int: pass
     async def FindCount(self) -> int: pass
     async def FindFullQuantity(self) -> int: pass
@@ -109,6 +110,7 @@ class AsyncInterface:
     async def GetAutoSellDelay(self) -> int: pass
     async def GetBuffBarInfo(self) -> list[BuffBarInfo]: pass
     async def GetCell(self, X: int, Y: int, WorldNum: int) -> MapCell: pass
+    async def GetCharTitle(self) -> str: pass
     async def GetCharsListForShard(self) -> list[str]: pass
     async def GetClientVersionInt(self) -> int: pass
     async def GetClilocByID(self, ClilocID: int, Params: list[str]) -> str: pass
@@ -145,7 +147,6 @@ class AsyncInterface:
     async def GetLastStepQUsedDoor(self) -> int: pass
     async def GetLayer(self, ObjID: int) -> int: pass
     async def GetLayerCount(self, X: int, Y: int, WorldNum: int) -> int: pass
-    async def GetLineTime(self) -> datetime: pass
     async def GetMana(self, ObjID: int) -> int: pass
     async def GetMaxHP(self, ObjID: int) -> int: pass
     async def GetMaxMana(self, ObjID: int) -> int: pass
@@ -178,21 +179,13 @@ class AsyncInterface:
     async def GetQuestArrow(self) -> Point: pass
     async def GetRunMountTimer(self) -> int: pass
     async def GetRunUnmountTimer(self) -> int: pass
+    async def GetScriptCount(self) -> int: pass
     async def GetScriptName(self, ScriptIndex: int) -> str: pass
     async def GetScriptParams(self) -> int: pass
     async def GetScriptPath(self, ScriptIndex: int) -> str: pass
     async def GetScriptState(self, ScriptIndex: int) -> int: pass
-    async def GetScriptsCount(self) -> int: pass
     async def GetScriptsList(self) -> list[ScriptInfo]: pass
-    async def GetSelfDex(self) -> int: pass
-    async def GetSelfInt(self) -> int: pass
-    async def GetSelfLife(self) -> int: pass
-    async def GetSelfMana(self) -> int: pass
-    async def GetSelfMaxLife(self) -> int: pass
-    async def GetSelfMaxMana(self) -> int: pass
-    async def GetSelfMaxStam(self) -> int: pass
-    async def GetSelfStam(self) -> int: pass
-    async def GetSelfStr(self) -> int: pass
+    async def GetShardPath(self) -> str: pass
     async def GetShopList(self) -> list[str]: pass
     async def GetShowIPCExceptionWindow(self) -> bool: pass
     async def GetSilentMode(self) -> bool: pass
@@ -203,10 +196,11 @@ class AsyncInterface:
     async def GetSkillValue(self, SkillID: int) -> float: pass
     async def GetStam(self, ObjID: int) -> int: pass
     async def GetStatLockState(self, statNum: int) -> int: pass
-    async def GetStaticArt(self, ObjType: int, Hue: int) -> list[int]: pass
+    async def GetStaticArtBitmap(self, ObjType: int, Hue: int) -> list[int]: pass
     async def GetStaticTileData(self, Tile: int) -> StaticTileData: pass
     async def GetStaticTilesArray(self, Xmin: int, Ymin: int, Xmax: int, Ymax: int, WorldNum: int, TileTypes: list[int]) -> list[FoundTile]: pass
     async def GetStealthInfo(self) -> AboutData: pass
+    async def GetStealthProfilePath(self) -> str: pass
     async def GetStr(self, ObjID: int) -> int: pass
     async def GetSurfaceZ(self, X: int, Y: int, WorldNum: int) -> int: pass
     async def GetTileFlags(self, Group: int, Tile: int) -> int: pass
@@ -244,6 +238,7 @@ class AsyncInterface:
     async def InJournal(self, Str: str) -> int: pass
     async def InJournalBetweenTimes(self, Str: str, TimeBegin: datetime, TimeEnd: datetime) -> int: pass
     async def InParty(self) -> bool: pass
+    async def Int(self) -> int: pass
     async def InviteToParty(self, ObjID: int) -> None: pass
     async def IsActiveSpellAbility(self, SpellID: int) -> bool: pass
     async def IsCheckLagEnd(self) -> bool: pass
@@ -270,6 +265,7 @@ class AsyncInterface:
     async def LastObject(self) -> int: pass
     async def LastStatus(self) -> int: pass
     async def LastTarget(self) -> int: pass
+    async def Life(self) -> int: pass
     async def LineCount(self) -> int: pass
     async def LineID(self) -> int: pass
     async def LineIndex(self) -> int: pass
@@ -281,6 +277,11 @@ class AsyncInterface:
     async def LineType(self) -> int: pass
     async def LowJournal(self) -> int: pass
     async def Luck(self) -> int: pass
+    async def Mana(self) -> int: pass
+    async def MaxLife(self) -> int: pass
+    async def MaxMana(self) -> int: pass
+    async def MaxPets(self) -> int: pass
+    async def MaxStam(self) -> int: pass
     async def MaxWeight(self) -> int: pass
     async def MenuHookPresent(self) -> bool: pass
     async def MenuPresent(self) -> bool: pass
@@ -310,7 +311,6 @@ class AsyncInterface:
     async def PartySay(self, Msg: str) -> None: pass
     async def PauseResumeSelScript(self, ScriptIndex: int) -> None: pass
     async def PetsCurrent(self) -> int: pass
-    async def PetsMax(self) -> int: pass
     async def PoisonResist(self) -> int: pass
     async def Poisoned(self) -> bool: pass
     async def PredictedDirection(self) -> int: pass
@@ -336,7 +336,6 @@ class AsyncInterface:
     async def Self(self) -> int: pass
     async def SetARExtParams(self, ShardName: str, CharName: str, UseAtEveryConnect: bool) -> None: pass
     async def SetARStatus(self, Value: bool) -> None: pass
-    async def SetAlarm(self) -> None: pass
     async def SetAutoBuyDelay(self, Value: int) -> None: pass
     async def SetAutoSellDelay(self, Value: int) -> None: pass
     async def SetBadLocation(self, X: int, Y: int) -> None: pass
@@ -375,14 +374,14 @@ class AsyncInterface:
     async def SetWarMode(self, Value: bool) -> None: pass
     async def Sex(self) -> int: pass
     async def ShardName(self) -> str: pass
-    async def ShardPath(self) -> str: pass
+    async def Stam(self) -> int: pass
     async def StartScript(self, ScriptPath: str) -> int: pass
     async def StealthPath(self) -> str: pass
-    async def StealthProfilePath(self) -> str: pass
     async def Step(self, Direction: int, Running: bool) -> int: pass
     async def StepQ(self, Direction: int, Running: bool) -> int: pass
     async def StopAllScripts(self) -> None: pass
     async def StopScript(self, ScriptIndex: int) -> None: pass
+    async def Str(self) -> int: pass
     async def TargetByResource(self, ObjID: int, Resource: int) -> None: pass
     async def TargetID(self) -> int: pass
     async def TargetToObject(self, ObjID: int) -> None: pass

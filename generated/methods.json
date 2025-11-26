@@ -236,13 +236,13 @@
         "result": "String"
     },
     {
-        "name": "StealthProfilePath",
+        "name": "GetStealthProfilePath",
         "id": 37,
         "args": [],
         "result": "String"
     },
     {
-        "name": "ShardPath",
+        "name": "GetShardPath",
         "id": 38,
         "args": [],
         "result": "String"
@@ -401,12 +401,6 @@
         "result": "U16"
     },
     {
-        "name": "GetLineTime",
-        "id": 54,
-        "args": [],
-        "result": "DateTime"
-    },
-    {
         "name": "LineTime",
         "id": 54,
         "args": [],
@@ -521,7 +515,7 @@
         "result": "String"
     },
     {
-        "name": "GetScriptsCount",
+        "name": "GetScriptCount",
         "id": 67,
         "args": [],
         "result": "U16"
@@ -757,7 +751,7 @@
         "result": "None"
     },
     {
-        "name": "SetAlarm",
+        "name": "Alarm",
         "id": 89,
         "args": [],
         "result": "None"
@@ -826,7 +820,7 @@
         "result": "U8"
     },
     {
-        "name": "CharTitle",
+        "name": "GetCharTitle",
         "id": 206,
         "args": [],
         "result": "String"
@@ -862,7 +856,7 @@
         "result": "U8"
     },
     {
-        "name": "PetsMax",
+        "name": "MaxPets",
         "id": 212,
         "args": [],
         "result": "U8"
@@ -898,55 +892,55 @@
         "result": "U16"
     },
     {
-        "name": "GetSelfStr",
+        "name": "Str",
         "id": 218,
         "args": [],
         "result": "I32"
     },
     {
-        "name": "GetSelfInt",
+        "name": "Int",
         "id": 219,
         "args": [],
         "result": "I32"
     },
     {
-        "name": "GetSelfDex",
+        "name": "Dex",
         "id": 220,
         "args": [],
         "result": "I32"
     },
     {
-        "name": "GetSelfLife",
+        "name": "Life",
         "id": 221,
         "args": [],
         "result": "I32"
     },
     {
-        "name": "GetSelfMana",
+        "name": "Mana",
         "id": 222,
         "args": [],
         "result": "I32"
     },
     {
-        "name": "GetSelfStam",
+        "name": "Stam",
         "id": 223,
         "args": [],
         "result": "I32"
     },
     {
-        "name": "GetSelfMaxLife",
+        "name": "MaxLife",
         "id": 224,
         "args": [],
         "result": "I32"
     },
     {
-        "name": "GetSelfMaxMana",
+        "name": "MaxMana",
         "id": 225,
         "args": [],
         "result": "I32"
     },
     {
-        "name": "GetSelfMaxStam",
+        "name": "MaxStam",
         "id": 226,
         "args": [],
         "result": "I32"
@@ -3288,7 +3282,7 @@
         "result": "list[String]"
     },
     {
-        "name": "GetStaticArt",
+        "name": "GetStaticArtBitmap",
         "id": 443,
         "args": [
             {
@@ -4101,7 +4095,7 @@
         "result": "list[String]"
     },
     {
-        "name": "FillInfoWindow",
+        "name": "FillNewWindow",
         "id": 514,
         "args": [
             {
@@ -4237,7 +4231,7 @@
         "result": "String"
     },
     {
-        "name": "ExtChangeProfile",
+        "name": "ChangeProfileEx",
         "id": 528,
         "args": [
             {

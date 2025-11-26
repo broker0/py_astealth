@@ -21,6 +21,7 @@ class SyncInterface:
     def AddToSystemJournal(self, Text: str) -> None: pass
     def AddToSystemJournalEx(self, Text: str, TextColor: int, BgColor: int, FontSize: int, FontName: str) -> None: pass
     def AddUserStatic(self, StaticItem: UserStaticItem, WorldNum: int) -> int: pass
+    def Alarm(self) -> None: pass
     def Armor(self) -> int: pass
     def Attack(self, ObjID: int) -> None: pass
     def AutoBuy(self, ItemType: int, ItemColor: int, Quantity: int) -> None: pass
@@ -41,8 +42,8 @@ class SyncInterface:
     def CancelWaitTarget(self) -> None: pass
     def Cast(self, SpellID: int) -> None: pass
     def ChangeProfile(self, Name: str) -> int: pass
+    def ChangeProfileEx(self, ProfileName: str, ShardName: str, CharName: str) -> int: pass
     def CharName(self) -> str: pass
-    def CharTitle(self) -> str: pass
     def CheckLOS(self, Xfrom: int, Yfrom: int, Zfrom: int, Xto: int, Yto: int, Zto: int, WorldNum: int, CheckType: int, Options: int) -> bool: pass
     def CheckLagBegin(self) -> None: pass
     def CheckLagEnd(self) -> None: pass
@@ -81,6 +82,7 @@ class SyncInterface:
     def ConvertIntegerToFlags(self, Group: int, Flags: int) -> list[str]: pass
     def CreateChar(self, ProfileName: str, ShardName: str, CharName: str, Gender: bool, Race: int, Strn: int, Dex: int, Int: int, Skill1: str, Skill2: str, Skill3: str, Skill4: str, SkillValue1: int, SkillValue2: int, SkillValue3: int, SkillValue4: int, City: int, Slot: int) -> None: pass
     def Dead(self) -> bool: pass
+    def Dex(self) -> int: pass
     def Disconnect(self) -> None: pass
     def DisconnectedTime(self) -> datetime: pass
     def DragItem(self, ObjID: int, Count: int) -> bool: pass
@@ -89,8 +91,7 @@ class SyncInterface:
     def EnergyResist(self) -> int: pass
     def EquipItemsSetMacro(self) -> None: pass
     def EquipLastWeapon(self) -> None: pass
-    def ExtChangeProfile(self, ProfileName: str, ShardName: str, CharName: str) -> int: pass
-    def FillInfoWindow(self, Text: str) -> None: pass
+    def FillNewWindow(self, Text: str) -> None: pass
     def FindAtCoord(self, X: int, Y: int) -> int: pass
     def FindCount(self) -> int: pass
     def FindFullQuantity(self) -> int: pass
@@ -109,6 +110,7 @@ class SyncInterface:
     def GetAutoSellDelay(self) -> int: pass
     def GetBuffBarInfo(self) -> list[BuffBarInfo]: pass
     def GetCell(self, X: int, Y: int, WorldNum: int) -> MapCell: pass
+    def GetCharTitle(self) -> str: pass
     def GetCharsListForShard(self) -> list[str]: pass
     def GetClientVersionInt(self) -> int: pass
     def GetClilocByID(self, ClilocID: int, Params: list[str]) -> str: pass
@@ -145,7 +147,6 @@ class SyncInterface:
     def GetLastStepQUsedDoor(self) -> int: pass
     def GetLayer(self, ObjID: int) -> int: pass
     def GetLayerCount(self, X: int, Y: int, WorldNum: int) -> int: pass
-    def GetLineTime(self) -> datetime: pass
     def GetMana(self, ObjID: int) -> int: pass
     def GetMaxHP(self, ObjID: int) -> int: pass
     def GetMaxMana(self, ObjID: int) -> int: pass
@@ -178,21 +179,13 @@ class SyncInterface:
     def GetQuestArrow(self) -> Point: pass
     def GetRunMountTimer(self) -> int: pass
     def GetRunUnmountTimer(self) -> int: pass
+    def GetScriptCount(self) -> int: pass
     def GetScriptName(self, ScriptIndex: int) -> str: pass
     def GetScriptParams(self) -> int: pass
     def GetScriptPath(self, ScriptIndex: int) -> str: pass
     def GetScriptState(self, ScriptIndex: int) -> int: pass
-    def GetScriptsCount(self) -> int: pass
     def GetScriptsList(self) -> list[ScriptInfo]: pass
-    def GetSelfDex(self) -> int: pass
-    def GetSelfInt(self) -> int: pass
-    def GetSelfLife(self) -> int: pass
-    def GetSelfMana(self) -> int: pass
-    def GetSelfMaxLife(self) -> int: pass
-    def GetSelfMaxMana(self) -> int: pass
-    def GetSelfMaxStam(self) -> int: pass
-    def GetSelfStam(self) -> int: pass
-    def GetSelfStr(self) -> int: pass
+    def GetShardPath(self) -> str: pass
     def GetShopList(self) -> list[str]: pass
     def GetShowIPCExceptionWindow(self) -> bool: pass
     def GetSilentMode(self) -> bool: pass
@@ -203,10 +196,11 @@ class SyncInterface:
     def GetSkillValue(self, SkillID: int) -> float: pass
     def GetStam(self, ObjID: int) -> int: pass
     def GetStatLockState(self, statNum: int) -> int: pass
-    def GetStaticArt(self, ObjType: int, Hue: int) -> list[int]: pass
+    def GetStaticArtBitmap(self, ObjType: int, Hue: int) -> list[int]: pass
     def GetStaticTileData(self, Tile: int) -> StaticTileData: pass
     def GetStaticTilesArray(self, Xmin: int, Ymin: int, Xmax: int, Ymax: int, WorldNum: int, TileTypes: list[int]) -> list[FoundTile]: pass
     def GetStealthInfo(self) -> AboutData: pass
+    def GetStealthProfilePath(self) -> str: pass
     def GetStr(self, ObjID: int) -> int: pass
     def GetSurfaceZ(self, X: int, Y: int, WorldNum: int) -> int: pass
     def GetTileFlags(self, Group: int, Tile: int) -> int: pass
@@ -244,6 +238,7 @@ class SyncInterface:
     def InJournal(self, Str: str) -> int: pass
     def InJournalBetweenTimes(self, Str: str, TimeBegin: datetime, TimeEnd: datetime) -> int: pass
     def InParty(self) -> bool: pass
+    def Int(self) -> int: pass
     def InviteToParty(self, ObjID: int) -> None: pass
     def IsActiveSpellAbility(self, SpellID: int) -> bool: pass
     def IsCheckLagEnd(self) -> bool: pass
@@ -270,6 +265,7 @@ class SyncInterface:
     def LastObject(self) -> int: pass
     def LastStatus(self) -> int: pass
     def LastTarget(self) -> int: pass
+    def Life(self) -> int: pass
     def LineCount(self) -> int: pass
     def LineID(self) -> int: pass
     def LineIndex(self) -> int: pass
@@ -281,6 +277,11 @@ class SyncInterface:
     def LineType(self) -> int: pass
     def LowJournal(self) -> int: pass
     def Luck(self) -> int: pass
+    def Mana(self) -> int: pass
+    def MaxLife(self) -> int: pass
+    def MaxMana(self) -> int: pass
+    def MaxPets(self) -> int: pass
+    def MaxStam(self) -> int: pass
     def MaxWeight(self) -> int: pass
     def MenuHookPresent(self) -> bool: pass
     def MenuPresent(self) -> bool: pass
@@ -310,7 +311,6 @@ class SyncInterface:
     def PartySay(self, Msg: str) -> None: pass
     def PauseResumeSelScript(self, ScriptIndex: int) -> None: pass
     def PetsCurrent(self) -> int: pass
-    def PetsMax(self) -> int: pass
     def PoisonResist(self) -> int: pass
     def Poisoned(self) -> bool: pass
     def PredictedDirection(self) -> int: pass
@@ -336,7 +336,6 @@ class SyncInterface:
     def Self(self) -> int: pass
     def SetARExtParams(self, ShardName: str, CharName: str, UseAtEveryConnect: bool) -> None: pass
     def SetARStatus(self, Value: bool) -> None: pass
-    def SetAlarm(self) -> None: pass
     def SetAutoBuyDelay(self, Value: int) -> None: pass
     def SetAutoSellDelay(self, Value: int) -> None: pass
     def SetBadLocation(self, X: int, Y: int) -> None: pass
@@ -375,14 +374,14 @@ class SyncInterface:
     def SetWarMode(self, Value: bool) -> None: pass
     def Sex(self) -> int: pass
     def ShardName(self) -> str: pass
-    def ShardPath(self) -> str: pass
+    def Stam(self) -> int: pass
     def StartScript(self, ScriptPath: str) -> int: pass
     def StealthPath(self) -> str: pass
-    def StealthProfilePath(self) -> str: pass
     def Step(self, Direction: int, Running: bool) -> int: pass
     def StepQ(self, Direction: int, Running: bool) -> int: pass
     def StopAllScripts(self) -> None: pass
     def StopScript(self, ScriptIndex: int) -> None: pass
+    def Str(self) -> int: pass
     def TargetByResource(self, ObjID: int, Resource: int) -> None: pass
     def TargetID(self) -> int: pass
     def TargetToObject(self, ObjID: int) -> None: pass
