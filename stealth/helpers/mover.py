@@ -3,7 +3,7 @@ from typing import Union, List, Optional, Callable
 
 from py_astealth.stealth import api
 from py_astealth.stealth_enums import TileGroup
-from py_astealth.stealth_structs import FoundTile, WorldPoint
+from py_astealth.stealth_structs import FoundTile, WorldPoint, UserStaticItem
 
 from .common import Wait, AddToSystemJournal
 from .utils import CalcDir
@@ -312,8 +312,21 @@ def GetStaticTilesArray(
     return [(tile.tile, tile.x, tile.y, tile.z) for tile in GetStaticTiles(xmin, ymin, xmax, ymax, world_num, tile_types)]
 
 
+def AddUserStaticStruct(static_item: UserStaticItem, world_num: int) -> int:
+    return api.AddUserStatic(static_item, world_num)
+
+
+def AddUserStatic(tile: int, x: int, y: int, z: int, color: int, world_num: int) -> int:
+    return AddUserStaticStruct(UserStaticItem(tile, x, y, z, color), world_num)
+
+
+def AddUserStaticItem(static_item: dict, world_num: int):
+    return AddUserStatic(static_item["tile"], static_item["x"], static_item["y"], static_item["z"], static_item["color"], world_num)
+
+
 __all__ = ['MoverSettings', 'Mover',
            'GetPath3D', 'GetPathArray3D',
            'NewMoveXYZ', 'NewMoveXY',
            'GetTileFlags', 'ConvertIntegerToFlags',
-           'GetStaticTiles', 'GetStaticTilesArray']
+           'GetStaticTiles', 'GetStaticTilesArray',
+           'AddUserStaticStruct', 'AddUserStatic', 'AddUserStaticItem']

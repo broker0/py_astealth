@@ -23,10 +23,6 @@ def AddToSystemJournal(*args, **kwargs):
     api.AddToSystemJournal(text)
 
 
-def ChangeProfileEx(profile_name: str, shard_name: str, char_name: str) -> int:
-    return api.ExtChangeProfile(profile_name, shard_name, char_name)
-
-
 # Event related
 class ThreadContext(threading.local):
     """

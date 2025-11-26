@@ -10,6 +10,7 @@ def _get_skill_id(skill_name: str) -> int:
     skill_id = api.GetSkillID(skill_name)
     if skill_id < 0:
         raise ValueError(f'Unknown skill name: "{skill_name}"')
+
     return skill_id
 
 

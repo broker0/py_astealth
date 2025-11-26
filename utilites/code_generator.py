@@ -50,7 +50,6 @@ class CodeGenerator:
 
         return str(type_obj)
 
-
     def generate_json(self, output_path):
         """Generate JSON file with API specification"""
         methods_data = []
