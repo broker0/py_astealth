@@ -3,7 +3,10 @@ from typing import Union
 
 from py_astealth.stealth import api
 from py_astealth.stealth_enums import Spell
+from py_astealth.stealth import api
+from py_astealth.stealth_enums import Spell
 from ._converters import _get_skill_id, _get_spell_id
+from .common import Wait
 
 
 # Skill helpers
@@ -35,6 +38,42 @@ def SetSkillLockState(skill_name: str, state: int) -> None:
 def GetSkillLockState(skill_name: str) -> int:
     """Get the skill lock state by name."""
     return api.GetSkillLockState(_get_skill_id(skill_name))
+
+
+def ChangeSkillLockState(skill_name: str, state: int) -> None:
+    """Alias for SetSkillLockState."""
+    SetSkillLockState(skill_name, state)
+
+
+# Stat helpers
+def GetHP(obj_id: int) -> int:
+    """Get HP of object, requesting stats if necessary."""
+    result = api.GetHP(obj_id)
+    if not result and api.IsObjectExists(obj_id) and api.IsNPC(obj_id):
+        api.RequestStats(obj_id)
+        Wait(100)
+        result = api.GetHP(obj_id)
+    return result
+
+
+def GetMana(obj_id: int) -> int:
+    """Get Mana of object, requesting stats if necessary."""
+    result = api.GetMana(obj_id)
+    if not result and api.IsObjectExists(obj_id) and api.IsNPC(obj_id):
+        api.RequestStats(obj_id)
+        Wait(100)
+        result = api.GetMana(obj_id)
+    return result
+
+
+def GetStam(obj_id: int) -> int:
+    """Get Stamina of object, requesting stats if necessary."""
+    result = api.GetStam(obj_id)
+    if not result and api.IsObjectExists(obj_id) and api.IsNPC(obj_id):
+        api.RequestStats(obj_id)
+        Wait(100)
+        result = api.GetStam(obj_id)
+    return result
 
 
 # Spell helpers
@@ -85,8 +124,16 @@ def IsActiveSpellAbility(spell: Union[str, int, Spell]) -> bool:
     return api.IsActiveSpellAbility(_get_spell_id(spell))
 
 
+def WarMode() -> bool:
+    """Check if self is in war mode."""
+    return api.IsWarMode(api.Self())
+
+
 __all__ = [
     'UseSkill', 'GetSkillValue', 'GetSkillCurrentValue', 'GetSkillCap',
-    'SetSkillLockState', 'GetSkillLockState',
+    'UseSkill', 'GetSkillValue', 'GetSkillCurrentValue', 'GetSkillCap',
+    'SetSkillLockState', 'GetSkillLockState', 'ChangeSkillLockState',
+    'GetHP', 'GetMana', 'GetStam',
     'Cast', 'CastToObj', 'CastToObject', 'IsActiveSpellAbility',
+    'WarMode',
 ]
