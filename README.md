@@ -39,3 +39,12 @@ connect to the UO Stealth Client and start working with it by calling functions.
 Despite the additional complexity, the programmer has more options—for example, within a single script, 
 multiple connections can be created for different characters and each can be controlled.
 
+
+### Compatibility
+
+Don't need complex client management, just a simple script? 
+The `py_astealth.stealth` module provides compatibility with classic `py_stealth`.
+This module is designed as a direct drop in replacement for `py_stealth` with some 
+new features and providing both standard API functions and most of the previous helpers, 
+ensuring a very high level of compatibility. 
+
