@@ -5,8 +5,8 @@
 
 from py_astealth.stealth_types import *
 from py_astealth.stealth_structs import *
+from py_astealth.stealth_enums import *
 from datetime import datetime
-
 
 
 async def AddChatUserIgnore(UserName: str) -> None: pass
@@ -281,12 +281,12 @@ async def Luck() -> int: pass
 async def MaxWeight() -> int: pass
 async def MenuHookPresent() -> bool: pass
 async def MenuPresent() -> bool: pass
-async def Messenger_GetConnected(MesID: int) -> bool: pass
-async def Messenger_GetName(MesID: int) -> str: pass
-async def Messenger_GetToken(MesID: int) -> str: pass
-async def Messenger_SendMessage(MesID: int, Msg: str, UserID: str) -> None: pass
-async def Messenger_SetConnected(MesID: int, Value: bool) -> None: pass
-async def Messenger_SetToken(MesID: int, Value: str) -> None: pass
+async def MessengerGetConnected(MesID: int) -> bool: pass
+async def MessengerGetName(MesID: int) -> str: pass
+async def MessengerGetToken(MesID: int) -> str: pass
+async def MessengerSendMessage(MesID: int, Msg: str, UserID: str) -> None: pass
+async def MessengerSetConnected(MesID: int, Value: bool) -> None: pass
+async def MessengerSetToken(MesID: int, Value: str) -> None: pass
 async def MobileCanBeRenamed(MobID: int) -> bool: pass
 async def MoveXY(Xdst: int, Ydst: int, Optimized: bool, Accuracy: int, Running: bool) -> bool: pass
 async def MoveXYZ(Xdst: int, Ydst: int, Zdst: int, AccuracyXY: int, AccuracyZ: int, Running: bool) -> bool: pass

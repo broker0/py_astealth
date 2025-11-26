@@ -5,11 +5,12 @@
 
 from py_astealth.stealth_types import *
 from py_astealth.stealth_structs import *
+from py_astealth.stealth_enums import *
 from datetime import datetime
 
 
 class AsyncInterface:
-    """base class defining the interface of StealthApi."""
+    """Base class defining the interface of StealthApi."""
 
     async def AddChatUserIgnore(self, UserName: str) -> None: pass
     async def AddFigure(self, Figure: MapFigure) -> int: pass
@@ -283,12 +284,12 @@ class AsyncInterface:
     async def MaxWeight(self) -> int: pass
     async def MenuHookPresent(self) -> bool: pass
     async def MenuPresent(self) -> bool: pass
-    async def Messenger_GetConnected(self, MesID: int) -> bool: pass
-    async def Messenger_GetName(self, MesID: int) -> str: pass
-    async def Messenger_GetToken(self, MesID: int) -> str: pass
-    async def Messenger_SendMessage(self, MesID: int, Msg: str, UserID: str) -> None: pass
-    async def Messenger_SetConnected(self, MesID: int, Value: bool) -> None: pass
-    async def Messenger_SetToken(self, MesID: int, Value: str) -> None: pass
+    async def MessengerGetConnected(self, MesID: int) -> bool: pass
+    async def MessengerGetName(self, MesID: int) -> str: pass
+    async def MessengerGetToken(self, MesID: int) -> str: pass
+    async def MessengerSendMessage(self, MesID: int, Msg: str, UserID: str) -> None: pass
+    async def MessengerSetConnected(self, MesID: int, Value: bool) -> None: pass
+    async def MessengerSetToken(self, MesID: int, Value: str) -> None: pass
     async def MobileCanBeRenamed(self, MobID: int) -> bool: pass
     async def MoveXY(self, Xdst: int, Ydst: int, Optimized: bool, Accuracy: int, Running: bool) -> bool: pass
     async def MoveXYZ(self, Xdst: int, Ydst: int, Zdst: int, AccuracyXY: int, AccuracyZ: int, Running: bool) -> bool: pass

@@ -643,7 +643,7 @@
         "result": "None"
     },
     {
-        "name": "Messenger_GetConnected",
+        "name": "MessengerGetConnected",
         "id": 80,
         "args": [
             {
@@ -654,7 +654,7 @@
         "result": "Bool"
     },
     {
-        "name": "Messenger_SetConnected",
+        "name": "MessengerSetConnected",
         "id": 81,
         "args": [
             {
@@ -669,7 +669,7 @@
         "result": "None"
     },
     {
-        "name": "Messenger_GetToken",
+        "name": "MessengerGetToken",
         "id": 82,
         "args": [
             {
@@ -680,7 +680,7 @@
         "result": "String"
     },
     {
-        "name": "Messenger_SetToken",
+        "name": "MessengerSetToken",
         "id": 83,
         "args": [
             {
@@ -695,7 +695,7 @@
         "result": "None"
     },
     {
-        "name": "Messenger_GetName",
+        "name": "MessengerGetName",
         "id": 84,
         "args": [
             {
@@ -706,7 +706,7 @@
         "result": "String"
     },
     {
-        "name": "Messenger_SendMessage",
+        "name": "MessengerSendMessage",
         "id": 85,
         "args": [
             {
@@ -1602,7 +1602,7 @@
             },
             {
                 "name": "Z",
-                "type": "I8"
+                "type": "I32"
             }
         ],
         "result": "Bool"
