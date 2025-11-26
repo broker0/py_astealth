@@ -17,6 +17,10 @@ def AddToSystemJournal(*args, **kwargs):
     api.AddToSystemJournal(text)
 
 
+def GetFoundList() -> list[int]:
+    return api.GetFindedList()
+
+
 def GetEvent(event_type: int, delay: int):
     """Get event from client."""
     return _manager.get_event(event_type, delay)
@@ -67,11 +71,28 @@ def GetGlobal(region, var_name: str) -> str:
     return api.GetGlobal(_get_global_region_id(region), var_name)
 
 
+def CheckLag(timeout_ms=10000):
+    stop_time = datetime.now() + timedelta(milliseconds=timeout_ms)
+
+    api.CheckLagBegin()
+    while datetime.now() <= stop_time:
+        if api.IsCheckLagEnd():
+            return True
+
+        Wait(1)
+
+    api.CheckLagEnd()
+    return False
+
+
+
 __all__ = [
     'AddToSystemJournal',
+    'GetFoundList',
     'GetEvent',
     'SetEventProc',
     'WaitForEvent',
     'Wait',
     'SetGlobal', 'GetGlobal',
+    'CheckLag',
 ]

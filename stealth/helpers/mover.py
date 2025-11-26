@@ -1,7 +1,7 @@
 """Mover settings and helper functions."""
 from py_astealth.stealth import api
 
-from .base import Wait
+from .common import Wait
 from .utils import CalcDir
 
 

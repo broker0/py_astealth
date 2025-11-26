@@ -5,7 +5,7 @@ from typing import Union
 from py_astealth.stealth import api
 from py_astealth.stealth_enums import Messenger
 from ._converters import _get_messenger_id
-from .base import Wait
+from .common import Wait
 
 
 # Journal helper functions

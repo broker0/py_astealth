@@ -1,6 +1,6 @@
 """Targeting and catch bag helpers."""
 from py_astealth.stealth import api
-from .base import Wait, AddToSystemJournal
+from .common import Wait, AddToSystemJournal
 
 
 # Target helpers

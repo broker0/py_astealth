@@ -1,6 +1,6 @@
 """Item-related helpers: finding, clicking, and moving items."""
 from py_astealth.stealth import api
-from .base import Wait, AddToSystemJournal
+from .common import Wait, AddToSystemJournal
 
 
 # Find and Click helpers
