@@ -242,6 +242,47 @@ def CountEx(obj_type: int, color: int, container: int) -> int:
     return api.FindFullQuantity()
 
 
+# Reagent types helpers
+def BP() -> int:
+    """Count Black Pearl in backpack."""
+    return Reagent.BlackPearl
+
+
+def BM() -> int:
+    """Count Blood Moss in backpack."""
+    return Reagent.BloodMoss
+
+
+def GA() -> int:
+    """Count Garlic in backpack."""
+    return Reagent.Garlic
+
+
+def GS() -> int:
+    """Count Ginseng in backpack."""
+    return Reagent.Ginseng
+
+
+def MR() -> int:
+    """Count Mandrake Root in backpack."""
+    return Reagent.MandrakeRoot
+
+
+def NS() -> int:
+    """Count Nightshade in backpack."""
+    return Reagent.Nightshade
+
+
+def SA() -> int:
+    """Count Sulfurous Ash in backpack."""
+    return Reagent.SulfurousAsh
+
+
+def SS() -> int:
+    """Count Spider's Silk in backpack."""
+    return Reagent.SpidersSilk
+
+
 # Reagent count helpers
 def BPCount() -> int:
     """Count Black Pearl in backpack."""
@@ -282,4 +323,5 @@ __all__ = [
     'MoveItem', 'Grab', 'Drop', 'DropHere', 'MoveItems', 'EmptyContainer',
     'Count', 'CountGround', 'CountEx',
     'BPCount', 'BMCount', 'GACount', 'GSCount', 'MRCount', 'NSCount', 'SACount', 'SSCount',
+    'BP', 'BM', 'GA', 'GS', 'MR', 'NS', 'SA', 'SS',
 ]

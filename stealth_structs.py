@@ -359,7 +359,7 @@ class GumpPicTiled(StructType):
 
 @StructType.register
 @dataclass
-class GumpRadioButton(StructType):
+class GumpRadiobutton(StructType):
     X: I32
     Y: I32
     ReleasedID: I32
@@ -410,7 +410,7 @@ class GumpTextEntry(StructType):
 
 @StructType.register
 @dataclass
-class GumpSimpleText(StructType):
+class Text(StructType):
     Text: String
 
 
@@ -588,31 +588,31 @@ class Gump(StructType):
 @dataclass
 class GumpInfo(StructType):
     gump: Gump
-    Groups: list[GumpGroup]
+    groups: list[GumpGroup]
     EndGroups: list[GumpEndGroup]
-    Buttons: list[GumpButton]
+    GumpButtons: list[GumpButton]
     ButtonsTileArt: list[GumpButtonTileArt]
     CheckBoxes: list[GumpCheckBox]
-    Checkers: list[GumpCheckerTrans]
+    CheckerTrans: list[GumpCheckerTrans]
     CroppedText: list[GumpCroppedText]
-    Pics: list[GumpPic]
-    PicsTiled: list[GumpPicTiled]
-    RadioButtons: list[GumpRadioButton]
+    GumpPics: list[GumpPic]
+    GumpPicTiled: list[GumpPicTiled]
+    RadioButtons: list[GumpRadiobutton]
     ResizePics: list[GumpResizePic]
-    Texts: list[GumpText]
+    GumpText: list[GumpText]
     TextEntries: list[GumpTextEntry]
-    SimpleTexts: list[GumpSimpleText]
+    Text: list[Text]
     TextEntriesLimited: list[GumpTextEntryLimited]
     TilePics: list[GumpTilePic]
     TilePicsHued: list[GumpTilePicHue]
     Tooltips: list[GumpTooltip]
-    Htmls: list[GumpHtml]
-    XmfHtmls: list[GumpXmfHtml]
-    XmfHtmlHued: list[GumpXmfHTMLColor]
-    XmfHtmlToks: list[GumpXmfHTMLTok]
-    Properties: list[GumpItemProperty]
+    HtmlGump: list[GumpHtml]
+    XmfHtmlGump: list[GumpXmfHtml]
+    XmfHTMLGumpColor: list[GumpXmfHTMLColor]
+    XmfHtmlTok: list[GumpXmfHTMLTok]
+    ItemProperties: list[GumpItemProperty]
     PicInPics: list[GumpPicInPic]
-    TilePicsAsGumpPics: list[GumpTilePicAsGumpPic]
+    TilePicAsGumpPics: list[GumpTilePicAsGumpPic]
     ToggleUpperWordCases: list[GumpToggleUpperWordCase]
     ToggleCroppedTexts: list[GumpToggleCroppedText]
     ECHandleInputs: list[GumpECHandleInput]
