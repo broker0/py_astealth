@@ -50,6 +50,10 @@ Finder = FinderSettings()
 
 
 # Find and Click helpers
+def GetFoundList() -> list[int]:
+    return api.GetFindedList()
+
+
 def Ground() -> int:
     """Returns the ground container constant (0)."""
     return 0
@@ -273,7 +277,7 @@ def SSCount() -> int:
 
 __all__ = [
     'FinderSettings', 'Finder',
-    'Ground', 'FindType', 'FindTypeEx', 'ClickOnObject',
+    'GetFoundList', 'Ground', 'FindType', 'FindTypeEx', 'ClickOnObject',
     'MoveItem', 'Grab', 'Drop', 'DropHere', 'MoveItems', 'EmptyContainer',
     'Count', 'CountGround', 'CountEx',
     'BPCount', 'BMCount', 'GACount', 'GSCount', 'MRCount', 'NSCount', 'SACount', 'SSCount',

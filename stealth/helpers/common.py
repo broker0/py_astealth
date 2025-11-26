@@ -17,10 +17,6 @@ def AddToSystemJournal(*args, **kwargs):
     api.AddToSystemJournal(text)
 
 
-def GetFoundList() -> list[int]:
-    return api.GetFindedList()
-
-
 def GetEvent(event_type: int, delay: int):
     """Get event from client."""
     return _manager.get_event(event_type, delay)
@@ -92,7 +88,6 @@ def IsGump() -> bool:
 
 __all__ = [
     'AddToSystemJournal',
-    'GetFoundList',
     'GetEvent',
     'SetEventProc',
     'WaitForEvent',
