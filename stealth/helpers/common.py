@@ -1,12 +1,16 @@
 """Base helper functions for events, logging, and layer constants."""
 import threading
+import dataclasses
 from collections import deque
+from dataclasses import asdict
 from datetime import datetime, timedelta
 from time import sleep
 
+from py_astealth.stealth_structs import GumpInfo
 from py_astealth.stealth import api
 from py_astealth.stealth._internals import _manager
-from py_astealth.stealth.helpers._converters import _get_global_region_id
+
+from ._converters import _get_global_region_id, _get_event_type_id
 
 
 def AddToSystemJournal(*args, **kwargs):
@@ -38,6 +42,7 @@ def GetEvent():
 
 
 def SetEventProc(event_type, handler):
+    event_type = _get_event_type_id(event_type)
     _manager.set_handler_for_thread(event_type, handler)
 
     if handler:
@@ -137,6 +142,74 @@ def IsGump() -> bool:
     return api.GetGumpsCount() > 0
 
 
+def GetGump(gump_index: int) -> GumpInfo:
+    """Returns a structured gump object"""
+    return api.GetGumpInfo(gump_index)
+
+
+def GetGumpInfo(GumpIndex: int) -> dict:
+    """Deprecated: use GetGump instead"""
+    info_obj = GetGump(GumpIndex)
+    if not info_obj:
+        return {}
+
+    result = asdict(info_obj.gump)
+
+    for field in dataclasses.fields(info_obj):
+        if field.name == 'gump':
+            continue
+
+        field_value = getattr(info_obj, field.name)
+        if not field_value:
+            result[field.name] = []
+            continue
+
+        if field.name == 'Text':
+            result['Text'] = [[item.Text] for item in field_value]
+            continue
+
+        processed_list = []
+        for item in field_value:
+            element_dict = asdict(item)
+
+            if 'ClilocID' in element_dict and 'Arguments' in element_dict:
+                _apply_cliloc_logic(element_dict)
+
+            processed_list.append(element_dict)
+
+        result[field.name] = processed_list
+
+    result['ChekerTrans'] = result['CheckerTrans']
+
+    return result
+
+
+def _apply_cliloc_logic(element: dict):
+    text = api.GetClilocByID(element['ClilocID'])
+    raw_args = element.get('Arguments', '')
+
+    args_list = raw_args.split('@')[1:] if raw_args else []
+
+    for arg in args_list:
+        if '~' in text and arg:
+            if arg.startswith('#'):
+                try:
+                    arg_id = int(arg.strip('#'))
+                    arg = api.GetClilocByID(arg_id)
+                except ValueError:
+                    pass
+
+            try:
+                s = text.index('~')
+                e = text.index('~', s + 1)
+                to_replace = text[s: e + 1]
+                text = text.replace(to_replace, arg, 1)
+            except ValueError:
+                pass
+
+    element['ClilocText'] = text
+
+
 __all__ = [
     'AddToSystemJournal',
     'GetEvent',
@@ -145,5 +218,5 @@ __all__ = [
     'Wait',
     'SetGlobal', 'GetGlobal',
     'CheckLag',
-    'IsGump'
+    'IsGump', 'GetGump', 'GetGumpInfo',
 ]

@@ -1,8 +1,10 @@
 """Client-related helpers: UI, Gumps, and Connection."""
 from typing import Union
+
 from py_astealth.stealth import api
-from py_astealth.stealth._internals import _manager
 from py_astealth.stealth_enums import UIWindowType
+from py_astealth.stealth._internals import _manager
+
 from .common import Wait
 
 

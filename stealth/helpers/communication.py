@@ -4,6 +4,7 @@ from typing import Union
 
 from py_astealth.stealth import api
 from py_astealth.stealth_enums import Messenger
+
 from ._converters import _get_messenger_id
 from .common import Wait
 

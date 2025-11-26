@@ -3,6 +3,7 @@ from typing import Union, List, Optional, Callable
 
 from py_astealth.stealth import api
 from py_astealth.stealth_enums import TileGroup
+from py_astealth.stealth_structs import FoundTile, WorldPoint
 
 from .common import Wait, AddToSystemJournal
 from .utils import CalcDir
@@ -116,6 +117,36 @@ class MoverSettings:
 Mover = MoverSettings()
 
 
+def GetPath3D(StartX: int, StartY: int, StartZ: int,
+              FinishX: int, FinishY: int, FinishZ: int,
+              WorldNum: int,
+              AccuracyXY: int, AccuracyZ: int,
+              Run: bool) -> list[WorldPoint]:
+    """
+    GetPath3D calculates the path from the start point to the end point with the specified accuracy.
+    Returns a list of path points.
+    If the path is not found, an empty list is returned.
+    """
+
+    return api.GetPathArray3D(StartX, StartY, StartZ, FinishX, FinishY, FinishZ, WorldNum, AccuracyXY, AccuracyZ, Run)
+
+
+def GetPathArray3D(StartX: int, StartY: int, StartZ: int,
+                   FinishX: int, FinishY: int, FinishZ: int,
+                   WorldNum: int,
+                   AccuracyXY: int, AccuracyZ: int,
+                   Run: bool) -> list[[tuple[int, int, int]]]:
+    """
+    GetPathArray3D is a legacy function, use GetPath3D instead
+    """
+
+    return [(p.x, p.y, p.z) for p in GetPath3D(StartX, StartY, StartZ,
+                                               FinishX, FinishY, FinishZ,
+                                               WorldNum,
+                                               AccuracyXY, AccuracyZ,
+                                               Run)]
+
+
 # Movement helpers
 def NewMoveXYZ(x_dst, y_dst, z_dst, accuracy_xy, accuracy_z, running, callback: Optional[Callable] = None) -> bool:
     """
@@ -200,9 +231,8 @@ def NewMoveXYZ(x_dst, y_dst, z_dst, accuracy_xy, accuracy_z, running, callback: 
             continue
             
         # call a callback object if it is not None
-        if callback is not None:
-            if not callback(x, y, z):
-                return False
+        if callback is not None and not callback(x, y, z):
+            return False
                 
         # looks like it is done
         if not path:
@@ -268,14 +298,22 @@ def ConvertIntegerToFlags(group: Union[str, TileGroup], flags: int) -> List[str]
     return api.ConvertIntegerToFlags(int(group), flags)
 
 
-def GetStaticTilesArray(xmin: int, ymin: int, xmax: int, ymax: int, world_num: int, tile_types: list[int]):
-    if isinstance(tile_types, int):
-        tile_types = [tile_types]
-
+def GetStaticTiles(xmin: int, ymin: int, xmax: int, ymax: int, world_num: int, tile_types: list[int]) -> list[FoundTile]:
     return api.GetStaticTilesArray(xmin, ymin, xmax, ymax, world_num, tile_types)
 
 
+def GetStaticTilesArray(
+        xmin: int, ymin: int, xmax: int, ymax: int,
+        world_num: int,
+        tile_types: list[int]|int) -> list[tuple[int, int, int, int]]:
+    if isinstance(tile_types, int):
+        tile_types = [tile_types]
+
+    return [(tile.tile, tile.x, tile.y, tile.z) for tile in GetStaticTiles(xmin, ymin, xmax, ymax, world_num, tile_types)]
+
+
 __all__ = ['MoverSettings', 'Mover',
+           'GetPath3D', 'GetPathArray3D',
            'NewMoveXYZ', 'NewMoveXY',
            'GetTileFlags', 'ConvertIntegerToFlags',
-           'GetStaticTilesArray']
+           'GetStaticTiles', 'GetStaticTilesArray']

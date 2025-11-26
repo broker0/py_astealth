@@ -3,8 +3,7 @@ from typing import Union
 
 from py_astealth.stealth import api
 from py_astealth.stealth_enums import Spell
-from py_astealth.stealth import api
-from py_astealth.stealth_enums import Spell
+
 from ._converters import _get_skill_id, _get_spell_id
 from .common import Wait
 

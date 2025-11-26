@@ -2,7 +2,7 @@
 from typing import Union
 
 from py_astealth.stealth import api
-from py_astealth.stealth_enums import Spell, Messenger, Global
+from py_astealth.stealth_enums import Spell, Messenger, Global, EventType
 
 
 def _get_skill_id(skill_name: str) -> int:
@@ -89,3 +89,29 @@ def _get_global_region_id(region: Union[str, int, Global]) -> int:
         raise ValueError(f'Unknown global region: "{region}". Must be "Stealth" or "Char"')
     else:
         raise TypeError(f'Invalid global region type: {type(region)}. Expected str, int, or GlobalRegion enum')
+
+
+def _get_event_type_id(event_type: Union[str, int, EventType]) -> int:
+    """
+    Convert global region to region ID.
+    Accepts:
+    - str: region name (case-insensitive: 'Stealth', 'Char')
+    - int: region ID directly (0, 1)
+    - GlobalRegion: enum member
+    Returns: int region ID
+    """
+
+    if isinstance(event_type, int):
+        return event_type
+    elif isinstance(event_type, EventType):
+        return event_type.value
+    elif isinstance(event_type, str):
+        # Normalize: lowercase
+        normalized = event_type.lower()
+        # Try to find matching Global enum member
+        for reg_enum in EventType:
+            if reg_enum.name.lower() == normalized:
+                return reg_enum.value
+        raise ValueError(f'Unknown event name: "{event_type}"')
+    else:
+        raise TypeError(f'Invalid event type: {type(event_type)}. Expected str, int, or EventType enum')

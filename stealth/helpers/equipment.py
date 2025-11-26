@@ -1,9 +1,9 @@
 """Equipment helpers: managing character equipment."""
 from py_astealth.stealth import api
-from .items import FindType, MoveItem
-from .common import Wait
 from py_astealth.stealth_enums import Layer
 
+from .items import FindType, MoveItem
+from .common import Wait
 
 
 # Layer constants/functions
