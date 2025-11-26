@@ -1,7 +1,10 @@
 """Mover settings and helper functions."""
-from py_astealth.stealth import api
+from typing import Union, List, Optional, Callable
 
-from .common import Wait
+from py_astealth.stealth import api
+from py_astealth.stealth_enums import TileGroup
+
+from .common import Wait, AddToSystemJournal
 from .utils import CalcDir
 
 
@@ -114,56 +117,155 @@ Mover = MoverSettings()
 
 
 # Movement helpers
-def MoveXYZ(x_dst: int, y_dst: int, z_dst: int, accuracy_xy: int, accuracy_z: int, running: bool) -> bool:
+def NewMoveXYZ(x_dst, y_dst, z_dst, accuracy_xy, accuracy_z, running, callback: Optional[Callable] = None) -> bool:
     """
-    Move to specified coordinates using pathfinding.
-    
-    Args:
-        x_dst, y_dst, z_dst: Destination coordinates
-        accuracy_xy: XY tolerance
-        accuracy_z: Z tolerance
-        running: True to run, False to walk
-        
-    Returns:
-        True if reached destination, False otherwise
+    Advanced MoveXYZ with path recalculation and callback support.
     """
+    def debug(msg):
+        if getattr(NewMoveXYZ, 'debug', False):
+            AddToSystemJournal('MoveXYZ: ' + msg)
 
-    # Simple implementation wrapper around NewMoveXYZ logic
-    # Note: Full implementation of NewMoveXYZ is complex and depends on many API calls.
-    # For now, we can implement a simplified version or port the full logic.
-    # Given the complexity, let's start with a basic pathfinding loop using API.
-    
-    # Check if we are already there
-    curr_x, curr_y = api.PredictedX(), api.PredictedY()
-    if abs(curr_x - x_dst) <= accuracy_xy and abs(curr_y - y_dst) <= accuracy_xy:
-        return True
+    def step(direction, run):
+        while True:
+            res = api.StepQ(direction, run)
+            if res == -2 or res >= 0:
+                return res >= 0
+            Wait(10)
 
-    # Find path
-    path = api.GetPathArray3D(
-        curr_x, curr_y, api.PredictedZ(),
-        x_dst, y_dst, z_dst,
-        api.WorldNum(), accuracy_xy, accuracy_z, running
-    )
-    
-    if not path:
-        return False
-        
-    # Follow path
-    for point in path:
-        next_x, next_y, next_z = point.X, point.Y, point.Z
-        
-        # Move step
-        direction = CalcDir(api.PredictedX(), api.PredictedY(), next_x, next_y)
-        if direction == 100:
+    if not hasattr(NewMoveXYZ, 'debug'):
+        NewMoveXYZ.debug = False
+
+    find_path = True
+    while True:
+        # pause while not connected
+        while not api.Connected():
+            Wait(100)
+            
+        # try to find a path if required
+        if find_path:
+            find_path = False
+            path = api.GetPathArray3D(
+                api.PredictedX(), api.PredictedY(), api.PredictedZ(),
+                x_dst, y_dst, z_dst,
+                api.WorldNum(), accuracy_xy, accuracy_z, running
+            )
+            # there is no path to a target location
+            if not path:
+                debug('There is no path to a target location.')
+                return False
+            debug('Path found. Length = ' + str(len(path)))
+            
+        # check path passability for a few steps
+        cx, cy, cz = api.PredictedX(), api.PredictedY(), api.PredictedZ()
+
+        for pt in path[:4]:
+            if api.IsWorldCellPassable(cx, cy, cz, pt.x, pt.y, api.WorldNum()):
+                cx, cy, cz = pt.x, pt.y, pt.z
+            else:
+                debug(f'Point ({pt.x}, {pt.y}, {pt.z}) is not passable.')
+                find_path = True
+                break
+
+        if find_path:
             continue
             
-        if not api.StepQ(direction, running):
-            # Failed to step, maybe resync or retry
-            return False
+        # stamina check
+        if not api.Dead() and api.Stam() < api.GetMoveCheckStamina():
+            Wait(100)
             
-        Wait(100 if running else 200)
+        # lets walk :)
+        mx, my = api.PredictedX(), api.PredictedY()
+        pt = path.pop(0)
+        x, y, z = pt.x, pt.y, pt.z
         
-    return True
+        dx = mx - x
+        dy = my - y
+        direction = CalcDir(mx, my, x, y)
+        
+        # if something wrong
+        if (dx == 0 and dy == 0) or (abs(dx) > 1 or abs(dy) > 1) or direction == 100:
+            debug(f'dx = {dx}, dy = {dy}, dir = {direction}')
+            find_path = True
+            continue
+            
+        # try to turn if required
+        if api.PredictedDirection() != direction:
+            if not step(direction, running):
+                find_path = True
+                continue
+                
+        # try to do a step
+        if not step(direction, running):
+            find_path = True
+            continue
+            
+        # call a callback object if it is not None
+        if callback is not None:
+            if not callback(x, y, z):
+                return False
+                
+        # looks like it is done
+        if not path:
+            mx, my = api.PredictedX(), api.PredictedY()
+            # ensure this
+            if abs(mx - x_dst) <= accuracy_xy and abs(my - y_dst) <= accuracy_xy:
+                debug('Location reached!')
+                return True
+            # nope (
+            debug('Wtf? Recompute path.')
+            find_path = True
 
 
-__all__ = ['MoverSettings', 'Mover', 'MoveXYZ']
+def NewMoveXY(x_dst, y_dst, optimized, accuracy, running) -> bool:
+    """Wrapper for NewMoveXYZ."""
+    return NewMoveXYZ(x_dst, y_dst, 0, accuracy, 255, running)
+
+
+# Tile helpers
+def GetTileFlags(tile_group: Union[str, TileGroup], tile: int) -> int:
+    """
+    Get flags for a tile.
+    
+    Args:
+        tile_group: TileGroup enum or 'Land'/'Static' string
+        tile: Tile ID
+        
+    Returns:
+        Tile flags
+    """
+    if isinstance(tile_group, str):
+        tile_group = tile_group.lower()
+        if tile_group in ('tfland', 'land'):
+            tile_group = TileGroup.Land
+        elif tile_group in ('tfstatic', 'static'):
+            tile_group = TileGroup.Static
+        else:
+            raise ValueError('GetTileFlags: TileGroup must be "Land" or "Static"')
+    
+    return api.GetTileFlags(int(tile_group), tile)
+
+
+def ConvertIntegerToFlags(group: Union[str, TileGroup], flags: int) -> List[str]:
+    """
+    Convert integer flags to list of string descriptions.
+    
+    Args:
+        group: TileGroup enum or 'Land'/'Static' string
+        flags: Flags value
+        
+    Returns:
+        List of flag names
+    """
+    if isinstance(group, str):
+        group = group.lower()
+        if group in ('tfland', 'land'):
+            group = TileGroup.Land
+        elif group in ('tfstatic', 'static'):
+            group = TileGroup.Static
+        else:
+            raise ValueError('ConvertIntegerToFlags: Group must be "Land" or "Static"')
+        
+    return api.ConvertIntegerToFlags(int(group), flags)
+
+
+__all__ = ['MoverSettings', 'Mover', 'NewMoveXYZ', 'NewMoveXY', 'GetTileFlags', 'ConvertIntegerToFlags']
