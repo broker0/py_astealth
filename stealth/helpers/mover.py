@@ -268,4 +268,14 @@ def ConvertIntegerToFlags(group: Union[str, TileGroup], flags: int) -> List[str]
     return api.ConvertIntegerToFlags(int(group), flags)
 
 
-__all__ = ['MoverSettings', 'Mover', 'NewMoveXYZ', 'NewMoveXY', 'GetTileFlags', 'ConvertIntegerToFlags']
+def GetStaticTilesArray(xmin: int, ymin: int, xmax: int, ymax: int, world_num: int, tile_types: list[int]):
+    if isinstance(tile_types, int):
+        tile_types = [tile_types]
+
+    return api.GetStaticTilesArray(xmin, ymin, xmax, ymax, world_num, tile_types)
+
+
+__all__ = ['MoverSettings', 'Mover',
+           'NewMoveXYZ', 'NewMoveXY',
+           'GetTileFlags', 'ConvertIntegerToFlags',
+           'GetStaticTilesArray']
