@@ -123,6 +123,10 @@ def Luck():
     return api.GetSelfLuck()
 
 
+def GetCharTitle():
+    return api.CharTitle()
+
+
 # Spell helpers
 def Cast(spell: Union[str, int, Spell]) -> bool:
     """
