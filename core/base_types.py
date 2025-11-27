@@ -6,26 +6,6 @@ import typing
 import inspect
 
 
-def _get_primitive_format(type_obj: Any) -> str | None:
-    """
-    Returns the struct format character if type_obj is a safe primitive type.
-    Returns None otherwise.
-    Safe primitives are those that inherit from PrimitiveType and have a simple _format.
-    We exclude DateTime because it overrides pack/unpack logic.
-    """
-    if inspect.isclass(type_obj) and issubclass(type_obj, PrimitiveType):
-        # Check if it's one of the safe primitives
-        # We can check if it overrides pack_simple_value/unpack_simple_value
-        # If it does (like DateTime), we shouldn't use raw struct packing
-        if type_obj.__dict__.get('pack_simple_value') or type_obj.__dict__.get('unpack_simple_value'):
-            return None
-        
-        fmt = getattr(type_obj, '_format', None)
-        if fmt and fmt.startswith('<') and len(fmt) == 2:
-            return fmt[1] # Return just the format char (e.g. 'I', 'H', 'd')
-    return None
-
-
 class RPCType(ABC):
     # '_mapping' is what python-type this stealth-type expects as a value
     _mapping = None
@@ -58,15 +38,6 @@ class RPCType(ABC):
 
             # write array length
             stream.write(struct.pack('<I', len(value)))
-
-            # Optimization: if inner_type is a safe primitive, pack all at once
-            prim_fmt = _get_primitive_format(inner_type)
-            if prim_fmt:
-                # Construct format string: < + count * fmt
-                # e.g. <1000I
-                full_fmt = f'<{len(value)}{prim_fmt}'
-                stream.write(struct.pack(full_fmt, *value))
-                return
 
             # we pack each element
             for item in value:
@@ -104,17 +75,6 @@ class RPCType(ABC):
 
             # we read the required number of elements and return the list
             inner_type = typing.get_args(type_obj)[0]
-
-            # Optimization: if inner_type is a safe primitive, unpack all at once
-            prim_fmt = _get_primitive_format(inner_type)
-            if prim_fmt:
-                full_fmt = f'<{count}{prim_fmt}'
-                size = struct.calcsize(full_fmt)
-                data = stream.read(size)
-                if len(data) < size:
-                    raise ValueError(f"Stream ended while reading list of {inner_type}")
-                return list(struct.unpack(full_fmt, data))
-
             return [RPCType.unpack_value(stream, inner_type) for _ in range(count)]
 
         # Processing the tuple
@@ -165,12 +125,6 @@ class StructType(RPCType):
 
     @classmethod
     def pack_simple_value(cls, stream: BinaryIO, value: Any):
-        # Optimization: use pre-calculated format
-        if getattr(cls, '_struct_format', None):
-            values = [getattr(value, field.name) for field in cls._fields]
-            stream.write(struct.pack(cls._struct_format, *values))
-            return
-
         # We go through the fields from the list and serialize each value with the required type.
         for field in cls._fields:
             field_value = getattr(value, field.name)
@@ -178,15 +132,6 @@ class StructType(RPCType):
 
     @classmethod
     def unpack_simple_value(cls, stream: BinaryIO) -> Any:
-        # Optimization: use pre-calculated format
-        if getattr(cls, '_struct_format', None):
-            size = struct.calcsize(cls._struct_format)
-            data = stream.read(size)
-            if len(data) < size:
-                raise ValueError(f"Stream ended while reading struct {cls}")
-            unpacked_args = struct.unpack(cls._struct_format, data)
-            return cls(*unpacked_args)
-
         # We create a list of values by deserializing the value of each field.
         unpacked_args = []
         for field in cls._fields:
@@ -213,19 +158,4 @@ class StructType(RPCType):
 
         # attach list of fields to the class itself
         cls._fields = fields_list
-
-        # Optimization: pre-calculate struct format if all fields are primitives
-        field_formats = []
-        for field in fields_list:
-            fmt = _get_primitive_format(field.type)
-            if not fmt:
-                field_formats = None
-                break
-            field_formats.append(fmt)
-        
-        if field_formats:
-            cls._struct_format = '<' + ''.join(field_formats)
-        else:
-            cls._struct_format = None
-
         return cls
