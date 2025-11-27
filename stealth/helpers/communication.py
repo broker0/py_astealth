@@ -19,7 +19,7 @@ def _wait_journal_line_internal(start_time: datetime, text: str, max_wait_ms: in
     
     while datetime.now() <= stop_time:
         if api.InJournalBetweenTimes(text, start_time, stop_time) >= 0:
-            if not check_system or api.GetLineName() == 'System':
+            if not check_system or api.LineName() == 'System':
                 return True
         Wait(10)
     return False
@@ -66,7 +66,7 @@ def MessengerGetConnected(messenger: Union[str, int, Messenger]) -> bool:
     Returns:
         True if connected, False otherwise
     """
-    return api.Messenger_GetConnected(_get_messenger_id(messenger))
+    return api.MessengerGetConnected(_get_messenger_id(messenger))
 
 
 def MessengerSetConnected(messenger: Union[str, int, Messenger], value: bool) -> None:
@@ -77,7 +77,7 @@ def MessengerSetConnected(messenger: Union[str, int, Messenger], value: bool) ->
         messenger: Messenger name (str), ID (int), or Messenger enum
         value: Connection status
     """
-    api.Messenger_SetConnected(_get_messenger_id(messenger), value)
+    api.MessengerSetConnected(_get_messenger_id(messenger), value)
 
 
 def MessengerGetToken(messenger: Union[str, int, Messenger]) -> str:
@@ -90,7 +90,7 @@ def MessengerGetToken(messenger: Union[str, int, Messenger]) -> str:
     Returns:
         Messenger token
     """
-    return api.Messenger_GetToken(_get_messenger_id(messenger))
+    return api.MessengerGetToken(_get_messenger_id(messenger))
 
 
 def MessengerSetToken(messenger: Union[str, int, Messenger], token: str) -> None:
@@ -101,7 +101,7 @@ def MessengerSetToken(messenger: Union[str, int, Messenger], token: str) -> None
         messenger: Messenger name (str), ID (int), or Messenger enum
         token: Authentication token
     """
-    api.Messenger_SetToken(_get_messenger_id(messenger), token)
+    api.MessengerSetToken(_get_messenger_id(messenger), token)
 
 
 def MessengerGetName(messenger: Union[str, int, Messenger]) -> str:
@@ -114,7 +114,7 @@ def MessengerGetName(messenger: Union[str, int, Messenger]) -> str:
     Returns:
         Messenger name
     """
-    return api.Messenger_GetName(_get_messenger_id(messenger))
+    return api.MessengerGetName(_get_messenger_id(messenger))
 
 
 def MessengerSendMessage(messenger: Union[str, int, Messenger], msg: str, user_id: str) -> None:
@@ -126,7 +126,7 @@ def MessengerSendMessage(messenger: Union[str, int, Messenger], msg: str, user_i
         msg: Message text
         user_id: Recipient user ID
     """
-    api.Messenger_SendMessage(_get_messenger_id(messenger), msg, user_id)
+    api.MessengerSendMessage(_get_messenger_id(messenger), msg, user_id)
 
 
 __all__ = [

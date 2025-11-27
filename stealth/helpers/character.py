@@ -75,56 +75,12 @@ def GetStam(obj_id: int) -> int:
     return result
 
 
-def Str():
-    return api.GetSelfStr()
-
-
-def Int():
-    return api.GetSelfInt()
-
-
-def Dex():
-    return api.GetSelfDex()
-
-
-def Life():
-    return api.GetSelfLife()
-
-
 def HP():
-    Life()
-
-
-def Mana():
-    return api.GetSelfMana()
-
-
-def Stam():
-    return api.GetSelfStam()
-
-
-def MaxLife():
-    return api.GetSelfMaxLife()
+    api.Life()
 
 
 def MaxHP():
-    return MaxLife()
-
-
-def MaxMana():
-    return api.GetSelfMaxMana()
-
-
-def MaxStam():
-    return api.GetSelfMaxStam()
-
-
-def Luck():
-    return api.GetSelfLuck()
-
-
-def GetCharTitle():
-    return api.CharTitle()
+    return api.MaxLife()
 
 
 # Spell helpers
@@ -185,9 +141,7 @@ __all__ = [
     'UseSkill', 'GetSkillValue', 'GetSkillCurrentValue', 'GetSkillCap',
     'SetSkillLockState', 'GetSkillLockState', 'ChangeSkillLockState',
     'GetHP', 'GetMana', 'GetStam',
-    'Str', 'Int', 'Dex', 'Life', 'HP', 'Mana', 'Stam',
-    'MaxLife', 'MaxHP', 'MaxMana', 'MaxStam',
-    'Luck',
+    'HP', 'MaxHP',
     'Cast', 'CastToObj', 'CastToObject', 'IsActiveSpellAbility',
     'WarMode',
 ]

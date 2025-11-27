@@ -312,12 +312,12 @@ def GetStaticTilesArray(
     return [(tile.tile, tile.x, tile.y, tile.z) for tile in GetStaticTiles(xmin, ymin, xmax, ymax, world_num, tile_types)]
 
 
-def AddUserStaticStruct(static_item: UserStaticItem, world_num: int) -> int:
+def CreateUserStatic(static_item: UserStaticItem, world_num: int) -> int:
     return api.AddUserStatic(static_item, world_num)
 
 
 def AddUserStatic(tile: int, x: int, y: int, z: int, color: int, world_num: int) -> int:
-    return AddUserStaticStruct(UserStaticItem(tile, x, y, z, color), world_num)
+    return CreateUserStatic(UserStaticItem(tile, x, y, z, color), world_num)
 
 
 def AddUserStaticItem(static_item: dict, world_num: int):
@@ -329,4 +329,4 @@ __all__ = ['MoverSettings', 'Mover',
            'NewMoveXYZ', 'NewMoveXY',
            'GetTileFlags', 'ConvertIntegerToFlags',
            'GetStaticTiles', 'GetStaticTilesArray',
-           'AddUserStaticStruct', 'AddUserStatic', 'AddUserStaticItem']
+           'CreateUserStatic', 'AddUserStatic', 'AddUserStaticItem']
