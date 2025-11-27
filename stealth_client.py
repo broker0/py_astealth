@@ -132,6 +132,10 @@ class AsyncStealthClient(AsyncRPCClient):
         self._pending_replies: dict[int, asyncio.Future] = {}
         self.events: asyncio.Queue[StealthEvent] = asyncio.Queue()
 
+        self._send_bytes = 0
+        self._recv_bytes = 0
+        self._calls = 0
+
         self._packet_handlers = {
             StealthApi._FunctionResultCallback.method_spec.id: self._handle_FunctionResultCallback,
             StealthApi._EventCallback.method_spec.id: self._handle_EventCallback,
@@ -175,7 +179,7 @@ class AsyncStealthClient(AsyncRPCClient):
         return self.call_id
 
     async def call_method(self, method_spec: MethodSpec, *args) -> Any:
-        # call_method receives the method_spec and arguments
+        # wait if paused
         await self._sending_allowed.wait()
 
         # for methods with a return value, we assign a new call_id
@@ -194,6 +198,7 @@ class AsyncStealthClient(AsyncRPCClient):
         # TODO You can create an adaptive timeout based on method_id - for example,
         #  GetPathArray3D can work for tens of seconds, while most methods should provide an "instant" response
 
+        self._calls += 1
         self.send_packet(packet)
         result_payload = await future if expect_reply else None
 
@@ -217,14 +222,17 @@ class AsyncStealthClient(AsyncRPCClient):
 
         # the packet is preceded by u32 length
         packet_len = struct.pack('<I', len(payload))
+        self._send_bytes += len(packet_len) + len(payload)
         self._transport.write(packet_len + payload)
 
     def handle_packet(self, payload: bytes):
         """unpacking incoming server packets"""
+        self._recv_bytes += len(payload)
+
         try:
             stream = io.BytesIO(payload)
             method_id = U16.unpack_simple_value(stream)
-            
+
             # Handle known server methods
             handler = self._packet_handlers.get(method_id)
             if handler:
