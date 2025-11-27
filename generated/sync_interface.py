@@ -20,7 +20,6 @@ class SyncInterface:
     def AddToJournal(self, Text: str) -> None: pass
     def AddToSystemJournal(self, Text: str) -> None: pass
     def AddToSystemJournalEx(self, Text: str, TextColor: int, BgColor: int, FontSize: int, FontName: str) -> None: pass
-    def AddUserStatic(self, StaticItem: UserStaticItem, WorldNum: int) -> int: pass
     def Alarm(self) -> None: pass
     def Armor(self) -> int: pass
     def Attack(self, ObjID: int) -> None: pass
@@ -81,13 +80,13 @@ class SyncInterface:
     def ConsoleEntryUnicodeReply(self, Text: str) -> None: pass
     def ConvertIntegerToFlags(self, Group: int, Flags: int) -> list[str]: pass
     def CreateChar(self, ProfileName: str, ShardName: str, CharName: str, Gender: bool, Race: int, Strn: int, Dex: int, Int: int, Skill1: str, Skill2: str, Skill3: str, Skill4: str, SkillValue1: int, SkillValue2: int, SkillValue3: int, SkillValue4: int, City: int, Slot: int) -> None: pass
+    def CreateUserStatic(self, StaticItem: UserStaticItem, WorldNum: int) -> int: pass
     def Dead(self) -> bool: pass
     def Dex(self) -> int: pass
     def Disconnect(self) -> None: pass
     def DisconnectedTime(self) -> datetime: pass
     def DragItem(self, ObjID: int, Count: int) -> bool: pass
     def DropItem(self, MoveIntoID: int, X: int, Y: int, Z: int) -> bool: pass
-    def DumpObjectsCache(self) -> None: pass
     def EnergyResist(self) -> int: pass
     def EquipItemsSetMacro(self) -> None: pass
     def EquipLastWeapon(self) -> None: pass
@@ -142,7 +141,7 @@ class SyncInterface:
     def GetIgnoreList(self) -> list[int]: pass
     def GetInt(self, ObjID: int) -> int: pass
     def GetLandTileData(self, Tile: int) -> LandTileData: pass
-    def GetLandTilesArray(self, Xmin: int, Ymin: int, Xmax: int, Ymax: int, WorldNum: int, TileType: list[int]) -> list[FoundTile]: pass
+    def GetLandTilesArray(self, Xmin: int, Ymin: int, Xmax: int, Ymax: int, WorldNum: int, TileTypes: list[int]) -> list[FoundTile]: pass
     def GetLastMenuItems(self) -> list[str]: pass
     def GetLastStepQUsedDoor(self) -> int: pass
     def GetLayer(self, ObjID: int) -> int: pass

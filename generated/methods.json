@@ -2350,12 +2350,6 @@
         "result": "String"
     },
     {
-        "name": "DumpObjectsCache",
-        "id": 367,
-        "args": [],
-        "result": "None"
-    },
-    {
         "name": "TradeCheck",
         "id": 367,
         "args": [
@@ -3241,7 +3235,7 @@
                 "type": "U8"
             },
             {
-                "name": "TileType",
+                "name": "TileTypes",
                 "type": "list[U16]"
             }
         ],
@@ -4144,7 +4138,7 @@
         "result": "list[MultiPart]"
     },
     {
-        "name": "AddUserStatic",
+        "name": "CreateUserStatic",
         "id": 519,
         "args": [
             {

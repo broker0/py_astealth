@@ -17,7 +17,6 @@ async def AddJournalIgnore(Str: str) -> None: pass
 async def AddToJournal(Text: str) -> None: pass
 async def AddToSystemJournal(Text: str) -> None: pass
 async def AddToSystemJournalEx(Text: str, TextColor: int, BgColor: int, FontSize: int, FontName: str) -> None: pass
-async def AddUserStatic(StaticItem: UserStaticItem, WorldNum: int) -> int: pass
 async def Alarm() -> None: pass
 async def Armor() -> int: pass
 async def Attack(ObjID: int) -> None: pass
@@ -78,13 +77,13 @@ async def ConsoleEntryReply(Text: str) -> None: pass
 async def ConsoleEntryUnicodeReply(Text: str) -> None: pass
 async def ConvertIntegerToFlags(Group: int, Flags: int) -> list[str]: pass
 async def CreateChar(ProfileName: str, ShardName: str, CharName: str, Gender: bool, Race: int, Strn: int, Dex: int, Int: int, Skill1: str, Skill2: str, Skill3: str, Skill4: str, SkillValue1: int, SkillValue2: int, SkillValue3: int, SkillValue4: int, City: int, Slot: int) -> None: pass
+async def CreateUserStatic(StaticItem: UserStaticItem, WorldNum: int) -> int: pass
 async def Dead() -> bool: pass
 async def Dex() -> int: pass
 async def Disconnect() -> None: pass
 async def DisconnectedTime() -> datetime: pass
 async def DragItem(ObjID: int, Count: int) -> bool: pass
 async def DropItem(MoveIntoID: int, X: int, Y: int, Z: int) -> bool: pass
-async def DumpObjectsCache() -> None: pass
 async def EnergyResist() -> int: pass
 async def EquipItemsSetMacro() -> None: pass
 async def EquipLastWeapon() -> None: pass
@@ -139,7 +138,7 @@ async def GetHP(ObjID: int) -> int: pass
 async def GetIgnoreList() -> list[int]: pass
 async def GetInt(ObjID: int) -> int: pass
 async def GetLandTileData(Tile: int) -> LandTileData: pass
-async def GetLandTilesArray(Xmin: int, Ymin: int, Xmax: int, Ymax: int, WorldNum: int, TileType: list[int]) -> list[FoundTile]: pass
+async def GetLandTilesArray(Xmin: int, Ymin: int, Xmax: int, Ymax: int, WorldNum: int, TileTypes: list[int]) -> list[FoundTile]: pass
 async def GetLastMenuItems() -> list[str]: pass
 async def GetLastStepQUsedDoor() -> int: pass
 async def GetLayer(ObjID: int) -> int: pass

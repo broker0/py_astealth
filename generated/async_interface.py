@@ -20,7 +20,6 @@ class AsyncInterface:
     async def AddToJournal(self, Text: str) -> None: pass
     async def AddToSystemJournal(self, Text: str) -> None: pass
     async def AddToSystemJournalEx(self, Text: str, TextColor: int, BgColor: int, FontSize: int, FontName: str) -> None: pass
-    async def AddUserStatic(self, StaticItem: UserStaticItem, WorldNum: int) -> int: pass
     async def Alarm(self) -> None: pass
     async def Armor(self) -> int: pass
     async def Attack(self, ObjID: int) -> None: pass
@@ -81,13 +80,13 @@ class AsyncInterface:
     async def ConsoleEntryUnicodeReply(self, Text: str) -> None: pass
     async def ConvertIntegerToFlags(self, Group: int, Flags: int) -> list[str]: pass
     async def CreateChar(self, ProfileName: str, ShardName: str, CharName: str, Gender: bool, Race: int, Strn: int, Dex: int, Int: int, Skill1: str, Skill2: str, Skill3: str, Skill4: str, SkillValue1: int, SkillValue2: int, SkillValue3: int, SkillValue4: int, City: int, Slot: int) -> None: pass
+    async def CreateUserStatic(self, StaticItem: UserStaticItem, WorldNum: int) -> int: pass
     async def Dead(self) -> bool: pass
     async def Dex(self) -> int: pass
     async def Disconnect(self) -> None: pass
     async def DisconnectedTime(self) -> datetime: pass
     async def DragItem(self, ObjID: int, Count: int) -> bool: pass
     async def DropItem(self, MoveIntoID: int, X: int, Y: int, Z: int) -> bool: pass
-    async def DumpObjectsCache(self) -> None: pass
     async def EnergyResist(self) -> int: pass
     async def EquipItemsSetMacro(self) -> None: pass
     async def EquipLastWeapon(self) -> None: pass
@@ -142,7 +141,7 @@ class AsyncInterface:
     async def GetIgnoreList(self) -> list[int]: pass
     async def GetInt(self, ObjID: int) -> int: pass
     async def GetLandTileData(self, Tile: int) -> LandTileData: pass
-    async def GetLandTilesArray(self, Xmin: int, Ymin: int, Xmax: int, Ymax: int, WorldNum: int, TileType: list[int]) -> list[FoundTile]: pass
+    async def GetLandTilesArray(self, Xmin: int, Ymin: int, Xmax: int, Ymax: int, WorldNum: int, TileTypes: list[int]) -> list[FoundTile]: pass
     async def GetLastMenuItems(self) -> list[str]: pass
     async def GetLastStepQUsedDoor(self) -> int: pass
     async def GetLayer(self, ObjID: int) -> int: pass

@@ -17,7 +17,6 @@ def AddJournalIgnore(Str: str) -> None: pass
 def AddToJournal(Text: str) -> None: pass
 def AddToSystemJournal(Text: str) -> None: pass
 def AddToSystemJournalEx(Text: str, TextColor: int, BgColor: int, FontSize: int, FontName: str) -> None: pass
-def AddUserStatic(StaticItem: UserStaticItem, WorldNum: int) -> int: pass
 def Alarm() -> None: pass
 def Armor() -> int: pass
 def Attack(ObjID: int) -> None: pass
@@ -78,13 +77,13 @@ def ConsoleEntryReply(Text: str) -> None: pass
 def ConsoleEntryUnicodeReply(Text: str) -> None: pass
 def ConvertIntegerToFlags(Group: int, Flags: int) -> list[str]: pass
 def CreateChar(ProfileName: str, ShardName: str, CharName: str, Gender: bool, Race: int, Strn: int, Dex: int, Int: int, Skill1: str, Skill2: str, Skill3: str, Skill4: str, SkillValue1: int, SkillValue2: int, SkillValue3: int, SkillValue4: int, City: int, Slot: int) -> None: pass
+def CreateUserStatic(StaticItem: UserStaticItem, WorldNum: int) -> int: pass
 def Dead() -> bool: pass
 def Dex() -> int: pass
 def Disconnect() -> None: pass
 def DisconnectedTime() -> datetime: pass
 def DragItem(ObjID: int, Count: int) -> bool: pass
 def DropItem(MoveIntoID: int, X: int, Y: int, Z: int) -> bool: pass
-def DumpObjectsCache() -> None: pass
 def EnergyResist() -> int: pass
 def EquipItemsSetMacro() -> None: pass
 def EquipLastWeapon() -> None: pass
@@ -139,7 +138,7 @@ def GetHP(ObjID: int) -> int: pass
 def GetIgnoreList() -> list[int]: pass
 def GetInt(ObjID: int) -> int: pass
 def GetLandTileData(Tile: int) -> LandTileData: pass
-def GetLandTilesArray(Xmin: int, Ymin: int, Xmax: int, Ymax: int, WorldNum: int, TileType: list[int]) -> list[FoundTile]: pass
+def GetLandTilesArray(Xmin: int, Ymin: int, Xmax: int, Ymax: int, WorldNum: int, TileTypes: list[int]) -> list[FoundTile]: pass
 def GetLastMenuItems() -> list[str]: pass
 def GetLastStepQUsedDoor() -> int: pass
 def GetLayer(ObjID: int) -> int: pass
