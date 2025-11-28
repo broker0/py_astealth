@@ -83,42 +83,47 @@ def print_clean_traceback(exc: Exception):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Stealth Python Script Launcher")
-    parser.add_argument("script", type=Path, help="Path to the script to execute")
-    parser.add_argument("port", nargs="?", help="Port (optional, internal use)")
-    parser.add_argument("func", nargs="?", help="Function to run inside the script")
+    if len(sys.argv) < 2:
+        error = 'CMD params must be: path_to_script [port] [func] [args]'
+        print(error)
+        sys.exit(4)
 
-    args, script_args = parser.parse_known_args()
+    script_arg = sys.argv[1]
 
     setup_io_redirection()
 
     # Add the script folder to the import path so that the script can see its files nearby
-    script_path = args.script.resolve()
+    script_path = Path(script_arg).resolve()
     sys.path.insert(0, str(script_path.parent))
 
     # Connecting to Stealth
     stealth.Wait(1)
 
     try:
-        if args.func:
+        target_func_name = None
+        if len(sys.argv) >= 4:
             # import script as module, so __main__ will not run
+            target_func_name = sys.argv[3]
+
+        if target_func_name:
             module_name = script_path.stem
             module = importlib.import_module(module_name)
 
-            if hasattr(module, args.func):
-                target_func = getattr(module, args.func)
+            if hasattr(module, target_func_name):
+                target_func = getattr(module, target_func_name)
                 if callable(target_func):
                     target_func()
                 else:
-                    print(f"Error: '{args.func}' is not callable.")
+                    print(f"Error: '{target_func_name}' is not callable.")
             else:
-                print(f"Error: Function '{args.func}' not found.")
-
+                print(f"Error: Function '{target_func_name}' not found.")
         else:
             # Substitute sys.argv so the script can see its arguments
             # Before: ['launcher.py', 'myscript.py', ...]
             # Now: ['myscript.py', 'arg1', 'arg2'...]
             original_argv = sys.argv
+
+            script_args = sys.argv[1:]
             sys.argv = [str(script_path)] + script_args
 
             try:
