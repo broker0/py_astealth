@@ -109,7 +109,8 @@ class String(RPCType):
         # read the string length as a U32 value
         size = U32.unpack_simple_value(stream)
         data = stream.read(size)
-        if len(data) < size: raise ValueError(f"Stream ended while reading {cls}")
+        if len(data) < size:
+            raise ValueError(f"Stream ended while reading {cls}")
 
         # cls.mapping is not used here either, so decode returns a string
         decoded_value = data.decode(cls.STEALTH_CODEC)

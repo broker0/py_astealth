@@ -29,19 +29,19 @@ class RPCType(ABC):
         # # if this is a list we write the list as an array of elements
         origin = typing.get_origin(type_obj)
         if origin is list:
+            # write array length
+            stream.write(struct.pack('<I', len(value)))
+
             if not value:   # empty list
-                stream.write(struct.pack('<I', 0))  # array length is 0 elements
                 return
 
             # type of the first element of the list
             inner_type = typing.get_args(type_obj)[0]
 
-            # write array length
-            stream.write(struct.pack('<I', len(value)))
-
             # we pack each element
             for item in value:
                 RPCType.pack_value(stream, item, inner_type)
+
             return
 
         # if this is a tuple we write the tuple elements sequentially
@@ -49,6 +49,7 @@ class RPCType(ABC):
             inner_types = typing.get_args(type_obj)
             for item, item_type in zip(value, inner_types):
                 RPCType.pack_value(stream, item, item_type)
+
             return
 
         # If the type is inherited from StealthType, then we call its pack method
@@ -71,10 +72,11 @@ class RPCType(ABC):
             data = stream.read(4)
             if len(data) < 4:
                 raise ValueError("Stream ended while reading list length")
-            count, = struct.unpack('<I', data)
 
             # we read the required number of elements and return the list
+            count, = struct.unpack('<I', data)
             inner_type = typing.get_args(type_obj)[0]
+
             return [RPCType.unpack_value(stream, inner_type) for _ in range(count)]
 
         # Processing the tuple
