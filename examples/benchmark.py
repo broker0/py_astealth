@@ -1,86 +1,68 @@
 import asyncio
 from datetime import datetime
-
 from py_astealth.api_client import AsyncStealthApiClient, SyncStealthApiClient
-import py_stealth as stealth
+import py_stealth as old_stealth
+from py_astealth import stealth as new_stealth
 
-from py_astealth import stealth as nstealth
-
-# how many times will we call the method
-COUNT = 5000
+COUNT = 15000
 
 
-def classic_sync_stealth():
-    start_time = datetime.now()
-    for x in range(0, COUNT):
-        stealth.Self()
-    time = datetime.now() - start_time
-    ms = time.total_seconds() * 1000 + time.microseconds / 1000
-    print(f"{COUNT} calls in {ms} milliseconds, {ms / COUNT} ms per call, {(COUNT / ms) * 1000} calls in one seconds")
+def log_stats(name: str, start_time: datetime):
+    dt = datetime.now() - start_time
+    total_ms = dt.total_seconds() * 1000
+    avg_ms = total_ms / COUNT
+    ops_sec = COUNT / dt.total_seconds() if dt.total_seconds() > 0 else 0
+
+    print(f"| {name:<40} | {total_ms:>8.0f} ms | {avg_ms:>6.3f} ms/op | {ops_sec:>8.0f} ops/sec |")
 
 
-async def modern_async_stealth():
+def bench_sync(name: str, func):
+    start = datetime.now()
+    for _ in range(COUNT):
+        func()
+    log_stats(name, start)
+
+
+async def bench_async(name: str):
     client = AsyncStealthApiClient()
     await client.connect()
 
-    start_time = datetime.now()
-    for x in range(0, COUNT):
-        await client.Self()
-    time = datetime.now() - start_time
-    ms = time.total_seconds() * 1000 + time.microseconds / 1000
-    print(f"{COUNT} calls in {ms} milliseconds, {ms / COUNT} ms per call, {(COUNT / ms) * 1000} calls in one seconds")
+    method = client.Self
+
+    start = datetime.now()
+    for _ in range(COUNT):
+        await method()
+    log_stats(name, start)
 
     client.close()
-
-
-def modern_sync_stealth():
-    client = SyncStealthApiClient()
-    client.connect()
-
-    start_time = datetime.now()
-    for x in range(0, COUNT):
-        client.Self()
-    time = datetime.now() - start_time
-    ms = time.total_seconds() * 1000 + time.microseconds / 1000
-    print(f"{COUNT} calls in {ms} milliseconds, {ms / COUNT} ms per call, {(COUNT / ms) * 1000} calls in one seconds")
-
-    client.close()
-
-
-def modern_fast_sync_stealth():
-    client = SyncStealthApiClient(threaded=False)
-    client.connect()
-
-    start_time = datetime.now()
-    for x in range(0, COUNT):
-        client.Self()
-    time = datetime.now() - start_time
-    ms = time.total_seconds() * 1000 + time.microseconds / 1000
-    print(f"{COUNT} calls in {ms} milliseconds, {ms / COUNT} ms per call, {(COUNT / ms) * 1000} calls in one seconds")
-
-    client.close()
-
-
-def modern_sync_in_classic():
-    start_time = datetime.now()
-    for x in range(0, COUNT):
-        nstealth.Self()
-    time = datetime.now() - start_time
-    ms = time.total_seconds() * 1000 + time.microseconds / 1000
-    print(f"{COUNT} calls in {ms} milliseconds, {ms / COUNT} ms per call, {(COUNT / ms) * 1000} calls in one seconds")
 
 
 def main():
-    print("======= Classic sync stealth benchmark =======")
-    classic_sync_stealth()
-    print("======= Modern sync stealth benchmark =======")
-    modern_sync_stealth()
-    print("======= Modern sync in classic interface benchmark =======")
-    modern_sync_in_classic()
-    print("======= Fast sync stealth benchmark =======")
-    modern_fast_sync_stealth()
-    print("======= Modern async stealth benchmark =======")
-    asyncio.run(modern_async_stealth())
+    print("-" * 92)
+    print(f"| {'BENCHMARK NAME':<40} | {'TOTAL':>11} | {'AVG':>12} | {'SPEED':>16} |")
+    print("-" * 92)
+
+    # 1. Classic py_stealth
+    bench_sync("Classic sync module (py_stealth)", old_stealth.Self)
+
+    # 2. Modern sync wrapper (emulation)
+    bench_sync("Modern sync module (emulate py_stealth)", new_stealth.Self)
+
+    # 3. Modern Sync Client (Threaded)
+    client_threaded = SyncStealthApiClient(threaded=True)
+    client_threaded.connect()
+    bench_sync("Modern Sync client (Threaded)", client_threaded.Self)
+    client_threaded.close()
+
+    # 4. Modern Sync Client (Single Thread)
+    client_fast = SyncStealthApiClient(threaded=False)
+    client_fast.connect()
+    bench_sync("Modern Sync client (Single Thread)", client_fast.Self)
+    client_fast.close()
+
+    # 5. Async Client
+    asyncio.run(bench_async("Modern Async client"))
+    print("-" * 92)
 
 
 if __name__ == "__main__":
