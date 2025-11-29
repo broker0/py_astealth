@@ -38,6 +38,7 @@ async def bench_async(name: str):
 
 
 def main():
+    print(f"Starting Benchmark (Count={COUNT})\n")
     print("-" * 92)
     print(f"| {'BENCHMARK NAME':<40} | {'TOTAL':>11} | {'AVG':>12} | {'SPEED':>16} |")
     print("-" * 92)

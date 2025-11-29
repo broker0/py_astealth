@@ -273,14 +273,15 @@ class AsyncStealthClient(AsyncRPCClient):
                     print(f"received {method_spec.name} with {args}")
                 handler(*args)
             else:
-                print(f"[Error] Received packet of unknown or unhandled type: ID {method_id}")
+                print(f"[Error] Received packet of unknown or unhandled type: ID {method_id}, data: {payload.hex()}")
 
         except (struct.error, ValueError, KeyError) as e:
             # struct.error, ValueError - if the packet is "broken" (unexpected end)
+            error_msg = f"[Error] Error parsing packet: {e}. Payload (hex): {payload.hex(' ')}"
             if _STRICT_PROTOCOL:
-                raise ConnectionError("[Error] Error parsing packet: {e}. Payload (hex): {payload.hex(' ')}")
+                raise ConnectionError(error_msg)
 
-            print(f"[Error] Error parsing packet: {e}. Payload (hex): {payload.hex(' ')}")
+            print(error_msg)
 
     def _handle_FunctionResultCallback(self, call_id: int, result_payload: bytes):
         if call_id in self._pending_replies:
