@@ -1,13 +1,12 @@
 ﻿import runpy
 import sys
-import argparse
 import traceback
 import importlib
 from pathlib import Path
 
 try:
     import py_astealth.stealth as stealth
-    from py_astealth.config import (
+    from py_astealth.utilites.config import (
         ERROR_FILTER,
         USE_STEALTH_SYSTEM_JOURNAL,
         REMOVE_NEW_LINES
@@ -17,7 +16,7 @@ except ImportError:
     sys.path.insert(0, str(current_dir.parent))
 
     import py_astealth.stealth as stealth
-    from py_astealth.config import (
+    from py_astealth.utilites.config import (
         ERROR_FILTER,
         USE_STEALTH_SYSTEM_JOURNAL,
         REMOVE_NEW_LINES
