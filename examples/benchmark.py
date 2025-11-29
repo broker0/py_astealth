@@ -25,16 +25,13 @@ def bench_sync(name: str, func):
 
 async def bench_async(name: str):
     client = AsyncStealthApiClient()
-    await client.connect()
-
     method = client.Self
+    async with client:
+        start = datetime.now()
+        for _ in range(COUNT):
+            await method()
 
-    start = datetime.now()
-    for _ in range(COUNT):
-        await method()
     log_stats(name, start)
-
-    client.close()
 
 
 def main():
@@ -51,15 +48,13 @@ def main():
 
     # 3. Modern Sync Client (Threaded)
     client_threaded = SyncStealthApiClient(threaded=True)
-    client_threaded.connect()
-    bench_sync("Modern Sync client (Threaded)", client_threaded.Self)
-    client_threaded.close()
+    with client_threaded:
+        bench_sync("Modern Sync client (Threaded)", client_threaded.Self)
 
     # 4. Modern Sync Client (Single Thread)
     client_fast = SyncStealthApiClient(threaded=False)
-    client_fast.connect()
-    bench_sync("Modern Sync client (Single Thread)", client_fast.Self)
-    client_fast.close()
+    with client_fast:
+        bench_sync("Modern Sync client (Single Thread)", client_fast.Self)
 
     # 5. Async Client
     asyncio.run(bench_async("Modern Async client"))

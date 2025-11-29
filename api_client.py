@@ -33,6 +33,13 @@ class AsyncStealthApiClient(AsyncInterface, AsyncStealthClient):
     def __init__(self, host: str = None, port: int = None):
         super().__init__(host, port)
 
+    async def __aenter__(self):
+        await self.connect()
+        return self
+
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        self.close()
+
     async def get_event(self):
         """
         return the next event from the queue or None if there are no events
