@@ -221,7 +221,7 @@ class AsyncStealthClient(AsyncRPCClient):
             if ret_type is not type(None):
                 print(f"decoded result({call_id}) for {method_spec.name} {result_payload.hex()} => {ret_type.__name__}({result})")
             else:
-                print(f"decoded result({call_id}) for {method_spec.name} is None")
+                print(f"{method_spec.name} has no result({call_id})")
 
         return result
 

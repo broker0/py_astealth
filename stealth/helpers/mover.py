@@ -313,7 +313,7 @@ def GetStaticTilesArray(
 
 
 def CreateUserStatic(static_item: UserStaticItem, world_num: int) -> int:
-    return api.AddUserStatic(static_item, world_num)
+    return api.CreateUserStatic(static_item, world_num)
 
 
 def AddUserStatic(tile: int, x: int, y: int, z: int, color: int, world_num: int) -> int:

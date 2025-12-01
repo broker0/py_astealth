@@ -43,7 +43,11 @@ class StealthApi(ApiSpecification):
     # connection management
     ####################################################################################################################
     @ApiSpecification.method(20)
-    def Connected(self) -> Bool: ...
+    def Connected(self) -> Bool:
+        """
+        Returns status of the connection with the UO server: ‘True - connected, ‘False - not connected
+        """
+        ...
 
     @ApiSpecification.method(28)
     def GetARStatus(self) -> Bool: ...
