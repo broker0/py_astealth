@@ -427,3 +427,7 @@ class AsyncInterface:
     async def _ScriptTogglePauseCallback(self) -> None: pass
     async def _SelectProfile(self, ProfileName: str) -> None: pass
     async def _StopScriptCallback(self) -> None: pass
+
+__all__ = [
+    "AsyncInterface",
+]

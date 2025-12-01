@@ -108,6 +108,8 @@ class CodeGenerator:
         indent = ""
         include_self = False
 
+        methods_list = self.api_spec.get_methods()
+
         if class_name:
             lines.append(f"class {class_name}:")
             lines.append(f'    """Base class defining the interface of {self.api_spec.__name__}."""')
@@ -115,9 +117,24 @@ class CodeGenerator:
             indent = "    "
             include_self = True
 
-        for spec in self.api_spec.get_methods():
+        for spec in methods_list:
             signature = self._build_method_signature(spec, is_async, include_self)
             lines.append(f"{indent}{signature}")
+
+        if class_name:
+            exports = [class_name]
+        else:
+            exports = [spec.name for spec in methods_list]
+
+        ## __all__
+        lines.append("")
+        lines.append('__all__ = [')
+        for name in exports:
+            lines.append(f'    "{name}",')
+        lines.append(']')
+        lines.append("")
+
+
 
         self._write_file(output_path, lines)
 
