@@ -13,6 +13,7 @@ class FinderSettings:
         # Set settings
         FinderSettings.FindDistance = 20
         FinderSettings.FindInNulPoint = True
+        print(Finder.FindVertical)
     """
     
     @property
@@ -30,7 +31,7 @@ class FinderSettings:
         """Get current find vertical distance."""
         return api.GetFindVertical()
 
-    @FindDistance.setter
+    @FindVertical.setter
     def FindVertical(self, value: int) -> None:
         """Set find vertical distance."""
         api.SetFindVertical(value)
@@ -65,7 +66,7 @@ def FindType(obj_type: int, container: int = None) -> int:
     Find an object by type in the specified container (simplified version).
     
     Args:
-        obj_type: Object type to search for
+        obj_type: Object type to search for (0xFFFF for any type)
         container: Container ID to search in (default: Backpack)
         
     Returns:
@@ -84,7 +85,7 @@ def FindTypeEx(obj_type: int, color: int, container: int = None, in_sub: bool = 
     Find an object by type and color in the specified container.
     
     Args:
-        obj_type: Object type to search for
+        obj_type: Object type to search for (0xFFFF for any type)
         color: Object color (0xFFFF for any color)
         container: Container ID to search in (default: Backpack)
         in_sub: Search in sub-containers
@@ -108,7 +109,7 @@ def FindTypesArrayEx(obj_types: list[int], colors: list[int], containers: list[i
     Find an object by types and colors in the specified container.
 
     Args:
-        obj_types: List of object types to search for
+        obj_types: List of object types to search for (0xFFFF for any type)
         colors: List of object colors (0xFFFF for any color)
         containers: List of container ID to search
         in_sub: Search in sub-containers
@@ -120,136 +121,6 @@ def FindTypesArrayEx(obj_types: list[int], colors: list[int], containers: list[i
     colors = [color if color != -1 else 0xFFFF for color in colors]
 
     return api.FindTypesArrayEx(obj_types, colors, containers, in_sub)
-
-
-def ClickOnObject(obj_id: int) -> None:
-    """
-    Click on an object (with existence check).
-    
-    Args:
-        obj_id: Object ID to click on
-    """
-    if not api.IsObjectExists(obj_id):
-        AddToSystemJournal(f'ClickOnObject error: Object {hex(obj_id)} not found.')
-    else:
-        api.ClickOnObject(obj_id)
-
-
-# Item movement helpers
-def MoveItem(item_id: int, count: int, move_into_id: int, x: int, y: int, z: int) -> bool:
-    """
-    Move an item to a container or location.
-    
-    Args:
-        item_id: Item to move
-        count: Amount to move (0 = all)
-        move_into_id: Destination container (or 0 for ground)
-        x, y, z: Destination coordinates
-        
-    Returns:
-        True if successful, False otherwise
-    """
-    if not api.DragItem(item_id, count):
-        return False
-
-    Wait(api.GetDropDelay())
-    return api.DropItem(move_into_id, x, y, z)
-
-
-def Grab(item_id: int, count: int) -> bool:
-    """
-    Move an item to backpack.
-    
-    Args:
-        item_id: Item to grab
-        count: Amount to grab (0 = all)
-        
-    Returns:
-        True if successful, False otherwise
-    """
-    return MoveItem(item_id, count, api.Backpack(), 0, 0, 0)
-
-
-def Drop(item_id: int, count: int, x: int, y: int, z: int) -> bool:
-    """
-    Drop an item on the ground at specified coordinates.
-    
-    Args:
-        item_id: Item to drop
-        count: Amount to drop (0 = all)
-        x, y, z: Ground coordinates
-        
-    Returns:
-        True if successful, False otherwise
-    """
-    return MoveItem(item_id, count, Ground(), x, y, z)
-
-
-def DropHere(item_id: int) -> bool:
-    """
-    Drop an item on the ground at current position.
-    
-    Args:
-        item_id: Item to drop
-        
-    Returns:
-        True if successful, False otherwise
-    """
-    return MoveItem(item_id, 0, Ground(), 0, 0, 0)
-
-
-def MoveItems(container: int, items_type: int, items_color: int, 
-              move_into_id: int, x: int, y: int, z: int,
-              delay_ms: int, max_count: int = 0) -> bool:
-    """
-    Move multiple items of specified type from container.
-    
-    Args:
-        container: Source container
-        items_type: Item type to move (-1 = all types)
-        items_color: Item color (-1 = all colors)
-        move_into_id: Destination container
-        x, y, z: Destination coordinates
-        delay_ms: Delay between moves in milliseconds
-        max_count: Maximum items to move (0 = all found items)
-        
-    Returns:
-        True if any items were moved, False otherwise
-    """
-    FindTypeEx(items_type, items_color, container, False)
-    items = api.GetFindedList()
-    if not items:  # nothing found
-        return False
-    
-    drop_delay = api.GetDropDelay()
-    if not 50 <= drop_delay <= 10000:
-        drop_delay = 50 if drop_delay < 50 else 10000
-    if drop_delay > delay_ms:
-        delay_ms = 0
-    api.SetDropDelay(drop_delay)
-    
-    if not 0 < max_count < len(items):
-        max_count = len(items)
-    
-    for i in range(max_count):
-        MoveItem(items[i], 0, move_into_id, x, y, z)
-        Wait(delay_ms)
-    return True
-
-
-def EmptyContainer(container: int, dest_container: int, delay_ms: int) -> bool:
-    """
-    Move all items from one container to another.
-    
-    Args:
-        container: Source container
-        dest_container: Destination container
-        delay_ms: Delay between moves in milliseconds
-        
-    Returns:
-        True if any items were moved, False otherwise
-    """
-    return MoveItems(container, -1, -1, dest_container, 0xFFFF, 0xFFFF, 0, delay_ms)
 
 
 # Count helpers
@@ -317,40 +188,178 @@ def BPCount() -> int:
     """Count Black Pearl in backpack."""
     return CountEx(Reagent.BlackPearl, 0, api.Backpack())
 
+
 def BMCount() -> int:
     """Count Blood Moss in backpack."""
     return CountEx(Reagent.BloodMoss, 0, api.Backpack())
+
 
 def GACount() -> int:
     """Count Garlic in backpack."""
     return CountEx(Reagent.Garlic, 0, api.Backpack())
 
+
 def GSCount() -> int:
     """Count Ginseng in backpack."""
     return CountEx(Reagent.Ginseng, 0, api.Backpack())
+
 
 def MRCount() -> int:
     """Count Mandrake Root in backpack."""
     return CountEx(Reagent.MandrakeRoot, 0, api.Backpack())
 
+
 def NSCount() -> int:
     """Count Nightshade in backpack."""
     return CountEx(Reagent.Nightshade, 0, api.Backpack())
 
+
 def SACount() -> int:
     """Count Sulfurous Ash in backpack."""
     return CountEx(Reagent.SulfurousAsh, 0, api.Backpack())
+
 
 def SSCount() -> int:
     """Count Spider's Silk in backpack."""
     return CountEx(Reagent.SpidersSilk, 0, api.Backpack())
 
 
+# Item movement helpers
+def MoveItem(item_id: int, count: int, move_into_id: int, x: int, y: int, z: int) -> bool:
+    """
+    Move an item to a container or location.
+
+    Args:
+        item_id: Item to move
+        count: Amount to move (0 = all)
+        move_into_id: Destination container (or 0 for ground)
+        x, y, z: Destination coordinates
+
+    Returns:
+        True if successful, False otherwise
+    """
+    if not api.DragItem(item_id, count):
+        return False
+
+    Wait(api.GetDropDelay())
+    return api.DropItem(move_into_id, x, y, z)
+
+
+def Grab(item_id: int, count: int) -> bool:
+    """
+    Move an item to backpack.
+
+    Args:
+        item_id: Item to grab
+        count: Amount to grab (0 = all)
+
+    Returns:
+        True if successful, False otherwise
+    """
+    return MoveItem(item_id, count, api.Backpack(), 0, 0, 0)
+
+
+def Drop(item_id: int, count: int, x: int, y: int, z: int) -> bool:
+    """
+    Drop an item on the ground at specified coordinates.
+
+    Args:
+        item_id: Item to drop
+        count: Amount to drop (0 = all)
+        x, y, z: Ground coordinates
+
+    Returns:
+        True if successful, False otherwise
+    """
+    return MoveItem(item_id, count, Ground(), x, y, z)
+
+
+def DropHere(item_id: int) -> bool:
+    """
+    Drop an item on the ground at current position.
+
+    Args:
+        item_id: Item to drop
+
+    Returns:
+        True if successful, False otherwise
+    """
+    return MoveItem(item_id, 0, Ground(), 0, 0, 0)
+
+
+def MoveItems(container: int, items_type: int, items_color: int,
+              move_into_id: int, x: int, y: int, z: int,
+              delay_ms: int, max_count: int = 0) -> bool:
+    """
+    Move multiple items of specified type from container.
+
+    Args:
+        container: Source container
+        items_type: Item type to move (-1 = all types)
+        items_color: Item color (-1 = all colors)
+        move_into_id: Destination container
+        x, y, z: Destination coordinates
+        delay_ms: Delay between moves in milliseconds
+        max_count: Maximum items to move (0 = all found items)
+
+    Returns:
+        True if any items were moved, False otherwise
+    """
+    FindTypeEx(items_type, items_color, container, False)
+    items = api.GetFindedList()
+    if not items:  # nothing found
+        return False
+
+    drop_delay = api.GetDropDelay()
+    if not 50 <= drop_delay <= 10000:
+        drop_delay = 50 if drop_delay < 50 else 10000
+    if drop_delay > delay_ms:
+        delay_ms = 0
+    api.SetDropDelay(drop_delay)
+
+    if not 0 < max_count < len(items):
+        max_count = len(items)
+
+    for i in range(max_count):
+        MoveItem(items[i], 0, move_into_id, x, y, z)
+        Wait(delay_ms)
+    return True
+
+
+def EmptyContainer(container: int, dest_container: int, delay_ms: int) -> bool:
+    """
+    Move all items from one container to another.
+
+    Args:
+        container: Source container
+        dest_container: Destination container
+        delay_ms: Delay between moves in milliseconds
+
+    Returns:
+        True if any items were moved, False otherwise
+    """
+    return MoveItems(container, -1, -1, dest_container, 0xFFFF, 0xFFFF, 0, delay_ms)
+
+
+def ClickOnObject(obj_id: int) -> None:
+    """
+    Click on an object (with existence check).
+
+    Args:
+        obj_id: Object ID to click on
+    """
+    if not api.IsObjectExists(obj_id):
+        AddToSystemJournal(f'ClickOnObject error: Object {hex(obj_id)} not found.')
+    else:
+        api.ClickOnObject(obj_id)
+
+
 __all__ = [
     'FinderSettings', 'Finder',
-    'GetFoundList', 'Ground', 'FindType', 'FindTypeEx', 'FindTypesArrayEx', 'ClickOnObject',
-    'MoveItem', 'Grab', 'Drop', 'DropHere', 'MoveItems', 'EmptyContainer',
+    'GetFoundList', 'Ground', 'FindType', 'FindTypeEx', 'FindTypesArrayEx',
     'Count', 'CountGround', 'CountEx',
     'BPCount', 'BMCount', 'GACount', 'GSCount', 'MRCount', 'NSCount', 'SACount', 'SSCount',
     'BP', 'BM', 'GA', 'GS', 'MR', 'NS', 'SA', 'SS',
+    'MoveItem', 'Grab', 'Drop', 'DropHere', 'MoveItems', 'EmptyContainer',
+    'ClickOnObject',
 ]
