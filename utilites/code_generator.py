@@ -126,15 +126,14 @@ class CodeGenerator:
         else:
             exports = [spec.name for spec in methods_list]
 
-        ## __all__
+        # filling __all__
+        lines.append("")
         lines.append("")
         lines.append('__all__ = [')
         for name in exports:
             lines.append(f'    "{name}",')
         lines.append(']')
         lines.append("")
-
-
 
         self._write_file(output_path, lines)
 

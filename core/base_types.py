@@ -10,13 +10,15 @@ class RPCType(ABC):
     # '_mapping' is what python-type this stealth-type expects as a value
     _mapping = None
 
+    @classmethod
     @abstractmethod
-    def pack_simple_value(self, stream: BinaryIO, value: Any):
+    def pack_simple_value(cls, stream: BinaryIO, value: Any):
         """Writes the binary representation of 'value' to 'stream'."""
         raise NotImplementedError
 
+    @classmethod
     @abstractmethod
-    def unpack_simple_value(self, stream: BinaryIO) -> Any:
+    def unpack_simple_value(cls, stream: BinaryIO) -> Any:
         """Reads data from the stream 'stream' and returns a Python object."""
         raise NotImplementedError
 

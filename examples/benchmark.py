@@ -18,18 +18,18 @@ def log_stats(name: str, start_time: datetime):
 
 def bench_sync(name: str, obj):
     start = datetime.now()
-    func = obj.Self
+    func = obj.Self     # ! METHOD func
     for _ in range(COUNT):
-        func()
+        func()          # ! METHOD args
     log_stats(name, start)
 
 
 async def bench_async(name: str):
     async with AsyncStealthApiClient() as client:
-        method = client.Self
+        method = client.Self       # ! METHOD func
         start = datetime.now()
         for _ in range(COUNT):
-            await method()
+            await method()         # ! METHOD args
 
     log_stats(name, start)
 
