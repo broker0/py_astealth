@@ -5,11 +5,15 @@ from py_astealth.stealth import api
 from py_astealth.stealth_enums import Spell, Messenger, Global, EventType
 
 
-def _get_skill_id(skill_name: str) -> int:
+def _get_skill_id(skill_id: str) -> int:
     """Convert skill name to skill ID, raises ValueError if invalid."""
-    skill_id = api.GetSkillID(skill_name)
+    if isinstance(skill_id, int):
+        return skill_id
+    else:
+        skill_id = api.GetSkillID(skill_id)
+
     if skill_id < 0:
-        raise ValueError(f'Unknown skill name: "{skill_name}"')
+        raise ValueError(f'Unknown skill name: "{skill_id}"')
 
     return skill_id
 
