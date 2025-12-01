@@ -145,15 +145,12 @@ async def simple_follower(master, slave):
 async def main():
     print("Connecting to Master...")
     master = AsyncStealthApiClient()
-    await master.connect()
+    await master.connect("(0)")     # select 0 profile
     print(f"Master connected. Profile: {await master.ProfileName()}")
-
-    print("\n!!! Please switch to the SLAVE profile in Stealth now !!!")
-    input("Press Enter when ready...")
 
     print("Connecting to Slave...")
     slave = AsyncStealthApiClient()
-    await slave.connect()
+    await slave.connect("(1)")      # select 1st profile
     print(f"Slave connected. Profile: {await slave.ProfileName()}")
 
     await complex_follower(master, slave)

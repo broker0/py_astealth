@@ -16,17 +16,17 @@ def log_stats(name: str, start_time: datetime):
     print(f"| {name:<40} | {total_ms:>8.0f} ms | {avg_ms:>6.3f} ms/op | {ops_sec:>8.0f} ops/sec |")
 
 
-def bench_sync(name: str, func):
+def bench_sync(name: str, obj):
     start = datetime.now()
+    func = obj.Self
     for _ in range(COUNT):
         func()
     log_stats(name, start)
 
 
 async def bench_async(name: str):
-    client = AsyncStealthApiClient()
-    method = client.Self
-    async with client:
+    async with AsyncStealthApiClient() as client:
+        method = client.Self
         start = datetime.now()
         for _ in range(COUNT):
             await method()
@@ -41,20 +41,18 @@ def main():
     print("-" * 92)
 
     # 1. Classic py_stealth
-    bench_sync("Classic sync module (py_stealth)", old_stealth.Self)
+    bench_sync("Classic sync module (py_stealth)", old_stealth)
 
     # 2. Modern sync wrapper (emulation)
-    bench_sync("Modern sync module (emulate py_stealth)", new_stealth.Self)
+    bench_sync("Modern sync module (emulate py_stealth)", new_stealth)
 
     # 3. Modern Sync Client (Threaded)
-    client_threaded = SyncStealthApiClient(threaded=True)
-    with client_threaded:
-        bench_sync("Modern Sync client (Threaded)", client_threaded.Self)
+    with SyncStealthApiClient(threaded=True) as client_threaded:
+        bench_sync("Modern Sync client (Threaded)", client_threaded)
 
     # 4. Modern Sync Client (Single Thread)
-    client_fast = SyncStealthApiClient(threaded=False)
-    with client_fast:
-        bench_sync("Modern Sync client (Single Thread)", client_fast.Self)
+    with SyncStealthApiClient(threaded=False) as client_fast:
+        bench_sync("Modern Sync client (Single Thread)", client_fast)
 
     # 5. Async Client
     asyncio.run(bench_async("Modern Async client"))

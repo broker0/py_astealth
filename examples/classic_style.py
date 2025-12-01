@@ -8,7 +8,7 @@ COUNT = 5000
 def worker(item_type):
     print(f"Thread {threading.get_ident()} finding {hex(item_type)}...")
     # first call in this thread create new connection
-    obj_id = stealth.FindTypeEx(item_type, 0xFFFF, 0, False)
+    obj_id = stealth.FindTypeEx(item_type, 0xFFFF, stealth.Backpack(), False)
 
     if obj_id:
         print(f"Thread {threading.get_ident()}: found {obj_id}!")
