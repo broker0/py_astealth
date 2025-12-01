@@ -71,6 +71,9 @@ def FindType(obj_type: int, container: int = None) -> int:
     Returns:
         Object ID if found, 0 if not found
     """
+    if obj_type == -1:
+        obj_type = 0xFFFF
+
     if container is None:
         container = api.Backpack()
     return api.FindTypeEx(obj_type, 0xFFFF, container, False)
@@ -89,9 +92,34 @@ def FindTypeEx(obj_type: int, color: int, container: int = None, in_sub: bool = 
     Returns:
         Object ID if found, 0 if not found
     """
+    if obj_type == -1:
+        obj_type = 0xFFFF
+
+    if color == -1:
+        color = 0xFFFF
+
     if container is None:
         container = api.Backpack()
     return api.FindTypeEx(obj_type, color, container, in_sub)
+
+
+def FindTypesArrayEx(obj_types: list[int], colors: list[int], containers: list[int], in_sub: bool) -> int:
+    """
+    Find an object by types and colors in the specified container.
+
+    Args:
+        obj_types: List of object types to search for
+        colors: List of object colors (0xFFFF for any color)
+        containers: List of container ID to search
+        in_sub: Search in sub-containers
+
+    Returns:
+        Object ID if found, 0 if not found
+    """
+    obj_types = [obj_type if obj_type != -1 else 0xFFFF for obj_type in obj_types]
+    colors = [color if color != -1 else 0xFFFF for color in colors]
+
+    return api.FindTypesArrayEx(obj_types, colors, containers, in_sub)
 
 
 def ClickOnObject(obj_id: int) -> None:
@@ -320,7 +348,7 @@ def SSCount() -> int:
 
 __all__ = [
     'FinderSettings', 'Finder',
-    'GetFoundList', 'Ground', 'FindType', 'FindTypeEx', 'ClickOnObject',
+    'GetFoundList', 'Ground', 'FindType', 'FindTypeEx', 'FindTypesArrayEx', 'ClickOnObject',
     'MoveItem', 'Grab', 'Drop', 'DropHere', 'MoveItems', 'EmptyContainer',
     'Count', 'CountGround', 'CountEx',
     'BPCount', 'BMCount', 'GACount', 'GSCount', 'MRCount', 'NSCount', 'SACount', 'SSCount',
