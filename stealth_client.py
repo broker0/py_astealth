@@ -64,7 +64,7 @@ class AsyncStealthRPCProtocol(asyncio.Protocol):
         if not self.transport:
             raise ConnectionError("Client not connected")
 
-        self._tx_bytes += len(bytes)
+        self._tx_bytes += len(payload)
         packet_len = struct.pack('<I', len(payload))    # the packet is preceded by u32 length
 
         if DEBUG_PROTOCOL > 0:
