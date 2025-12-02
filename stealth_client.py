@@ -200,7 +200,7 @@ class AsyncStealthClient(AsyncRPCClient):
             self._transport.close()
 
     def _get_call_id(self):
-        self._call_id = (self._call_id + 1) & 0xFFFF
+        self._call_id = self._call_id % 0xFFFF + 1
         return self._call_id
 
     async def call_method(self, method_spec: MethodSpec, *args) -> Any:
