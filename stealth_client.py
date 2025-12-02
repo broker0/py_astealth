@@ -26,6 +26,8 @@ class AsyncStealthRPCProtocol(asyncio.Protocol):
         self.client = client
         self.transport = None
         self._buffer = bytearray()
+        self._tx_bytes = 0
+        self._rx_bytes = 0
 
     def connection_made(self, transport: asyncio.Transport):
         self.transport = transport
@@ -33,6 +35,8 @@ class AsyncStealthRPCProtocol(asyncio.Protocol):
         self.client.connection_made(transport)
 
     def data_received(self, data: bytes):
+        self._rx_bytes += len(data)
+
         if DEBUG_PROTOCOL > 1:
             print("data_received:", data.hex())
 
@@ -55,6 +59,18 @@ class AsyncStealthRPCProtocol(asyncio.Protocol):
                 print("data_received.packet:", packet_len, packet_payload.hex())
 
             self.client.handle_packet(packet_payload)
+
+    def send_packet(self, payload: bytes):
+        if not self.transport:
+            raise ConnectionError("Client not connected")
+
+        self._tx_bytes += len(bytes)
+        packet_len = struct.pack('<I', len(payload))    # the packet is preceded by u32 length
+
+        if DEBUG_PROTOCOL > 0:
+            print("send_packet: ", packet_len.hex(), payload.hex())
+
+        self.transport.write(packet_len + payload)
 
     def connection_lost(self, exc):
         self.client.connection_lost(exc)
@@ -143,8 +159,6 @@ class AsyncStealthClient(AsyncRPCClient):
         self._pending_replies: dict[int, asyncio.Future] = {}
         self.events: asyncio.Queue[StealthEvent] = asyncio.Queue()
 
-        self._send_bytes = 0
-        self._recv_bytes = 0
         self._calls = 0
 
         self._packet_handlers = {
@@ -238,24 +252,16 @@ class AsyncStealthClient(AsyncRPCClient):
                 future.set_exception(ConnectionAbortedError("Connection lost"))
 
     def send_packet(self, payload: bytes):
-        if not self._transport:
+        if not self._protocol:
             raise ConnectionError("Client not connected")
 
-        # the packet is preceded by u32 length
-        packet_len = struct.pack('<I', len(payload))
-        self._send_bytes += len(packet_len) + len(payload)
-        if DEBUG_PROTOCOL > 0:
-            print("send_packet: ", packet_len.hex(), payload.hex())
-
-        self._transport.write(packet_len + payload)
+        self._protocol.send_packet(payload)
 
     def handle_packet(self, payload: bytes):
         """unpacking incoming server packets"""
 
         if DEBUG_CLIENT > 1:
             print("handle_packet: ", payload.hex())
-
-        self._recv_bytes += len(payload)
 
         try:
             stream = io.BytesIO(payload)
