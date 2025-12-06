@@ -252,7 +252,7 @@ class AsyncStealthClient(AsyncRPCClient):
                 future.set_exception(ConnectionAbortedError("Connection lost"))
 
     def send_packet(self, payload: bytes):
-        if not self._protocol:
+        if not self._transport:
             raise ConnectionError("Client not connected")
 
         self._protocol.send_packet(payload)
