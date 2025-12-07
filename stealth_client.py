@@ -324,7 +324,7 @@ class AsyncStealthClient(AsyncRPCClient):
         loop.create_task(self.call_method(StealthApi._ScriptPath.method_spec, script_name))
 
     @staticmethod
-    async def async_get_stealth_port(host: str = DEFAULT_STEALTH_HOST, port: int = DEFAULT_STEALTH_PORT) -> int:
+    async def async_get_stealth_port(host: str = DEFAULT_STEALTH_HOST, port: int = DEFAULT_STEALTH_PORT, script_group: int = 0, script_profile: str = "") -> int:
         """
         Asynchronously retrieves the script port from the Stealth client.
         """
@@ -341,11 +341,10 @@ class AsyncStealthClient(AsyncRPCClient):
                     timeout=SOCK_TIMEOUT
                 )
 
-                # Packet structure:
-                # Length: 4 bytes (unsigned int) = 8
-                # Type: 2 bytes (unsigned short) = 4
-                packet = struct.pack('<IH', 2, 4)
-                writer.write(packet)
+                CALL_ID = 1
+                packet = StealthRPCEncoder.encode_method(StealthApi._RequestPort.method_spec, CALL_ID, script_group, script_profile)
+                header = struct.pack('<I', len(packet))
+                writer.write(header + packet)
                 await writer.drain()
 
                 # Read length first (4 bytes)
@@ -355,9 +354,17 @@ class AsyncStealthClient(AsyncRPCClient):
                 # Read payload
                 payload_data = await reader.readexactly(length)
 
-                if len(payload_data) >= 2:
-                    script_port = struct.unpack_from('<H', payload_data, 0)[0]
-                    return script_port
+                stream = io.BytesIO(payload_data)
+                method_id = U16.unpack_simple_value(stream)
+                call_id = U16.unpack_simple_value(stream)
+
+                assert call_id == CALL_ID
+                assert method_id == StealthApi._FunctionResultCallback.method_spec.id
+
+                script_port = U16.unpack_simple_value(stream)
+                script_group = U64.unpack_simple_value(stream)
+
+                return script_port
 
             except (OSError, struct.error, asyncio.TimeoutError, asyncio.IncompleteReadError):
                 # If we can't connect to the main Stealth port, we can't get the script port

@@ -39,6 +39,9 @@ class StealthApi(ApiSpecification):
     @ApiSpecification.method(11)
     def _SelectProfile(self, ProfileName: String) -> None: ...
 
+    @ApiSpecification.method(12)
+    def _RequestPort(self, GroupId: U64, ProfileName: String) -> tuple[U16, U64]: ...
+
     ####################################################################################################################
     # connection management
     ####################################################################################################################
