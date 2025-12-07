@@ -103,12 +103,13 @@ class SyncStealthApiClient(SyncInterface):
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.close()
 
-    def connect(self):
+    def connect(self, group: int = 0, profile: str = ""):
         if self._threaded:
             with self._lock:
                 if self._thread is not None:
                     raise RuntimeError("Already connected")
-                self._thread = threading.Thread(target=self._run_event_loop, daemon=True)
+                
+                self._thread = threading.Thread(target=self._run_event_loop, args=(group, profile), daemon=True)
                 self._thread.start()
                 if not self._ready_event.wait(timeout=10):
                     raise ConnectionError("Cannot connect")
@@ -116,7 +117,7 @@ class SyncStealthApiClient(SyncInterface):
             if self._loop is not None:
                  raise RuntimeError("Already connected")
             self._loop = asyncio.new_event_loop()
-            self._loop.run_until_complete(self._async_client.connect())
+            self._loop.run_until_complete(self._async_client.connect(group, profile))
 
     def close(self):
         if self._threaded:
@@ -144,11 +145,13 @@ class SyncStealthApiClient(SyncInterface):
         else:
              return self._loop.run_until_complete(coro)
 
-    def _run_event_loop(self):
+    def _run_event_loop(self, group: int, profile: str):
         try:
             self._loop = asyncio.new_event_loop()
             asyncio.set_event_loop(self._loop)
-            self._loop.run_until_complete(self._async_client.connect())
+            
+            self._loop.run_until_complete(self._async_client.connect(group, profile))
+
             self._ready_event.set()
             self._loop.run_forever()
         finally:

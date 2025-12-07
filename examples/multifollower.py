@@ -139,18 +139,15 @@ async def simple_follower(master, slave):
         await asyncio.sleep(1/1000)
 
 
-
-
-
 async def main():
     print("Connecting to Master...")
     master = AsyncStealthApiClient()
-    await master.connect("(0)")     # select 0 profile
+    await master.connect(profile="(0)")     # select 0 profile
     print(f"Master connected. Profile: {await master.ProfileName()}")
 
     print("Connecting to Slave...")
     slave = AsyncStealthApiClient()
-    await slave.connect("(1)")      # select 1st profile
+    await slave.connect(profile="(1)")      # select 1st profile
     print(f"Slave connected. Profile: {await slave.ProfileName()}")
 
     await complex_follower(master, slave)

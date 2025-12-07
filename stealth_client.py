@@ -149,6 +149,8 @@ class AsyncStealthClient(AsyncRPCClient):
     def __init__(self, host: str = None, port: int = None):
         self.host = host
         self.port = port
+        self.group = 0
+        self.profile = ""
         self._transport = None
         self._protocol = None
         self._connected = asyncio.Event()
@@ -169,13 +171,20 @@ class AsyncStealthClient(AsyncRPCClient):
             StealthApi._ScriptPathCallback.method_spec.id: self._handle_ScriptPathCallback,
         }
 
-    async def connect(self, profile: str = None):
+    async def connect(self, group: int = 0, profile: str = "") -> int:
         """establishing a connection with the Stealth-client and sending a packet with the version of our protocol"""
+        self.profile = profile
+
         if self.host is None:
             self.host = DEFAULT_STEALTH_HOST
 
         if self.port is None:
-            self.port = await AsyncStealthClient.async_get_stealth_port(self.host)
+            self.port, self.group = await AsyncStealthClient.async_get_stealth_port(
+                self.host, script_group=group,
+                script_profile=self.profile
+            )
+        else:
+            self.group = group
 
         loop = asyncio.get_running_loop()
         try:
@@ -188,12 +197,14 @@ class AsyncStealthClient(AsyncRPCClient):
             # self.send_packet(packet)
             await self.call_method(StealthApi._LangVersion.method_spec, 1, *VERSION)
 
-            if profile is not None:
-                await self.call_method(StealthApi._SelectProfile.method_spec, profile)
+            # if self.profile is not None:
+            #     await self.call_method(StealthApi._SelectProfile.method_spec, profile)
 
         except ConnectionRefusedError:
             print(f"Unable to connect to {self.host}:{self.port}. Connection refused.")
             raise
+
+        return self.group
 
     def close(self):
         if self._transport:
@@ -324,7 +335,7 @@ class AsyncStealthClient(AsyncRPCClient):
         loop.create_task(self.call_method(StealthApi._ScriptPath.method_spec, script_name))
 
     @staticmethod
-    async def async_get_stealth_port(host: str = DEFAULT_STEALTH_HOST, port: int = DEFAULT_STEALTH_PORT, script_group: int = 0, script_profile: str = "") -> int:
+    async def async_get_stealth_port(host: str = DEFAULT_STEALTH_HOST, port: int = DEFAULT_STEALTH_PORT, script_group: int = 0, script_profile: str = "") -> tuple[int, int]:
         """
         Asynchronously retrieves the script port from the Stealth client.
         """
@@ -358,13 +369,13 @@ class AsyncStealthClient(AsyncRPCClient):
                 method_id = U16.unpack_simple_value(stream)
                 call_id = U16.unpack_simple_value(stream)
 
-                assert call_id == CALL_ID
-                assert method_id == StealthApi._FunctionResultCallback.method_spec.id
+                # assert call_id == CALL_ID
+                # assert method_id == StealthApi._FunctionResultCallback.method_spec.id
 
                 script_port = U16.unpack_simple_value(stream)
                 script_group = U64.unpack_simple_value(stream)
 
-                return script_port
+                return script_port, script_group
 
             except (OSError, struct.error, asyncio.TimeoutError, asyncio.IncompleteReadError):
                 # If we can't connect to the main Stealth port, we can't get the script port
