@@ -93,7 +93,10 @@ def main():
 
     # Add the script folder to the import path so that the script can see its files nearby
     script_path = Path(script_arg).resolve()
+    script_args = sys.argv[1:]
+    # replace sys.argv[0] (py_stealth) with the script name
     sys.path.insert(0, str(script_path.parent))
+    sys.argv = [str(script_path)] + script_args
 
     # Connecting to Stealth
     stealth.Wait(1)
@@ -117,18 +120,10 @@ def main():
             else:
                 print(f"Error: Function '{target_func_name}' not found.")
         else:
-            # Substitute sys.argv so the script can see its arguments
-            # Before: ['launcher.py', 'myscript.py', ...]
-            # Now: ['myscript.py', 'arg1', 'arg2'...]
-            original_argv = sys.argv
-
-            script_args = sys.argv[1:]
-            sys.argv = [str(script_path)] + script_args
-
             try:
                 runpy.run_path(str(script_path), run_name='__main__')
             finally:
-                sys.argv = original_argv
+                pass
 
     except SystemExit:
         pass
