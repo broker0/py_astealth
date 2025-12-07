@@ -425,6 +425,7 @@ async def _ScriptTogglePauseCallback() -> None: pass
 async def _SelectProfile(ProfileName: str) -> None: pass
 async def _StopScriptCallback() -> None: pass
 
+
 __all__ = [
     "AddChatUserIgnore",
     "AddFigure",

@@ -342,15 +342,15 @@ class AsyncStealthClient(AsyncRPCClient):
                 )
 
                 # Packet structure:
+                # Length: 4 bytes (unsigned int) = 8
                 # Type: 2 bytes (unsigned short) = 4
-                # Value: 4 bytes (unsigned int) = 0xDEADBEEF
-                packet = struct.pack('<HI', 4, 0xDEADBEEF)
+                packet = struct.pack('<IH', 2, 4)
                 writer.write(packet)
                 await writer.drain()
 
-                # Read length first (2 bytes)
-                header_data = await reader.readexactly(2)
-                length = struct.unpack('<H', header_data)[0]
+                # Read length first (4 bytes)
+                header_data = await reader.readexactly(4)
+                length = struct.unpack('<I', header_data)[0]
 
                 # Read payload
                 payload_data = await reader.readexactly(length)
@@ -365,7 +365,7 @@ class AsyncStealthClient(AsyncRPCClient):
                     if writer:
                         writer.close()
                         await writer.wait_closed()
-                    raise RuntimeError(f"Stealth not found at {host}:{port}")
+                    raise RuntimeError(f"Stealth PortProviding service not available on {host}:{port}")
 
                 if writer:
                     writer.close()

@@ -428,6 +428,7 @@ class SyncInterface:
     def _SelectProfile(self, ProfileName: str) -> None: pass
     def _StopScriptCallback(self) -> None: pass
 
+
 __all__ = [
     "SyncInterface",
 ]
