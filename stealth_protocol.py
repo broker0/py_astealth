@@ -113,6 +113,16 @@ class StealthRPCEncoder:
             return stream.getvalue()
 
     @staticmethod
+    def decode_tuple(item_types, payload: bytes) -> tuple:
+        """
+        Decodes a bytes to a sequence of types
+        Example: decode_tuple(byte_buffer, U16, U16)
+        """
+        with io.BytesIO(payload) as stream:
+            return tuple(RPCType.unpack_value(stream, item_type) for item_type in item_types)
+
+
+    @staticmethod
     def encode_method(method_spec: MethodSpec, call_id: int, *args) -> bytes:
         """
         encode full packet with header and arguments

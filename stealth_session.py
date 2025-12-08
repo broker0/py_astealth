@@ -73,19 +73,17 @@ class StealthSession:
                 length = struct.unpack('<I', header_data)[0]
 
                 # Read payload
-                payload_data = await reader.readexactly(length)
+                payload = await reader.readexactly(length)
 
-                stream = io.BytesIO(payload_data)
-                method_id = U16.unpack_simple_value(stream)
-                call_id = U16.unpack_simple_value(stream)
+                method_id, call_id = StealthRPCEncoder.decode_tuple((U16, U16), payload)
 
                 if STRICT_PROTOCOL:
                     assert method_id == StealthApi._FunctionResultCallback.method_spec.id
                     assert call_id == CALL_ID
 
-                new_script_port = U16.unpack_simple_value(stream)
-                new_script_group = U64.unpack_simple_value(stream)
-                
+                result = payload[4:]
+                new_script_port, new_script_group = StealthRPCEncoder.decode_result(StealthApi._RequestPort.method_spec, result)
+
                 self.script_port = new_script_port
                 self.script_group = new_script_group
                 self.negotiated = True
