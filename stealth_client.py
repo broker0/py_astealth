@@ -16,129 +16,8 @@ from py_astealth.utilites.config import GET_PORT_ATTEMPT_COUNT, SOCK_TIMEOUT
 from py_astealth.utilites.config import DEBUG_PROTOCOL, DEBUG_CLIENT
 from py_astealth.utilites.config import STRICT_PROTOCOL
 
-
-class AsyncStealthRPCProtocol(asyncio.Protocol):
-    """
-        The class implements reading a data stream and splitting it into individual packets.
-    """
-
-    def __init__(self, client: AsyncRPCClient):
-        self.client = client
-        self.transport = None
-        self._buffer = bytearray()
-        self._tx_bytes = 0
-        self._rx_bytes = 0
-
-    def connection_made(self, transport: asyncio.Transport):
-        self.transport = transport
-        # notify the client about the connection
-        self.client.connection_made(transport)
-
-    def data_received(self, data: bytes):
-        self._rx_bytes += len(data)
-
-        if DEBUG_PROTOCOL > 1:
-            print("data_received:", data.hex())
-
-        self._buffer.extend(data)
-
-        # works as long as the buffer length is greater than 4 bytes
-        while len(self._buffer) >= 4:
-            # peek the length of the packet
-            packet_len, = struct.unpack('<I', self._buffer[:4])
-
-            if len(self._buffer) < 4 + packet_len:
-                break   # there is not enough data yet for a complete packet
-
-            # skip the length, get the payload from the packet, remove the data from the buffer
-            # and give the client the data
-            packet_payload = self._buffer[4:4 + packet_len]
-            self._buffer = self._buffer[4 + packet_len:]
-
-            if DEBUG_PROTOCOL > 0:
-                print("data_received.packet:", packet_len, packet_payload.hex())
-
-            self.client.handle_packet(packet_payload)
-
-    def send_packet(self, payload: bytes):
-        if not self.transport:
-            raise ConnectionError("Client not connected")
-
-        self._tx_bytes += len(payload)
-        packet_len = struct.pack('<I', len(payload))    # the packet is preceded by u32 length
-
-        if DEBUG_PROTOCOL > 0:
-            print("send_packet: ", packet_len.hex(), payload.hex())
-
-        self.transport.write(packet_len + payload)
-
-    def connection_lost(self, exc):
-        self.client.connection_lost(exc)
-
-    def close(self):
-        if self.transport:
-            self.transport.close()
-
-
-class StealthRPCEncoder:
-    """
-    Serialize and deserialize arguments, results and callbacks
-    """
-
-    @staticmethod
-    def encode_arguments(method_spec: MethodSpec, *args) -> bytes:
-        """
-        encode arguments list to bytes
-        """
-        if len(args) != len(method_spec.args):
-            raise TypeError(f"{method_spec.name}() takes {len(method_spec.args)} arguments but {len(args)} were given")
-
-        return StealthRPCEncoder.encode_tuple(*zip(args, (arg.type for arg in method_spec.args)))
-
-    @staticmethod
-    def decode_arguments(method_spec: MethodSpec, stream: io.BytesIO) -> tuple:
-        """
-        decode arguments from bytes to python types
-        """
-        return tuple(RPCType.unpack_value(stream, arg.type) for arg in method_spec.args)
-        # args = []
-        # for arg in method_spec.args:
-        #     args.append(RPCType.unpack_value(stream, arg.type))
-        # return args
-
-
-    @staticmethod
-    def encode_tuple(*items) -> bytes:
-        """
-        Encodes a sequence of (value, type) pairs into bytes.
-        Example: encode_tuple((10, U16), (0, U16))
-        """
-        with io.BytesIO() as stream:
-            for value, type_cls in items:
-                RPCType.pack_value(stream, value, type_cls)
-
-            return stream.getvalue()
-
-    @staticmethod
-    def encode_method(method_spec: MethodSpec, call_id: int, *args) -> bytes:
-        """
-        encode full packet with header and arguments
-        """
-        header = StealthRPCEncoder.encode_tuple((method_spec.id, U16), (call_id, U16))
-        args_payload = StealthRPCEncoder.encode_arguments(method_spec, *args)
-        return header + args_payload
-
-    @staticmethod
-    def decode_result(method_spec: MethodSpec, payload: bytes) -> Any:
-        """
-        decode single (result) value from bytes to python types
-        """
-        if not payload:
-            return None
-
-        stream = io.BytesIO(payload)
-        ret_type = method_spec.result.type
-        return RPCType.unpack_value(stream, ret_type)
+from py_astealth.stealth_protocol import AsyncStealthRPCProtocol, StealthRPCEncoder
+from py_astealth.stealth_session import StealthSession
 
 
 class AsyncStealthClient(AsyncRPCClient):
@@ -146,11 +25,11 @@ class AsyncStealthClient(AsyncRPCClient):
         implementation of a specific Stealth client protocol
     """
 
-    def __init__(self, host: str = None, port: int = None):
-        self.stealth_host = host
-        self.script_port = None
-        self.script_group = 0
-        self.script_profile = ""
+    def __init__(self, session: StealthSession = None):
+        if session is None:
+            session = StealthSession()
+        self.session = session
+
         self._transport = None
         self._protocol = None
         self._connected = asyncio.Event()
@@ -171,26 +50,16 @@ class AsyncStealthClient(AsyncRPCClient):
             StealthApi._ScriptPathCallback.method_spec.id: self._handle_ScriptPathCallback,
         }
 
-    async def connect(self, group: int = 0, profile: str = "") -> int:
+    async def connect(self) -> int:
         """establishing a connection with the Stealth-client and sending a packet with the version of our protocol"""
-        self.script_profile = profile
-
-        if self.stealth_host is None:
-            self.stealth_host = DEFAULT_STEALTH_HOST
-
-        if self.script_port is None:
-            self.script_port, self.script_group = await AsyncStealthClient.async_get_stealth_port(
-                self.stealth_host,
-                script_group=group,
-                script_profile=self.script_profile
-            )
-        else:
-            self.script_group = group
+        
+        # Negotiate port/group if needed
+        await self.session.negotiate_port()
 
         loop = asyncio.get_running_loop()
         try:
             self._transport, self._protocol = await loop.create_connection(
-                lambda: AsyncStealthRPCProtocol(self), self.stealth_host, self.script_port
+                lambda: AsyncStealthRPCProtocol(self), self.session.host, self.session.script_port
             )
             await self._connected.wait()  # waiting for connection to be established
 
@@ -198,14 +67,14 @@ class AsyncStealthClient(AsyncRPCClient):
             # self.send_packet(packet)
             await self.call_method(StealthApi._LangVersion.method_spec, 1, *VERSION)
 
-            # if self.profile is not None:
-            #     await self.call_method(StealthApi._SelectProfile.method_spec, profile)
+            # if self.session.profile:
+            #     await self.call_method(StealthApi._SelectProfile.method_spec, self.session.profile)
 
         except ConnectionRefusedError:
-            print(f"Unable to connect to {self.stealth_host}:{self.script_port}. Connection refused.")
+            print(f"Unable to connect to {self.session.host}:{self.session.script_port}. Connection refused.")
             raise
 
-        return self.script_group
+        return self.session.group_id
 
     def close(self):
         if self._transport:
@@ -329,77 +198,11 @@ class AsyncStealthClient(AsyncRPCClient):
 
     def _handle_ScriptPathCallback(self):
         script_name = os.path.realpath(sys.argv[0])
+        if DEBUG_CLIENT > 1:
+            print(f"[Info] ScriptPathCallback -> {script_name}")
+
         # packet = StealthRPCEncoder.encode_method(StealthApi._ScriptPath.method_spec, 0, script_name)
         # self.send_packet(packet)
 
         loop = asyncio.get_running_loop()
         loop.create_task(self.call_method(StealthApi._ScriptPath.method_spec, script_name))
-
-    @staticmethod
-    async def async_get_stealth_port(host: str = DEFAULT_STEALTH_HOST, port: int = DEFAULT_STEALTH_PORT, script_group: int = 0, script_profile: str = "") -> tuple[int, int]:
-        """
-        Asynchronously retrieves the script port from the Stealth client.
-        """
-        # Check command line arguments first (standard behavior)
-        if len(sys.argv) >= 3 and sys.argv[2].isdigit():
-            return int(sys.argv[2]), script_group
-
-        for i in range(GET_PORT_ATTEMPT_COUNT):
-            reader = None
-            writer = None
-            try:
-                reader, writer = await asyncio.wait_for(
-                    asyncio.open_connection(host, port),
-                    timeout=SOCK_TIMEOUT
-                )
-
-                CALL_ID = 1
-                packet = StealthRPCEncoder.encode_method(StealthApi._RequestPort.method_spec, CALL_ID, script_group, script_profile)
-                header = struct.pack('<I', len(packet))
-                writer.write(header + packet)
-                await writer.drain()
-
-                # Read length first (4 bytes)
-                header_data = await reader.readexactly(4)
-                length = struct.unpack('<I', header_data)[0]
-
-                # Read payload
-                payload_data = await reader.readexactly(length)
-
-                stream = io.BytesIO(payload_data)
-                method_id = U16.unpack_simple_value(stream)
-                call_id = U16.unpack_simple_value(stream)
-
-                # assert call_id == CALL_ID
-                # assert method_id == StealthApi._FunctionResultCallback.method_spec.id
-
-                script_port = U16.unpack_simple_value(stream)
-                script_group = U64.unpack_simple_value(stream)
-
-                return script_port, script_group
-
-            except (OSError, struct.error, asyncio.TimeoutError, asyncio.IncompleteReadError):
-                # If we can't connect to the main Stealth port, we can't get the script port
-                if i == GET_PORT_ATTEMPT_COUNT - 1:
-                    if writer:
-                        writer.close()
-                        await writer.wait_closed()
-                    raise RuntimeError(f"Stealth PortProviding service not available on {host}:{port}")
-
-                if writer:
-                    writer.close()
-                    await writer.wait_closed()
-
-                await asyncio.sleep(0.1)
-                continue
-
-            finally:
-                if writer:
-                    writer.close()
-                    # await writer.wait_closed() # wait_closed can hang if connection is already closed/error
-                    try:
-                        await writer.wait_closed()
-                    except Exception:
-                        pass
-
-        raise RuntimeError("Failed to retrieve script port from Stealth")
