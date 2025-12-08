@@ -74,7 +74,7 @@ class AsyncStealthClient(AsyncRPCClient):
             print(f"Unable to connect to {self.session.host}:{self.session.script_port}. Connection refused.")
             raise
 
-        return self.session.group_id
+        return self.session.script_group
 
     def close(self):
         if self._transport:

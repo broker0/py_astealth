@@ -15,11 +15,13 @@ class StealthSession:
     Manages the identity and connection parameters for a Stealth script session.
     Stores the script group, profile, and negotiated script port.
     """
-    def __init__(self, host: str = DEFAULT_STEALTH_HOST, port: int = DEFAULT_STEALTH_PORT,
-                 script_group: int = 0, profile: str = ""):
+    def __init__(self, host: str = DEFAULT_STEALTH_HOST,
+                 port: int = DEFAULT_STEALTH_PORT,
+                 script_group: int = 0,
+                 profile: str = ""):
         self.host = host
-        self.port = port  # Main stealth port
-        self.group_id = script_group
+        self.port = port  # stealth port provider
+        self.script_group = script_group
         self.profile = profile
         self.script_port: int | None = None
         self.negotiated = False
@@ -32,7 +34,7 @@ class StealthSession:
         # Check command line arguments first (standard behavior) - legacy support
         if len(sys.argv) >= 3 and sys.argv[2].isdigit() and self.script_port is None:
             self.script_port = int(sys.argv[2])
-            return self.script_port, self.group_id   # TODO What if port in argument and group==0?
+            return self.script_port, self.script_group   # TODO What if port in argument and group==0?
 
         for i in range(GET_PORT_ATTEMPT_COUNT):
             reader = None
@@ -44,7 +46,7 @@ class StealthSession:
                 )
 
                 CALL_ID = 1
-                packet = StealthRPCEncoder.encode_method(StealthApi._RequestPort.method_spec, CALL_ID, self.group_id, self.profile)
+                packet = StealthRPCEncoder.encode_method(StealthApi._RequestPort.method_spec, CALL_ID, self.script_group, self.profile)
                 header = struct.pack('<I', len(packet))
                 writer.write(header + packet)
                 await writer.drain()
@@ -68,10 +70,10 @@ class StealthSession:
                 new_script_group = U64.unpack_simple_value(stream)
                 
                 self.script_port = new_script_port
-                self.group_id = new_script_group
+                self.script_group = new_script_group
                 self.negotiated = True
 
-                return self.script_port, self.group_id
+                return self.script_port, self.script_group
 
             except (OSError, struct.error, asyncio.TimeoutError, asyncio.IncompleteReadError):
                 if i == GET_PORT_ATTEMPT_COUNT - 1:
