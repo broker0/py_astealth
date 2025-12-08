@@ -148,7 +148,6 @@ class AsyncStealthClient(AsyncRPCClient):
 
     def __init__(self, host: str = None, port: int = None):
         self.stealth_host = host
-        self.stealth_port = port
         self.script_port = None
         self.script_group = 0
         self.script_profile = ""
@@ -179,8 +178,8 @@ class AsyncStealthClient(AsyncRPCClient):
         if self.stealth_host is None:
             self.stealth_host = DEFAULT_STEALTH_HOST
 
-        if self.stealth_port is None:
-            self.stealth_port, self.script_group = await AsyncStealthClient.async_get_stealth_port(
+        if self.script_port is None:
+            self.script_port, self.script_group = await AsyncStealthClient.async_get_stealth_port(
                 self.stealth_host,
                 script_group=group,
                 script_profile=self.script_profile
@@ -191,7 +190,7 @@ class AsyncStealthClient(AsyncRPCClient):
         loop = asyncio.get_running_loop()
         try:
             self._transport, self._protocol = await loop.create_connection(
-                lambda: AsyncStealthRPCProtocol(self), self.stealth_host, self.stealth_port
+                lambda: AsyncStealthRPCProtocol(self), self.stealth_host, self.script_port
             )
             await self._connected.wait()  # waiting for connection to be established
 
@@ -203,7 +202,7 @@ class AsyncStealthClient(AsyncRPCClient):
             #     await self.call_method(StealthApi._SelectProfile.method_spec, profile)
 
         except ConnectionRefusedError:
-            print(f"Unable to connect to {self.stealth_host}:{self.stealth_port}. Connection refused.")
+            print(f"Unable to connect to {self.stealth_host}:{self.script_port}. Connection refused.")
             raise
 
         return self.script_group
@@ -343,7 +342,7 @@ class AsyncStealthClient(AsyncRPCClient):
         """
         # Check command line arguments first (standard behavior)
         if len(sys.argv) >= 3 and sys.argv[2].isdigit():
-            return int(sys.argv[2])
+            return int(sys.argv[2]), script_group
 
         for i in range(GET_PORT_ATTEMPT_COUNT):
             reader = None
