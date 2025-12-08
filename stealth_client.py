@@ -197,7 +197,7 @@ class AsyncStealthClient(AsyncRPCClient):
             self._sending_allowed.set()
 
     def _handle_ScriptPathCallback(self):
-        script_name = os.path.realpath(sys.argv[0])
+        script_name = self.session.script_name
         if DEBUG_CLIENT > 1:
             print(f"[Info] ScriptPathCallback -> {script_name}")
 

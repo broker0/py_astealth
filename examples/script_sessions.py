@@ -24,23 +24,23 @@ async def main():
 
     tasks = []
 
-    # single session for all clients
+    # ** single session for all clients **
     # session = StealthSession()
     # await session.negotiate_port()
 
     for profile in profiles:
-        # single session per profile
-        # session = StealthSession(profile=profile)
+        # ** single session per profile **
+        # session = StealthSession(profile=profile, script_name=f"profile#{profile}")
         # await session.negotiate_port()
 
         for session_n in range(session_per_profile):
-            # (normal mode) single session for "session"
-            session = StealthSession(profile=profile)
+            # ** (normal mode) single session for "session" **
+            session = StealthSession(profile=profile, script_name=f"session#{session_n}")
             await session.negotiate_port()
 
             for client_n in range(client_per_session):
-                # single session per client
-                # session = StealthSession(profile=profile)
+                # ** single session per client **
+                # session = StealthSession(profile=profile, script_name=f"client#{client_n})
                 # await session.negotiate_port()
 
                 client = AsyncStealthApiClient(session=session)
