@@ -117,7 +117,8 @@ class _StealthManager:
         self._thread.join()
         self._thread = None
         self._loop = None
-        print("Stealth manager shut down gracefully.")
+        # cannot print this because print and AddToSysJournal can be redirected
+        # print("Stealth manager shut down gracefully.")
 
     def _run_forever(self, ready_event: threading.Event):
         asyncio.set_event_loop(self._loop)
