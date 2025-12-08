@@ -620,7 +620,7 @@ async def stress_test(methods, call_count=1, print_pass=True, print_fails=False,
     if call_count < 1:
         return
 
-    print(f"Testing {len(methods)} methods closures.")
+    print(f"Testing {len(methods)} methods closures, batch {call_count} call per closure")
     successes = 0
     fails = 0
 
@@ -670,7 +670,7 @@ async def main():
     print("Connected.")
 
     time = datetime.now()
-    batch_size = 100
+    batch_size = 1000
 
     methods = await method_generator(stealth)
     await stress_test(methods, batch_size, print_pass=False, print_fails=True, print_result=True, print_batch_time=False)

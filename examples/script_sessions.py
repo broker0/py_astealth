@@ -19,21 +19,36 @@ async def client_task(client: AsyncStealthApiClient, task_id: str):
 async def main():
     # list of profiles
     profiles = ["(0)", "(1)", "(2)"]
-    session_per_profile = 2
-    client_per_session = 2
+    session_per_profile = 10
+    client_per_session = 15
 
     tasks = []
+
+    # single session for all clients
+    # session = StealthSession()
+    # await session.negotiate_port()
+
     for profile in profiles:
-        for session in range(session_per_profile):
+        # single session per profile
+        # session = StealthSession(profile=profile)
+        # await session.negotiate_port()
+
+        for session_n in range(session_per_profile):
+            # (normal mode) single session for "session"
             session = StealthSession(profile=profile)
+            await session.negotiate_port()
+
             for client_n in range(client_per_session):
-                # all clients of one session = one "script" in stealth
+                # single session per client
+                # session = StealthSession(profile=profile)
+                # await session.negotiate_port()
+
                 client = AsyncStealthApiClient(session=session)
                 await client.connect()
                 client_id = f"{await client.CharName()}#{client_n}#{session.script_port}"
 
                 tasks.append(asyncio.create_task(client_task(client, client_id)))
-                await asyncio.sleep(0.1)
+                # await asyncio.sleep(0.1)
 
     while True:
         done, pending = await asyncio.wait(tasks, return_when=asyncio.FIRST_COMPLETED)
