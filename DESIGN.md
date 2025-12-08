@@ -27,7 +27,7 @@ The file `stealth_structs.py` describes composite (structure) types.
 
 `StealthApi` is a declarative description of the UO Stealth client API. 
 It only requires declaring a function, annotating its arguments and return type, 
-and using the `@ApiSpecification.method(int)` decorator to associate the method 
+and using the `@method_api(int)` decorator to associate the method 
 with its numeric identifier. 
 
 Arguments and return values must inherit from `RPCType`.
@@ -37,16 +37,17 @@ For example:
 
 ```py
 class StealthApi(ApiSpecification):
-    @ApiSpecification.method(14)
-    def GetSelfID(self) -> U32: 
+    @method_api(14)
+    def GetSelfID(self) -> U32:
         pass
 
-    @ApiSpecification.method(381)
+    @method_api(381)
     def GetMultiAllParts(self, MultiID: U32) -> list[MultiPart]:
         pass
 
-    @ApiSpecification.method(438)
-    def IsWorldCellPassable(self, CurrX: U16, CurrY: U16, CurrZ: I8, DestX: U16, DestY: U16, WorldNum: U8) -> tuple[Bool, I8]:
+    @method_api(438)
+    def IsWorldCellPassable(self, CurrX: U16, CurrY: U16, CurrZ: I8, DestX: U16, DestY: U16, WorldNum: U8) -> tuple[
+        Bool, I8]:
         pass
 ```
 

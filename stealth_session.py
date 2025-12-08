@@ -6,16 +6,22 @@ import sys
 from py_astealth.stealth_api import StealthApi
 from py_astealth.stealth_types import U16, U64
 from py_astealth.stealth_protocol import StealthRPCEncoder
-from py_astealth.utilites.config import DEFAULT_STEALTH_HOST, DEFAULT_STEALTH_PORT, GET_PORT_ATTEMPT_COUNT, \
-    SOCK_TIMEOUT, STRICT_PROTOCOL
+
+from py_astealth.utilites.config import DEFAULT_STEALTH_HOST, DEFAULT_STEALTH_PORT
+from py_astealth.utilites.config import GET_PORT_ATTEMPT_COUNT, SOCK_TIMEOUT
+from py_astealth.utilites.config import STRICT_PROTOCOL
 
 
 class StealthSession:
     """
     Manages the identity and connection parameters for a Stealth script session.
     Stores the script group, profile, and negotiated script port.
+    
+    Not thread-safe for concurrent negotiation across multiple event loops.
+    Safe for concurrent use within a single event loop if initialized sequentially.
     """
-    def __init__(self, host: str = DEFAULT_STEALTH_HOST,
+    def __init__(self,
+                 host: str = DEFAULT_STEALTH_HOST,
                  port: int = DEFAULT_STEALTH_PORT,
                  script_group: int = 0,
                  profile: str = ""):
@@ -26,11 +32,14 @@ class StealthSession:
         self.script_port: int | None = None
         self.negotiated = False
 
-    async def negotiate_port(self) -> tuple[int, int]:
+    async def negotiate_port(self, force: bool = False) -> tuple[int, int]:
         """
         Connects to the main Stealth port to request a dedicated script port.
         Updates self.script_port and self.group_id with values returned by Stealth.
         """
+        if self.negotiated and not force:
+            return self.script_port, self.script_group
+
         # Check command line arguments first (standard behavior) - legacy support
         if len(sys.argv) >= 3 and sys.argv[2].isdigit() and self.script_port is None:
             self.script_port = int(sys.argv[2])

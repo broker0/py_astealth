@@ -15,40 +15,6 @@ class MethodSpec:
 
 class ApiSpecification:
     @classmethod
-    def method(cls, method_id: int):
-        """
-        This decorator inspects the method signature to construct a MethodSpec
-        with arguments and result and attach this to decorated method as 'method_spec' attribute.
-        """
-        def decorator(func):
-            hints = get_type_hints(func)
-            sig = inspect.signature(func)
-
-            # we go through all the arguments of the method, skipping self
-            args = [
-                ParameterSpec(name, hints.get(name, Any))
-                for name, param in sig.parameters.items()
-                if name != 'self'
-            ]
-
-            # get the return value type
-            return_type = hints.get('return', type(None))
-
-            # form a method descriptor
-            method_spec = MethodSpec(
-                id=method_id,
-                name=func.__name__,
-                args=args,
-                result=ParameterSpec("Result", return_type),
-            )
-
-            func.method_spec = method_spec
-
-            return func
-
-        return decorator
-
-    @classmethod
     def get_methods(cls) -> list[MethodSpec]:
         """
         Return collected methods specifications.
@@ -61,6 +27,40 @@ class ApiSpecification:
         Find a method specification by its ID using a pre-calculated dictionary.
         """
         return getattr(cls, '_methods_dict', {}).get(method_id)
+
+
+def method_api(method_id: int):
+    """
+    This decorator inspects the method signature to construct a MethodSpec
+    with arguments and result and attach this to decorated method as 'method_spec' attribute.
+    """
+    def decorator(func):
+        hints = get_type_hints(func)
+        sig = inspect.signature(func)
+
+        # we go through all the arguments of the method, skipping self
+        args = [
+            ParameterSpec(name, hints.get(name, Any))
+            for name, param in sig.parameters.items()
+            if name != 'self'
+        ]
+
+        # get the return value type
+        return_type = hints.get('return', type(None))
+
+        # form a method descriptor
+        method_spec = MethodSpec(
+            id=method_id,
+            name=func.__name__,
+            args=args,
+            result=ParameterSpec("Result", return_type),
+        )
+
+        func.method_spec = method_spec
+
+        return func
+
+    return decorator
 
 
 def register_api(cls):
