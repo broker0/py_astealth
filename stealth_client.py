@@ -147,10 +147,11 @@ class AsyncStealthClient(AsyncRPCClient):
     """
 
     def __init__(self, host: str = None, port: int = None):
-        self.host = host
-        self.port = port
-        self.group = 0
-        self.profile = ""
+        self.stealth_host = host
+        self.stealth_port = port
+        self.script_port = None
+        self.script_group = 0
+        self.script_profile = ""
         self._transport = None
         self._protocol = None
         self._connected = asyncio.Event()
@@ -173,23 +174,24 @@ class AsyncStealthClient(AsyncRPCClient):
 
     async def connect(self, group: int = 0, profile: str = "") -> int:
         """establishing a connection with the Stealth-client and sending a packet with the version of our protocol"""
-        self.profile = profile
+        self.script_profile = profile
 
-        if self.host is None:
-            self.host = DEFAULT_STEALTH_HOST
+        if self.stealth_host is None:
+            self.stealth_host = DEFAULT_STEALTH_HOST
 
-        if self.port is None:
-            self.port, self.group = await AsyncStealthClient.async_get_stealth_port(
-                self.host, script_group=group,
-                script_profile=self.profile
+        if self.stealth_port is None:
+            self.stealth_port, self.script_group = await AsyncStealthClient.async_get_stealth_port(
+                self.stealth_host,
+                script_group=group,
+                script_profile=self.script_profile
             )
         else:
-            self.group = group
+            self.script_group = group
 
         loop = asyncio.get_running_loop()
         try:
             self._transport, self._protocol = await loop.create_connection(
-                lambda: AsyncStealthRPCProtocol(self), self.host, self.port
+                lambda: AsyncStealthRPCProtocol(self), self.stealth_host, self.stealth_port
             )
             await self._connected.wait()  # waiting for connection to be established
 
@@ -201,10 +203,10 @@ class AsyncStealthClient(AsyncRPCClient):
             #     await self.call_method(StealthApi._SelectProfile.method_spec, profile)
 
         except ConnectionRefusedError:
-            print(f"Unable to connect to {self.host}:{self.port}. Connection refused.")
+            print(f"Unable to connect to {self.stealth_host}:{self.stealth_port}. Connection refused.")
             raise
 
-        return self.group
+        return self.script_group
 
     def close(self):
         if self._transport:
