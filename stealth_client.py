@@ -47,6 +47,7 @@ class AsyncStealthClient(AsyncRPCClient):
             StealthApi._EventCallback.method_spec.id: self._handle_EventCallback,
             StealthApi._ScriptTogglePauseCallback.method_spec.id: self._handle_ScriptTogglePauseCallback,
             StealthApi._StopScriptCallback.method_spec.id: self._handle_StopScriptCallback,
+            StealthApi._ErrorReportCallback.method_spec.id: self._handle_ErrorReportCallback,
             StealthApi._ScriptPathCallback.method_spec.id: self._handle_ScriptPathCallback,
         }
 
@@ -183,6 +184,12 @@ class AsyncStealthClient(AsyncRPCClient):
             print(f"[Info] StopScript, close connection, stopping client")
 
         self.close()
+
+    def _handle_ErrorReportCallback(self, error: str):
+        print(f"[Error] ErrorReportCallback: Stealth report error {error}")
+
+        self.close()
+
 
     def _handle_ScriptTogglePauseCallback(self):
         if self._sending_allowed.is_set():

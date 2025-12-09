@@ -99,7 +99,6 @@ class StealthRPCEncoder:
         #     args.append(RPCType.unpack_value(stream, arg.type))
         # return args
 
-
     @staticmethod
     def encode_tuple(*items) -> bytes:
         """
@@ -120,7 +119,6 @@ class StealthRPCEncoder:
         """
         with io.BytesIO(payload) as stream:
             return tuple(RPCType.unpack_value(stream, item_type) for item_type in item_types)
-
 
     @staticmethod
     def encode_method(method_spec: MethodSpec, call_id: int, *args) -> bytes:

@@ -21,6 +21,9 @@ class StealthApi(ApiSpecification):
     @method_api(2)
     def _StopScriptCallback(self) -> None: ...
 
+    @method_api(3)
+    def _ErrorReportCallback(self, Error: String) -> None: ...
+
     @method_api(4)
     def _ScriptTogglePauseCallback(self) -> None: ...
 
