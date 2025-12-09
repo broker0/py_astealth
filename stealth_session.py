@@ -38,7 +38,7 @@ class StealthSession:
         else:
             self.script_name = script_name
 
-        self.script_port: int | None = None
+        self.script_port: Optional[int] = None
         self.negotiated = False
         
         # Concurrency control
