@@ -6,7 +6,7 @@ import atexit
 from py_astealth.api_client import SyncStealthApiClient
 from py_astealth.stealth_session import StealthSession
 from py_astealth.core.api_specification import MethodSpec
-from py_astealth.core.context import DefaultContextManager
+from py_astealth.stealth_context import DefaultContextManager
 
 
 class _ThreadLocalClientProxy:

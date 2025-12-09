@@ -3,7 +3,7 @@ from datetime import datetime
 from py_astealth.api_client import AsyncStealthApiClient, SyncStealthApiClient
 import py_stealth as old_stealth
 from py_astealth import stealth as new_stealth
-from py_astealth.core.context import DirectContext
+from py_astealth.stealth_context import DirectContext
 
 COUNT = 15000
 

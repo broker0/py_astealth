@@ -8,7 +8,7 @@ from py_astealth.stealth_api import StealthApi
 from py_astealth.stealth_client import AsyncStealthClient, StealthEvent
 from py_astealth.core.api_specification import MethodSpec, implement_api
 from py_astealth.stealth_session import StealthSession
-from py_astealth.core.context import StealthContext, DefaultContextManager
+from py_astealth.stealth_context import StealthContext, DefaultContextManager
 
 
 def create_async_method(method_spec: MethodSpec) -> Callable:
