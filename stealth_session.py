@@ -1,8 +1,8 @@
 import asyncio
-import io
 import os
 import struct
 import sys
+import threading
 
 from py_astealth.stealth_api import StealthApi
 from py_astealth.stealth_types import U16, U64
@@ -39,77 +39,86 @@ class StealthSession:
 
         self.script_port: int | None = None
         self.negotiated = False
+        self._lock = threading.Lock()
 
     async def negotiate_port(self, force: bool = False) -> tuple[int, int]:
         """
         Connects to the main Stealth port to request a dedicated script port.
         Updates self.script_port and self.group_id with values returned by Stealth.
+        Thread-safe: serializes requests if multiple contexts use the same session.
         """
-        if self.negotiated and not force:
-            return self.script_port, self.script_group
 
-        # Check command line arguments first (standard behavior) - legacy support
-        if len(sys.argv) >= 3 and sys.argv[2].isdigit() and self.script_port is None:
-            self.script_port = int(sys.argv[2])
-            return self.script_port, self.script_group   # TODO What if port in argument and group==0?
-
-        for i in range(GET_PORT_ATTEMPT_COUNT):
-            reader = None
-            writer = None
-            try:
-                reader, writer = await asyncio.wait_for(
-                    asyncio.open_connection(self.host, self.port),
-                    timeout=SOCK_TIMEOUT
-                )
-
-                CALL_ID = 1
-                packet = StealthRPCEncoder.encode_method(StealthApi._RequestPort.method_spec, CALL_ID, self.script_group, self.profile)
-                header = struct.pack('<I', len(packet))
-                writer.write(header + packet)
-                await writer.drain()
-
-                # Read length first (4 bytes)
-                header_data = await reader.readexactly(4)
-                length = struct.unpack('<I', header_data)[0]
-
-                # Read payload
-                payload = await reader.readexactly(length)
-
-                method_id, call_id = StealthRPCEncoder.decode_tuple((U16, U16), payload)
-
-                if STRICT_PROTOCOL:
-                    assert method_id == StealthApi._FunctionResultCallback.method_spec.id
-                    assert call_id == CALL_ID
-
-                result = payload[4:]
-                new_script_port, new_script_group = StealthRPCEncoder.decode_result(StealthApi._RequestPort.method_spec, result)
-
-                self.script_port = new_script_port
-                self.script_group = new_script_group
-                self.negotiated = True
-
+        # We acquire the lock synchronously. If another thread is negotiating, we wait.
+        self._lock.acquire()
+        try:
+            if self.negotiated and not force:
                 return self.script_port, self.script_group
 
-            except (OSError, struct.error, asyncio.TimeoutError, asyncio.IncompleteReadError):
-                if i == GET_PORT_ATTEMPT_COUNT - 1:
+            # Check command line arguments first (standard behavior) - legacy support
+            if len(sys.argv) >= 3 and sys.argv[2].isdigit() and self.script_port is None:
+                self.script_port = int(sys.argv[2])
+                self.negotiated = True
+                return self.script_port, self.script_group   # TODO What if port in argument and group==0?
+
+            for i in range(GET_PORT_ATTEMPT_COUNT):
+                reader = None
+                writer = None
+                try:
+                    reader, writer = await asyncio.wait_for(
+                        asyncio.open_connection(self.host, self.port),
+                        timeout=SOCK_TIMEOUT
+                    )
+
+                    CALL_ID = 1
+                    packet = StealthRPCEncoder.encode_method(StealthApi._RequestPort.method_spec, CALL_ID, self.script_group, self.profile)
+                    header = struct.pack('<I', len(packet))
+                    writer.write(header + packet)
+                    await writer.drain()
+
+                    # Read length first (4 bytes)
+                    header_data = await reader.readexactly(4)
+                    length = struct.unpack('<I', header_data)[0]
+
+                    # Read payload
+                    payload = await reader.readexactly(length)
+
+                    method_id, call_id = StealthRPCEncoder.decode_tuple((U16, U16), payload)
+
+                    if STRICT_PROTOCOL:
+                        assert method_id == StealthApi._FunctionResultCallback.method_spec.id
+                        assert call_id == CALL_ID
+
+                    result = payload[4:]
+                    new_script_port, new_script_group = StealthRPCEncoder.decode_result(StealthApi._RequestPort.method_spec, result)
+
+                    self.script_port = new_script_port
+                    self.script_group = new_script_group
+                    self.negotiated = True
+
+                    return self.script_port, self.script_group
+
+                except (OSError, struct.error, asyncio.TimeoutError, asyncio.IncompleteReadError):
+                    if i == GET_PORT_ATTEMPT_COUNT - 1:
+                        if writer:
+                            writer.close()
+                            await writer.wait_closed()
+                        raise RuntimeError(f"Stealth PortProviding service not available on {self.host}:{self.port}")
+
                     if writer:
                         writer.close()
                         await writer.wait_closed()
-                    raise RuntimeError(f"Stealth PortProviding service not available on {self.host}:{self.port}")
 
-                if writer:
-                    writer.close()
-                    await writer.wait_closed()
+                    await asyncio.sleep(0.1)
+                    continue
 
-                await asyncio.sleep(0.1)
-                continue
-
-            finally:
-                if writer:
-                    writer.close()
-                    try:
-                        await writer.wait_closed()
-                    except Exception:
-                        pass
-
-        raise RuntimeError("Failed to retrieve script port from Stealth")
+                finally:
+                    if writer:
+                        writer.close()
+                        try:
+                            await writer.wait_closed()
+                        except Exception:
+                            pass
+            
+            raise RuntimeError("Failed to retrieve script port from Stealth")
+        finally:
+            self._lock.release()
