@@ -164,3 +164,41 @@ class DirectContext(StealthContext):
              raise RuntimeError("Cannot use DirectContext.run_coroutine from inside a running event loop.")
 
         return self._loop.run_until_complete(coro)
+
+
+class DefaultContextManager:
+    """
+    Singleton manager for the default shared ThreadedContext.
+    Ensures that only one global background thread is created for implicit usages.
+    """
+    _instance = None
+    _lock = threading.Lock()
+
+    @classmethod
+    def get_instance(cls):
+        if cls._instance is None:
+            with cls._lock:
+                if cls._instance is None:
+                    cls._instance = cls()
+        return cls._instance
+
+    @classmethod
+    def context(cls) -> StealthContext:
+        """
+        Convenience wrapper to access the global default context.
+        """
+        return cls.get_instance().get_context()
+
+    def __init__(self):
+        self._context: Optional[ThreadedContext] = None
+        self._context_lock = threading.Lock()
+
+    def get_context(self) -> StealthContext:
+        """
+        Returns the lazily initialized global context.
+        """
+        if self._context is None:
+            with self._context_lock:
+                if self._context is None:
+                    self._context = ThreadedContext(name="default thread client runner")
+        return self._context

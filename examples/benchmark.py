@@ -3,6 +3,7 @@ from datetime import datetime
 from py_astealth.api_client import AsyncStealthApiClient, SyncStealthApiClient
 import py_stealth as old_stealth
 from py_astealth import stealth as new_stealth
+from py_astealth.core.context import DirectContext
 
 COUNT = 15000
 
@@ -47,11 +48,11 @@ def main():
     bench_sync("Modern sync module (emulate py_stealth)", new_stealth)
 
     # 3. Modern Sync Client (Threaded)
-    with SyncStealthApiClient(threaded=True) as client_threaded:
+    with SyncStealthApiClient() as client_threaded:
         bench_sync("Modern Sync client (Threaded)", client_threaded)
 
     # 4. Modern Sync Client (Single Thread)
-    with SyncStealthApiClient(threaded=False) as client_fast:
+    with SyncStealthApiClient(DirectContext()) as client_fast:
         bench_sync("Modern Sync client (Single Thread)", client_fast)
 
     # 5. Async Client

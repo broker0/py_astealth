@@ -8,6 +8,7 @@ from py_astealth.stealth_api import StealthApi
 from py_astealth.stealth_client import AsyncStealthClient, StealthEvent
 from py_astealth.core.api_specification import MethodSpec, implement_api
 from py_astealth.stealth_session import StealthSession
+from py_astealth.core.context import StealthContext, DefaultContextManager
 
 
 def create_async_method(method_spec: MethodSpec) -> Callable:
@@ -62,19 +63,8 @@ def create_sync_proxy_method(method_spec: MethodSpec) -> Callable:
         # we create a coroutine method with arguments
         coro = async_method(*args, **kwargs)
 
-        if self._threaded:
-            if self._loop is None or not self._loop.is_running():
-                raise ConnectionError("Client not connected")
-
-            future = asyncio.run_coroutine_threadsafe(coro, self._loop)
-            try:
-                return future.result(timeout=30)
-            except Exception as e:
-                raise e
-        else:
-            if self._loop is None:  # or self._loop.is_running(): # is_running check might be tricky if we are inside the loop? No, we are sync.
-                raise ConnectionError("Client not connected")
-            return self._loop.run_until_complete(coro)
+        # Delegate execution to the context
+        return self.context.run_coroutine(coro)
 
     sync_proxy_impl.__name__ = method_spec.name
     sync_proxy_impl.__doc__ = f"Sync proxy for API method {method_spec.name}(...)"
@@ -84,18 +74,18 @@ def create_sync_proxy_method(method_spec: MethodSpec) -> Callable:
 @implement_api(StealthApi, method_factory=create_sync_proxy_method)
 class SyncStealthApiClient(SyncInterface):
     """
-    Stealth synchronous client.
-    Can operate in two modes:
-    1. Threaded (threaded=True): Runs the asyncio loop in a background thread. Thread-safe.
-    2. Non-threaded (threaded=False): Runs the asyncio loop in the current thread. Not thread-safe.
+    Stealth synchronous client using the StealthContext for execution context.
+    
+    You can define HOW and WHERE the code runs by passing a `context`:
+    - ThreadedContext (default): Runs in a background thread. Thread-safe.
+    - DirectContext: Runs in the current thread (requires care with loops).
     """
-    def __init__(self, session: StealthSession = None, threaded: bool = True):
+    def __init__(self, context: StealthContext = None, session: StealthSession = None):
+        if context is None:
+            context = DefaultContextManager.context()
+
+        self.context = context
         self._async_client = AsyncStealthApiClient(session)
-        self._threaded = threaded
-        self._lock = threading.Lock()
-        self._loop = None
-        self._thread = None
-        self._ready_event = threading.Event()
 
     def __enter__(self):
         self.connect()
@@ -104,69 +94,26 @@ class SyncStealthApiClient(SyncInterface):
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.close()
 
-    def connect(self, group: int = 0, profile: str = ""):
-        if self._threaded:
-            with self._lock:
-                if self._thread is not None:
-                    raise RuntimeError("Already connected")
-                
-                self._thread = threading.Thread(target=self._run_event_loop, daemon=True)
-                self._thread.start()
-                if not self._ready_event.wait(timeout=10):
-                    raise ConnectionError("Cannot connect")
-        else:
-            if self._loop is not None:
-                 raise RuntimeError("Already connected")
-            self._loop = asyncio.new_event_loop()
-            self._loop.run_until_complete(self._async_client.connect())
+    def connect(self):
+        # Ensure context is running (lazy start logic in context itself will handle it, but explicit start is fine too)
+        self.context.start()
+        
+        # Execute connect() in the context
+        self.context.run_coroutine(self._async_client.connect())
 
     def close(self):
-        if self._threaded:
-            with self._lock:
-                if self._thread is None or self._loop is None or not self._loop.is_running():
-                    return
-                self._loop.call_soon_threadsafe(self._async_client.close)
-                self._loop.call_soon_threadsafe(self._loop.stop)
-                self._thread.join()
-                self._thread = None
-                self._loop = None
-                self._ready_event.clear()
-        else:
-            if self._loop is None:
-                return
-            if not self._loop.is_closed():
-                self._async_client.close()
-                self._loop.close()
-            self._loop = None
+        # We should close the connection gracefully first
+        try:
+            # Try to close connection if context is still running
+            if self.context.is_running():
+                self.context.run_coroutine(self._async_client.close())
+        except Exception:
+            pass
 
     def get_event(self) -> Optional[StealthEvent]:
         coro = self._async_client.get_event()
-        if self._threaded:
-             return self._execute_coro_in_loop(coro, timeout=1.0)
-        else:
-             return self._loop.run_until_complete(coro)
-
-    def _run_event_loop(self):
         try:
-            self._loop = asyncio.new_event_loop()
-            asyncio.set_event_loop(self._loop)
-            
-            self._loop.run_until_complete(self._async_client.connect())
-
-            self._ready_event.set()
-            self._loop.run_forever()
-        finally:
-            self._loop.close()
-
-    def _execute_coro_in_loop(self, coro: Coroutine, timeout: Optional[float]) -> Any:
-        if self._loop is None or not self._loop.is_running():
-            raise ConnectionError("Client not connected")
-
-        future = asyncio.run_coroutine_threadsafe(coro, self._loop)
-
-        try:
-            return future.result(timeout=timeout)
-        except (asyncio.TimeoutError, TimeoutError):
+            return self.context.run_coroutine(coro)
+        except Exception:
+            # If context is dead or error occurs
             return None
-        except Exception as e:
-            raise e
