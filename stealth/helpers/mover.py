@@ -305,7 +305,7 @@ def GetStaticTiles(xmin: int, ymin: int, xmax: int, ymax: int, world_num: int, t
 def GetStaticTilesArray(
         xmin: int, ymin: int, xmax: int, ymax: int,
         world_num: int,
-        tile_types: list[int]|int) -> list[tuple[int, int, int, int]]:
+        tile_types: Union[list[int], int]) -> list[tuple[int, int, int, int]]:
     if isinstance(tile_types, int):
         tile_types = [tile_types]
 
