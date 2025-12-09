@@ -419,9 +419,11 @@ class SyncInterface:
     def WearItem(self, Layer: int, ObjID: int) -> bool: pass
     def Weight(self) -> int: pass
     def WorldNum(self) -> int: pass
+    def _ErrorReportCallback(self, Error: str) -> None: pass
     def _EventCallback(self, EventId: int, Arguments: tuple) -> None: pass
     def _FunctionResultCallback(self, CallId: int, Result: bytes) -> None: pass
     def _LangVersion(self, Lang: int, Major: int, Minor: int, Revision: int, Build: int) -> None: pass
+    def _RequestPort(self, GroupId: int, ProfileName: str) -> tuple[int, int]: pass
     def _ScriptPath(self, ScriptName: str) -> None: pass
     def _ScriptPathCallback(self) -> None: pass
     def _ScriptTogglePauseCallback(self) -> None: pass

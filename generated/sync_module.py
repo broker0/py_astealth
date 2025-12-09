@@ -416,9 +416,11 @@ def WarTargetID() -> int: pass
 def WearItem(Layer: int, ObjID: int) -> bool: pass
 def Weight() -> int: pass
 def WorldNum() -> int: pass
+def _ErrorReportCallback(Error: str) -> None: pass
 def _EventCallback(EventId: int, Arguments: tuple) -> None: pass
 def _FunctionResultCallback(CallId: int, Result: bytes) -> None: pass
 def _LangVersion(Lang: int, Major: int, Minor: int, Revision: int, Build: int) -> None: pass
+def _RequestPort(GroupId: int, ProfileName: str) -> tuple[int, int]: pass
 def _ScriptPath(ScriptName: str) -> None: pass
 def _ScriptPathCallback() -> None: pass
 def _ScriptTogglePauseCallback() -> None: pass
@@ -834,9 +836,11 @@ __all__ = [
     "WearItem",
     "Weight",
     "WorldNum",
+    "_ErrorReportCallback",
     "_EventCallback",
     "_FunctionResultCallback",
     "_LangVersion",
+    "_RequestPort",
     "_ScriptPath",
     "_ScriptPathCallback",
     "_ScriptTogglePauseCallback",

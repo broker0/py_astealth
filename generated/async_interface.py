@@ -419,9 +419,11 @@ class AsyncInterface:
     async def WearItem(self, Layer: int, ObjID: int) -> bool: pass
     async def Weight(self) -> int: pass
     async def WorldNum(self) -> int: pass
+    async def _ErrorReportCallback(self, Error: str) -> None: pass
     async def _EventCallback(self, EventId: int, Arguments: tuple) -> None: pass
     async def _FunctionResultCallback(self, CallId: int, Result: bytes) -> None: pass
     async def _LangVersion(self, Lang: int, Major: int, Minor: int, Revision: int, Build: int) -> None: pass
+    async def _RequestPort(self, GroupId: int, ProfileName: str) -> tuple[int, int]: pass
     async def _ScriptPath(self, ScriptName: str) -> None: pass
     async def _ScriptPathCallback(self) -> None: pass
     async def _ScriptTogglePauseCallback(self) -> None: pass

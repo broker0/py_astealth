@@ -1,6 +1,6 @@
 import inspect
 from dataclasses import dataclass
-from typing import Any, get_type_hints, Callable
+from typing import Any, get_type_hints, Callable, Optional
 
 from py_astealth.core.base_types import ParameterSpec
 
@@ -22,7 +22,7 @@ class ApiSpecification:
         return getattr(cls, '_methods_list', [])
 
     @classmethod
-    def get_method(cls, method_id: int) -> MethodSpec | None:
+    def get_method(cls, method_id: int) -> Optional[MethodSpec]:
         """
         Find a method specification by its ID using a pre-calculated dictionary.
         """

@@ -21,6 +21,17 @@
         "result": "None"
     },
     {
+        "name": "_ErrorReportCallback",
+        "id": 3,
+        "args": [
+            {
+                "name": "Error",
+                "type": "String"
+            }
+        ],
+        "result": "None"
+    },
+    {
         "name": "_ScriptTogglePauseCallback",
         "id": 4,
         "args": [],
@@ -117,6 +128,21 @@
             }
         ],
         "result": "None"
+    },
+    {
+        "name": "_RequestPort",
+        "id": 12,
+        "args": [
+            {
+                "name": "GroupId",
+                "type": "U64"
+            },
+            {
+                "name": "ProfileName",
+                "type": "String"
+            }
+        ],
+        "result": "tuple[U16, U64]"
     },
     {
         "name": "Connected",
