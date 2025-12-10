@@ -1,57 +1,51 @@
-﻿import runpy
+﻿import threading
+import runpy
 import sys
 import traceback
 import importlib
+
 from pathlib import Path
+
+
+# find the path to the py_astealth module
+current_dir_path = Path(__file__).absolute().parent         # current file parent directory
+stealth_path = str(current_dir_path.parent)                 # next parent directory
+if stealth_path not in sys.path:
+    sys.path.insert(0, stealth_path)
+
 
 try:
     import py_astealth.stealth as stealth
-    from py_astealth.utilites.config import (
-        ERROR_FILTER,
-        USE_STEALTH_SYSTEM_JOURNAL,
-        REMOVE_NEW_LINES
-    )
-except ImportError:
-    current_dir = Path(__file__).resolve().parent
-    sys.path.insert(0, str(current_dir.parent))
-
-    import py_astealth.stealth as stealth
-    from py_astealth.utilites.config import (
-        ERROR_FILTER,
-        USE_STEALTH_SYSTEM_JOURNAL,
-        REMOVE_NEW_LINES
-    )
+    from py_astealth.utilites.config import ERROR_FILTER, USE_STEALTH_SYSTEM_JOURNAL, REMOVE_NEW_LINES
+except ImportError as e:
+    print(f"Critical Error: Could not import py_astealth. Checked path: {stealth_path}")
+    raise e
 
 
 class SysJournalOut:
     """Redirects stdout/stderr output to the Stealth log."""
 
     def __init__(self, original_stream=None):
-        self._buffer: list[str] = []
         self.original_stream = original_stream
+        self._lock = threading.Lock()
 
     def write(self, text: str):
-        # Write to the original stream (console), if there is one
-        if self.original_stream:
-            self.original_stream.write(text)
+        with self._lock:
+            # Write to the original stream (console), if there is one
+            if self.original_stream:
+                self.original_stream.write(text)
 
-        # Accumulate a buffer for sending to the Stealth log
-        self._buffer.append(text)
-        if '\n' in text:
-            self.flush()
+            if REMOVE_NEW_LINES:
+                text = text.replace('\n', '')
+
+            try:
+                if text:
+                    stealth.AddToSystemJournal(text.rstrip())
+            except Exception as e:
+                self.original_stream.write(f"error while stealth.AddToSystemJournal({text}) - {e}")
 
     def flush(self):
-        if not self._buffer:
-            return
-
-        full_text = "".join(self._buffer)
-        if REMOVE_NEW_LINES:
-            full_text = full_text.replace('\n', '')
-
-        if full_text:
-            stealth.AddToSystemJournal(full_text)
-
-        self._buffer.clear()
+        pass
 
 
 def setup_io_redirection():
@@ -89,8 +83,6 @@ def main():
 
     script_arg = sys.argv[1]
 
-    setup_io_redirection()
-
     # Add the script folder to the import path so that the script can see its files nearby
     script_path = Path(script_arg).resolve()
     script_args = sys.argv[1:]
@@ -99,7 +91,9 @@ def main():
     sys.argv = [str(script_path)] + script_args
 
     # Connecting to Stealth
-    stealth.Wait(1)
+    stealth.Self()
+
+    setup_io_redirection()
 
     try:
         target_func_name = None
