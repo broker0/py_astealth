@@ -6,14 +6,12 @@ import sys
 from typing import Any
 
 from py_astealth.core.api_specification import MethodSpec
-from py_astealth.core.base_types import RPCType
 from py_astealth.core.rpc_client import AsyncRPCClient
 from py_astealth.stealth_types import *
 from py_astealth.stealth_api import StealthApi
 
-from py_astealth.utilites.config import VERSION, DEFAULT_STEALTH_HOST, DEFAULT_STEALTH_PORT
-from py_astealth.utilites.config import GET_PORT_ATTEMPT_COUNT, SOCK_TIMEOUT
-from py_astealth.utilites.config import DEBUG_PROTOCOL, DEBUG_CLIENT
+from py_astealth.utilites.config import VERSION
+from py_astealth.utilites.config import DEBUG_CLIENT
 from py_astealth.utilites.config import STRICT_PROTOCOL
 
 from py_astealth.stealth_protocol import AsyncStealthRPCProtocol, StealthRPCEncoder
@@ -171,9 +169,12 @@ class AsyncStealthClient(AsyncRPCClient):
     def _handle_FunctionResultCallback(self, call_id: int, result_payload: bytes):
         if call_id in self._pending_replies:
             future = self._pending_replies.pop(call_id)
-            future.set_result(result_payload)
+            try:
+                future.set_result(result_payload)
+            except asyncio.exceptions.InvalidStateError:
+                print(f"[Warning] FunctionResultCallback({call_id}) cannot set future result {result_payload.hex()}")
         else:
-            print(f"[Warning] FunctionResultCallback received for unknown call_id: {call_id}")
+            print(f"[Warning] FunctionResultCallback({call_id}) received for unknown call_id")
 
     def _handle_EventCallback(self, event_id: int, arguments: list):
         event = StealthEvent(id=EventType(event_id), arguments=arguments)

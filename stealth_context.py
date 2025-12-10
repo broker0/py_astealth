@@ -105,7 +105,16 @@ class ThreadedContext(StealthContext):
         self._ready_event.set()
         
         try:
-            self._loop.run_forever()
+            while True:
+                try:
+                    self._loop.run_forever()
+                    # if run_forever returns, it means stop() was called
+                    break
+                except asyncio.exceptions.InvalidStateError:
+                    # one of the clients was forcibly closed.
+                    # no problem, we'll continue working.
+                    pass
+
         finally:
             # Clean up pending tasks
             try:
