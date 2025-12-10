@@ -119,37 +119,28 @@ class ThreadedContext(StealthContext):
                 self._loop.close()
 
 
-class DirectContext(StealthContext):
+class FastContext(StealthContext):
     """
     Executes coroutines in the Current Thread's event loop.
     Warning: This blocks the current thread until the coroutine completes.
     Useful for simple scripts, debugging, or when you are already inside an async environment
-    and want to control the execution flow manually (though nesting loops needs care).
+    and want to control the execution flow manually.
     """
 
     def __init__(self):
         self._loop = None
-        # In Direct mode, we don't really 'own' the loop's lifecycle in the same way,
-        # but we might create a temporary one if none exists.
-        self._own_loop = False
 
     def start(self):
-        # In direct mode, start checks if we have a loop available
-        try:
-            self._loop = asyncio.get_event_loop()
-        except RuntimeError:
-            self._loop = asyncio.new_event_loop()
-            asyncio.set_event_loop(self._loop)
-            self._own_loop = True
+        self._loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(self._loop)
 
     def stop(self):
-        if self._own_loop and self._loop:
+        if self._loop:
             self._loop.close()
-            self._own_loop = False
         self._loop = None
 
     def is_running(self) -> bool:
-        # For DirectContext, "is_running" implies we have access to a loop
+        # For FastContext, "is_running" implies we have access to a loop
         # We don't check .is_running() because the loop might be stopped waiting for run_until_complete
         return True
 
@@ -161,7 +152,7 @@ class DirectContext(StealthContext):
         # strictly speaking we cannot use run_until_complete. 
         # This implementation assumes we are in a Sync Thread calling this.
         if self._loop.is_running():
-             raise RuntimeError("Cannot use DirectContext.run_coroutine from inside a running event loop.")
+            raise RuntimeError("Cannot use DirectContext.run_coroutine from inside a running event loop.")
 
         return self._loop.run_until_complete(coro)
 
