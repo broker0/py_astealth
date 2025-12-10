@@ -217,6 +217,8 @@ def GetCliloc(cliloc_id, params: list[str]):
 
 def GetClilocByID(cliloc_id, params: list[str] = None):
     """Deprecated: emulate old behavior, use GetCliloc instead"""
+    if params is None:
+        params = []
     return api.GetClilocByID(cliloc_id, params)
 
 
