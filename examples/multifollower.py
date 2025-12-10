@@ -1,6 +1,7 @@
 import asyncio
 import math
 from py_astealth.api_client import AsyncStealthApiClient
+from py_astealth.stealth_session import StealthSession
 from py_astealth.stealth_structs import WorldPoint
 
 
@@ -140,14 +141,16 @@ async def simple_follower(master, slave):
 
 
 async def main():
+    master_session = StealthSession(profile="(0)")     # select 0 profile
     print("Connecting to Master...")
-    master = AsyncStealthApiClient()
-    await master.connect(profile="(0)")     # select 0 profile
+    master = AsyncStealthApiClient(session=master_session)
+    await master.connect()
     print(f"Master connected. Profile: {await master.ProfileName()}")
 
     print("Connecting to Slave...")
-    slave = AsyncStealthApiClient()
-    await slave.connect(profile="(1)")      # select 1st profile
+    slave_session = StealthSession(profile="(1)")     # select 1st profile
+    slave = AsyncStealthApiClient(session=slave_session)
+    await slave.connect()
     print(f"Slave connected. Profile: {await slave.ProfileName()}")
 
     await complex_follower(master, slave)
