@@ -148,7 +148,7 @@ def GetPathArray3D(StartX: int, StartY: int, StartZ: int,
 
 
 # Movement helpers
-def NewMoveXYZ(x_dst, y_dst, z_dst, accuracy_xy, accuracy_z, running, callback: Optional[Callable] = None) -> bool:
+def NewMoveXYZ(x_dst, y_dst, z_dst, accuracy_xy, accuracy_z, running) -> bool:
     return api.MoveXYZ(x_dst, y_dst, z_dst, accuracy_xy, accuracy_z, running)
 
 
