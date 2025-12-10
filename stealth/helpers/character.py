@@ -1,8 +1,10 @@
 """Character-related helpers: skills and spells."""
 from typing import Union
+from dataclasses import asdict
 
 from py_astealth.stealth import api
 from py_astealth.stealth_enums import Spell
+from py_astealth.stealth_structs import BuffBarInfo
 
 from ._converters import _get_skill_id, _get_spell_id
 from .common import Wait
@@ -136,6 +138,35 @@ def WarMode() -> bool:
     return api.IsWarMode(api.Self())
 
 
+def GetBuffs() -> list[BuffBarInfo]:
+    """
+    Get buff bar info.
+    Returns a list of BuffBarInfo.
+    Direct API call.
+    """
+    return api.GetBuffBarInfo()
+
+
+def GetBuffBarInfo() -> list[dict]:
+    """
+    Get buff bar info.
+    Returns a list of dictionaries for backward compatibility with the old API.
+    Each dictionary contains keys: 'Attribute_ID', 'TimeStart', 'Seconds', 'ClilocID1', 'ClilocID2', 'ClilocID3', 'BuffText'.
+    """
+    buffs = api.GetBuffBarInfo()
+    result = []
+    for buff in buffs:
+        buff_dict = asdict(buff)
+
+        # Optionally strip garbage after '@'
+        raw_text = buff_dict.get('BuffText', '')
+        if raw_text:
+            buff_dict['BuffText'] = raw_text.split('@')[0].strip()
+
+        result.append(buff_dict)
+    return result
+
+
 __all__ = [
     'UseSkill', 'GetSkillValue', 'GetSkillCurrentValue', 'GetSkillCap',
     'UseSkill', 'GetSkillValue', 'GetSkillCurrentValue', 'GetSkillCap',
@@ -143,5 +174,5 @@ __all__ = [
     'GetHP', 'GetMana', 'GetStam',
     'HP', 'MaxHP',
     'Cast', 'CastToObj', 'CastToObject', 'IsActiveSpellAbility',
-    'WarMode',
+    'WarMode', 'GetBuffs', 'GetBuffBarInfo',
 ]

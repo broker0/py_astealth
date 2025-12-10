@@ -214,7 +214,7 @@ class MapFigure(StructType):
 @dataclass
 class BuffBarInfo(StructType):
     Attribute_ID: U16
-    TimeStart: F64
+    TimeStart: DateTime
     Seconds: U16
     ClilocID1: U32
     ClilocID2: U32
