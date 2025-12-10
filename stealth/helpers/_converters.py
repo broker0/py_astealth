@@ -1,21 +1,32 @@
 """Internal converter functions for type-safe parameter handling."""
-from typing import Union
+from typing import Union, Type, TypeVar
+from enum import Enum
 
 from py_astealth.stealth import api
 from py_astealth.stealth_enums import Spell, Messenger, Global, EventType, Virtue
 
 
-def _get_skill_id(skill_id: str) -> int:
-    """Convert skill name to skill ID, raises ValueError if invalid."""
-    if isinstance(skill_id, int):
-        return skill_id
+T = TypeVar("T", bound=Enum)
+
+
+def _get_enum_value(value: Union[str, int, T], enum_class: Type[T], item_name: str) -> int:
+    """
+    Generic converter for Enum variants.
+    """
+    if isinstance(value, int):
+        return value
+    elif isinstance(value, enum_class):
+        return value.value
+    elif isinstance(value, str):
+        # Normalize: lowercase, remove spaces and underscores
+        normalized = value.lower().replace(" ", "").replace("_", "")
+        # Try to find matching Enum member
+        for member in enum_class:
+            if member.name.lower() == normalized:
+                return member.value
+        raise ValueError(f'Unknown {item_name} name: "{value}"')
     else:
-        skill_id = api.GetSkillID(skill_id)
-
-    if skill_id < 0:
-        raise ValueError(f'Unknown skill name: "{skill_id}"')
-
-    return skill_id
+        raise TypeError(f"Invalid {item_name} type: {type(value)}. Expected str, int, or {enum_class.__name__} enum")
 
 
 def _get_spell_id(spell: Union[str, int, Spell]) -> int:
@@ -27,21 +38,7 @@ def _get_spell_id(spell: Union[str, int, Spell]) -> int:
     - Spell: enum member
     Returns: int spell ID
     """
-    if isinstance(spell, int):
-        return spell
-    elif isinstance(spell, Spell):
-        return spell.value
-    elif isinstance(spell, str):
-        # Normalize: lowercase, remove spaces and underscores
-        normalized = spell.lower().replace(' ', '').replace('_', '')
-        # Try to find matching Spell enum member
-        for spell_enum in Spell:
-            enum_normalized = spell_enum.name.lower()
-            if enum_normalized == normalized:
-                return spell_enum.value
-        raise ValueError(f'Unknown spell name: "{spell}"')
-    else:
-        raise TypeError(f'Invalid spell type: {type(spell)}. Expected str, int, or Spell enum')
+    return _get_enum_value(spell, Spell, "spell")
 
 
 def _get_virtue_id(virtue: Union[str, int, Virtue]) -> int:
@@ -53,23 +50,7 @@ def _get_virtue_id(virtue: Union[str, int, Virtue]) -> int:
     - Virtue: enum member
     Returns: int virtue ID
     """
-    if isinstance(virtue, int):
-        return virtue
-    elif isinstance(virtue, Virtue):
-        return virtue.value
-    elif isinstance(virtue, str):
-        # Normalize: lowercase, remove spaces and underscores
-        normalized = virtue.lower().replace(' ', '').replace('_', '')
-        # Try to find matching Virtue enum member
-        for virtue_enum in Virtue:
-            # We compare with the enum name in lower case
-            # Assuming Virtue Enum names are like 'Honor', 'Sacrifice' etc.
-            enum_normalized = virtue_enum.name.lower()
-            if enum_normalized == normalized:
-                return virtue_enum.value
-        raise ValueError(f'Unknown virtue name: "{virtue}"')
-    else:
-        raise TypeError(f'Invalid virtue type: {type(virtue)}. Expected str, int, or Virtue enum')
+    return _get_enum_value(virtue, Virtue, "virtue")
 
 
 def _get_messenger_id(messenger: Union[str, int, Messenger]) -> int:
@@ -81,21 +62,9 @@ def _get_messenger_id(messenger: Union[str, int, Messenger]) -> int:
     - Messenger: enum member
     Returns: int messenger ID
     """
-    if isinstance(messenger, int):
-        # 0 means default (Telegram)
-        return 1 if messenger == 0 else messenger
-    elif isinstance(messenger, Messenger):
-        return messenger.value
-    elif isinstance(messenger, str):
-        # Normalize: lowercase
-        normalized = messenger.lower()
-        # Try to find matching Messenger enum member
-        for mes_enum in Messenger:
-            if mes_enum.name.lower() == normalized:
-                return mes_enum.value
-        raise ValueError(f'Unknown messenger name: "{messenger}". Must be "Telegram", "Viber", or "Discord"')
-    else:
-        raise TypeError(f'Invalid messenger type: {type(messenger)}. Expected str, int, or Messenger enum')
+    if isinstance(messenger, int) and messenger == 0:
+        return 1
+    return _get_enum_value(messenger, Messenger, "messenger")
 
 
 def _get_global_region_id(region: Union[str, int, Global]) -> int:
@@ -107,21 +76,7 @@ def _get_global_region_id(region: Union[str, int, Global]) -> int:
     - GlobalRegion: enum member
     Returns: int region ID
     """
-
-    if isinstance(region, int):
-        return region
-    elif isinstance(region, Global):
-        return region.value
-    elif isinstance(region, str):
-        # Normalize: lowercase
-        normalized = region.lower()
-        # Try to find matching Global enum member
-        for reg_enum in Global:
-            if reg_enum.name.lower() == normalized:
-                return reg_enum.value
-        raise ValueError(f'Unknown global region: "{region}". Must be "Stealth" or "Char"')
-    else:
-        raise TypeError(f'Invalid global region type: {type(region)}. Expected str, int, or GlobalRegion enum')
+    return _get_enum_value(region, Global, "global region")
 
 
 def _get_event_type_id(event_type: Union[str, int, EventType]) -> int:
@@ -133,18 +88,17 @@ def _get_event_type_id(event_type: Union[str, int, EventType]) -> int:
     - GlobalRegion: enum member
     Returns: int region ID
     """
+    return _get_enum_value(event_type, EventType, "event type")
 
-    if isinstance(event_type, int):
-        return event_type
-    elif isinstance(event_type, EventType):
-        return event_type.value
-    elif isinstance(event_type, str):
-        # Normalize: lowercase
-        normalized = event_type.lower()
-        # Try to find matching Global enum member
-        for reg_enum in EventType:
-            if reg_enum.name.lower() == normalized:
-                return reg_enum.value
-        raise ValueError(f'Unknown event name: "{event_type}"')
+
+def _get_skill_id(skill_id: Union[str, int]) -> int:
+    """Convert skill name to skill ID, raises ValueError if invalid."""
+    if isinstance(skill_id, int):
+        return skill_id
     else:
-        raise TypeError(f'Invalid event type: {type(event_type)}. Expected str, int, or EventType enum')
+        skill_id = api.GetSkillID(skill_id)
+
+    if skill_id < 0:
+        raise ValueError(f'Unknown skill name: "{skill_id}"')
+
+    return skill_id
