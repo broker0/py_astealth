@@ -1,6 +1,28 @@
+from typing import TYPE_CHECKING
 from dataclasses import dataclass
-from py_astealth.stealth_types import *
+
 from py_astealth.core.base_types import StructType
+
+
+if TYPE_CHECKING:
+    import py_astealth.stealth_types
+
+    #for better IDE support
+    Bool = py_astealth.stealth_types.Bool._mapping
+    U8 = py_astealth.stealth_types.U8._mapping
+    I8 = py_astealth.stealth_types.I8._mapping
+    U16 = py_astealth.stealth_types.U16._mapping
+    I16 = py_astealth.stealth_types.I16._mapping
+    U32 = py_astealth.stealth_types.U32._mapping
+    I32 = py_astealth.stealth_types.I32._mapping
+    U64 = py_astealth.stealth_types.U64._mapping
+    I64 = py_astealth.stealth_types.I64._mapping
+    F32 = py_astealth.stealth_types.F32._mapping
+    F64 = py_astealth.stealth_types.F64._mapping
+    DateTime = py_astealth.stealth_types.DateTime._mapping
+    String = py_astealth.stealth_types.String._mapping
+else:
+    from py_astealth.stealth_types import *
 
 
 # Using the @StructType.register decorator registers fields (arguments of constructor) for serialization.
