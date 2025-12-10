@@ -195,7 +195,7 @@ def _apply_cliloc_logic(element: dict):
             if arg.startswith('#'):
                 try:
                     arg_id = int(arg.strip('#'))
-                    arg = api.GetClilocByID(arg_id)
+                    arg = GetClilocByID(arg_id)
                 except ValueError:
                     pass
 
@@ -210,6 +210,16 @@ def _apply_cliloc_logic(element: dict):
     element['ClilocText'] = text
 
 
+def GetCliloc(cliloc_id, params: list[str]):
+    """Direct API call"""
+    return api.GetClilocByID(cliloc_id, params)
+
+
+def GetClilocByID(cliloc_id, params: list[str] = None):
+    """Deprecated: emulate old behavior, use GetCliloc instead"""
+    return api.GetClilocByID(cliloc_id, params)
+
+
 __all__ = [
     'AddToSystemJournal',
     'GetEvent',
@@ -219,4 +229,5 @@ __all__ = [
     'SetGlobal', 'GetGlobal',
     'CheckLag',
     'IsGump', 'GetGump', 'GetGumpInfo',
+    'GetCliloc', 'GetClilocByID',
 ]
