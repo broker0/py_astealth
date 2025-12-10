@@ -149,11 +149,15 @@ def GetPathArray3D(StartX: int, StartY: int, StartZ: int,
 
 # Movement helpers
 def NewMoveXYZ(x_dst, y_dst, z_dst, accuracy_xy, accuracy_z, running, callback: Optional[Callable] = None) -> bool:
+    return api.MoveXYZ(x_dst, y_dst, z_dst, accuracy_xy, accuracy_z, running)
+
+
+def newMoveXYZ(x_dst, y_dst, z_dst, accuracy_xy, accuracy_z, running, callback: Optional[Callable] = None) -> bool:
     """
-    Advanced MoveXYZ with path recalculation and callback support.
+    Advanced MoveXYZ with callback support.
     """
     def debug(msg):
-        if getattr(NewMoveXYZ, 'debug', False):
+        if getattr(newMoveXYZ, 'debug', False):
             AddToSystemJournal('MoveXYZ: ' + msg)
 
     def step(direction, run):
@@ -163,8 +167,8 @@ def NewMoveXYZ(x_dst, y_dst, z_dst, accuracy_xy, accuracy_z, running, callback: 
                 return res >= 0
             Wait(10)
 
-    if not hasattr(NewMoveXYZ, 'debug'):
-        NewMoveXYZ.debug = False
+    if not hasattr(newMoveXYZ, 'debug'):
+        newMoveXYZ.debug = False
 
     find_path = True
     while True:
@@ -246,9 +250,14 @@ def NewMoveXYZ(x_dst, y_dst, z_dst, accuracy_xy, accuracy_z, running, callback: 
             find_path = True
 
 
+def newMoveXY(x_dst, y_dst, optimized, accuracy, running):
+    """Wrapper for newMoveXYZ."""
+    return api.MoveXYZ(x_dst, y_dst, 0, accuracy, 255, running)
+
+
 def NewMoveXY(x_dst, y_dst, optimized, accuracy, running) -> bool:
-    """Wrapper for NewMoveXYZ."""
-    return NewMoveXYZ(x_dst, y_dst, 0, accuracy, 255, running)
+    """Wrapper for newMoveXYZ."""
+    return newMoveXY(x_dst, y_dst, optimized, accuracy, running)
 
 
 # Tile helpers
@@ -326,7 +335,7 @@ def AddUserStaticItem(static_item: dict, world_num: int):
 
 __all__ = ['MoverSettings', 'Mover',
            'GetPath3D', 'GetPathArray3D',
-           'NewMoveXYZ', 'NewMoveXY',
+           'NewMoveXYZ', 'newMoveXYZ', 'NewMoveXY', "newMoveXY",
            'GetTileFlags', 'ConvertIntegerToFlags',
            'GetStaticTiles', 'GetStaticTilesArray',
            'CreateUserStatic', 'AddUserStatic', 'AddUserStaticItem']
