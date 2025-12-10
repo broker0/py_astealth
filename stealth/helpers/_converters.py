@@ -2,7 +2,7 @@
 from typing import Union
 
 from py_astealth.stealth import api
-from py_astealth.stealth_enums import Spell, Messenger, Global, EventType
+from py_astealth.stealth_enums import Spell, Messenger, Global, EventType, Virtue
 
 
 def _get_skill_id(skill_id: str) -> int:
@@ -42,6 +42,34 @@ def _get_spell_id(spell: Union[str, int, Spell]) -> int:
         raise ValueError(f'Unknown spell name: "{spell}"')
     else:
         raise TypeError(f'Invalid spell type: {type(spell)}. Expected str, int, or Spell enum')
+
+
+def _get_virtue_id(virtue: Union[str, int, Virtue]) -> int:
+    """
+    Convert virtue to virtue ID.
+    Accepts:
+    - str: virtue name (case-insensitive, spaces/underscores ignored)
+    - int: virtue ID directly
+    - Virtue: enum member
+    Returns: int virtue ID
+    """
+    if isinstance(virtue, int):
+        return virtue
+    elif isinstance(virtue, Virtue):
+        return virtue.value
+    elif isinstance(virtue, str):
+        # Normalize: lowercase, remove spaces and underscores
+        normalized = virtue.lower().replace(' ', '').replace('_', '')
+        # Try to find matching Virtue enum member
+        for virtue_enum in Virtue:
+            # We compare with the enum name in lower case
+            # Assuming Virtue Enum names are like 'Honor', 'Sacrifice' etc.
+            enum_normalized = virtue_enum.name.lower()
+            if enum_normalized == normalized:
+                return virtue_enum.value
+        raise ValueError(f'Unknown virtue name: "{virtue}"')
+    else:
+        raise TypeError(f'Invalid virtue type: {type(virtue)}. Expected str, int, or Virtue enum')
 
 
 def _get_messenger_id(messenger: Union[str, int, Messenger]) -> int:

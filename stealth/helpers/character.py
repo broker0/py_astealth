@@ -3,10 +3,10 @@ from typing import Union
 from dataclasses import asdict
 
 from py_astealth.stealth import api
-from py_astealth.stealth_enums import Spell
+from py_astealth.stealth_enums import Spell, Virtue
 from py_astealth.stealth_structs import BuffBarInfo
 
-from ._converters import _get_skill_id, _get_spell_id
+from ._converters import _get_skill_id, _get_spell_id, _get_virtue_id
 from .common import Wait
 
 
@@ -167,12 +167,16 @@ def GetBuffBarInfo() -> list[dict]:
     return result
 
 
+def UseVirtue(virtue: Union[str, int, Virtue]):
+    return api.UseVirtue(_get_virtue_id(virtue))
+
+
 __all__ = [
-    'UseSkill', 'GetSkillValue', 'GetSkillCurrentValue', 'GetSkillCap',
     'UseSkill', 'GetSkillValue', 'GetSkillCurrentValue', 'GetSkillCap',
     'SetSkillLockState', 'GetSkillLockState', 'ChangeSkillLockState',
     'GetHP', 'GetMana', 'GetStam',
     'HP', 'MaxHP',
     'Cast', 'CastToObj', 'CastToObject', 'IsActiveSpellAbility',
     'WarMode', 'GetBuffs', 'GetBuffBarInfo',
+    'UseVirtue',
 ]

@@ -210,15 +210,11 @@ def _apply_cliloc_logic(element: dict):
     element['ClilocText'] = text
 
 
-def GetCliloc(cliloc_id, params: list[str]):
-    """Direct API call"""
-    return api.GetClilocByID(cliloc_id, params)
-
-
 def GetClilocByID(cliloc_id, params: list[str] = None):
     """Deprecated: emulate old behavior, use GetCliloc instead"""
     if params is None:
         params = []
+
     return api.GetClilocByID(cliloc_id, params)
 
 
@@ -231,5 +227,5 @@ __all__ = [
     'SetGlobal', 'GetGlobal',
     'CheckLag',
     'IsGump', 'GetGump', 'GetGumpInfo',
-    'GetCliloc', 'GetClilocByID',
+    'GetClilocByID',
 ]
