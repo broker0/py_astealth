@@ -75,33 +75,33 @@ class ExtendedInfo(StructType):
     Luck: I16
     DamageMin: U16
     DamageMax: U16
-    TithingPoints: I32
+    Tithing_points: I32
     ArmorMax: U16
-    FireResistMax: U16
-    ColdResistMax: U16
-    PoisonResistMax: U16
-    EnergyResistMax: U16
+    fireresistMax: U16
+    coldresistMax: U16
+    poisonresistMax: U16
+    energyresistMax: U16
     DefenseChance: U16
     DefenseChanceMax: U16
-    HitChanceIncr: U16
-    DamageIncr: U16
-    SwingSpeedIncr: U16
-    LowerReagentCost: U16
-    SpellDamageIncr: U16
-    FasterCastRecovery: U16
-    FasterCasting: U16
-    LowerManaCost: U16
-    HpRegen: U16
-    SpRegen: U16
-    MpRegen: U16
-    ReflectPhysDamage: U16
-    EnhancePotions: U16
-    StrIncr: U16
-    DexIncr: U16
-    IntIncr: U16
-    HpIncr: U16
-    SpIncr: U16
-    MpIncr: U16
+    Hit_Chance_Incr: U16
+    Damage_Incr: U16
+    Swing_Speed_Incr: U16
+    Lower_Reagent_Cost: U16
+    Spell_Damage_Incr: U16
+    Faster_Cast_Recovery: U16
+    Faster_Casting: U16
+    Lower_Mana_Cost: U16
+    HP_Regen: U16
+    Stam_Regen: U16
+    Mana_Regen: U16
+    Reflect_Phys_Damage: U16
+    Enhance_Potions: U16
+    Strength_Incr: U16
+    Dex_Incr: U16
+    Int_Incr: U16
+    HP_Incr: U16
+    Stam_Incr: U16
+    Mana_Incr: U16
 
 
 @StructType.register
