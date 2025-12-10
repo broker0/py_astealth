@@ -171,6 +171,11 @@ def UseVirtue(virtue: Union[str, int, Virtue]):
     return api.UseVirtue(_get_virtue_id(virtue))
 
 
+def GetExtInfo() -> dict:
+    info = api.GetExtInfo()
+    return asdict(info)
+
+
 __all__ = [
     'UseSkill', 'GetSkillValue', 'GetSkillCurrentValue', 'GetSkillCap',
     'SetSkillLockState', 'GetSkillLockState', 'ChangeSkillLockState',
@@ -179,4 +184,5 @@ __all__ = [
     'Cast', 'CastToObj', 'CastToObject', 'IsActiveSpellAbility',
     'WarMode', 'GetBuffs', 'GetBuffBarInfo',
     'UseVirtue',
+    'GetExtInfo',
 ]

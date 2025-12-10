@@ -1,4 +1,6 @@
 """Targeting and catch bag helpers."""
+from dataclasses import asdict
+
 from py_astealth.stealth import api
 from .common import Wait, AddToSystemJournal
 
@@ -34,6 +36,11 @@ def CancelTarget() -> None:
     api.CancelTarget()
     while api.TargetID():
         Wait(10)
+
+
+def ClientTargetResponse() -> dict:
+    response = api.ClientTargetResponse()
+    return asdict(response)
 
 
 # CatchBag helpers
@@ -78,7 +85,7 @@ def UseType2(obj_type: int) -> int:
 
 
 __all__ = [
-    'TargetPresent', 'WaitForTarget', 'CancelTarget',
+    'TargetPresent', 'WaitForTarget', 'CancelTarget', 'ClientTargetResponse',
     'SetCatchBag', 'UnsetCatchBag',
     'UseType2',
 ]
