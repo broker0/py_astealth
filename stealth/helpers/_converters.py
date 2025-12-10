@@ -1,12 +1,12 @@
 """Internal converter functions for type-safe parameter handling."""
 from typing import Union, Type, TypeVar
-from enum import Enum
+from enum import IntEnum
 
 from py_astealth.stealth import api
 from py_astealth.stealth_enums import Spell, Messenger, Global, EventType, Virtue
 
 
-T = TypeVar("T", bound=Enum)
+T = TypeVar("T", bound=IntEnum)
 
 
 def _get_enum_value(value: Union[str, int, T], enum_class: Type[T], item_name: str) -> int:
@@ -63,7 +63,7 @@ def _get_messenger_id(messenger: Union[str, int, Messenger]) -> int:
     Returns: int messenger ID
     """
     if isinstance(messenger, int) and messenger == 0:
-        return 1
+        return Messenger.Telegram.value
     return _get_enum_value(messenger, Messenger, "messenger")
 
 
