@@ -2,7 +2,8 @@ import asyncio
 from datetime import datetime, timedelta
 import inspect
 
-from py_astealth.api_client import AsyncStealthApiClient, SyncStealthApiClient
+from py_astealth.async_client import AsyncStealthApiClient
+from py_astealth.sync.client import SyncStealthApiClient
 from py_astealth.stealth_types import *
 from py_astealth.stealth_structs import *
 from py_astealth.stealth_enums import *

@@ -1,12 +1,11 @@
-import asyncio
 import threading
-from typing import Optional, List
+from typing import List
 import atexit
 
-from py_astealth.api_client import SyncStealthApiClient
+from py_astealth.sync.client import SyncStealthApiClient
 from py_astealth.stealth_session import StealthSession
 from py_astealth.core.api_specification import MethodSpec
-from py_astealth.stealth_context import DefaultContextManager
+from py_astealth.sync.context import DefaultContextManager
 
 
 class _ThreadLocalClientProxy:

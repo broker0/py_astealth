@@ -2,8 +2,8 @@ import asyncio
 import random
 from datetime import datetime
 
-from py_astealth.api_client import AsyncStealthApiClient
-from py_astealth.stealth_client import EventType
+from py_astealth.async_client import AsyncStealthApiClient
+from py_astealth.stealth_types import EventType
 from py_astealth.examples.example_lib import graceful_shutdown
 
 

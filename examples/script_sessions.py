@@ -1,6 +1,6 @@
 import asyncio
 
-from py_astealth.api_client import AsyncStealthApiClient
+from py_astealth.async_client import AsyncStealthApiClient
 from py_astealth.examples.example_lib import graceful_shutdown
 from py_astealth.stealth_session import StealthSession
 

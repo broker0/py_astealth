@@ -1,8 +1,6 @@
 import asyncio
-import math
-from py_astealth.api_client import AsyncStealthApiClient
+from py_astealth.async_client import AsyncStealthApiClient
 from py_astealth.stealth_session import StealthSession
-from py_astealth.stealth_structs import WorldPoint
 
 
 class SharedState:

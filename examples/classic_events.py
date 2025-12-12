@@ -1,5 +1,5 @@
 from py_astealth import stealth
-from py_astealth.stealth_client import EventType
+from py_astealth.stealth_types import EventType
 
 
 def speech_handler(text, sender_name, sender_id):

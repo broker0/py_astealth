@@ -1,6 +1,6 @@
 import asyncio
 import functools
-from py_astealth.api_client import AsyncStealthApiClient
+from py_astealth.async_client import AsyncStealthApiClient
 
 
 def graceful_shutdown(coro):

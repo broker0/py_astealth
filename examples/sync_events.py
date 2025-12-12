@@ -1,7 +1,7 @@
 from time import sleep
 
-from py_astealth.api_client import SyncStealthApiClient
-from py_astealth.stealth_client import EventType
+from py_astealth.sync.client import SyncStealthApiClient
+from py_astealth.stealth_types import EventType
 
 
 def main():
