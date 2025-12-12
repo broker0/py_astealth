@@ -180,7 +180,7 @@ if __name__ == '__main__':
 
 ```python
 
-from py_astealth.sync.client import SyncStealthApiClient
+from py_astealth.sync.sync_client import SyncStealthApiClient
 
 # Using context manager for automatic connection/disconnection
 with SyncStealthApiClient() as client:
