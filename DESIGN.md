@@ -155,22 +155,24 @@ Usage Examples
 
 ```python
 import asyncio
-from py_astealth.api_client import AsyncStealthApiClient
+from py_astealth.async_client import AsyncStealthApiClient
+
 
 async def main():
     client = AsyncStealthApiClient()
     await client.connect()
-    
+
     # Call an API method
     self_id = await client.Self()
     print(f"My ID: {self_id}")
-    
+
     # Event loop
     while True:
         event = await client.get_event()
         if event:
             print(f"Received event: {event}")
         await asyncio.sleep(0.1)
+
 
 if __name__ == '__main__':
     asyncio.run(main())

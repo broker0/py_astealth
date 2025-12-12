@@ -1,6 +1,6 @@
 from typing import Callable, Optional
 
-from py_astealth.api_client import AsyncStealthApiClient
+from py_astealth.async_client import AsyncStealthApiClient
 from py_astealth.core.api_specification import MethodSpec, implement_api
 from py_astealth.generated.sync_interface import SyncInterface
 from py_astealth.stealth_api import StealthApi
