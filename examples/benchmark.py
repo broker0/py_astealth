@@ -2,8 +2,8 @@ import asyncio
 from datetime import datetime
 
 from py_astealth.async_client import AsyncStealthApiClient
-from py_astealth.sync.client import SyncStealthApiClient
-from py_astealth.sync.context import FastContext
+from py_astealth.sync import SyncStealthApiClient
+from py_astealth.sync import FastContext
 
 import py_stealth as old_stealth
 from py_astealth import stealth as new_stealth
