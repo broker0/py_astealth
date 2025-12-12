@@ -121,17 +121,16 @@ Example usage:
 with SyncStealthApiClient() as client:
     client.AddToSystemJournal("Hello from Python!")
 
-    
 # Custom context (dedicated thread for this client)
-from py_astealth.stealth_context import ThreadedContext
+from py_astealth.sync.context import ThreadedContext
+
 context = ThreadedContext(name="my-client-thread")
 client = SyncStealthApiClient(context=context)
 
-
 # Fast context (runs in current thread, lower overhead)
-from py_astealth.stealth_context import FastContext
-client = SyncStealthApiClient(context=FastContext())
+from py_astealth.sync.context import FastContext
 
+client = SyncStealthApiClient(context=FastContext())
 
 # Shared session across multiple clients
 from py_astealth.stealth_session import StealthSession
@@ -180,13 +179,14 @@ if __name__ == '__main__':
 ### Synchronous Example
 
 ```python
-from py_astealth.api_client import SyncStealthApiClient
+
+from py_astealth.sync.client import SyncStealthApiClient
 
 # Using context manager for automatic connection/disconnection
 with SyncStealthApiClient() as client:
     if client.Connected():
         print("Connected to Stealth!")
-        
+
     client.AddToSystemJournal("Hello from Python!")
 ```
 
