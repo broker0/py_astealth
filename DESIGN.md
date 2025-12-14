@@ -82,7 +82,7 @@ Method binding is performed by the `implement_api` decorator, which receives an 
 class as an argument, describing the API, and a `method_factory` that simply returns a closure method 
 that handles this call.
 
-Using `AsyncClientPool`, you can spawn a group of `AsyncStealthApiClients` for batch execution 
+`AsyncClientPool` spawns a group of `AsyncStealthApiClients` for batch execution 
 of bulk operations.
 
 While `AsyncStealthApiClient` provides the core asynchronous interface, the library also includes wrappers 

@@ -111,12 +111,12 @@ async def benchmark():
         start = time.perf_counter()
         parallel_results = await pool.run(found_ids, processor=get_object_info_simple, pipelining=16)
         parallel_time = time.perf_counter() - start
-        print(f"Pool Map ({pool.size} clients) simp: {parallel_time:.3f}s, speedup: {single_time / parallel_time:.2f}x")
+        print(f"Pool Run ({pool.size} clients) simp: {parallel_time:.3f}s, speedup: {single_time / parallel_time:.2f}x")
 
         start = time.perf_counter()
         parallel_results = await pool.run(found_ids, processor=get_object_info_concurrent, pipelining=16)
         parallel_time = time.perf_counter() - start
-        print(f"Pool Map ({pool.size} clients) conc: {parallel_time:.3f}s, speedup: {single_time / parallel_time:.2f}x")
+        print(f"Pool Run ({pool.size} clients) conc: {parallel_time:.3f}s, speedup: {single_time / parallel_time:.2f}x")
 
 
 if __name__ == "__main__":
