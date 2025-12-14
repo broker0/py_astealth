@@ -24,9 +24,9 @@ class AsyncStealthClient(AsyncRPCClient):
     """
 
     def __init__(self, session: StealthSession = None):
-        if session is None:
-            session = StealthSession()
-        self.session = session
+        self.events: asyncio.Queue[StealthEvent] = asyncio.Queue()
+
+        self._session = StealthSession() if session is None else session
 
         self._transport = None
         self._protocol = None
@@ -36,7 +36,6 @@ class AsyncStealthClient(AsyncRPCClient):
         self._sending_allowed.set()
         self._call_id = 0
         self._pending_replies: dict[int, asyncio.Future] = {}
-        self.events: asyncio.Queue[StealthEvent] = asyncio.Queue()
 
         self._calls = 0
 
@@ -53,12 +52,12 @@ class AsyncStealthClient(AsyncRPCClient):
         """establishing a connection with the Stealth-client and sending a packet with the version of our protocol"""
         
         # Negotiate port/group if needed
-        await self.session.negotiate_port()
+        await self._session.negotiate_port()
 
         loop = asyncio.get_running_loop()
         try:
             self._transport, self._protocol = await loop.create_connection(
-                lambda: AsyncStealthRPCProtocol(self), self.session.host, self.session.script_port
+                lambda: AsyncStealthRPCProtocol(self), self._session.host, self._session.script_port
             )
             await self._connected.wait()  # waiting for connection to be established
 
@@ -70,10 +69,10 @@ class AsyncStealthClient(AsyncRPCClient):
             #     await self.call_method(StealthApi._SelectProfile.method_spec, self.session.profile)
 
         except ConnectionRefusedError:
-            print(f"Unable to connect to {self.session.host}:{self.session.script_port}. Connection refused.")
+            print(f"Unable to connect to {self._session.host}:{self._session.script_port}. Connection refused.")
             raise
 
-        return self.session.script_group
+        return self._session.script_group
 
     def close(self):
         if self._transport:
@@ -205,7 +204,7 @@ class AsyncStealthClient(AsyncRPCClient):
             self._sending_allowed.set()
 
     def _handle_ScriptPathCallback(self):
-        script_name = self.session.script_name
+        script_name = self._session.script_name
         if DEBUG_CLIENT > 1:
             print(f"[Info] ScriptPathCallback -> {script_name}")
 
