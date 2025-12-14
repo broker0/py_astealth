@@ -19,11 +19,9 @@ class AsyncClientPool:
     
     async def connect_all(self):
         """Create and connect all clients in the pool."""
-        for _ in range(self.size):
-            client = AsyncStealthApiClient(self.session)
-            await client.connect()
-            self.clients.append(client)
-    
+        self.clients = [AsyncStealthApiClient(self.session) for _ in range(self.size)]
+        await asyncio.gather(*(client.connect() for client in self.clients))
+
     def close_all(self):
         """Close all clients in the pool."""
         for client in self.clients:
@@ -62,8 +60,8 @@ class AsyncClientPool:
         # Pre-allocate results array
         results = [None] * len(items)
         
-        # Shared atomic counter (simple list to pass by reference) for zero-copy processing items
-        # [current_index]
+        # Shared atomic counter (simple list to pass by reference)
+        # [current_index] of current `items` position
         shared_index = [0]
         
         total_items = len(items)
@@ -71,6 +69,7 @@ class AsyncClientPool:
         # worker does all the work to execute our tasks.
         async def worker(client: AsyncStealthApiClient):
             while True:
+                # START NO AWAIT ZONE
                 # claim batch of items for processing
                 start = shared_index[0]
                 if start >= total_items:
@@ -78,20 +77,19 @@ class AsyncClientPool:
                 
                 end = min(start + pipelining, total_items)
                 shared_index[0] = end
-
-                items_batch = (items[i] for i in range(start, end))
+                # END NO AWAIT ZONE
 
                 try:
                     current_batch_coros = []
 
                     # processing of batch
                     if processor:   # Item processing mode
-                        for item in items_batch:
-                            current_batch_coros.append(processor(client, item))
+                        for i in range(start, end):
+                            current_batch_coros.append(processor(client, items[i]))
 
                     else:   # Task factory mode (item is callable(client))
-                        for factory in items_batch:
-                            current_batch_coros.append(factory(client))
+                        for i in range(start, end):
+                            current_batch_coros.append(items[i](client))
                     
                     # concurrent execution of batch coros
                     batch_results = await asyncio.gather(*current_batch_coros, return_exceptions=True)
