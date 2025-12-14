@@ -1,16 +1,8 @@
 import inspect
-from dataclasses import dataclass
+
 from typing import Any, get_type_hints, Callable, Optional
 
-from py_astealth.core.base_types import ParameterSpec
-
-
-@dataclass
-class MethodSpec:
-    id: int
-    name: str
-    args: list[ParameterSpec]
-    result: Any
+from py_astealth.core.base_types import ParameterSpec, MethodSpec
 
 
 class ApiSpecification:

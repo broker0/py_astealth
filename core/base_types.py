@@ -123,6 +123,14 @@ class ParameterSpec:
     type: Any
 
 
+@dataclass
+class MethodSpec:
+    id: int
+    name: str
+    args: list[ParameterSpec]
+    result: Any
+
+
 class StructType(RPCType):
     # '_fields' is a list of structure fields to be serialized.
     _fields: list[ParameterSpec] = []
