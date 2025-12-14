@@ -82,6 +82,9 @@ Method binding is performed by the `implement_api` decorator, which receives an 
 class as an argument, describing the API, and a `method_factory` that simply returns a closure method 
 that handles this call.
 
+Using `AsyncClientPool`, you can spawn a group of `AsyncStealthApiClients` for batch execution 
+of bulk operations.
+
 While `AsyncStealthApiClient` provides the core asynchronous interface, the library also includes wrappers 
 for synchronous usage, which can be more convenient for simple scripts or those migrating from `py_stealth`.
 
@@ -94,7 +97,7 @@ If not provided, a new unique `StealthSession` is automatically created.
 
 `SyncStealthApiClient` also accepts optional parameter - **`context`** 
 a `StealthContext` instance defining how coroutines are executed. 
-If not provided, a new `StealthSession` instance will be created.
+If not provided, a default context of `DefaultContextManager` will be used.
 
 
 Execution Contexts
