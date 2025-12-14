@@ -2,6 +2,8 @@ import asyncio
 from datetime import datetime
 
 from py_astealth.async_client import AsyncStealthApiClient
+from py_astealth.async_pool import AsyncClientPool
+from py_astealth.stealth_session import StealthSession
 from py_astealth.sync import SyncStealthApiClient
 from py_astealth.sync import FastContext
 
@@ -39,6 +41,14 @@ async def bench_async(name: str):
     log_stats(name, start)
 
 
+async def bench_async_pool(name: str):
+    async with AsyncClientPool(StealthSession(), size=16) as client_pool:
+        start = datetime.now()
+        await client_pool.run([lambda c: c.Self() for _ in range(COUNT)], pipelining=16)
+
+    log_stats(name, start)
+
+
 def main():
     print(f"Starting Benchmark (Count={COUNT})\n")
     print("-" * 92)
@@ -61,6 +71,10 @@ def main():
 
     # 5. Async Client
     asyncio.run(bench_async("Modern Async client"))
+
+    # 6. Async pool of clients
+    asyncio.run(bench_async_pool("Pool of Async clients"))
+
     print("-" * 92)
 
 
