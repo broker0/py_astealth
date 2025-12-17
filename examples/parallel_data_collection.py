@@ -44,7 +44,7 @@ async def get_object_info_simple(client: AsyncStealthApiClient, obj_id: int) -> 
     return ObjectInfo(obj_id, obj_type, color, x, y, z)
 
 
-async def get_object_info_concurrent(client, obj_id):
+async def get_object_info_concurrent(client: AsyncStealthApiClient, obj_id):
     """concurrent version of get_object_info"""
     for _ in range(REPEAT_CALL):
         obj_type, color, x, y, z = await asyncio.gather(

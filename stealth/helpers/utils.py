@@ -1,3 +1,5 @@
+from .common import AddToSystemJournal
+
 """Utility functions: math helpers and EasyUO compatibility."""
 
 
@@ -168,7 +170,6 @@ def PlayWav(FileName: str) -> None:
     import platform
     if platform.system() != "Windows":
         try:
-            from .communication import AddToSystemJournal
             AddToSystemJournal('PlayWav supports only Windows.')
         except Exception:
             pass
@@ -178,7 +179,6 @@ def PlayWav(FileName: str) -> None:
         winsound.PlaySound(FileName, winsound.SND_FILENAME)
     except Exception as e:
         try:
-            from .communication import AddToSystemJournal
             AddToSystemJournal(f'PlayWav error: {e}')
         except Exception:
             pass

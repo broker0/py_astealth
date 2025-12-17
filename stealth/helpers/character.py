@@ -78,7 +78,7 @@ def GetStam(obj_id: int) -> int:
 
 
 def HP():
-    api.Life()
+    return api.Life()
 
 
 def MaxHP():

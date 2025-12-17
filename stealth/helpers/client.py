@@ -1,5 +1,6 @@
 """Client-related helpers: UI, Gumps, and Connection."""
 from typing import Union
+from datetime import datetime, timedelta
 
 from py_astealth.stealth import api
 from py_astealth.stealth_enums import UIWindowType
@@ -43,10 +44,9 @@ def WaitForClientTargetResponse(max_wait_ms: int) -> bool:
     Returns:
         True if response present, False if timeout
     """
-    from time import time
-    end_time = time() + max_wait_ms / 1000
+    end_time = datetime.now() + timedelta(milliseconds=max_wait_ms)
 
-    while time() < end_time:
+    while datetime.now() < end_time:
         if api.ClientTargetResponsePresent():
             return True
         Wait(10)
@@ -56,13 +56,7 @@ def WaitForClientTargetResponse(max_wait_ms: int) -> bool:
 def CorrectDisconnection() -> None:
     """Force close the current connection."""
     client = _manager.get_client_for_thread()
-    # The proxy redirects calls, but close() might be on the client object itself
-    # or we might need to go through the manager to properly clean up.
-    # _manager.close_client_for_thread(client._client) would be safer if we could access it.
-    # But client is a proxy. client._client is accessible.
-    
-    # However, simply calling close() on the client should trigger the socket close.
-    # The manager might try to reconnect or handle it.
+
     if hasattr(client, 'close'):
         client.close()
 

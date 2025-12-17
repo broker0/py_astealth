@@ -1,8 +1,6 @@
 import asyncio
 import io
-import os
 import struct
-import sys
 from typing import Any
 
 from py_astealth.core.api_specification import MethodSpec
