@@ -3,6 +3,7 @@ import runpy
 import sys
 import traceback
 import importlib
+import builtins
 
 from pathlib import Path
 
@@ -75,6 +76,13 @@ def print_clean_traceback(exc: Exception):
     print(f"{type(exc).__name__}: {exc}", file=sys.stderr)
 
 
+def inject_stealth_to_builtins():
+    for name in dir(stealth):   # iterate over stealth module exports
+        if not name.startswith('_'):    # skip private exports
+            obj = getattr(stealth, name)
+            setattr(builtins, name, obj)
+
+
 def main():
     if len(sys.argv) < 2:
         error = 'CMD params must be: path_to_script [port] [func] [args]'
@@ -92,6 +100,8 @@ def main():
 
     # Connecting to Stealth
     stealth.Self()
+
+    inject_stealth_to_builtins()
 
     setup_io_redirection()
 
