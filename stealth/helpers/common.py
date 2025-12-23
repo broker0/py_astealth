@@ -1,4 +1,5 @@
 """Base helper functions for events, logging, and layer constants."""
+import inspect
 import threading
 import dataclasses
 from collections import deque
@@ -51,6 +52,26 @@ def SetEventProc(event_type, handler):
         api.ClearEventCallback(event_type)
 
 
+def _call_event_handler(handler, args):
+    try:
+        sig = inspect.signature(handler)
+        params = sig.parameters.values()
+
+        # if the signature contains *args, we pass all arguments without fear.
+        if any(p.kind == inspect.Parameter.VAR_POSITIONAL for p in params):
+            return handler(*args)
+
+        # count only positional parameters
+        pos_params_count = sum(
+            1 for p in params
+            if p.kind in (inspect.Parameter.POSITIONAL_ONLY, inspect.Parameter.POSITIONAL_OR_KEYWORD)
+        )
+
+        return handler(*args[:pos_params_count])
+    except Exception as e:
+        AddToSystemJournal(f"Error calling event handler {handler}({args}): {e}")
+
+
 def WaitForEvent(delay_ms: int = 0):
     """
     Waits for an event within the specified time (max_wait), specified in milliseconds.
@@ -68,7 +89,7 @@ def WaitForEvent(delay_ms: int = 0):
         if event:
             handler = _manager.get_handler_for_thread(event.id)
             if handler:
-                handler(*event.arguments)
+                _call_event_handler(handler, event.arguments)
                 return event
             else:
                 return event
@@ -89,7 +110,7 @@ def Wait(delay_ms: int):
             handler = _manager.get_handler_for_thread(event.id)
 
             if handler:
-                handler(*event.arguments)
+                _call_event_handler(handler, event.arguments)
             else:
                 _context.event_buffer.append(event)
 
