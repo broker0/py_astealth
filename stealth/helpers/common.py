@@ -42,11 +42,11 @@ def GetEvent():
     return _manager.get_event_for_thread()
 
 
-def SetEventProc(event_type, handler):
+def SetEventProc(event_type, Callback=None):
     event_type = _get_event_type_id(event_type)
-    _manager.set_handler_for_thread(event_type, handler)
+    _manager.set_handler_for_thread(event_type, Callback)
 
-    if handler:
+    if Callback:
         api.SetEventCallback(event_type)
     else:
         api.ClearEventCallback(event_type)
