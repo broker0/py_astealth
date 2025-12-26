@@ -188,7 +188,6 @@ class AsyncStealthClient(AsyncRPCClient):
 
         self.close()
 
-
     def _handle_ScriptTogglePauseCallback(self):
         if self._sending_allowed.is_set():
             if DEBUG_CLIENT > 1:

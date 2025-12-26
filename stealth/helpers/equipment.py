@@ -7,34 +7,34 @@ from .common import Wait
 
 
 # Layer constants/functions
-def RhandLayer(): return Layer.RhandLayer
-def LhandLayer(): return Layer.LhandLayer
-def ShoesLayer(): return Layer.ShoesLayer
-def PantsLayer(): return Layer.PantsLayer
-def ShirtLayer(): return Layer.ShirtLayer
-def HatLayer(): return Layer.HatLayer
-def GlovesLayer(): return Layer.GlovesLayer
-def RingLayer(): return Layer.RingLayer
-def TalismanLayer(): return Layer.TalismanLayer
-def NeckLayer(): return Layer.NeckLayer
-def HairLayer(): return Layer.HairLayer
-def WaistLayer(): return Layer.WaistLayer
-def TorsoLayer(): return Layer.TorsoLayer
-def BraceLayer(): return Layer.BraceLayer
-def BeardLayer(): return Layer.BeardLayer
-def TorsoHLayer(): return Layer.TorsoHLayer
-def EarLayer(): return Layer.EarLayer
-def ArmsLayer(): return Layer.ArmsLayer
-def CloakLayer(): return Layer.CloakLayer
-def BpackLayer(): return Layer.BpackLayer
-def RobeLayer(): return Layer.RobeLayer
-def EggsLayer(): return Layer.EggsLayer
-def LegsLayer(): return Layer.LegsLayer
-def HorseLayer(): return Layer.HorseLayer
-def RstkLayer(): return Layer.RstkLayer
-def NRstkLayer(): return Layer.NRstkLayer
-def SellLayer(): return Layer.SellLayer
-def BankLayer(): return Layer.BankLayer
+def RhandLayer(): return Layer.RhandLayer.value
+def LhandLayer(): return Layer.LhandLayer.value
+def ShoesLayer(): return Layer.ShoesLayer.value
+def PantsLayer(): return Layer.PantsLayer.value
+def ShirtLayer(): return Layer.ShirtLayer.value
+def HatLayer(): return Layer.HatLayer.value
+def GlovesLayer(): return Layer.GlovesLayer.value
+def RingLayer(): return Layer.RingLayer.value
+def TalismanLayer(): return Layer.TalismanLayer.value
+def NeckLayer(): return Layer.NeckLayer.value
+def HairLayer(): return Layer.HairLayer.value
+def WaistLayer(): return Layer.WaistLayer.value
+def TorsoLayer(): return Layer.TorsoLayer.value
+def BraceLayer(): return Layer.BraceLayer.value
+def BeardLayer(): return Layer.BeardLayer.value
+def TorsoHLayer(): return Layer.TorsoHLayer.value
+def EarLayer(): return Layer.EarLayer.value
+def ArmsLayer(): return Layer.ArmsLayer.value
+def CloakLayer(): return Layer.CloakLayer.value
+def BpackLayer(): return Layer.BpackLayer.value
+def RobeLayer(): return Layer.RobeLayer.value
+def EggsLayer(): return Layer.EggsLayer.value
+def LegsLayer(): return Layer.LegsLayer.value
+def HorseLayer(): return Layer.HorseLayer.value
+def RstkLayer(): return Layer.RstkLayer.value
+def NRstkLayer(): return Layer.NRstkLayer.value
+def SellLayer(): return Layer.SellLayer.value
+def BankLayer(): return Layer.BankLayer.value
 
 
 
