@@ -246,7 +246,7 @@ def GetClilocByID(cliloc_id, params: list[str] = None):
 
 
 __all__ = [
-    'AddToSystemJournal',
+    'AddToSystemJournal', 'AddToSystemJournalEx',
     'GetEvent',
     'SetEventProc',
     'WaitForEvent',
