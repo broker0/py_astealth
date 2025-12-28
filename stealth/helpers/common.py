@@ -25,6 +25,11 @@ def AddToSystemJournal(*args, **kwargs):
     api.AddToSystemJournal(text)
 
 
+def AddToSystemJournalEx(value: str, textcolor: int = 0, bgcolor: int = -1, fontsize: int = 10, fontname: str = 'Consolas'):
+    """Format and add message to system journal with font settings."""
+    api.AddToSystemJournalEx(value, textcolor, bgcolor, fontsize, fontname)
+
+
 # Event related
 class ThreadContext(threading.local):
     """
