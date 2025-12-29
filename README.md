@@ -48,3 +48,6 @@ This module is designed as a direct drop in replacement for `py_stealth` with so
 new features and providing both standard API functions and most of the previous helpers, 
 ensuring a very high level of compatibility. 
 
+### Issues
+
+Python 2.x is not supported; the minimum version is 3.8.
