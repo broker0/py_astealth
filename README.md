@@ -1,4 +1,4 @@
-# py_astealth
+# [py_astealth](https://github.com/broker0/py_astealth/)
 
 
 Asynchronous/alternative python API for [UO Stealth client](https://stealth.od.ua/)
