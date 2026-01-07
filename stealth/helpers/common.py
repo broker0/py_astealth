@@ -212,7 +212,7 @@ def GetGumpInfo(GumpIndex: int) -> dict:
 
 
 def _apply_cliloc_logic(element: dict):
-    text = api.GetClilocByID(element['ClilocID'])
+    text = GetClilocByID(element['ClilocID'])
     raw_args = element.get('Arguments', '')
 
     args_list = raw_args.split('@')[1:] if raw_args else []
