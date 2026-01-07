@@ -556,6 +556,7 @@ class GumpPicInPic(StructType):
     StartY: I32
     Width: I32
     Height: I32
+    Hue: I32
     ElemNum: I32
 
 
