@@ -146,6 +146,7 @@ class StaticTileData(StructType):
     G: U8
     B: U8
     A: U8
+    Layer: U8
     Name: String
 
 
@@ -267,6 +268,63 @@ class ContextMenuRec(StructType):
     EntriesNumber: U8
     NewCliloc: Bool
     Entries: list[ContextMenuEntry]
+
+
+@StructType.register
+@dataclass
+class WorldItemData(StructType):
+    serial: U32
+    graphic: U16
+    color: U16
+    x: U16
+    y: U16
+    z: I8
+    world: U8
+    count: U16
+    flags: U8
+
+@StructType.register
+@dataclass
+class MobileData(StructType):
+    serial: U32
+    graphic: U16
+    color: U16
+    x: U16
+    y: U16
+    z: I8
+    direction: U8
+    world: U8
+    flags: U8
+    notoriety: U8
+
+    hp: I32
+    hp_max: I32
+    sp: I32
+    sp_max: I32
+    mp: I32
+    mp_max: I32
+
+
+@StructType.register
+@dataclass
+class EquippedItemData(StructType):
+    serial: U32
+    graphic: U16
+    color: U16
+    layer: U8
+    parent: U32
+
+
+@StructType.register
+@dataclass
+class ContentItemData(StructType):
+    serial: U32
+    graphic: U16
+    color: U16
+    x: U16
+    y: U16
+    count: U16
+    parent: U32
 
 
 ####################################################################################################################

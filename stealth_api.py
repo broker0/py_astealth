@@ -356,6 +356,33 @@ class StealthApi(ApiSpecification):
     def IsHouse(self, ObjID: U32) -> Bool: ...
 
     ####################################################################################################################
+    # bulk query
+    ####################################################################################################################
+    @method_api(533)
+    def GetWorldItems(self) -> list[WorldItemData]: ...
+
+    @method_api(534)
+    def GetMobiles(self) -> list[MobileData]: ...
+
+    @method_api(535)
+    def GetMobile(MobID: U32) -> MobileData: ...
+
+    @method_api(536)
+    def GetEquipment(MobID: U32) -> list[EquippedItemData]: ...
+
+    @method_api(537)
+    def GetContent(ObjID: U32) -> list[ContentItemData]: ...
+
+    ####################################################################################################################
+    # equipment
+    ####################################################################################################################
+    @method_api(538)
+    def EquipItems(Items: list[U32]) -> Bool: ...
+
+    @method_api(539)
+    def UnequipItems(Items: list[U32]) -> Bool: ...
+
+    ####################################################################################################################
     # past information
     ####################################################################################################################
     @method_api(230)

@@ -1,4 +1,4 @@
-from enum import IntEnum
+from enum import IntEnum, Flag
 
 
 class Messenger(IntEnum):
@@ -385,3 +385,15 @@ class LOSCheckOption(IntEnum):
     PolLosThroughWindow = 0x400
 
 
+class MobileFlags(Flag):
+    Poisoned = 0x04
+    YellowHits = 0x08
+
+    Paralyzed = 0x20
+    WarMode = 0x40
+    Hidden = 0x80
+
+
+class ItemFlags(Flag):
+    Movable = 0x20
+    Hidden = 0x80
