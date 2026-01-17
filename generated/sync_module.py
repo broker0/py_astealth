@@ -85,6 +85,7 @@ def DisconnectedTime() -> datetime: pass
 def DragItem(ObjID: int, Count: int) -> bool: pass
 def DropItem(MoveIntoID: int, X: int, Y: int, Z: int) -> bool: pass
 def EnergyResist() -> int: pass
+def EquipItems(Items: list[int]) -> bool: pass
 def EquipItemsSetMacro() -> None: pass
 def EquipLastWeapon() -> None: pass
 def FillNewWindow(Text: str) -> None: pass
@@ -111,6 +112,7 @@ def GetCharsListForShard() -> list[str]: pass
 def GetClientVersionInt() -> int: pass
 def GetClilocByID(ClilocID: int, Params: list[str]) -> str: pass
 def GetColor(ObjID: int) -> int: pass
+def GetContent(ObjID: int) -> list[ContentItemData]: pass
 def GetContextMenu() -> list[str]: pass
 def GetContextMenuRec() -> ContextMenuRec: pass
 def GetDex(ObjID: int) -> int: pass
@@ -120,6 +122,7 @@ def GetDressSet() -> list[LayerObject]: pass
 def GetDressSpeed() -> int: pass
 def GetDropCheckCoord() -> bool: pass
 def GetDropDelay() -> int: pass
+def GetEquipment(MobID: int) -> list[EquippedItemData]: pass
 def GetExtInfo() -> ExtendedInfo: pass
 def GetFindDistance() -> int: pass
 def GetFindInNulPoint() -> bool: pass
@@ -149,6 +152,8 @@ def GetMaxMana(ObjID: int) -> int: pass
 def GetMaxStam(ObjID: int) -> int: pass
 def GetMenuItems(Caption: str) -> list[str]: pass
 def GetMenuItemsEx(Caption: str) -> list[MenuItem]: pass
+def GetMobile(MobID: int) -> MobileData: pass
+def GetMobiles() -> list[MobileData]: pass
 def GetMoveBetweenTwoCorners() -> bool: pass
 def GetMoveCheckStamina() -> int: pass
 def GetMoveHeuristicMult() -> int: pass
@@ -209,6 +214,7 @@ def GetTradeOpponentName(TradeNum: int) -> str: pass
 def GetType(ObjID: int) -> int: pass
 def GetWalkMountTimer() -> int: pass
 def GetWalkUnmountTimer() -> int: pass
+def GetWorldItems() -> list[WorldItemData]: pass
 def GetX(ObjID: int) -> int: pass
 def GetY(ObjID: int) -> int: pass
 def GetZ(ObjID: int) -> int: pass
@@ -388,6 +394,7 @@ def TradeCheck(TradeNum: int, Num: int) -> bool: pass
 def TradeCount() -> int: pass
 def UOSay(Text: str) -> None: pass
 def UOSayColor(Text: str, Color: int) -> None: pass
+def UnequipItems(Items: list[int]) -> bool: pass
 def UnequipItemsSetMacro() -> None: pass
 def UnsetCatchBag() -> None: pass
 def UpdateFigure(FigureID: int, Figure: MapFigure) -> bool: pass
@@ -505,6 +512,7 @@ __all__ = [
     "DragItem",
     "DropItem",
     "EnergyResist",
+    "EquipItems",
     "EquipItemsSetMacro",
     "EquipLastWeapon",
     "FillNewWindow",
@@ -531,6 +539,7 @@ __all__ = [
     "GetClientVersionInt",
     "GetClilocByID",
     "GetColor",
+    "GetContent",
     "GetContextMenu",
     "GetContextMenuRec",
     "GetDex",
@@ -540,6 +549,7 @@ __all__ = [
     "GetDressSpeed",
     "GetDropCheckCoord",
     "GetDropDelay",
+    "GetEquipment",
     "GetExtInfo",
     "GetFindDistance",
     "GetFindInNulPoint",
@@ -569,6 +579,8 @@ __all__ = [
     "GetMaxStam",
     "GetMenuItems",
     "GetMenuItemsEx",
+    "GetMobile",
+    "GetMobiles",
     "GetMoveBetweenTwoCorners",
     "GetMoveCheckStamina",
     "GetMoveHeuristicMult",
@@ -629,6 +641,7 @@ __all__ = [
     "GetType",
     "GetWalkMountTimer",
     "GetWalkUnmountTimer",
+    "GetWorldItems",
     "GetX",
     "GetY",
     "GetZ",
@@ -808,6 +821,7 @@ __all__ = [
     "TradeCount",
     "UOSay",
     "UOSayColor",
+    "UnequipItems",
     "UnequipItemsSetMacro",
     "UnsetCatchBag",
     "UpdateFigure",

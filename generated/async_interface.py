@@ -88,6 +88,7 @@ class AsyncInterface:
     async def DragItem(self, ObjID: int, Count: int) -> bool: pass
     async def DropItem(self, MoveIntoID: int, X: int, Y: int, Z: int) -> bool: pass
     async def EnergyResist(self) -> int: pass
+    async def EquipItems(self, Items: list[int]) -> bool: pass
     async def EquipItemsSetMacro(self) -> None: pass
     async def EquipLastWeapon(self) -> None: pass
     async def FillNewWindow(self, Text: str) -> None: pass
@@ -114,6 +115,7 @@ class AsyncInterface:
     async def GetClientVersionInt(self) -> int: pass
     async def GetClilocByID(self, ClilocID: int, Params: list[str]) -> str: pass
     async def GetColor(self, ObjID: int) -> int: pass
+    async def GetContent(self, ObjID: int) -> list[ContentItemData]: pass
     async def GetContextMenu(self) -> list[str]: pass
     async def GetContextMenuRec(self) -> ContextMenuRec: pass
     async def GetDex(self, ObjID: int) -> int: pass
@@ -123,6 +125,7 @@ class AsyncInterface:
     async def GetDressSpeed(self) -> int: pass
     async def GetDropCheckCoord(self) -> bool: pass
     async def GetDropDelay(self) -> int: pass
+    async def GetEquipment(self, MobID: int) -> list[EquippedItemData]: pass
     async def GetExtInfo(self) -> ExtendedInfo: pass
     async def GetFindDistance(self) -> int: pass
     async def GetFindInNulPoint(self) -> bool: pass
@@ -152,6 +155,8 @@ class AsyncInterface:
     async def GetMaxStam(self, ObjID: int) -> int: pass
     async def GetMenuItems(self, Caption: str) -> list[str]: pass
     async def GetMenuItemsEx(self, Caption: str) -> list[MenuItem]: pass
+    async def GetMobile(self, MobID: int) -> MobileData: pass
+    async def GetMobiles(self) -> list[MobileData]: pass
     async def GetMoveBetweenTwoCorners(self) -> bool: pass
     async def GetMoveCheckStamina(self) -> int: pass
     async def GetMoveHeuristicMult(self) -> int: pass
@@ -212,6 +217,7 @@ class AsyncInterface:
     async def GetType(self, ObjID: int) -> int: pass
     async def GetWalkMountTimer(self) -> int: pass
     async def GetWalkUnmountTimer(self) -> int: pass
+    async def GetWorldItems(self) -> list[WorldItemData]: pass
     async def GetX(self, ObjID: int) -> int: pass
     async def GetY(self, ObjID: int) -> int: pass
     async def GetZ(self, ObjID: int) -> int: pass
@@ -391,6 +397,7 @@ class AsyncInterface:
     async def TradeCount(self) -> int: pass
     async def UOSay(self, Text: str) -> None: pass
     async def UOSayColor(self, Text: str, Color: int) -> None: pass
+    async def UnequipItems(self, Items: list[int]) -> bool: pass
     async def UnequipItemsSetMacro(self) -> None: pass
     async def UnsetCatchBag(self) -> None: pass
     async def UpdateFigure(self, FigureID: int, Figure: MapFigure) -> bool: pass

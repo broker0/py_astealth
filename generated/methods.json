@@ -1622,7 +1622,7 @@
             },
             {
                 "name": "Z",
-                "type": "I32"
+                "type": "I8"
             }
         ],
         "result": "Bool"
@@ -4378,5 +4378,72 @@
         "id": 532,
         "args": [],
         "result": "I32"
+    },
+    {
+        "name": "GetWorldItems",
+        "id": 533,
+        "args": [],
+        "result": "list[WorldItemData]"
+    },
+    {
+        "name": "GetMobiles",
+        "id": 534,
+        "args": [],
+        "result": "list[MobileData]"
+    },
+    {
+        "name": "GetMobile",
+        "id": 535,
+        "args": [
+            {
+                "name": "MobID",
+                "type": "U32"
+            }
+        ],
+        "result": "MobileData"
+    },
+    {
+        "name": "GetEquipment",
+        "id": 536,
+        "args": [
+            {
+                "name": "MobID",
+                "type": "U32"
+            }
+        ],
+        "result": "list[EquippedItemData]"
+    },
+    {
+        "name": "GetContent",
+        "id": 537,
+        "args": [
+            {
+                "name": "ObjID",
+                "type": "U32"
+            }
+        ],
+        "result": "list[ContentItemData]"
+    },
+    {
+        "name": "EquipItems",
+        "id": 538,
+        "args": [
+            {
+                "name": "Items",
+                "type": "list[U32]"
+            }
+        ],
+        "result": "Bool"
+    },
+    {
+        "name": "UnequipItems",
+        "id": 539,
+        "args": [
+            {
+                "name": "Items",
+                "type": "list[U32]"
+            }
+        ],
+        "result": "Bool"
     }
 ]

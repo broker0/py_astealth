@@ -85,6 +85,7 @@ async def DisconnectedTime() -> datetime: pass
 async def DragItem(ObjID: int, Count: int) -> bool: pass
 async def DropItem(MoveIntoID: int, X: int, Y: int, Z: int) -> bool: pass
 async def EnergyResist() -> int: pass
+async def EquipItems(Items: list[int]) -> bool: pass
 async def EquipItemsSetMacro() -> None: pass
 async def EquipLastWeapon() -> None: pass
 async def FillNewWindow(Text: str) -> None: pass
@@ -111,6 +112,7 @@ async def GetCharsListForShard() -> list[str]: pass
 async def GetClientVersionInt() -> int: pass
 async def GetClilocByID(ClilocID: int, Params: list[str]) -> str: pass
 async def GetColor(ObjID: int) -> int: pass
+async def GetContent(ObjID: int) -> list[ContentItemData]: pass
 async def GetContextMenu() -> list[str]: pass
 async def GetContextMenuRec() -> ContextMenuRec: pass
 async def GetDex(ObjID: int) -> int: pass
@@ -120,6 +122,7 @@ async def GetDressSet() -> list[LayerObject]: pass
 async def GetDressSpeed() -> int: pass
 async def GetDropCheckCoord() -> bool: pass
 async def GetDropDelay() -> int: pass
+async def GetEquipment(MobID: int) -> list[EquippedItemData]: pass
 async def GetExtInfo() -> ExtendedInfo: pass
 async def GetFindDistance() -> int: pass
 async def GetFindInNulPoint() -> bool: pass
@@ -149,6 +152,8 @@ async def GetMaxMana(ObjID: int) -> int: pass
 async def GetMaxStam(ObjID: int) -> int: pass
 async def GetMenuItems(Caption: str) -> list[str]: pass
 async def GetMenuItemsEx(Caption: str) -> list[MenuItem]: pass
+async def GetMobile(MobID: int) -> MobileData: pass
+async def GetMobiles() -> list[MobileData]: pass
 async def GetMoveBetweenTwoCorners() -> bool: pass
 async def GetMoveCheckStamina() -> int: pass
 async def GetMoveHeuristicMult() -> int: pass
@@ -209,6 +214,7 @@ async def GetTradeOpponentName(TradeNum: int) -> str: pass
 async def GetType(ObjID: int) -> int: pass
 async def GetWalkMountTimer() -> int: pass
 async def GetWalkUnmountTimer() -> int: pass
+async def GetWorldItems() -> list[WorldItemData]: pass
 async def GetX(ObjID: int) -> int: pass
 async def GetY(ObjID: int) -> int: pass
 async def GetZ(ObjID: int) -> int: pass
@@ -388,6 +394,7 @@ async def TradeCheck(TradeNum: int, Num: int) -> bool: pass
 async def TradeCount() -> int: pass
 async def UOSay(Text: str) -> None: pass
 async def UOSayColor(Text: str, Color: int) -> None: pass
+async def UnequipItems(Items: list[int]) -> bool: pass
 async def UnequipItemsSetMacro() -> None: pass
 async def UnsetCatchBag() -> None: pass
 async def UpdateFigure(FigureID: int, Figure: MapFigure) -> bool: pass
@@ -505,6 +512,7 @@ __all__ = [
     "DragItem",
     "DropItem",
     "EnergyResist",
+    "EquipItems",
     "EquipItemsSetMacro",
     "EquipLastWeapon",
     "FillNewWindow",
@@ -531,6 +539,7 @@ __all__ = [
     "GetClientVersionInt",
     "GetClilocByID",
     "GetColor",
+    "GetContent",
     "GetContextMenu",
     "GetContextMenuRec",
     "GetDex",
@@ -540,6 +549,7 @@ __all__ = [
     "GetDressSpeed",
     "GetDropCheckCoord",
     "GetDropDelay",
+    "GetEquipment",
     "GetExtInfo",
     "GetFindDistance",
     "GetFindInNulPoint",
@@ -569,6 +579,8 @@ __all__ = [
     "GetMaxStam",
     "GetMenuItems",
     "GetMenuItemsEx",
+    "GetMobile",
+    "GetMobiles",
     "GetMoveBetweenTwoCorners",
     "GetMoveCheckStamina",
     "GetMoveHeuristicMult",
@@ -629,6 +641,7 @@ __all__ = [
     "GetType",
     "GetWalkMountTimer",
     "GetWalkUnmountTimer",
+    "GetWorldItems",
     "GetX",
     "GetY",
     "GetZ",
@@ -808,6 +821,7 @@ __all__ = [
     "TradeCount",
     "UOSay",
     "UOSayColor",
+    "UnequipItems",
     "UnequipItemsSetMacro",
     "UnsetCatchBag",
     "UpdateFigure",

@@ -88,6 +88,7 @@ class SyncInterface:
     def DragItem(self, ObjID: int, Count: int) -> bool: pass
     def DropItem(self, MoveIntoID: int, X: int, Y: int, Z: int) -> bool: pass
     def EnergyResist(self) -> int: pass
+    def EquipItems(self, Items: list[int]) -> bool: pass
     def EquipItemsSetMacro(self) -> None: pass
     def EquipLastWeapon(self) -> None: pass
     def FillNewWindow(self, Text: str) -> None: pass
@@ -114,6 +115,7 @@ class SyncInterface:
     def GetClientVersionInt(self) -> int: pass
     def GetClilocByID(self, ClilocID: int, Params: list[str]) -> str: pass
     def GetColor(self, ObjID: int) -> int: pass
+    def GetContent(self, ObjID: int) -> list[ContentItemData]: pass
     def GetContextMenu(self) -> list[str]: pass
     def GetContextMenuRec(self) -> ContextMenuRec: pass
     def GetDex(self, ObjID: int) -> int: pass
@@ -123,6 +125,7 @@ class SyncInterface:
     def GetDressSpeed(self) -> int: pass
     def GetDropCheckCoord(self) -> bool: pass
     def GetDropDelay(self) -> int: pass
+    def GetEquipment(self, MobID: int) -> list[EquippedItemData]: pass
     def GetExtInfo(self) -> ExtendedInfo: pass
     def GetFindDistance(self) -> int: pass
     def GetFindInNulPoint(self) -> bool: pass
@@ -152,6 +155,8 @@ class SyncInterface:
     def GetMaxStam(self, ObjID: int) -> int: pass
     def GetMenuItems(self, Caption: str) -> list[str]: pass
     def GetMenuItemsEx(self, Caption: str) -> list[MenuItem]: pass
+    def GetMobile(self, MobID: int) -> MobileData: pass
+    def GetMobiles(self) -> list[MobileData]: pass
     def GetMoveBetweenTwoCorners(self) -> bool: pass
     def GetMoveCheckStamina(self) -> int: pass
     def GetMoveHeuristicMult(self) -> int: pass
@@ -212,6 +217,7 @@ class SyncInterface:
     def GetType(self, ObjID: int) -> int: pass
     def GetWalkMountTimer(self) -> int: pass
     def GetWalkUnmountTimer(self) -> int: pass
+    def GetWorldItems(self) -> list[WorldItemData]: pass
     def GetX(self, ObjID: int) -> int: pass
     def GetY(self, ObjID: int) -> int: pass
     def GetZ(self, ObjID: int) -> int: pass
@@ -391,6 +397,7 @@ class SyncInterface:
     def TradeCount(self) -> int: pass
     def UOSay(self, Text: str) -> None: pass
     def UOSayColor(self, Text: str, Color: int) -> None: pass
+    def UnequipItems(self, Items: list[int]) -> bool: pass
     def UnequipItemsSetMacro(self) -> None: pass
     def UnsetCatchBag(self) -> None: pass
     def UpdateFigure(self, FigureID: int, Figure: MapFigure) -> bool: pass
