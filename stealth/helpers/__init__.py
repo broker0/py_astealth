@@ -8,6 +8,7 @@ from .equipment import *
 from .utils import *
 from .mover import *
 from .client import *
+from .world import *
 
 from . import common
 from . import character
@@ -18,6 +19,7 @@ from . import equipment
 from . import utils
 from . import mover
 from . import client
+from . import world
 
 
 __all__ = (
@@ -29,5 +31,6 @@ __all__ = (
         equipment.__all__ +
         utils.__all__ +
         mover.__all__ +
-        client.__all__
+        client.__all__ +
+        world.__all__
 )
