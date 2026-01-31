@@ -8,7 +8,6 @@ from py_astealth.stealth_api import StealthApi
 
 
 class CodeGenerator:
-    # Константы для генерации
     COMMON_IMPORTS = [
         "from py_astealth.stealth_types import *",
         "from py_astealth.stealth_structs import *",

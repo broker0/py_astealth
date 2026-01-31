@@ -301,7 +301,7 @@ def NumGumpButton(GumpIndex: int, Value: int) -> bool: pass
 def NumGumpCheckBox(GumpIndex: int, CBID: int, Value: int) -> bool: pass
 def NumGumpRadiobutton(GumpIndex: int, RadiobuttonID: int, Value: int) -> bool: pass
 def NumGumpTextEntry(GumpIndex: int, TextEntryID: int, Value: str) -> bool: pass
-def ObjAtLayerEx(LayerType: int, PlayerID: int) -> int: pass
+def ObjAtLayerEx(Layer: int, ObjID: int) -> int: pass
 def OpenDoor() -> None: pass
 def Paralyzed() -> bool: pass
 def PartyAcceptInvite() -> None: pass
@@ -319,7 +319,6 @@ def PredictedDirection() -> int: pass
 def PredictedX() -> int: pass
 def PredictedY() -> int: pass
 def PredictedZ() -> int: pass
-def PrintScriptMethodsList(FileName: str, SortedList: bool) -> None: pass
 def ProfileName() -> str: pass
 def ProfileShardName() -> str: pass
 def ProxyIP() -> str: pass
@@ -746,7 +745,6 @@ __all__ = [
     "PredictedX",
     "PredictedY",
     "PredictedZ",
-    "PrintScriptMethodsList",
     "ProfileName",
     "ProfileShardName",
     "ProxyIP",
