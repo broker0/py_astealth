@@ -762,21 +762,6 @@
         "result": "Bool"
     },
     {
-        "name": "PrintScriptMethodsList",
-        "id": 88,
-        "args": [
-            {
-                "name": "FileName",
-                "type": "String"
-            },
-            {
-                "name": "SortedList",
-                "type": "Bool"
-            }
-        ],
-        "result": "None"
-    },
-    {
         "name": "Alarm",
         "id": 89,
         "args": [],
@@ -2771,11 +2756,11 @@
         "id": 401,
         "args": [
             {
-                "name": "LayerType",
+                "name": "Layer",
                 "type": "U8"
             },
             {
-                "name": "PlayerID",
+                "name": "ObjID",
                 "type": "U32"
             }
         ],

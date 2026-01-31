@@ -304,7 +304,7 @@ class AsyncInterface:
     async def NumGumpCheckBox(self, GumpIndex: int, CBID: int, Value: int) -> bool: pass
     async def NumGumpRadiobutton(self, GumpIndex: int, RadiobuttonID: int, Value: int) -> bool: pass
     async def NumGumpTextEntry(self, GumpIndex: int, TextEntryID: int, Value: str) -> bool: pass
-    async def ObjAtLayerEx(self, LayerType: int, PlayerID: int) -> int: pass
+    async def ObjAtLayerEx(self, Layer: int, ObjID: int) -> int: pass
     async def OpenDoor(self) -> None: pass
     async def Paralyzed(self) -> bool: pass
     async def PartyAcceptInvite(self) -> None: pass
@@ -322,7 +322,6 @@ class AsyncInterface:
     async def PredictedX(self) -> int: pass
     async def PredictedY(self) -> int: pass
     async def PredictedZ(self) -> int: pass
-    async def PrintScriptMethodsList(self, FileName: str, SortedList: bool) -> None: pass
     async def ProfileName(self) -> str: pass
     async def ProfileShardName(self) -> str: pass
     async def ProxyIP(self) -> str: pass

@@ -304,7 +304,7 @@ class SyncInterface:
     def NumGumpCheckBox(self, GumpIndex: int, CBID: int, Value: int) -> bool: pass
     def NumGumpRadiobutton(self, GumpIndex: int, RadiobuttonID: int, Value: int) -> bool: pass
     def NumGumpTextEntry(self, GumpIndex: int, TextEntryID: int, Value: str) -> bool: pass
-    def ObjAtLayerEx(self, LayerType: int, PlayerID: int) -> int: pass
+    def ObjAtLayerEx(self, Layer: int, ObjID: int) -> int: pass
     def OpenDoor(self) -> None: pass
     def Paralyzed(self) -> bool: pass
     def PartyAcceptInvite(self) -> None: pass
@@ -322,7 +322,6 @@ class SyncInterface:
     def PredictedX(self) -> int: pass
     def PredictedY(self) -> int: pass
     def PredictedZ(self) -> int: pass
-    def PrintScriptMethodsList(self, FileName: str, SortedList: bool) -> None: pass
     def ProfileName(self) -> str: pass
     def ProfileShardName(self) -> str: pass
     def ProxyIP(self) -> str: pass

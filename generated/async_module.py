@@ -301,7 +301,7 @@ async def NumGumpButton(GumpIndex: int, Value: int) -> bool: pass
 async def NumGumpCheckBox(GumpIndex: int, CBID: int, Value: int) -> bool: pass
 async def NumGumpRadiobutton(GumpIndex: int, RadiobuttonID: int, Value: int) -> bool: pass
 async def NumGumpTextEntry(GumpIndex: int, TextEntryID: int, Value: str) -> bool: pass
-async def ObjAtLayerEx(LayerType: int, PlayerID: int) -> int: pass
+async def ObjAtLayerEx(Layer: int, ObjID: int) -> int: pass
 async def OpenDoor() -> None: pass
 async def Paralyzed() -> bool: pass
 async def PartyAcceptInvite() -> None: pass
@@ -319,7 +319,6 @@ async def PredictedDirection() -> int: pass
 async def PredictedX() -> int: pass
 async def PredictedY() -> int: pass
 async def PredictedZ() -> int: pass
-async def PrintScriptMethodsList(FileName: str, SortedList: bool) -> None: pass
 async def ProfileName() -> str: pass
 async def ProfileShardName() -> str: pass
 async def ProxyIP() -> str: pass
@@ -746,7 +745,6 @@ __all__ = [
     "PredictedX",
     "PredictedY",
     "PredictedZ",
-    "PrintScriptMethodsList",
     "ProfileName",
     "ProfileShardName",
     "ProxyIP",
