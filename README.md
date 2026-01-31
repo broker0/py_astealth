@@ -1,7 +1,7 @@
 # [py_astealth](https://github.com/broker0/py_astealth/)
 
 
-Asynchronous/alternative python API for [UO Stealth client](https://stealth.od.ua/)
+Asynchronous/alternative python API for [Stealth client for Ultima Online](https://uostealth.com/)
 
 ## Why?
 
