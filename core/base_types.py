@@ -79,6 +79,17 @@ class RPCType(ABC):
             count, = struct.unpack('<I', data)
             inner_type = typing.get_args(type_obj)[0]
 
+            # HACK: if inner type has a pre-calculated _struct_format
+            # we can read the entire list data at once and unpack it
+            if hasattr(inner_type, '_struct_format') and inner_type._struct_format:
+                item_size = struct.calcsize(inner_type._struct_format)
+                total_size = count * item_size
+                data = stream.read(total_size)
+                if len(data) < total_size:
+                    raise ValueError(f"Stream ended while reading list of {inner_type}")
+
+                return [inner_type(*args) for args in struct.iter_unpack(inner_type._struct_format, data)]
+
             return [RPCType.unpack_value(stream, inner_type) for _ in range(count)]
 
         # Processing the tuple
@@ -132,8 +143,8 @@ class MethodSpec:
 
 
 class StructType(RPCType):
-    # '_fields' is a list of structure fields to be serialized.
-    _fields: list[ParameterSpec] = []
+    _fields: list[ParameterSpec] = []       # '_fields' is a list of structure fields to be serialized.
+    _struct_format: str = None              # '_struct_format' is format string if all fields are primitive types.
 
     @classmethod
     def pack_simple_value(cls, stream: BinaryIO, value: Any):
@@ -144,6 +155,15 @@ class StructType(RPCType):
 
     @classmethod
     def unpack_simple_value(cls, stream: BinaryIO) -> Any:
+        if cls._struct_format:  # HACK for fast unpack, if we have a pre-calculated _struct_format, use it
+            size = struct.calcsize(cls._struct_format)
+            data = stream.read(size)
+            if len(data) < size:
+                raise ValueError(f"Stream ended while reading {cls}")
+            
+            unpacked_args = struct.unpack(cls._struct_format, data)
+            return cls(*unpacked_args)
+
         # We create a list of values by deserializing the value of each field.
         unpacked_args = []
         for field in cls._fields:
@@ -164,10 +184,33 @@ class StructType(RPCType):
 
         # Only fields that have the type annotation will be written to fields_list
         fields_list = []
+        all_primitive = True
+        fmt_parts = []
+
         for field_name in params:
             if field_name in hints:
-                fields_list.append(ParameterSpec(field_name, hints[field_name]))
+                field_type = hints[field_name]
+                fields_list.append(ParameterSpec(field_name, field_type))
+                
+                # check if primitive and collect format
+                if all_primitive:
+                    try:
+                        if issubclass(field_type, PrimitiveType) and field_type._format:
+                            fmt = field_type._format
+                            if fmt.startswith('<'):
+                                fmt = fmt[1:]   # handling endianness - remove explicit little-endian marker if present to merge
+                            fmt_parts.append(fmt)
+                        else:
+                            all_primitive = False
+                    except TypeError:
+                        all_primitive = False   # issubclass might fail if field_type is not a class (e.g. list)
 
         # attach list of fields to the class itself
         cls._fields = fields_list
+        
+        if all_primitive and fmt_parts:
+            cls._struct_format = '<' + ''.join(fmt_parts)   # join all formats and add little-endian prefix
+        else:
+            cls._struct_format = None
+            
         return cls
