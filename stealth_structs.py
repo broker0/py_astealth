@@ -1,5 +1,4 @@
 from typing import TYPE_CHECKING
-from dataclasses import dataclass
 
 from py_astealth.core.base_types import StructType
 
@@ -26,12 +25,8 @@ else:
 
 
 # Using the @StructType.register decorator registers fields (arguments of constructor) for serialization.
-# When using the @dataclass decorator, you only need to declare the fields, __init__ will be created automatically.
-# The order of the decorators is important - @StructType.register comes first, followed by @dataclass.
-# Thus, @dataclass is executed first and creates an annotated constructor for the type, and @StructType.register
-# parses the constructor arguments and registers them as serializable fields of the given structure.
+# @dataclass decorator will be applied for this class
 @StructType.register
-@dataclass
 class WorldPoint(StructType):
     x: U16
     y: U16
@@ -39,7 +34,6 @@ class WorldPoint(StructType):
 
 
 @StructType.register
-@dataclass
 class FoundTile(StructType):
     tile: U16
     x: U16
@@ -48,7 +42,6 @@ class FoundTile(StructType):
 
 
 @StructType.register
-@dataclass
 class Multi(StructType):
     id: U32
     x: U16
@@ -63,7 +56,6 @@ class Multi(StructType):
 
 
 @StructType.register
-@dataclass
 class MultiPart(StructType):
     graphic: U16
     x: U16
@@ -73,7 +65,6 @@ class MultiPart(StructType):
 
 
 @StructType.register
-@dataclass
 class AboutData(StructType):
     version: list[U16]
     build: U16
@@ -83,7 +74,6 @@ class AboutData(StructType):
 
 
 @StructType.register
-@dataclass
 class ExtendedInfo(StructType):
     MaxWeight: U16
     Race: U8
@@ -127,7 +117,6 @@ class ExtendedInfo(StructType):
 
 
 @StructType.register
-@dataclass
 class LandTileData(StructType):
     Flags: U32
     Flags2: U32
@@ -136,7 +125,6 @@ class LandTileData(StructType):
 
 
 @StructType.register
-@dataclass
 class StaticTileData(StructType):
     Flags: U64
     Weight: U16
@@ -151,7 +139,6 @@ class StaticTileData(StructType):
 
 
 @StructType.register
-@dataclass
 class StaticItemRealXY(StructType):
     Tile: U16
     X: U16
@@ -161,14 +148,12 @@ class StaticItemRealXY(StructType):
 
 
 @StructType.register
-@dataclass
 class MapCell(StructType):
     Tile: U16
     Z: I8
 
 
 @StructType.register
-@dataclass
 class MenuItem(StructType):
     Model: U16
     Color: U16
@@ -176,7 +161,6 @@ class MenuItem(StructType):
 
 
 @StructType.register
-@dataclass
 class ScriptInfo(StructType):
     Index: U32
     Name: String
@@ -184,7 +168,6 @@ class ScriptInfo(StructType):
 
 
 @StructType.register
-@dataclass
 class TargetInfo(StructType):
     ID: U32
     Tile: U16
@@ -194,7 +177,6 @@ class TargetInfo(StructType):
 
 
 @StructType.register
-@dataclass
 class UserStaticItem(StructType):
     Tile: U16
     X: U16
@@ -204,21 +186,18 @@ class UserStaticItem(StructType):
 
 
 @StructType.register
-@dataclass
 class ClilocRec(StructType):
     Cliloc_ID: U32
     Params: list[String]
 
 
 @StructType.register
-@dataclass
 class Point(StructType):
     X: I32
     Y: I32
 
 
 @StructType.register
-@dataclass
 class MapFigure(StructType):
     Kind: U8
     Coord: U8
@@ -234,7 +213,6 @@ class MapFigure(StructType):
 
 
 @StructType.register
-@dataclass
 class BuffBarInfo(StructType):
     Attribute_ID: U16
     TimeStart: DateTime
@@ -246,14 +224,12 @@ class BuffBarInfo(StructType):
 
 
 @StructType.register
-@dataclass
 class LayerObject(StructType):
     Layer: U8
     ObjID: U32
 
 
 @StructType.register
-@dataclass
 class ContextMenuEntry(StructType):
     Tag: U16
     IntLocID: U32
@@ -262,7 +238,6 @@ class ContextMenuEntry(StructType):
 
 
 @StructType.register
-@dataclass
 class ContextMenuRec(StructType):
     ID: U32
     EntriesNumber: U8
@@ -271,7 +246,6 @@ class ContextMenuRec(StructType):
 
 
 @StructType.register
-@dataclass
 class WorldItemData(StructType):
     serial: U32
     graphic: U16
@@ -283,8 +257,8 @@ class WorldItemData(StructType):
     count: U16
     flags: U8
 
+
 @StructType.register
-@dataclass
 class MobileData(StructType):
     serial: U32
     graphic: U16
@@ -306,7 +280,6 @@ class MobileData(StructType):
 
 
 @StructType.register
-@dataclass
 class EquippedItemData(StructType):
     serial: U32
     graphic: U16
@@ -316,7 +289,6 @@ class EquippedItemData(StructType):
 
 
 @StructType.register
-@dataclass
 class ContentItemData(StructType):
     serial: U32
     graphic: U16
@@ -331,7 +303,6 @@ class ContentItemData(StructType):
 # gump elements
 ####################################################################################################################
 @StructType.register
-@dataclass
 class GumpGroup(StructType):
     Number: I32
     Page: I32
@@ -339,7 +310,6 @@ class GumpGroup(StructType):
 
 
 @StructType.register
-@dataclass
 class GumpEndGroup(StructType):
     Number: I32
     Page: I32
@@ -347,7 +317,6 @@ class GumpEndGroup(StructType):
 
 
 @StructType.register
-@dataclass
 class GumpButton(StructType):
     X: I32
     Y: I32
@@ -361,7 +330,6 @@ class GumpButton(StructType):
 
 
 @StructType.register
-@dataclass
 class GumpButtonTileArt(StructType):
     X: I32
     Y: I32
@@ -378,7 +346,6 @@ class GumpButtonTileArt(StructType):
 
 
 @StructType.register
-@dataclass
 class GumpCheckBox(StructType):
     X: I32
     Y: I32
@@ -391,7 +358,6 @@ class GumpCheckBox(StructType):
 
 
 @StructType.register
-@dataclass
 class GumpCheckerTrans(StructType):
     X: I32
     Y: I32
@@ -402,7 +368,6 @@ class GumpCheckerTrans(StructType):
 
 
 @StructType.register
-@dataclass
 class GumpCroppedText(StructType):
     X: I32
     Y: I32
@@ -415,7 +380,6 @@ class GumpCroppedText(StructType):
 
 
 @StructType.register
-@dataclass
 class GumpPic(StructType):
     X: I32
     Y: I32
@@ -426,7 +390,6 @@ class GumpPic(StructType):
 
 
 @StructType.register
-@dataclass
 class GumpPicTiled(StructType):
     X: I32
     Y: I32
@@ -438,7 +401,6 @@ class GumpPicTiled(StructType):
 
 
 @StructType.register
-@dataclass
 class GumpRadiobutton(StructType):
     X: I32
     Y: I32
@@ -451,7 +413,6 @@ class GumpRadiobutton(StructType):
 
 
 @StructType.register
-@dataclass
 class GumpResizePic(StructType):
     X: I32
     Y: I32
@@ -463,7 +424,6 @@ class GumpResizePic(StructType):
 
 
 @StructType.register
-@dataclass
 class GumpText(StructType):
     X: I32
     Y: I32
@@ -474,7 +434,6 @@ class GumpText(StructType):
 
 
 @StructType.register
-@dataclass
 class GumpTextEntry(StructType):
     X: I32
     Y: I32
@@ -489,13 +448,11 @@ class GumpTextEntry(StructType):
 
 
 @StructType.register
-@dataclass
 class Text(StructType):
     Text: String
 
 
 @StructType.register
-@dataclass
 class GumpTextEntryLimited(StructType):
     X: I32
     Y: I32
@@ -509,7 +466,6 @@ class GumpTextEntryLimited(StructType):
 
 
 @StructType.register
-@dataclass
 class GumpTilePic(StructType):
     X: I32
     Y: I32
@@ -519,7 +475,6 @@ class GumpTilePic(StructType):
 
 
 @StructType.register
-@dataclass
 class GumpTilePicHue(StructType):
     X: I32
     Y: I32
@@ -530,7 +485,6 @@ class GumpTilePicHue(StructType):
 
 
 @StructType.register
-@dataclass
 class GumpTooltip(StructType):
     ClilocID: I32
     Arguments: String
@@ -539,7 +493,6 @@ class GumpTooltip(StructType):
 
 
 @StructType.register
-@dataclass
 class GumpHtml(StructType):
     X: I32
     Y: I32
@@ -553,7 +506,6 @@ class GumpHtml(StructType):
 
 
 @StructType.register
-@dataclass
 class GumpXmfHtml(StructType):
     X: I32
     Y: I32
@@ -567,7 +519,6 @@ class GumpXmfHtml(StructType):
 
 
 @StructType.register
-@dataclass
 class GumpXmfHTMLColor(StructType):
     X: I32
     Y: I32
@@ -582,7 +533,6 @@ class GumpXmfHTMLColor(StructType):
 
 
 @StructType.register
-@dataclass
 class GumpXmfHTMLTok(StructType):
     X: I32
     Y: I32
@@ -598,14 +548,12 @@ class GumpXmfHTMLTok(StructType):
 
 
 @StructType.register
-@dataclass
 class GumpItemProperty(StructType):
     Prop: U32
     ElemNum: I32
 
 
 @StructType.register
-@dataclass
 class GumpPicInPic(StructType):
     X: I32
     Y: I32
@@ -619,7 +567,6 @@ class GumpPicInPic(StructType):
 
 
 @StructType.register
-@dataclass
 class GumpTilePicAsGumpPic(StructType):
     X: I32
     Y: I32
@@ -631,28 +578,24 @@ class GumpTilePicAsGumpPic(StructType):
 
 
 @StructType.register
-@dataclass
 class GumpToggleUpperWordCase(StructType):
     Argument: String
     ElemNum: I32
 
 
 @StructType.register
-@dataclass
 class GumpToggleCroppedText(StructType):
     Argument: String
     ElemNum: I32
 
 
 @StructType.register
-@dataclass
 class GumpECHandleInput(StructType):
     Argument: String
     ElemNum: I32
 
 
 @StructType.register
-@dataclass
 class Gump(StructType):
     Serial: U32
     GumpID: U32
@@ -666,7 +609,6 @@ class Gump(StructType):
 
 
 @StructType.register
-@dataclass
 class GumpInfo(StructType):
     gump: Gump
     groups: list[GumpGroup]

@@ -179,6 +179,7 @@ class StructType(RPCType):
         A decorator for creating structured types that can be serialized using StructType.
         """
         # inspect the __init__ parameters of the class
+        cls = dataclass(cls)
         hints = get_type_hints(cls)
         params = inspect.signature(cls).parameters
 
