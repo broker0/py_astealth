@@ -46,37 +46,6 @@ def ChangeSkillLockState(skill_name: str, state: int) -> None:
     SetSkillLockState(skill_name, state)
 
 
-# Stat helpers
-def GetHP(obj_id: int) -> int:
-    """Get HP of object, requesting stats if necessary."""
-    result = api.GetHP(obj_id)
-    if not result and api.IsObjectExists(obj_id) and api.IsNPC(obj_id):
-        api.RequestStats(obj_id)
-        Wait(100)
-        result = api.GetHP(obj_id)
-    return result
-
-
-def GetMana(obj_id: int) -> int:
-    """Get Mana of object, requesting stats if necessary."""
-    result = api.GetMana(obj_id)
-    if not result and api.IsObjectExists(obj_id) and api.IsNPC(obj_id):
-        api.RequestStats(obj_id)
-        Wait(100)
-        result = api.GetMana(obj_id)
-    return result
-
-
-def GetStam(obj_id: int) -> int:
-    """Get Stamina of object, requesting stats if necessary."""
-    result = api.GetStam(obj_id)
-    if not result and api.IsObjectExists(obj_id) and api.IsNPC(obj_id):
-        api.RequestStats(obj_id)
-        Wait(100)
-        result = api.GetStam(obj_id)
-    return result
-
-
 def HP():
     return api.Life()
 
@@ -179,7 +148,6 @@ def GetExtInfo() -> dict:
 __all__ = [
     'UseSkill', 'GetSkillValue', 'GetSkillCurrentValue', 'GetSkillCap',
     'SetSkillLockState', 'GetSkillLockState', 'ChangeSkillLockState',
-    'GetHP', 'GetMana', 'GetStam',
     'HP', 'MaxHP',
     'Cast', 'CastToObj', 'CastToObject', 'IsActiveSpellAbility',
     'WarMode', 'GetBuffs', 'GetBuffBarInfo',
