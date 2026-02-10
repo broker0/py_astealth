@@ -104,7 +104,7 @@ class _StealthManager:
             for client in self._all_clients:
                 try:
                     client.close()
-                except:
+                except Exception:
                     pass
             self._all_clients.clear()
 
