@@ -3,7 +3,6 @@ from py_astealth.stealth_types import *
 from py_astealth.stealth_structs import *
 
 
-# TODO declare all other Stealth api methods
 @register_api
 class StealthApi(ApiSpecification):
     """
