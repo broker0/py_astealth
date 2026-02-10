@@ -1,5 +1,9 @@
 import asyncio
+
 from abc import ABC, abstractmethod
+from typing import Any
+
+from py_astealth.core.base_types import MethodSpec
 
 
 class AsyncRPCClient(ABC):
@@ -24,5 +28,5 @@ class AsyncRPCClient(ABC):
         pass
 
     @abstractmethod
-    def call_method(self, method_id: int, args_payload: bytes, ret):
+    def call_method(self, method_spec: MethodSpec, *args) -> Any:
         pass
