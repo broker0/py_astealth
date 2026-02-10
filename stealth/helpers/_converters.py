@@ -81,12 +81,12 @@ def _get_global_region_id(region: Union[str, int, Global]) -> int:
 
 def _get_event_type_id(event_type: Union[str, int, EventType]) -> int:
     """
-    Convert global region to region ID.
+    Convert event identifier to int.
     Accepts:
-    - str: region name (case-insensitive: 'Stealth', 'Char')
-    - int: region ID directly (0, 1)
-    - GlobalRegion: enum member
-    Returns: int region ID
+    - str: event name (case-insensitive: 'EvSpeech', 'EvItemInfo')
+    - int: event ID directly (0, 1)
+    - EventType: enum member
+    Returns: int event ID
     """
     return _get_enum_value(event_type, EventType, "event type")
 
