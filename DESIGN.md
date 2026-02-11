@@ -147,7 +147,8 @@ Event Handling
 
 The client supports receiving asynchronous events from the Stealth server (e.g., chat messages, item updates).
 
-`StealthEvent` - Represents an event with an `id` (EventType) and a list of `arguments`.
+`StealthEvent` - Base representation of event. Common events have typed subclasses (like `SpeechEvent`, `ItemInfoEvent`) 
+with named fields for better developer experience.
 
 `get_event()` - Both async and sync clients provide this method to retrieve the next event from the queue.
 

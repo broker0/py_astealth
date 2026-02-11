@@ -1,8 +1,10 @@
 from datetime import datetime, timedelta
 from typing import Any, BinaryIO
-from dataclasses import dataclass
+
 from py_astealth.core.base_types import PrimitiveType, RPCType
+from py_astealth.stealth_events import StealthEvent
 from py_astealth.stealth_enums import EventType
+
 
 __all__ = ['Buffer', 'Bool', 'U8', 'I8', 'U16', 'I16', 'U32', 'I32', 'U64', 'I64', 'F32', 'F64',
            'DateTime', 'String', 'EventType', 'StealthEvent', 'TypedTuple']
@@ -115,13 +117,6 @@ class String(RPCType):
         # cls.mapping is not used here either, so decode returns a string
         decoded_value = data.decode(cls.STEALTH_CODEC)
         return decoded_value
-
-
-@dataclass
-class StealthEvent:
-    id: EventType
-    arguments: list
-
 
 class TypedTuple(RPCType):
     _mapping = tuple

@@ -14,7 +14,7 @@ from py_astealth.utilites.config import STRICT_PROTOCOL
 
 from py_astealth.stealth_protocol import AsyncStealthRPCProtocol, StealthRPCEncoder
 from py_astealth.stealth_session import StealthSession
-
+from py_astealth.stealth_events import EventFactory
 
 class AsyncStealthClient(AsyncRPCClient):
     """
@@ -174,7 +174,7 @@ class AsyncStealthClient(AsyncRPCClient):
             print(f"[Warning] FunctionResultCallback({call_id}) received for unknown call_id")
 
     def _handle_EventCallback(self, event_id: int, arguments: list):
-        event = StealthEvent(id=EventType(event_id), arguments=arguments)
+        event = EventFactory.create(event_id, arguments)
         self.events.put_nowait(event)
 
     def _handle_StopScriptCallback(self):
