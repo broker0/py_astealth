@@ -169,7 +169,8 @@ class AsyncStealthClient(AsyncRPCClient):
             try:
                 future.set_result(result_payload)
             except asyncio.exceptions.InvalidStateError:
-                print(f"[Warning] FunctionResultCallback({call_id}) cannot set future result {result_payload.hex()}")
+                if DEBUG_CLIENT > 1:
+                    print(f"[Info] FunctionResultCallback({call_id}) cannot set future result {result_payload.hex()}")
         else:
             print(f"[Warning] FunctionResultCallback({call_id}) received for unknown call_id")
 
