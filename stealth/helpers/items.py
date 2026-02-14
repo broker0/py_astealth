@@ -101,6 +101,7 @@ def FindTypeEx(obj_type: int, color: int, container: int = None, in_sub: bool = 
 
     if container is None:
         container = api.Backpack()
+        
     return api.FindTypeEx(obj_type, color, container, in_sub)
 
 
@@ -121,6 +122,27 @@ def FindTypesArrayEx(obj_types: list[int], colors: list[int], containers: list[i
     colors = [color if color != -1 else 0xFFFF for color in colors]
 
     return api.FindTypesArrayEx(obj_types, colors, containers, in_sub)
+
+
+def FindNotoriety(obj_type: int, notoriety: int) -> int:
+    """
+    Find a mobile (npc) by type and notoriety.
+
+    Args:
+        obj_type: Object type to search for (0xFFFF for any type)
+        notoriety: 1 - innocent (blue)
+                   2 - guilded/ally (green)
+                   3 - attackable but not criminal (gray)
+                   4 - criminal (gray)
+                   5 - enemy (orange)
+                   6 - murderer (red)
+    Returns:
+        Object ID if found, 0 if not found
+    """
+    if obj_type == -1:
+        obj_type = 0xFFFF
+
+    return api.FindNotoriety(obj_type, notoriety)
 
 
 # Count helpers
@@ -356,7 +378,7 @@ def ClickOnObject(obj_id: int) -> None:
 
 __all__ = [
     'FinderSettings', 'Finder',
-    'GetFoundList', 'Ground', 'FindType', 'FindTypeEx', 'FindTypesArrayEx',
+    'GetFoundList', 'Ground', 'FindType', 'FindTypeEx', 'FindTypesArrayEx', 'FindNotoriety',
     'Count', 'CountGround', 'CountEx',
     'BPCount', 'BMCount', 'GACount', 'GSCount', 'MRCount', 'NSCount', 'SACount', 'SSCount',
     'BP', 'BM', 'GA', 'GS', 'MR', 'NS', 'SA', 'SS',
