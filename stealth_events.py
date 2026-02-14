@@ -91,6 +91,15 @@ class CharAnimationEvent(StealthEvent):
     action: int
 
 
+@dataclass
+class MoveRejectionEvent(StealthEvent):
+    x_src: int
+    y_src: int
+    direction: int
+    x_dst: int
+    y_dst: int
+
+
 class EventFactory:
 
     _registry: Dict[EventType, Type[StealthEvent]] = {
@@ -107,6 +116,7 @@ class EventFactory:
         EventType.EvContextMenu: ContextMenuEvent,
         EventType.EvSound: SoundEvent,
         EventType.EvCharAnimation: CharAnimationEvent,
+        EventType.EvMoveRejection: MoveRejectionEvent
     }
 
     @classmethod
