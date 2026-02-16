@@ -3,6 +3,7 @@ import os
 import struct
 import sys
 import threading
+import logging
 
 from typing import Optional
 from concurrent.futures import Future
@@ -13,7 +14,8 @@ from py_astealth.stealth_protocol import StealthRPCEncoder
 
 from py_astealth.utilites.config import DEFAULT_STEALTH_HOST, DEFAULT_STEALTH_PORT
 from py_astealth.utilites.config import GET_PORT_ATTEMPT_COUNT, SOCK_TIMEOUT
-from py_astealth.utilites.config import STRICT_PROTOCOL, DEBUG_PORT_NEGOTIATION
+from py_astealth.utilites.config import STRICT_PROTOCOL
+from py_astealth.utilites.logger import session_logger
 
 
 class StealthSession:
@@ -93,8 +95,7 @@ class StealthSession:
             self.script_port = int(sys.argv[2])
             self.negotiated = True
 
-            if DEBUG_PORT_NEGOTIATION > 1:
-                print(f"negotiate_port: {self.port} passed as cmdline argument")
+            session_logger.debug("negotiate_port: %s passed as cmdline argument", self.port)
             return
 
         for i in range(GET_PORT_ATTEMPT_COUNT):
@@ -106,12 +107,15 @@ class StealthSession:
                     timeout=SOCK_TIMEOUT
                 )
 
-                if DEBUG_PORT_NEGOTIATION > 0:
-                    print(f"negotiate_port: calling _RequestPort({self.script_group}, \"{self.profile}\")")
+                session_logger.info("negotiate_port: calling _RequestPort(%s, \"%s\")", self.script_group, self.profile)
 
                 my_call_id = 1
                 packet = StealthRPCEncoder.encode_method(StealthApi._RequestPort.method_spec, my_call_id, self.script_group, self.profile)
                 header = struct.pack('<I', len(packet))
+
+                if session_logger.isEnabledFor(logging.DEBUG):
+                    session_logger.debug(f"negotiate_port: packet header {header.hex()}, payload {packet.hex()}")
+
                 writer.write(header + packet)
                 await writer.drain()
 
@@ -119,14 +123,13 @@ class StealthSession:
                 header_data = await reader.readexactly(4)
                 length = struct.unpack('<I', header_data)[0]
 
-                if DEBUG_PORT_NEGOTIATION > 1:
-                    print(f"negotiate_port: length of reply {length}")
+                session_logger.debug("negotiate_port: length of reply %s", length)
 
                 # Read payload
                 payload = await reader.readexactly(length)
 
-                if DEBUG_PORT_NEGOTIATION > 1:
-                    print(f"negotiate_port: reply payload {payload.hex()}")
+                if session_logger.isEnabledFor(logging.DEBUG):
+                    session_logger.debug(f"negotiate_port: reply payload {payload.hex()}")
 
                 method_id, call_id = StealthRPCEncoder.decode_tuple((U16, U16), payload)
 
@@ -141,8 +144,7 @@ class StealthSession:
                 self.script_group = new_script_group
                 self.negotiated = True
 
-                if DEBUG_PORT_NEGOTIATION > 0:
-                    print(f"negotiate_port: receiving reply with port {self.script_port} and group {self.script_group}")
+                session_logger.info("negotiate_port: receiving reply with port %s and group %s", self.script_port, self.script_group)
 
                 return
 

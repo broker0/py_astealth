@@ -1,20 +1,23 @@
 import asyncio
 import io
 import struct
+import logging
+
 from typing import Any
 
 from py_astealth.core.api_specification import MethodSpec
 from py_astealth.core.rpc_client import AsyncRPCClient
+
 from py_astealth.stealth_types import *
 from py_astealth.stealth_api import StealthApi
-
-from py_astealth.utilites.config import VERSION
-from py_astealth.utilites.config import DEBUG_CLIENT
-from py_astealth.utilites.config import STRICT_PROTOCOL
-
 from py_astealth.stealth_protocol import AsyncStealthRPCProtocol, StealthRPCEncoder
 from py_astealth.stealth_session import StealthSession
 from py_astealth.stealth_events import EventFactory
+
+from py_astealth.utilites.config import VERSION
+from py_astealth.utilites.config import STRICT_PROTOCOL
+from py_astealth.utilites.logger import client_logger
+
 
 class AsyncStealthClient(AsyncRPCClient):
     """
@@ -67,7 +70,7 @@ class AsyncStealthClient(AsyncRPCClient):
             #     await self.call_method(StealthApi._SelectProfile.method_spec, self.session.profile)
 
         except ConnectionRefusedError:
-            print(f"Unable to connect to {self._session.host}:{self._session.script_port}. Connection refused.")
+            client_logger.error(f"Unable to connect to {self._session.host}:{self._session.script_port}. Connection refused.")
             raise
 
         return self._session.script_group
@@ -89,8 +92,8 @@ class AsyncStealthClient(AsyncRPCClient):
         expect_reply = ret_type is not type(None)
         call_id = self._get_call_id() if expect_reply else 0
 
-        if DEBUG_CLIENT > 0:
-            print(f"called({call_id}) {method_spec.name} with {args} -> {ret_type.__name__}")
+        if client_logger.isEnabledFor(logging.INFO):
+            client_logger.info(f"called({call_id}) {method_spec.name} with {args} -> {ret_type.__name__}")
 
         packet = StealthRPCEncoder.encode_method(method_spec, call_id, *args)
 
@@ -108,11 +111,11 @@ class AsyncStealthClient(AsyncRPCClient):
         result_payload = await future if expect_reply else None
         result = StealthRPCEncoder.decode_result(method_spec, result_payload)
 
-        if DEBUG_CLIENT > 0:
+        if client_logger.isEnabledFor(logging.INFO):
             if ret_type is not type(None):
-                print(f"decoded result({call_id}) for {method_spec.name} {result_payload.hex()} => {ret_type.__name__}({result})")
+                client_logger.info(f"decoded result({call_id}) for {method_spec.name} {result_payload.hex()} => {ret_type.__name__}({result})")
             else:
-                print(f"{method_spec.name} has no result({call_id})")
+                client_logger.info(f"{method_spec.name} has no result({call_id})")
 
         return result
 
@@ -137,8 +140,8 @@ class AsyncStealthClient(AsyncRPCClient):
     def handle_packet(self, payload: bytes):
         """unpacking incoming server packets"""
 
-        if DEBUG_CLIENT > 1:
-            print("handle_packet: ", payload.hex())
+        if client_logger.isEnabledFor(logging.DEBUG):
+            client_logger.debug(f"handle_packet: {payload.hex()}")
 
         try:
             stream = io.BytesIO(payload)
@@ -149,11 +152,11 @@ class AsyncStealthClient(AsyncRPCClient):
             if handler:
                 method_spec = StealthApi.get_method(method_id)
                 args = StealthRPCEncoder.decode_arguments(method_spec, stream)
-                if DEBUG_CLIENT > 1:
-                    print(f"received {method_spec.name} with {args}")
+                if client_logger.isEnabledFor(logging.DEBUG):
+                    client_logger.debug(f"received {method_spec.name} with {args}")
                 handler(*args)
             else:
-                print(f"[Error] Received packet of unknown or unhandled type: ID {method_id}, data: {payload.hex()}")
+                client_logger.error(f"Received packet of unknown or unhandled type: ID {method_id}, data: {payload.hex()}")
 
         except (struct.error, ValueError, KeyError) as e:
             # struct.error, ValueError - if the packet is "broken" (unexpected end)
@@ -161,7 +164,7 @@ class AsyncStealthClient(AsyncRPCClient):
             if STRICT_PROTOCOL:
                 raise ConnectionError(error_msg)
 
-            print(error_msg)
+            client_logger.error(error_msg)
 
     def _handle_FunctionResultCallback(self, call_id: int, result_payload: bytes):
         if call_id in self._pending_replies:
@@ -169,42 +172,36 @@ class AsyncStealthClient(AsyncRPCClient):
             try:
                 future.set_result(result_payload)
             except asyncio.exceptions.InvalidStateError:
-                if DEBUG_CLIENT > 1:
-                    print(f"[Info] FunctionResultCallback({call_id}) cannot set future result {result_payload.hex()}")
+                if client_logger.isEnabledFor(logging.DEBUG):
+                    client_logger.debug(f"FunctionResultCallback({call_id}) cannot set future result {result_payload.hex()}")
         else:
-            print(f"[Warning] FunctionResultCallback({call_id}) received for unknown call_id")
+            client_logger.warning(f"FunctionResultCallback({call_id}) received for unknown call_id")
 
     def _handle_EventCallback(self, event_id: int, arguments: list):
         event = EventFactory.create(event_id, arguments)
         self.events.put_nowait(event)
 
     def _handle_StopScriptCallback(self):
-        if DEBUG_CLIENT > 1:
-            print(f"[Info] StopScript, close connection, stopping client")
-
+        client_logger.debug("StopScript, close connection, stopping client")
         self.close()
 
     def _handle_ErrorReportCallback(self, error: str):
-        print(f"[Error] ErrorReportCallback: Stealth report error {error}")
-
+        client_logger.error("ErrorReportCallback: Stealth report error %s", error)
         self.close()
 
     def _handle_ScriptTogglePauseCallback(self):
         if self._sending_allowed.is_set():
-            if DEBUG_CLIENT > 1:
-                print(f"[Info] ScriptTogglePauseCallback, set pause")
+            client_logger.debug("ScriptTogglePauseCallback, set pause")
 
             self._sending_allowed.clear()
         else:
-            if DEBUG_CLIENT > 1:
-                print(f"[Info] ScriptTogglePauseCallback, resume")
+            client_logger.debug("ScriptTogglePauseCallback, resume")
 
             self._sending_allowed.set()
 
     def _handle_ScriptPathCallback(self):
         script_name = self._session.script_name
-        if DEBUG_CLIENT > 1:
-            print(f"[Info] ScriptPathCallback -> {script_name}")
+        client_logger.debug("ScriptPathCallback -> %s", script_name)
 
         # packet = StealthRPCEncoder.encode_method(StealthApi._ScriptPath.method_spec, 0, script_name)
         # self.send_packet(packet)

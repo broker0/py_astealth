@@ -1,13 +1,15 @@
 import asyncio
 import io
 import struct
+import logging
+
 from typing import Any
 
 from py_astealth.core.api_specification import MethodSpec
 from py_astealth.core.base_types import RPCType
 from py_astealth.core.rpc_client import AsyncRPCClient
 from py_astealth.stealth_types import *
-from py_astealth.utilites.config import DEBUG_PROTOCOL
+from py_astealth.utilites.logger import protocol_logger
 
 
 class AsyncStealthRPCProtocol(asyncio.Protocol):
@@ -30,8 +32,8 @@ class AsyncStealthRPCProtocol(asyncio.Protocol):
     def data_received(self, data: bytes):
         self._rx_bytes += len(data)
 
-        if DEBUG_PROTOCOL > 1:
-            print("data_received:", data.hex())
+        if protocol_logger.isEnabledFor(logging.DEBUG):
+            protocol_logger.debug(f"data_received: {data.hex()}")
 
         self._buffer.extend(data)
 
@@ -46,10 +48,10 @@ class AsyncStealthRPCProtocol(asyncio.Protocol):
             # skip the length, get the payload from the packet, remove the data from the buffer
             # and give the client the data
             packet_payload = self._buffer[4:4 + packet_len]
-            self._buffer = self._buffer[4 + packet_len:]
+            if protocol_logger.isEnabledFor(logging.INFO):
+                protocol_logger.info(f"data_received: len {self._buffer[:4].hex()} payload {packet_payload.hex()}")
 
-            if DEBUG_PROTOCOL > 0:
-                print("data_received.packet:", packet_len, packet_payload.hex())
+            self._buffer = self._buffer[4 + packet_len:]
 
             self.client.handle_packet(packet_payload)
 
@@ -60,8 +62,8 @@ class AsyncStealthRPCProtocol(asyncio.Protocol):
         self._tx_bytes += len(payload)
         packet_len = struct.pack('<I', len(payload))    # the packet is preceded by u32 length
 
-        if DEBUG_PROTOCOL > 0:
-            print("send_packet: ", packet_len.hex(), payload.hex())
+        if protocol_logger.isEnabledFor(logging.INFO):
+            protocol_logger.info(f"send_packet: len {packet_len.hex()} payload {payload.hex()}")
 
         self.transport.write(packet_len + payload)
 
