@@ -38,6 +38,8 @@ class AsyncStealthClient(AsyncRPCClient):
         self._call_id = 0
         self._pending_replies: dict[int, asyncio.Future] = {}
 
+        self._background_tasks = set()
+
         self._calls = 0
 
         self._packet_handlers = {
@@ -203,8 +205,19 @@ class AsyncStealthClient(AsyncRPCClient):
         script_name = self._session.script_name
         client_logger.debug("ScriptPathCallback -> %s", script_name)
 
-        # packet = StealthRPCEncoder.encode_method(StealthApi._ScriptPath.method_spec, 0, script_name)
-        # self.send_packet(packet)
+        task = asyncio.create_task(self.call_method(StealthApi._ScriptPath.method_spec, script_name))
 
-        loop = asyncio.get_running_loop()
-        loop.create_task(self.call_method(StealthApi._ScriptPath.method_spec, script_name))
+        # this code adds reliability, but everything worked reliably without it.
+        def _task_callback(t):
+            if not t.cancelled():
+                if exc := t.exception():
+                    client_logger.error(
+                        "Failed to call ScriptPath(%s)", script_name,
+                        exc_info=(type(exc), exc, exc.__traceback__)
+                    )
+
+            self._background_tasks.discard(t)
+
+        self._background_tasks.add(task)
+        task.add_done_callback(_task_callback)
+
