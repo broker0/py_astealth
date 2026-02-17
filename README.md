@@ -1,7 +1,7 @@
 # [py_astealth](https://github.com/broker0/py_astealth/)
 
 
-Asynchronous/alternative python API for [Stealth client for Ultima Online](https://uostealth.com/)
+Asynchronous/alternative Python API for [Stealth client for Ultima Online](https://uostealth.com/)
 
 ## Why?
 
@@ -16,7 +16,7 @@ This implementation increases the number of calls per second by 3-5 times.
 
 ### Declarative Design
 
-I tried to minimize the effort required to add new methods and types (structures) in the future.
+The goal was to minimize the effort required to add new methods and types (structures) in the future.
 
 We simply declare a new function, apply a decorator, annotate the arguments 
 and return type ... and that's it!
@@ -31,20 +31,20 @@ The original implementation provides a very simple interface - a module with fun
 the connection to the UO Stealth Client will be created automatically and transparently for the user, 
 which is extremely convenient for simple scripts.
 
-But, let's say, controlling several characters with one script is extremely difficult.
+However, controlling multiple characters with a single script is extremely difficult.
 
-In this implementation, everything is at a lower level - you need to create a client object, 
+This implementation operates at a lower level - you need to create a client object, 
 connect to the UO Stealth Client and start working with it by calling functions.
 
 Despite the additional complexity, the programmer has more options—for example, within a single script, 
-multiple connections can be created for different characters and each can be controlled.
+multiple connections can be created for different characters and allowing independent control of each character.
 
 
 ### Compatibility
 
 Don't need complex client management, just a simple script? 
 The `py_astealth.stealth` module provides compatibility with classic `py_stealth`.
-This module is designed as a direct drop in replacement for `py_stealth` with some 
+This module is designed as a direct drop-in replacement for `py_stealth` with some 
 new features and providing both standard API functions and most of the previous helpers, 
 ensuring a very high level of compatibility. 
 
