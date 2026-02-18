@@ -63,13 +63,7 @@ class AsyncStealthClient(AsyncRPCClient):
                 lambda: AsyncStealthRPCProtocol(self), self._session.host, self._session.script_port
             )
             await self._connected.wait()  # waiting for connection to be established
-
-            # packet = StealthRPCEncoder.encode_method(StealthApi.LangVersion.method_spec, 0, 1, *VERSION)
-            # self.send_packet(packet)
             await self.call_method(StealthApi._LangVersion.method_spec, 1, *VERSION)
-
-            # if self.session.profile:
-            #     await self.call_method(StealthApi._SelectProfile.method_spec, self.session.profile)
 
         except ConnectionRefusedError:
             client_logger.error(f"Unable to connect to {self._session.host}:{self._session.script_port}. Connection refused.")
@@ -104,13 +98,10 @@ class AsyncStealthClient(AsyncRPCClient):
             future = asyncio.get_running_loop().create_future()
             self._pending_replies[call_id] = future
 
-        # TODO It probably makes sense to limit the wait with a timeout
-        # TODO You can create an adaptive timeout based on method_id - for example,
-        #  GetPathArray3D can work for tens of seconds, while most methods should provide an "instant" response
-
         self._calls += 1
         self.send_packet(packet)
-        result_payload = await future if expect_reply else None
+
+        result_payload = await asyncio.wait_for(future, timeout=method_spec.timeout) if expect_reply else None
         result = StealthRPCEncoder.decode_result(method_spec, result_payload)
 
         if client_logger.isEnabledFor(logging.INFO):
@@ -162,7 +153,7 @@ class AsyncStealthClient(AsyncRPCClient):
 
         except (struct.error, ValueError, KeyError) as e:
             # struct.error, ValueError - if the packet is "broken" (unexpected end)
-            error_msg = f"[Error] Error parsing packet: {e}. Payload (hex): {payload.hex(' ')}"
+            error_msg = f"Error parsing packet: {e}. Payload (hex): {payload.hex(' ')}"
             if STRICT_PROTOCOL:
                 raise ConnectionError(error_msg)
 

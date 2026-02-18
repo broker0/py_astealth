@@ -140,6 +140,7 @@ class MethodSpec:
     name: str
     args: list[ParameterSpec]
     result: Any
+    timeout: float | None
 
 
 class StructType(RPCType):

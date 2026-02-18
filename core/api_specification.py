@@ -21,10 +21,13 @@ class ApiSpecification:
         return getattr(cls, '_methods_dict', {}).get(method_id)
 
 
-def method_api(method_id: int):
+def method_api(method_id: int, timeout: float | None = 1.0):
     """
     This decorator inspects the method signature to construct a MethodSpec
     with arguments and result and attach this to decorated method as 'method_spec' attribute.
+
+    :param method_id: unique method identifier
+    :param timeout: RPC timeout in seconds
     """
     def decorator(func):
         hints = get_type_hints(func)
@@ -46,6 +49,7 @@ def method_api(method_id: int):
             name=func.__name__,
             args=args,
             result=ParameterSpec("Result", return_type),
+            timeout=timeout,
         )
 
         func.method_spec = method_spec

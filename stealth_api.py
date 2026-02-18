@@ -729,10 +729,10 @@ class StealthApi(ApiSpecification):
     @method_api(491)
     def StepQ(self, Direction: U8, Running: Bool) -> I32: ...
 
-    @method_api(492)
+    @method_api(492, timeout=600)
     def MoveXYZ(self, Xdst: U16, Ydst: U16, Zdst: I8, AccuracyXY: I32, AccuracyZ: I32, Running: Bool) -> Bool: ...
 
-    @method_api(493)
+    @method_api(493, timeout=600)
     def MoveXY(self, Xdst: U16, Ydst: U16, Optimized: Bool, Accuracy: I32, Running: Bool) -> Bool: ...
 
     @method_api(502)
@@ -751,10 +751,10 @@ class StealthApi(ApiSpecification):
     @method_api(499)
     def CheckLOS(self, Xfrom: U16, Yfrom: U16, Zfrom: I8, Xto: U16, Yto: U16, Zto: I8, WorldNum: U8, CheckType: U8, Options: U32) -> Bool: ...
 
-    @method_api(500)
+    @method_api(500, timeout=90.0)
     def GetPathArray(self, Xdst: U16, Ydst: U16, Optimized: Bool, Accuracy: I32) -> list[WorldPoint]: ...
 
-    @method_api(501)
+    @method_api(501, timeout=90.0)
     def GetPathArray3D(self,
                        StartX: U16, StartY: U16, StartZ: I8,
                        FinishX: U16, FinishY: U16, FinishZ: I8,
