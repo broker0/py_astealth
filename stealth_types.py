@@ -115,8 +115,9 @@ class String(RPCType):
             raise ValueError(f"Stream ended while reading {cls}")
 
         # cls.mapping is not used here either, so decode returns a string
-        decoded_value = data.decode(cls.STEALTH_CODEC)
+        decoded_value = data.decode(cls.STEALTH_CODEC, errors="surrogateescape")
         return decoded_value
+
 
 class TypedTuple(RPCType):
     _mapping = tuple
