@@ -101,8 +101,12 @@ class AsyncStealthClient(AsyncRPCClient):
         self._calls += 1
         self.send_packet(packet)
 
-        result_payload = await asyncio.wait_for(future, timeout=method_spec.timeout) if expect_reply else None
-        result = StealthRPCEncoder.decode_result(method_spec, result_payload)
+        try:
+            result_payload = await asyncio.wait_for(future, timeout=method_spec.timeout) if expect_reply else None
+            result = StealthRPCEncoder.decode_result(method_spec, result_payload)
+        except asyncio.TimeoutError:
+            self._pending_replies.pop(call_id, None)
+            raise TimeoutError(f"RPC call {method_spec.name}({call_id}) timed out after {method_spec.timeout}s")
 
         if client_logger.isEnabledFor(logging.INFO):
             if ret_type is not type(None):

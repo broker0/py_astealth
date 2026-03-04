@@ -1256,7 +1256,7 @@ class StealthApi(ApiSpecification):
     @method_api(444)
     def CloseClientGump(self, ID: U32) -> None: ...
 
-    @method_api(445)
+    @method_api(445, timeout=5.0)
     def ClientHide(self, ObjID: U32) -> Bool: ...
 
     @method_api(532)
