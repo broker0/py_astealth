@@ -152,7 +152,7 @@ def NewMoveXYZ(x_dst, y_dst, z_dst, accuracy_xy, accuracy_z, running) -> bool:
     return api.MoveXYZ(x_dst, y_dst, z_dst, accuracy_xy, accuracy_z, running)
 
 
-def newMoveXYZ(x_dst, y_dst, z_dst, accuracy_xy, accuracy_z, running, callback: Optional[Callable] = None) -> bool:
+def newMoveXYZ(x_dst, y_dst, z_dst, accuracy_xy, accuracy_z, running, callback: Optional[Callable] = None, wait_sync = True) -> bool:
     """
     Advanced MoveXYZ with callback support.
     """
@@ -196,6 +196,15 @@ def newMoveXYZ(x_dst, y_dst, z_dst, accuracy_xy, accuracy_z, running, callback: 
 
         if is_reached():
             debug('Location reached!')
+            if wait_sync:
+                self = api.Self()
+                for _ in range(10):
+                    curr_pos = api.GetX(self), api.GetY(self), api.GetZ(self), api.GetDirection(self)
+                    predicted_pos = api.PredictedX(), api.PredictedY(), api.PredictedZ(), api.PredictedDirection()
+                    if curr_pos == predicted_pos:
+                        break
+                    Wait(50)
+
             return True
 
         if recompute:
@@ -214,7 +223,6 @@ def newMoveXYZ(x_dst, y_dst, z_dst, accuracy_xy, accuracy_z, running, callback: 
 
         if not is_passable_ahead():
             recompute = True
-            Wait(50)
             continue
 
         # prepare next step
