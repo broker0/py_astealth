@@ -152,13 +152,13 @@ def NewMoveXYZ(x_dst, y_dst, z_dst, accuracy_xy, accuracy_z, running) -> bool:
     return api.MoveXYZ(x_dst, y_dst, z_dst, accuracy_xy, accuracy_z, running)
 
 
-def newMoveXYZ(x_dst, y_dst, z_dst, accuracy_xy, accuracy_z, running, callback: Optional[Callable] = None) -> bool:
+def newMoveXYZ(x_dst, y_dst, z_dst, accuracy_xy, accuracy_z, running, callback: Optional[Callable] = None, wait_sync = True) -> bool:
     """
     Advanced MoveXYZ with callback support.
     """
     def debug(msg):
         if getattr(newMoveXYZ, 'debug', False):
-            AddToSystemJournal('MoveXYZ: ' + msg)
+            AddToSystemJournal(f'MoveXYZ: {msg}')
 
     def step(direction, run):
         while True:
@@ -167,87 +167,93 @@ def newMoveXYZ(x_dst, y_dst, z_dst, accuracy_xy, accuracy_z, running, callback: 
                 return res >= 0
             Wait(10)
 
+    def is_reached() -> bool:
+        return (abs(api.PredictedX() - x_dst) <= accuracy_xy and
+                abs(api.PredictedY() - y_dst) <= accuracy_xy and
+                abs(api.PredictedZ() - z_dst) <= accuracy_z)
+
+    def is_passable_ahead(lookahead=4):
+        cx, cy, cz = api.PredictedX(), api.PredictedY(), api.PredictedZ()
+        for pt in path[:lookahead]:
+            passable, dest_z = api.IsWorldCellPassable(cx, cy, cz, pt.x, pt.y, api.WorldNum())
+            if not passable or dest_z != pt.z:
+                debug(f'({pt.x}, {pt.y}, {pt.z}) is not passable')
+                return False
+            cx, cy, cz = pt.x, pt.y, pt.z
+
+        return True
+
     if not hasattr(newMoveXYZ, 'debug'):
         newMoveXYZ.debug = False
 
-    find_path = True
+    path = []
+    recompute = True
+
     while True:
         # pause while not connected
         while not api.Connected():
             Wait(100)
-            
-        # try to find a path if required
-        if find_path:
-            find_path = False
+
+        if is_reached():
+            debug('Location reached!')
+            if wait_sync:
+                self = api.Self()
+                for _ in range(10):
+                    curr_pos = api.GetX(self), api.GetY(self), api.GetZ(self), api.GetDirection(self)
+                    predicted_pos = api.PredictedX(), api.PredictedY(), api.PredictedZ(), api.PredictedDirection()
+                    if curr_pos == predicted_pos:
+                        break
+                    Wait(50)
+
+            return True
+
+        if recompute:
+            recompute = False
             path = api.GetPathArray3D(
                 api.PredictedX(), api.PredictedY(), api.PredictedZ(),
                 x_dst, y_dst, z_dst,
                 api.WorldNum(), accuracy_xy, accuracy_z, running
             )
-            # there is no path to a target location
+
             if not path:
-                debug('There is no path to a target location.')
+                debug('No path found')
                 return False
-            debug('Path found. Length = ' + str(len(path)))
-            
-        # check path passability for a few steps
-        cx, cy, cz = api.PredictedX(), api.PredictedY(), api.PredictedZ()
 
-        for pt in path[:4]:
-            if api.IsWorldCellPassable(cx, cy, cz, pt.x, pt.y, api.WorldNum()):
-                cx, cy, cz = pt.x, pt.y, pt.z
-            else:
-                debug(f'Point ({pt.x}, {pt.y}, {pt.z}) is not passable.')
-                find_path = True
-                break
+            debug(f'Path found, {len(path)} steps')
 
-        if find_path:
+        if not is_passable_ahead():
+            recompute = True
             continue
-            
-        # stamina check
-        if not api.Dead() and api.Stam() < api.GetMoveCheckStamina():
-            Wait(100)
-            
-        # lets walk :)
+
+        # prepare next step
+        pt = path[0]
         mx, my = api.PredictedX(), api.PredictedY()
-        pt = path.pop(0)
-        x, y, z = pt.x, pt.y, pt.z
-        
-        dx = mx - x
-        dy = my - y
-        direction = CalcDir(mx, my, x, y)
-        
-        # if something wrong
-        if (dx == 0 and dy == 0) or (abs(dx) > 1 or abs(dy) > 1) or direction == 100:
-            debug(f'dx = {dx}, dy = {dy}, dir = {direction}')
-            find_path = True
+        direction = CalcDir(mx, my, pt.x, pt.y)
+
+        if direction == 100 or abs(mx - pt.x) > 1 or abs(my - pt.y) > 1:
+            debug(f'Desync: dx={mx - pt.x}, dy={my - pt.y}, dir={direction}')
+            recompute = True
             continue
-            
-        # try to turn if required
+
         if api.PredictedDirection() != direction:
             if not step(direction, running):
-                find_path = True
+                debug(f'Failed to turn to direction {direction}')
+                recompute = True
                 continue
-                
-        # try to do a step
+
         if not step(direction, running):
-            find_path = True
+            debug(f'Failed to step to {pt.x}, {pt.y}')
+            recompute = True
             continue
-            
-        # call a callback object if it is not None
-        if callback is not None and not callback(x, y, z):
+
+        # step complete
+        path.pop(0)
+
+        if callback is not None and not callback(pt.x, pt.y, pt.z):
             return False
-                
-        # looks like it is done
+
         if not path:
-            mx, my = api.PredictedX(), api.PredictedY()
-            # ensure this
-            if abs(mx - x_dst) <= accuracy_xy and abs(my - y_dst) <= accuracy_xy:
-                debug('Location reached!')
-                return True
-            # nope (
-            debug('Wtf? Recompute path.')
-            find_path = True
+            recompute = True
 
 
 def newMoveXY(x_dst, y_dst, optimized, accuracy, running):

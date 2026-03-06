@@ -397,3 +397,26 @@ class MobileFlags(Flag):
 class ItemFlags(Flag):
     Movable = 0x20
     Hidden = 0x80
+
+
+class Direction(IntEnum):
+    North = 0
+    NorthEast = 1
+    East = 2
+    SouthEast = 3
+    South = 4
+    SouthWest = 5
+    West = 6
+    NorthWest = 7
+
+
+class StatType(IntEnum):
+    Str = 0
+    Dex = 1
+    Int = 1
+
+
+class StatState(IntEnum):
+    Up = 0
+    Down = 1
+    Lock = 2
