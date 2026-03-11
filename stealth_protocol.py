@@ -139,6 +139,6 @@ class StealthRPCEncoder:
         if not payload:
             return None
 
-        stream = io.BytesIO(payload)
-        ret_type = method_spec.result.type
-        return RPCType.unpack_value(stream, ret_type)
+        with io.BytesIO(payload) as stream:
+            ret_type = method_spec.result.type
+            return RPCType.unpack_value(stream, ret_type)

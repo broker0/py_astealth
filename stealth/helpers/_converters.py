@@ -93,12 +93,13 @@ def _get_event_type_id(event_type: Union[str, int, EventType]) -> int:
 
 def _get_skill_id(skill_id: Union[str, int]) -> int:
     """Convert skill name to skill ID, raises ValueError if invalid."""
+    _skill_id = skill_id
     if isinstance(skill_id, int):
         return skill_id
     else:
         skill_id = api.GetSkillID(skill_id)
 
     if skill_id < 0:
-        raise ValueError(f'Unknown skill name: "{skill_id}"')
+        raise ValueError(f'Unknown skill identifier: "{_skill_id}"')
 
     return skill_id
