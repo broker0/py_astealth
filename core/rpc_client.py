@@ -28,5 +28,5 @@ class AsyncRPCClient(ABC):
         pass
 
     @abstractmethod
-    def call_method(self, method_spec: MethodSpec, *args) -> Any:
+    async def call_method(self, method_spec: MethodSpec, *args) -> Any:
         pass

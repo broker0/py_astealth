@@ -1,5 +1,5 @@
 """World, map, static, tile, etc helpers."""
-from typing import Union, List
+from typing import Union
 from dataclasses import asdict
 
 from py_astealth.stealth import api
@@ -31,7 +31,7 @@ def GetTileFlags(tile_group: Union[str, TileGroup], tile: int) -> int:
     return api.GetTileFlags(int(tile_group), tile)
 
 
-def ConvertIntegerToFlags(group: Union[str, TileGroup], flags: int) -> List[str]:
+def ConvertIntegerToFlags(group: Union[str, TileGroup], flags: int) -> list[str]:
     """
     Convert integer flags to list of string descriptions.
 
