@@ -1,5 +1,4 @@
 import threading
-from typing import List
 import atexit
 
 from py_astealth.sync.client import SyncStealthApiClient
@@ -34,7 +33,7 @@ class _StealthManager:
         self._local_storage.handlers = {}
         self._session = StealthSession()
         
-        self._all_clients: List[SyncStealthApiClient] = []
+        self._all_clients: list[SyncStealthApiClient] = []
         self._clients_lock = threading.Lock()
         self._is_shutting_down = False
 

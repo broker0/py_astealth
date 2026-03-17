@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Any, Dict, Type, List
+from typing import Any, Dict, Type
 
 from py_astealth.stealth_enums import EventType
 
@@ -11,7 +11,7 @@ class StealthEvent:
     Stored arguments in 'arguments' list for backward compatibility.
     """
     id: EventType
-    arguments: List[Any]
+    arguments: list[Any]
 
 
 @dataclass
