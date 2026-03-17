@@ -1,7 +1,7 @@
 # import all methods from generated interface file to help the IDE
 from py_astealth.generated.sync_module import *
 
-from py_astealth.stealth._internals import _create_global_proxy
+from py_astealth.stealth._internals import _create_global_proxy, set_profile
 from py_astealth.stealth_api import StealthApi
 
 from py_astealth.stealth import methods as _methods
@@ -17,4 +17,4 @@ globals().update({
 from py_astealth.stealth.methods import *
 
 
-__all__ = sorted(set(_sync_module.__all__) | set(_methods.__all__))
+__all__ = sorted(set(_sync_module.__all__) | set(_methods.__all__) | {'set_profile'})

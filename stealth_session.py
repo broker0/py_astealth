@@ -28,20 +28,21 @@ class StealthSession:
                  host: str = DEFAULT_STEALTH_HOST,
                  port: int = DEFAULT_STEALTH_PORT,
                  script_group: int = 0,
-                 profile: str = "",
-                 script_name: str = None):
+                 profile: str = None,
+                 script_name: str = None,
+                 script_port: int = None):
         self.host = host
         self.port = port  # stealth port provider
         self.script_group = script_group
-        self.profile = profile
+        self.profile = profile if profile is not None else ""
         
         if script_name is None:
             self.script_name = os.path.realpath(sys.argv[0])
         else:
             self.script_name = script_name
 
-        self.script_port: Optional[int] = None
-        self.negotiated = False
+        self.script_port: Optional[int] = script_port
+        self.negotiated = self.script_port is not None
         
         # Concurrency control
         self._negotiation_future: Optional[Future] = None
@@ -90,14 +91,6 @@ class StealthSession:
         """
         Internal method performing the actual socket IO.
         """
-        # Check command line arguments first (standard behavior) - legacy support
-        if len(sys.argv) >= 3 and sys.argv[2].isdigit() and self.script_port is None:
-            self.script_port = int(sys.argv[2])
-            self.negotiated = True
-
-            session_logger.debug("negotiate_port: %s passed as cmdline argument", self.port)
-            return
-
         for i in range(GET_PORT_ATTEMPT_COUNT):
             reader = None
             writer = None

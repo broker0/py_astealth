@@ -5,6 +5,7 @@ from py_astealth.sync.client import SyncStealthApiClient
 from py_astealth.stealth_session import StealthSession
 from py_astealth.core.api_specification import MethodSpec
 from py_astealth.sync.context import DefaultContextManager
+from py_astealth.utilites import config
 
 
 class _ThreadLocalClientProxy:
@@ -31,8 +32,13 @@ class _StealthManager:
     def __init__(self):
         self._local_storage = threading.local()
         self._local_storage.handlers = {}
-        self._session = StealthSession()
         
+        self._session = StealthSession(
+            profile=config.STEALTH_PROFILE,
+            script_port=config.STEALTH_SCRIPT_PORT,
+            script_name=config.STEALTH_SCRIPT_NAME
+        )
+
         self._all_clients: list[SyncStealthApiClient] = []
         self._clients_lock = threading.Lock()
         self._is_shutting_down = False
@@ -113,6 +119,20 @@ class _StealthManager:
 
 _manager = _StealthManager()
 atexit.register(_manager.shutdown)
+
+
+def set_profile(profile_name: str):
+    """
+    Sets the profile name to use when requesting a script port from Stealth.
+    Must be called BEFORE any other stealth API methods are invoked.
+    """
+    if _manager._session.negotiated:
+        raise RuntimeError(
+            f"Cannot set profile to '{profile_name}': The session has already been established. "
+            "Please call stealth.set_profile() before any other stealth methods."
+        )
+    
+    _manager._session.profile = profile_name
 
 
 def _create_global_proxy(method_spec: MethodSpec):
