@@ -8,7 +8,7 @@ from typing import Any
 from py_astealth.core.api_specification import MethodSpec
 from py_astealth.core.rpc_client import AsyncRPCClient
 
-from py_astealth.stealth_types import *
+from py_astealth.stealth_types import U16, StealthEvent
 from py_astealth.stealth_api import StealthApi
 from py_astealth.stealth_protocol import AsyncStealthRPCProtocol, StealthRPCEncoder
 from py_astealth.stealth_session import StealthSession

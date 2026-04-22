@@ -4430,5 +4430,11 @@
             }
         ],
         "result": "Bool"
+    },
+    {
+        "name": "IsWaitTargetActive",
+        "id": 540,
+        "args": [],
+        "result": "Bool"
     }
 ]

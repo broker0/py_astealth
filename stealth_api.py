@@ -1082,6 +1082,9 @@ class StealthApi(ApiSpecification):
     @method_api(252)
     def WaitTargetLast(self) -> None: ...
 
+    @method_api(540)
+    def IsWaitTargetActive (self) -> Bool: ...
+
     @method_api(279)
     def TargetByResource(self, ObjID: U32, Resource: U16) -> None: ...
 
