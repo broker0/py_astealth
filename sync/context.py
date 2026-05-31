@@ -1,4 +1,5 @@
 import asyncio
+import sys
 import threading
 from abc import ABC, abstractmethod
 from typing import Any, Coroutine, Optional
@@ -140,7 +141,12 @@ class FastContext(StealthContext):
         self._loop = None
 
     def start(self):
-        self._loop = asyncio.new_event_loop()
+        # libuv-based loops (winloop/uvloop) have high per-call run_until_complete
+        # overhead. Bypass the installed loop policy and use the stdlib loop here.
+        if sys.platform == 'win32':
+            self._loop = asyncio.ProactorEventLoop()
+        else:
+            self._loop = asyncio.SelectorEventLoop()
         asyncio.set_event_loop(self._loop)
 
     def stop(self):

@@ -19,6 +19,9 @@ from py_astealth.utilites.config import STRICT_PROTOCOL
 from py_astealth.utilites.logger import client_logger
 
 
+_U16_HEADER = struct.Struct('<H')
+
+
 class AsyncStealthClient(AsyncRPCClient):
     """
         implementation of a specific Stealth client protocol
@@ -76,44 +79,59 @@ class AsyncStealthClient(AsyncRPCClient):
         if self._transport:
             self._transport.close()
 
-    def _get_call_id(self):
-        self._call_id = self._call_id % 0xFFFF + 1
-        return self._call_id
-
     async def call_method(self, method_spec: MethodSpec, *args) -> Any:
         # wait if paused
         await self._sending_allowed.wait()
 
-        # for methods with a return value, we assign a new call_id
-        ret_type = method_spec.result.type
-        expect_reply = ret_type is not type(None)
-        call_id = self._get_call_id() if expect_reply else 0
+        # `decode_result` is the None sentinel for fire-and-forget methods
+        decoder = method_spec.decode_result
+        expect_reply = decoder is not None
+
+        if expect_reply:
+            # inline _get_call_id — modulo wrap cycles through 1..65535
+            self._call_id = call_id = self._call_id % 0xFFFF + 1
+        else:
+            call_id = 0
 
         if client_logger.isEnabledFor(logging.INFO):
-            client_logger.info(f"called({call_id}) {method_spec.name} with {args} -> {ret_type.__name__}")
-
-        packet = StealthRPCEncoder.encode_method(method_spec, call_id, *args)
+            client_logger.info(f"called({call_id}) {method_spec.name} with {args} -> {method_spec.result.type.__name__}")
 
         future = None
         if expect_reply:
             future = asyncio.get_running_loop().create_future()
             self._pending_replies[call_id] = future
 
+        packet = method_spec.encode_packet(call_id, *args)
+
         self._calls += 1
         self.send_packet(packet)
 
-        try:
-            result_payload = await asyncio.wait_for(future, timeout=method_spec.timeout) if expect_reply else None
-            result = StealthRPCEncoder.decode_result(method_spec, result_payload)
-        except asyncio.TimeoutError:
-            self._pending_replies.pop(call_id, None)
-            raise TimeoutError(f"RPC call {method_spec.name}({call_id}) timed out after {method_spec.timeout}s")
+        if not expect_reply:
+            return None
+
+        # NOTE: tried `async with asyncio.timeout(timeout)` and with I
+        # measured a 3-4x throughput regression with winloop. Reverted to
+        # `wait_for`, which is empirically faster in this stack despite the
+        # Python docs suggesting otherwise.
+        # When `timeout is None` (opt-in via PY_ASTEALTH_NO_TIMEOUT=1), bypass
+        # the wait_for machinery entirely — saves ~5-10% per call. The future
+        # still completes via _handle_FunctionResultCallback or via
+        # connection_lost (which sets ConnectionAbortedError as the future's
+        # exception); both paths propagate correctly through bare `await`.
+        timeout = method_spec.timeout
+        if timeout is None:
+            result_payload = await future
+        else:
+            try:
+                result_payload = await asyncio.wait_for(future, timeout=timeout)
+            except asyncio.TimeoutError:
+                self._pending_replies.pop(call_id, None)
+                raise TimeoutError(f"RPC call {method_spec.name}({call_id}) timed out after {timeout}s")
+
+        result = decoder(result_payload)
 
         if client_logger.isEnabledFor(logging.INFO):
-            if ret_type is not type(None):
-                client_logger.info(f"decoded result({call_id}) for {method_spec.name} {result_payload.hex()} => {ret_type.__name__}({result})")
-            else:
-                client_logger.info(f"{method_spec.name} has no result({call_id})")
+            client_logger.info(f"decoded result({call_id}) for {method_spec.name} {result_payload.hex()} => {result}")
 
         return result
 
@@ -142,14 +160,15 @@ class AsyncStealthClient(AsyncRPCClient):
             client_logger.debug(f"handle_packet: {payload.hex()}")
 
         try:
-            stream = io.BytesIO(payload)
-            method_id = U16.unpack_simple_value(stream)
+            # Read the 2-byte method id directly; the per-method `decode_args`
+            # closure handles everything after that without going through the
+            # legacy reflective `StealthRPCEncoder.decode_arguments` path.
+            method_id = _U16_HEADER.unpack_from(payload, 0)[0]
 
-            # Handle known server methods
             handler = self._packet_handlers.get(method_id)
             if handler:
                 method_spec = StealthApi.get_method(method_id)
-                args = StealthRPCEncoder.decode_arguments(method_spec, stream)
+                args = method_spec.decode_args(payload, 2)
                 if client_logger.isEnabledFor(logging.DEBUG):
                     client_logger.debug(f"received {method_spec.name} with {args}")
                 handler(*args)

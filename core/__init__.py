@@ -1,11 +1,5 @@
-from py_astealth.core.base_types import MethodSpec, ParameterSpec, StructType, PrimitiveType
-from py_astealth.core.api_specification import ApiSpecification
-from py_astealth.core.rpc_client import AsyncRPCClient
-
-
-__all__ = [
-    'MethodSpec', 'ParameterSpec',
-    'StructType', 'PrimitiveType',
-    'ApiSpecification',
-    'AsyncRPCClient',
-]
+# Submodules are imported on demand by their callers — keeping this `__init__`
+# empty avoids a circular import where importing `py_astealth.core.base_types`
+# would otherwise pull `core.api_specification` → `core.codec` →
+# `py_astealth.stealth_types` (which is itself loading and triggered the
+# `core.base_types` import in the first place).
