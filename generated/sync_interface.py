@@ -433,7 +433,8 @@ class SyncInterface:
     def _RequestPort(self, GroupId: int, ProfileName: str) -> tuple[int, int]: pass
     def _ScriptPath(self, ScriptName: str) -> None: pass
     def _ScriptPathCallback(self) -> None: pass
-    def _ScriptTogglePauseCallback(self) -> None: pass
+    def _ScriptPauseCallback(self) -> None: pass
+    def _ScriptResumeCallback(self) -> None: pass
     def _SelectProfile(self, ProfileName: str) -> None: pass
     def _StopScriptCallback(self) -> None: pass
 

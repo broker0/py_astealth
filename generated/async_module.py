@@ -430,7 +430,8 @@ async def _LangVersion(Lang: int, Major: int, Minor: int, Revision: int, Build: 
 async def _RequestPort(GroupId: int, ProfileName: str) -> tuple[int, int]: pass
 async def _ScriptPath(ScriptName: str) -> None: pass
 async def _ScriptPathCallback() -> None: pass
-async def _ScriptTogglePauseCallback() -> None: pass
+async def _ScriptPauseCallback() -> None: pass
+async def _ScriptResumeCallback() -> None: pass
 async def _SelectProfile(ProfileName: str) -> None: pass
 async def _StopScriptCallback() -> None: pass
 
@@ -857,7 +858,8 @@ __all__ = [
     "_RequestPort",
     "_ScriptPath",
     "_ScriptPathCallback",
-    "_ScriptTogglePauseCallback",
+    "_ScriptPauseCallback",
+    "_ScriptResumeCallback",
     "_SelectProfile",
     "_StopScriptCallback",
 ]

@@ -430,7 +430,8 @@ def _LangVersion(Lang: int, Major: int, Minor: int, Revision: int, Build: int) -
 def _RequestPort(GroupId: int, ProfileName: str) -> tuple[int, int]: pass
 def _ScriptPath(ScriptName: str) -> None: pass
 def _ScriptPathCallback() -> None: pass
-def _ScriptTogglePauseCallback() -> None: pass
+def _ScriptPauseCallback() -> None: pass
+def _ScriptResumeCallback() -> None: pass
 def _SelectProfile(ProfileName: str) -> None: pass
 def _StopScriptCallback() -> None: pass
 
@@ -857,7 +858,8 @@ __all__ = [
     "_RequestPort",
     "_ScriptPath",
     "_ScriptPathCallback",
-    "_ScriptTogglePauseCallback",
+    "_ScriptPauseCallback",
+    "_ScriptResumeCallback",
     "_SelectProfile",
     "_StopScriptCallback",
 ]

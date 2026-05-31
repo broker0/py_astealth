@@ -12,7 +12,6 @@ import asyncio
 import time
 
 from dataclasses import dataclass
-from typing import List
 
 from py_astealth import AsyncClientPool, StealthSession, AsyncStealthApiClient
 
@@ -58,7 +57,7 @@ async def get_object_info_concurrent(client: AsyncStealthApiClient, obj_id):
     return ObjectInfo(obj_id, obj_type, color, x, y, z)
 
 
-async def collect_objects_list_info(client: AsyncStealthApiClient, obj_ids: List[int]) -> List[ObjectInfo]:
+async def collect_objects_list_info(client: AsyncStealthApiClient, obj_ids: list[int]) -> list[ObjectInfo]:
     result = []
     for obj_id in obj_ids:
         result.append(await get_object_info_simple(client, obj_id))

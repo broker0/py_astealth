@@ -45,7 +45,8 @@ class AsyncStealthClient(AsyncRPCClient):
         self._packet_handlers = {
             StealthApi._FunctionResultCallback.method_spec.id: self._handle_FunctionResultCallback,
             StealthApi._EventCallback.method_spec.id: self._handle_EventCallback,
-            StealthApi._ScriptTogglePauseCallback.method_spec.id: self._handle_ScriptTogglePauseCallback,
+            StealthApi._ScriptPauseCallback.method_spec.id: self._handle_ScriptPauseCallback,
+            StealthApi._ScriptResumeCallback.method_spec.id: self._handle_ScriptResumeCallback,
             StealthApi._StopScriptCallback.method_spec.id: self._handle_StopScriptCallback,
             StealthApi._ErrorReportCallback.method_spec.id: self._handle_ErrorReportCallback,
             StealthApi._ScriptPathCallback.method_spec.id: self._handle_ScriptPathCallback,
@@ -186,15 +187,21 @@ class AsyncStealthClient(AsyncRPCClient):
         client_logger.error("ErrorReportCallback: Stealth report error %s", error)
         self.close()
 
-    def _handle_ScriptTogglePauseCallback(self):
+    def _handle_ScriptPauseCallback(self):
         if self._sending_allowed.is_set():
             client_logger.debug("ScriptTogglePauseCallback, set pause")
 
             self._sending_allowed.clear()
         else:
-            client_logger.debug("ScriptTogglePauseCallback, resume")
+            client_logger.warning("ScriptTogglePauseCallback, repeated call")
+
+    def _handle_ScriptResumeCallback(self):
+        if not self._sending_allowed.is_set():
+            client_logger.debug("ScriptResumeCallback, resume")
 
             self._sending_allowed.set()
+        else:
+            client_logger.debug("ScriptResumeCallback, repeated call")
 
     def _handle_ScriptPathCallback(self):
         script_name = self._session.script_name

@@ -433,7 +433,8 @@ class AsyncInterface:
     async def _RequestPort(self, GroupId: int, ProfileName: str) -> tuple[int, int]: pass
     async def _ScriptPath(self, ScriptName: str) -> None: pass
     async def _ScriptPathCallback(self) -> None: pass
-    async def _ScriptTogglePauseCallback(self) -> None: pass
+    async def _ScriptPauseCallback(self) -> None: pass
+    async def _ScriptResumeCallback(self) -> None: pass
     async def _SelectProfile(self, ProfileName: str) -> None: pass
     async def _StopScriptCallback(self) -> None: pass
 

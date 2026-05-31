@@ -32,12 +32,6 @@
         "result": "None"
     },
     {
-        "name": "_ScriptTogglePauseCallback",
-        "id": 4,
-        "args": [],
-        "result": "None"
-    },
-    {
         "name": "_LangVersion",
         "id": 5,
         "args": [
@@ -143,6 +137,18 @@
             }
         ],
         "result": "tuple[U16, U64]"
+    },
+    {
+        "name": "_ScriptPauseCallback",
+        "id": 13,
+        "args": [],
+        "result": "None"
+    },
+    {
+        "name": "_ScriptResumeCallback",
+        "id": 14,
+        "args": [],
+        "result": "None"
     },
     {
         "name": "Connected",
@@ -1968,7 +1974,7 @@
                 "type": "U32"
             }
         ],
-        "result": "I32"
+        "result": "U16"
     },
     {
         "name": "GetPrice",
