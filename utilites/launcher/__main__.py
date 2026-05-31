@@ -1,4 +1,4 @@
-﻿import threading
+import threading
 import runpy
 import sys
 import traceback
@@ -16,8 +16,8 @@ if stealth_path not in sys.path:
 
 
 try:
-    import py_astealth.stealth as stealth
     from py_astealth.utilites.config import ERROR_FILTER, USE_STEALTH_SYSTEM_JOURNAL, REMOVE_NEW_LINES
+    from py_astealth.utilites import config
 except ImportError as e:
     print(f"Critical Error: Could not import py_astealth. Checked path: {stealth_path}")
     raise e
@@ -26,7 +26,8 @@ except ImportError as e:
 class SysJournalOut:
     """Redirects stdout/stderr output to the Stealth log."""
 
-    def __init__(self, original_stream=None):
+    def __init__(self, stealth_module, original_stream=None):
+        self.stealth = stealth_module
         self.original_stream = original_stream
         self._lock = threading.Lock()
 
@@ -38,10 +39,9 @@ class SysJournalOut:
 
             if REMOVE_NEW_LINES:
                 text = text.replace('\n', '')
-
             try:
                 if text:
-                    stealth.AddToSystemJournal(text.rstrip())
+                    self.stealth.AddToSystemJournal(text.rstrip())
             except Exception as e:
                 self.original_stream.write(f"error while stealth.AddToSystemJournal({text}) - {e}")
 
@@ -49,11 +49,11 @@ class SysJournalOut:
         pass
 
 
-def setup_io_redirection():
+def setup_io_redirection(stealth_module):
     """Redirects print() and errors to the Stealth log."""
     if USE_STEALTH_SYSTEM_JOURNAL:
-        sys.stdout = SysJournalOut(sys.stdout)
-        sys.stderr = SysJournalOut(sys.stderr)
+        sys.stdout = SysJournalOut(stealth_module, sys.stdout)
+        sys.stderr = SysJournalOut(stealth_module, sys.stderr)
 
 
 def print_clean_traceback(exc: Exception):
@@ -76,34 +76,45 @@ def print_clean_traceback(exc: Exception):
     print(f"{type(exc).__name__}: {exc}", file=sys.stderr)
 
 
-def inject_stealth_to_builtins():
-    for name in dir(stealth):   # iterate over stealth module exports
+def inject_stealth_to_builtins(stealth_module):
+    for name in dir(stealth_module):   # iterate over stealth module exports
         if not name.startswith('_'):    # skip private exports
-            obj = getattr(stealth, name)
+            obj = getattr(stealth_module, name)
             setattr(builtins, name, obj)
 
 
 def main():
     if len(sys.argv) < 2:
-        error = 'CMD params must be: path_to_script [port] [func] [args]'
+        error = 'CMD params must be: path_to_script [port] [func] [args] [--profile=profile]'
         print(error)
         sys.exit(4)
 
-    script_arg = sys.argv[1]
-
-    # Add the script folder to the import path so that the script can see its files nearby
-    script_path = Path(script_arg).resolve()
+    # script arguments
     script_args = sys.argv[1:]
-    # replace sys.argv[0] (py_stealth) with the script name
+
+    # set script name
+    script_path = Path(sys.argv[1]).resolve()
+    config.STEALTH_SCRIPT_NAME = str(script_path)
+
+    # set script port
+    if len(sys.argv) >= 3 and sys.argv[2].isdigit():
+        config.STEALTH_SCRIPT_PORT = int(sys.argv[2])
+
+    # set profile name
+    for arg in sys.argv:
+        if arg.startswith('--profile='):
+            config.STEALTH_PROFILE = arg.split('=', 1)[1]
+
     sys.path.insert(0, str(script_path.parent))
+    # replace sys.argv[0] (py_stealth) with the script name
     sys.argv = [str(script_path)] + script_args
 
-    # Connecting to Stealth
-    stealth.Self()
+    # import stealth module and setup script environment
+    import py_astealth.stealth as stealth_module
 
-    inject_stealth_to_builtins()
-
-    setup_io_redirection()
+    stealth_module.Self()   # initialize connections
+    inject_stealth_to_builtins(stealth_module)
+    setup_io_redirection(stealth_module)
 
     try:
         target_func_name = None

@@ -54,7 +54,7 @@ class RPCType(ABC):
 
             return
 
-        # If the type is inherited from StealthType, then we call its pack method
+        # If the type is inherited from RPCType, then we call its pack method
         if inspect.isclass(type_obj) and issubclass(type_obj, RPCType):
             type_obj.pack_simple_value(stream, value)
         else:
@@ -63,7 +63,6 @@ class RPCType(ABC):
     @staticmethod
     def unpack_value(stream: BinaryIO, type_obj: Any) -> Any:
         """Unpacking a binary value"""
-
         if type_obj is type(None):
             return None
 
@@ -97,7 +96,7 @@ class RPCType(ABC):
             inner_types = typing.get_args(type_obj)
             return tuple(RPCType.unpack_value(stream, t) for t in inner_types)
 
-        # If the type is inherited from StealthType, then we call its unpack method
+        # If the type is inherited from RPCType, then we call its unpack method
         if inspect.isclass(type_obj) and issubclass(type_obj, RPCType):
             return type_obj.unpack_simple_value(stream)
         else:
@@ -115,13 +114,13 @@ class PrimitiveType(RPCType):
     @classmethod
     def unpack_simple_value(cls, stream: BinaryIO) -> Any:
         # We calculate the size of this type in bytes and read from the stream
-        size = struct.calcsize(f'{cls._format}')
+        size = struct.calcsize(cls._format)
         data = stream.read(size)
         if len(data) < size:
             raise ValueError(f"Stream ended while reading {cls}")
 
         # unpack the received data according to the format
-        unpacked_value, = struct.unpack(f'{cls._format}', data)
+        unpacked_value, = struct.unpack(cls._format, data)
 
         # In fact, cls.mapping is not used, since struct.unpack converts the binary data
         # to an integer or bool type according to the format

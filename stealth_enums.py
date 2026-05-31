@@ -62,7 +62,7 @@ class Layer(IntEnum):
     RobeLayer = 0x16
     EggsLayer = 0x17
     LegsLayer = 0x18
-    HorseLayer =0x19
+    HorseLayer = 0x19
     RstkLayer = 0x1A
     NRstkLayer = 0x1B
     SellLayer =0x1C
@@ -413,7 +413,7 @@ class Direction(IntEnum):
 class StatType(IntEnum):
     Str = 0
     Dex = 1
-    Int = 1
+    Int = 2
 
 
 class StatState(IntEnum):

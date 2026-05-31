@@ -1,6 +1,6 @@
 import asyncio
 
-from typing import List, Callable, Any, Awaitable
+from typing import Callable, Any, Awaitable
 
 from py_astealth.async_client import AsyncStealthApiClient
 from py_astealth.stealth_session import StealthSession
@@ -15,7 +15,7 @@ class AsyncClientPool:
     def __init__(self, session: StealthSession, size: int = 4):
         self.session = session
         self.size = size
-        self.clients: List[AsyncStealthApiClient] = []
+        self.clients: list[AsyncStealthApiClient] = []
     
     async def connect_all(self):
         """Create and connect all clients in the pool."""
@@ -41,7 +41,7 @@ class AsyncClientPool:
     async def __aexit__(self, exc_type, exc_val, exc_tb):
         self.close_all()
 
-    async def run(self, items: List[Any], processor: Callable[[AsyncStealthApiClient, Any], Awaitable[Any]] = None, pipelining: int = 1) -> List[Any]:
+    async def run(self, items: list[Any], processor: Callable[[AsyncStealthApiClient, Any], Awaitable[Any]] = None, pipelining: int = 1) -> list[Any]:
         """
         Execute tasks on a pool of clients
 

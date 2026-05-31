@@ -257,6 +257,7 @@ async def IsParalyzed(ObjID: int) -> bool: pass
 async def IsPoisoned(ObjID: int) -> bool: pass
 async def IsRunning(ObjID: int) -> bool: pass
 async def IsTrade() -> bool: pass
+async def IsWaitTargetActive() -> bool: pass
 async def IsWarMode(ObjID: int) -> bool: pass
 async def IsWorldCellPassable(CurrX: int, CurrY: int, CurrZ: int, DestX: int, DestY: int, WorldNum: int) -> tuple[bool, int]: pass
 async def IsYellowHits(ObjID: int) -> bool: pass
@@ -683,6 +684,7 @@ __all__ = [
     "IsPoisoned",
     "IsRunning",
     "IsTrade",
+    "IsWaitTargetActive",
     "IsWarMode",
     "IsWorldCellPassable",
     "IsYellowHits",

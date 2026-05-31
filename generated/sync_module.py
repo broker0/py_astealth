@@ -257,6 +257,7 @@ def IsParalyzed(ObjID: int) -> bool: pass
 def IsPoisoned(ObjID: int) -> bool: pass
 def IsRunning(ObjID: int) -> bool: pass
 def IsTrade() -> bool: pass
+def IsWaitTargetActive() -> bool: pass
 def IsWarMode(ObjID: int) -> bool: pass
 def IsWorldCellPassable(CurrX: int, CurrY: int, CurrZ: int, DestX: int, DestY: int, WorldNum: int) -> tuple[bool, int]: pass
 def IsYellowHits(ObjID: int) -> bool: pass
@@ -683,6 +684,7 @@ __all__ = [
     "IsPoisoned",
     "IsRunning",
     "IsTrade",
+    "IsWaitTargetActive",
     "IsWarMode",
     "IsWorldCellPassable",
     "IsYellowHits",

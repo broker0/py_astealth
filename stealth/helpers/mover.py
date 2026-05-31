@@ -1,9 +1,8 @@
 """Mover settings and helper functions."""
-from typing import Union, List, Optional, Callable
+from typing import Optional, Callable
 
 from py_astealth.stealth import api
-from py_astealth.stealth_enums import TileGroup
-from py_astealth.stealth_structs import FoundTile, WorldPoint, UserStaticItem
+from py_astealth.stealth_structs import WorldPoint
 
 from .common import Wait, AddToSystemJournal
 from .utils import CalcDir
