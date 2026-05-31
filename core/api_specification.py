@@ -21,7 +21,7 @@ class ApiSpecification:
         return getattr(cls, '_methods_dict', {}).get(method_id)
 
 
-def method_api(method_id: int, timeout: float | None = 1.0):
+def method_api(method_id: int, timeout: float | None = None):
     """
     This decorator inspects the method signature to construct a MethodSpec
     with arguments and result and attach this to decorated method as 'method_spec' attribute.

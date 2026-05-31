@@ -23,9 +23,6 @@ class StealthApi(ApiSpecification):
     @method_api(3)
     def _ErrorReportCallback(self, Error: String) -> None: ...
 
-    @method_api(4)
-    def _ScriptTogglePauseCallback(self) -> None: ...
-
     @method_api(6)
     def _EventCallback(self, EventId: U8, Arguments: TypedTuple) -> None: ...
 
@@ -43,6 +40,12 @@ class StealthApi(ApiSpecification):
 
     @method_api(12)
     def _RequestPort(self, GroupId: U64, ProfileName: String) -> tuple[U16, U64]: ...
+
+    @method_api(13)
+    def _ScriptPauseCallback(self) -> None: ...
+
+    @method_api(14)
+    def _ScriptResumeCallback(self) -> None: ...
 
     ####################################################################################################################
     # connection management
@@ -283,7 +286,7 @@ class StealthApi(ApiSpecification):
     def GetClilocByID(self, ClilocID: U32, Params: list[String]) -> String: ...
 
     @method_api(329)
-    def GetQuantity(self, ObjID: U32) -> I32: ...
+    def GetQuantity(self, ObjID: U32) -> U16: ...
 
     @method_api(330)
     def GetPrice(self, ObjID: U32) -> U32: ...
@@ -729,10 +732,10 @@ class StealthApi(ApiSpecification):
     @method_api(491)
     def StepQ(self, Direction: U8, Running: Bool) -> I32: ...
 
-    @method_api(492, timeout=600)
+    @method_api(492)
     def MoveXYZ(self, Xdst: U16, Ydst: U16, Zdst: I8, AccuracyXY: I32, AccuracyZ: I32, Running: Bool) -> Bool: ...
 
-    @method_api(493, timeout=600)
+    @method_api(493)
     def MoveXY(self, Xdst: U16, Ydst: U16, Optimized: Bool, Accuracy: I32, Running: Bool) -> Bool: ...
 
     @method_api(502)
@@ -751,10 +754,10 @@ class StealthApi(ApiSpecification):
     @method_api(499)
     def CheckLOS(self, Xfrom: U16, Yfrom: U16, Zfrom: I8, Xto: U16, Yto: U16, Zto: I8, WorldNum: U8, CheckType: U8, Options: U32) -> Bool: ...
 
-    @method_api(500, timeout=90.0)
+    @method_api(500)
     def GetPathArray(self, Xdst: U16, Ydst: U16, Optimized: Bool, Accuracy: I32) -> list[WorldPoint]: ...
 
-    @method_api(501, timeout=90.0)
+    @method_api(501)
     def GetPathArray3D(self,
                        StartX: U16, StartY: U16, StartZ: I8,
                        FinishX: U16, FinishY: U16, FinishZ: I8,
@@ -1259,7 +1262,7 @@ class StealthApi(ApiSpecification):
     @method_api(444)
     def CloseClientGump(self, ID: U32) -> None: ...
 
-    @method_api(445, timeout=5.0)
+    @method_api(445)
     def ClientHide(self, ObjID: U32) -> Bool: ...
 
     @method_api(532)

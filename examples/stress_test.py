@@ -192,7 +192,7 @@ async def method_generator(stealth):
     ItemType = 0
     ItemColor = 0
     TextColor = 0
-    BgColor = 0
+    BgColor = 0xFFFFFF
     FontSize = 0
     FontName = "Font"
     Num = 0
@@ -260,7 +260,7 @@ async def method_generator(stealth):
     methods["ClearJournal"] = lambda: stealth.ClearJournal()
     methods["ClearJournalIgnore"] = lambda: stealth.ClearJournalIgnore()
     methods["ClearShopList"] = lambda: stealth.ClearShopList()
-    methods["ClearSystemJournal"] = lambda: stealth.ClearSystemJournal()
+    # methods["ClearSystemJournal"] = lambda: stealth.ClearSystemJournal()
     # methods["ClickOnObject"] = lambda: client.ClickOnObject(ObjID)
     methods["ClientHide"] = lambda: stealth.ClientHide(0)
     methods["ClientPrint"] = lambda: stealth.ClientPrint(Text)
@@ -652,7 +652,7 @@ async def stress_test(methods, call_count=1, print_pass=True, print_fails=False,
             fails += 1
 
             if print_fails:
-                print(f"test failed, \"{method_name}\" caused an error: {e}")
+                print(f"test failed, \"{method_name}\" caused an error:", type(e), e)
 
     print(f"success {successes} / total {len(methods)} / failed {fails}")
 
@@ -671,10 +671,10 @@ async def main():
     print("Connected.")
 
     time = datetime.now()
-    batch_size = 1000
+    batch_size = 40
 
     methods = await method_generator(stealth)
-    await stress_test(methods, batch_size, print_pass=False, print_fails=True, print_result=True, print_batch_time=False)
+    await stress_test(methods, batch_size, print_pass=True, print_fails=True, print_result=True, print_batch_time=True)
 
     time = datetime.now() - time
     time_ms = time.total_seconds() * 1000
