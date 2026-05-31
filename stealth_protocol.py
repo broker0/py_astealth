@@ -12,6 +12,9 @@ from py_astealth.stealth_types import *
 from py_astealth.utilites.logger import protocol_logger
 
 
+_U32_HEADER = struct.Struct('<I')
+
+
 class AsyncStealthRPCProtocol(asyncio.Protocol):
     """
         The class implements reading a data stream and splitting it into individual packets.
@@ -35,23 +38,25 @@ class AsyncStealthRPCProtocol(asyncio.Protocol):
         if protocol_logger.isEnabledFor(logging.DEBUG):
             protocol_logger.debug(f"data_received: {data.hex()}")
 
-        self._buffer.extend(data)
+        buf = self._buffer
+        buf.extend(data)
 
         # works as long as the buffer length is greater than 4 bytes
-        while len(self._buffer) >= 4:
-            # peek the length of the packet
-            packet_len, = struct.unpack('<I', self._buffer[:4])
+        while len(buf) >= 4:
+            # peek the length of the packet without slicing or re-parsing the format
+            packet_len = _U32_HEADER.unpack_from(buf, 0)[0]
+            total = 4 + packet_len
 
-            if len(self._buffer) < 4 + packet_len:
+            if len(buf) < total:
                 break   # there is not enough data yet for a complete packet
 
-            # skip the length, get the payload from the packet, remove the data from the buffer
-            # and give the client the data
-            packet_payload = self._buffer[4:4 + packet_len]
+            # take a detached copy of the payload (its own bytearray), then trim
+            # the buffer in place — no allocation of a fresh tail copy
+            packet_payload = buf[4:total]
             if protocol_logger.isEnabledFor(logging.INFO):
-                protocol_logger.info(f"data_received: len {self._buffer[:4].hex()} payload {packet_payload.hex()}")
+                protocol_logger.info(f"data_received: len {buf[:4].hex()} payload {packet_payload.hex()}")
 
-            self._buffer = self._buffer[4 + packet_len:]
+            del buf[:total]
 
             self.client.handle_packet(packet_payload)
 

@@ -102,8 +102,9 @@ class StealthSession:
 
                 session_logger.info("negotiate_port: calling _RequestPort(%s, \"%s\")", self.script_group, self.profile)
 
+                spec = StealthApi._RequestPort.method_spec
                 my_call_id = 1
-                packet = StealthRPCEncoder.encode_method(StealthApi._RequestPort.method_spec, my_call_id, self.script_group, self.profile)
+                packet = spec.encode_packet(my_call_id, self.script_group, self.profile)
                 header = struct.pack('<I', len(packet))
 
                 if session_logger.isEnabledFor(logging.DEBUG):
@@ -131,7 +132,7 @@ class StealthSession:
                     assert call_id == my_call_id
 
                 result = payload[4:]
-                new_script_port, new_script_group = StealthRPCEncoder.decode_result(StealthApi._RequestPort.method_spec, result)
+                new_script_port, new_script_group = spec.decode_result(result)
 
                 self.script_port = new_script_port
                 self.script_group = new_script_group

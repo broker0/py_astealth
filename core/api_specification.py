@@ -1,8 +1,23 @@
 import inspect
+import os
 
 from typing import Any, get_type_hints, Callable, Optional
 
 from py_astealth.core.base_types import ParameterSpec, MethodSpec
+from py_astealth.core.codec import build_args_decoder, build_packet_encoder, build_result_decoder
+
+
+# Per-call RPC timeouts can be controlled two ways:
+#   (1) `py_astealth.set_per_call_timeout(t)` — runtime API, primary path.
+#   (2) `PY_ASTEALTH_NO_TIMEOUT=1` env var — read once at import time, kept as
+#       a deployment-time fallback (e.g. for Stealth-launcher .bat or ps1 files
+#       where Python code can't easily be edited).
+# Effect is workload-dependent (see notes in pull requests for measurements):
+# drop-in sync module gains ~+20%, Pool LOSES ~15% due to scheduling
+# interactions, others are noise. Trade-off when disabled: a hung Stealth
+# server blocks the call indefinitely; only connection-level TCP errors
+# surface. Default: timeouts ON at the project default of 1.0s per call.
+_DISABLE_TIMEOUTS_AT_IMPORT = os.environ.get("PY_ASTEALTH_NO_TIMEOUT") == "1"
 
 
 class ApiSpecification:
@@ -44,19 +59,55 @@ def method_api(method_id: int, timeout: float | None = 1.0):
         return_type = hints.get('return', type(None))
 
         # form a method descriptor
+        effective_timeout = None if _DISABLE_TIMEOUTS_AT_IMPORT else timeout
         method_spec = MethodSpec(
             id=method_id,
             name=func.__name__,
             args=args,
             result=ParameterSpec("Result", return_type),
-            timeout=timeout,
+            timeout=effective_timeout,
         )
+
+        # Precompile encoder/decoder closures so the hot path skips per-call
+        # reflection. `decode_result` is None when the method returns None.
+        # `decode_args` decodes incoming packets (most importantly
+        # `_FunctionResultCallback` — fires once per reply).
+        method_spec.encode_packet = build_packet_encoder(method_id, args)
+        method_spec.decode_result = build_result_decoder(return_type)
+        method_spec.decode_args = build_args_decoder(args)
 
         func.method_spec = method_spec
 
         return func
 
     return decorator
+
+
+def set_per_call_timeout(timeout: float | None) -> None:
+    """Override the per-call RPC timeout for every registered Stealth method.
+
+    Pass ``None`` to disable per-call timeouts entirely (skips
+    ``asyncio.wait_for`` — saves ~5-10% per call on async paths). Pass any
+    positive float to set a uniform per-call timeout in seconds. Pass ``1.0``
+    to restore the project default.
+
+    Can be called at any time. ``call_method`` reads ``MethodSpec.timeout`` on
+    every call, so the change takes effect immediately for in-flight clients
+    (no need to reconnect).
+
+    Effect of disabling is **workload-dependent** — see notes in pull request
+    for measured numbers. The drop-in ``py_astealth.stealth`` sync module gains
+    ~+20%; ``AsyncClientPool`` LOSES ~15% due to scheduling interactions. Use
+    with care if you rely on Pool throughput.
+
+    Trade-off when disabled: a hung Stealth server blocks the call indefinitely.
+    Only connection-level TCP errors will surface.
+    """
+    # Late import: `stealth_api` imports this module, so we can't pull it at
+    # module top.
+    from py_astealth.stealth_api import StealthApi
+    for spec in StealthApi.get_methods():
+        spec.timeout = timeout
 
 
 def register_api(cls):
