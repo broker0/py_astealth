@@ -12,6 +12,7 @@ __all__ = ['Buffer', 'Bool', 'U8', 'I8', 'U16', 'I16', 'U32', 'I32', 'U64', 'I64
 
 class Buffer(RPCType):
     _mapping = bytes
+    _reads_to_end = True
 
     @classmethod
     def pack_simple_value(cls, stream: BinaryIO, value: Any):
@@ -80,6 +81,7 @@ class F64(PrimitiveType):
 class DateTime(F64):
     _format = "<d"
     _mapping = datetime
+    _is_plain = False   # custom pack/unpack (converts to/from Delphi days), excluded from fast struct paths
     DELPHI_EPOCH = datetime(1899, 12, 30)
     DAY = timedelta(days=1)
 

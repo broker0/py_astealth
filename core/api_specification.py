@@ -2,7 +2,7 @@ import inspect
 
 from typing import Any, get_type_hints, Callable, Optional
 
-from py_astealth.core.base_types import ParameterSpec, MethodSpec
+from py_astealth.core.base_types import ParameterSpec, MethodSpec, ArgsPlan, ResultPlan, ArgsDecodePlan
 
 
 class ApiSpecification:
@@ -51,6 +51,12 @@ def method_api(method_id: int, timeout: float | None = None):
             result=ParameterSpec("Result", return_type),
             timeout=timeout,
         )
+
+        # Pre-compute serialization plans once, mirroring StructType.register.
+        arg_types = [a.type for a in args]
+        method_spec.args_plan = ArgsPlan.build(arg_types)
+        method_spec.result_plan = ResultPlan.build(return_type)
+        method_spec.args_decode_plan = ArgsDecodePlan.build(arg_types)
 
         func.method_spec = method_spec
 
