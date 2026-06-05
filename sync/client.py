@@ -71,6 +71,10 @@ class SyncStealthApiClient(SyncInterface):
         coro = self._async_client.get_event()
         try:
             return self.context.run_coroutine(coro)
+        except (ConnectionError, ConnectionAbortedError, ConnectionResetError):
+            # Connection to Stealth was lost - propagate so callers (e.g. Wait)
+            # can stop instead of spinning forever.
+            raise
         except Exception:
-            # If context is dead or error occurs
+            # If context is dead or another transient error occurs
             return None

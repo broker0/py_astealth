@@ -76,6 +76,10 @@ class AsyncStealthClient(AsyncRPCClient):
         if self._transport:
             self._transport.close()
 
+    def is_connected(self) -> bool:
+        """True while the transport is alive and the connection is established."""
+        return self._connected.is_set() and self._transport is not None
+
     def _get_call_id(self):
         self._call_id = self._call_id % 0xFFFF + 1
         return self._call_id

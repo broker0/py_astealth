@@ -41,11 +41,14 @@ class AsyncStealthApiClient(AsyncInterface, AsyncStealthClient):
 
     async def get_event(self):
         """
-        return the next event from the queue or None if there are no events
+        return the next event from the queue or None if there are no events.
+
+        Raises ConnectionError if there are no buffered events left and the
+        connection to Stealth has been lost.
         """
         try:
             return self.events.get_nowait()
         except asyncio.QueueEmpty:
+            if not self.is_connected():
+                raise ConnectionError("Connection to Stealth lost")
             return None
-
-
