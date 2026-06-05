@@ -1,5 +1,5 @@
 import asyncio
-from datetime import datetime
+import time
 
 from py_astealth.async_client import AsyncStealthApiClient
 from py_astealth.async_pool import AsyncClientPool
@@ -11,48 +11,61 @@ import py_stealth as old_stealth
 from py_astealth import stealth as new_stealth
 
 
-COUNT = 15000
+DURATION = 15.0          # seconds per test
+POOL_BATCH = 1000       # ops per batch for the async pool benchmark
 
 
-def log_stats(name: str, start_time: datetime):
-    dt = datetime.now() - start_time
-    total_ms = dt.total_seconds() * 1000
-    avg_ms = total_ms / COUNT
-    ops_sec = COUNT / dt.total_seconds() if dt.total_seconds() > 0 else 0
+def log_stats(name: str, count: int, elapsed: float):
+    total_ms = elapsed * 1000
+    avg_ms = total_ms / count if count > 0 else 0
+    ops_sec = count / elapsed if elapsed > 0 else 0
 
-    print(f"| {name:<40} | {total_ms:>8.0f} ms | {avg_ms:>6.3f} ms/op | {ops_sec:>8.0f} ops/sec |")
+    print(f"| {name:<40} | {count:>10} | {avg_ms:>6.3f} ms/op | {ops_sec:>8.0f} ops/sec |")
 
 
 def bench_sync(name: str, obj):
-    start = datetime.now()
     func = obj.Self     # ! METHOD func
-    for _ in range(COUNT):
+    count = 0
+    start = time.perf_counter()
+    deadline = start + DURATION
+    while time.perf_counter() < deadline:
         func()          # ! METHOD args
-    log_stats(name, start)
+        count += 1
+    elapsed = time.perf_counter() - start
+    log_stats(name, count, elapsed)
 
 
 async def bench_async(name: str):
     async with AsyncStealthApiClient() as client:
         method = client.Self       # ! METHOD func
-        start = datetime.now()
-        for _ in range(COUNT):
+        count = 0
+        start = time.perf_counter()
+        deadline = start + DURATION
+        while time.perf_counter() < deadline:
             await method()         # ! METHOD args
+            count += 1
+        elapsed = time.perf_counter() - start
 
-    log_stats(name, start)
+    log_stats(name, count, elapsed)
 
 
 async def bench_async_pool(name: str):
     async with AsyncClientPool(StealthSession(), size=16) as client_pool:
-        start = datetime.now()
-        await client_pool.run([lambda c: c.Self() for _ in range(COUNT)], pipelining=16)
+        count = 0
+        start = time.perf_counter()
+        deadline = start + DURATION
+        while time.perf_counter() < deadline:
+            await client_pool.run([lambda c: c.Self() for _ in range(POOL_BATCH)], pipelining=16)
+            count += POOL_BATCH
+        elapsed = time.perf_counter() - start
 
-    log_stats(name, start)
+    log_stats(name, count, elapsed)
 
 
 def main():
-    print(f"Starting Benchmark (Count={COUNT})\n")
+    print(f"Starting Benchmark (Duration={DURATION:g}s per test)\n")
     print("-" * 92)
-    print(f"| {'BENCHMARK NAME':<40} | {'TOTAL':>11} | {'AVG':>12} | {'SPEED':>16} |")
+    print(f"| {'BENCHMARK NAME':<40} | {'COUNT':>10} | {'AVG':>12} | {'SPEED':>16} |")
     print("-" * 92)
 
     # 1. Classic py_stealth
