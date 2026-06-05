@@ -50,4 +50,4 @@ ensuring a very high level of compatibility.
 
 ### Issues
 
-Python 2.x is not supported; the minimum version is 3.8.
+Python 2.x is not supported; the minimum version is 3.10
