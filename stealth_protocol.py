@@ -7,7 +7,9 @@ from datetime import timedelta
 from typing import Any
 
 from py_astealth.core.api_specification import MethodSpec
-from py_astealth.core.base_types import RPCType, ResultKind, ArgsDecodeKind
+from py_astealth.core.base_types import (
+    RPCType, ResultKind, ArgsDecodeKind, compile_writer, compile_reader,
+)
 from py_astealth.core.rpc_client import AsyncRPCClient
 from py_astealth.stealth_types import *
 from py_astealth.utilites.logger import protocol_logger
@@ -131,7 +133,7 @@ class StealthRPCEncoder:
             if kind is ArgsDecodeKind.GENERAL:    # compiled per-arg readers
                 return tuple(r(stream) for r in plan.readers)
 
-        return tuple(RPCType.unpack_value(stream, arg.type) for arg in method_spec.args)
+        return tuple(compile_reader(arg.type)(stream) for arg in method_spec.args)
 
     @staticmethod
     def encode_tuple(*items) -> bytes:
@@ -141,7 +143,7 @@ class StealthRPCEncoder:
         """
         with io.BytesIO() as stream:
             for value, type_cls in items:
-                RPCType.pack_value(stream, value, type_cls)
+                compile_writer(type_cls)(stream, value)
 
             return stream.getvalue()
 
@@ -152,7 +154,7 @@ class StealthRPCEncoder:
         Example: decode_tuple(byte_buffer, U16, U16)
         """
         with io.BytesIO(payload) as stream:
-            return tuple(RPCType.unpack_value(stream, item_type) for item_type in item_types)
+            return tuple(compile_reader(item_type)(stream) for item_type in item_types)
 
     @staticmethod
     def encode_method(method_spec: MethodSpec, call_id: int, *args) -> bytes:
@@ -230,4 +232,4 @@ class StealthRPCEncoder:
 
         # general fallback
         with io.BytesIO(payload) as stream:
-            return RPCType.unpack_value(stream, method_spec.result.type)
+            return compile_reader(method_spec.result.type)(stream)

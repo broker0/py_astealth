@@ -275,101 +275,24 @@ class RPCType(ABC):
 
     @staticmethod
     def pack_value(stream: BinaryIO, value: Any, type_obj: Any):
-        """Packing a value into binary form as type type_obj"""
-        if type_obj is type(None):
-            return  # None type has no serialization
+        """
+        Packing a value into binary form as type 'type_obj'.
 
-        # # if this is a list we write the list as an array of elements
-        origin = typing.get_origin(type_obj)
-        if origin is list:
-            # write array length
-            stream.write(struct.pack('<I', len(value)))
-
-            if not value:   # empty list
-                return
-
-            # type of the first element of the list
-            inner_type = typing.get_args(type_obj)[0]
-
-            # HACK: if inner type is fixed-size plain, pack the whole list in one go
-            item_struct = get_fixed_struct(inner_type)
-            if item_struct is not None:
-                if inspect.isclass(inner_type) and issubclass(inner_type, StructType):
-                    names = inner_type._struct_names
-                    for item in value:
-                        stream.write(item_struct.pack(*[getattr(item, n) for n in names]))
-                else:   # plain primitive
-                    for item in value:
-                        stream.write(item_struct.pack(item))
-                return
-
-            # we pack each element
-            for item in value:
-                RPCType.pack_value(stream, item, inner_type)
-
-            return
-
-        # if this is a tuple we write the tuple elements sequentially
-        if origin is tuple:
-            inner_types = typing.get_args(type_obj)
-            for item, item_type in zip(value, inner_types):
-                RPCType.pack_value(stream, item, item_type)
-
-            return
-
-        # If the type is inherited from RPCType, then we call its pack method
-        if inspect.isclass(type_obj) and issubclass(type_obj, RPCType):
-            type_obj.pack_simple_value(stream, value)
-        else:
-            raise TypeError(f"Serialization of this value type is not implemented: {type_obj}")
+        Thin wrapper over compile_writer: all list/tuple/struct/primitive fast
+        paths live in the compiled writer (single source of truth). The compiled
+        closure is cached per type, so repeated calls are cheap.
+        """
+        compile_writer(type_obj)(stream, value)
 
     @staticmethod
     def unpack_value(stream: BinaryIO, type_obj: Any) -> Any:
-        """Unpacking a binary value"""
-        if type_obj is type(None):
-            return None
+        """
+        Unpacking a binary value of type 'type_obj'.
 
-        # Processing the list
-        origin = typing.get_origin(type_obj)
-        if origin is list:
-            # read the number of array elements
-            data = stream.read(4)
-            if len(data) < 4:
-                raise ValueError("Stream ended while reading list length")
-
-            # we read the required number of elements and return the list
-            count, = struct.unpack('<I', data)
-            inner_type = typing.get_args(type_obj)[0]
-
-            if count == 0:
-                return []
-
-            # HACK: if inner type is fixed-size plain, read the whole list at once
-            item_struct = get_fixed_struct(inner_type)
-            if item_struct is not None:
-                item_size = item_struct.size
-                total_size = count * item_size
-                data = stream.read(total_size)
-                if len(data) < total_size:
-                    raise ValueError(f"Stream ended while reading list of {inner_type}")
-
-                if inspect.isclass(inner_type) and issubclass(inner_type, StructType):
-                    return [inner_type(*args) for args in item_struct.iter_unpack(data)]
-                # plain primitive
-                return [args[0] for args in item_struct.iter_unpack(data)]
-
-            return [RPCType.unpack_value(stream, inner_type) for _ in range(count)]
-
-        # Processing the tuple
-        if origin is tuple:
-            inner_types = typing.get_args(type_obj)
-            return tuple(RPCType.unpack_value(stream, t) for t in inner_types)
-
-        # If the type is inherited from RPCType, then we call its unpack method
-        if inspect.isclass(type_obj) and issubclass(type_obj, RPCType):
-            return type_obj.unpack_simple_value(stream)
-        else:
-            raise TypeError(f"Deserialization of this value type is not implemented: {type_obj}")
+        Thin wrapper over compile_reader (mirror of pack_value); the compiled
+        reader is the single source of truth for all deserialization fast paths.
+        """
+        return compile_reader(type_obj)(stream)
 
 
 class PrimitiveType(RPCType):
@@ -382,22 +305,28 @@ class PrimitiveType(RPCType):
     _struct: struct.Struct = None
 
     @classmethod
+    def _get_struct(cls) -> struct.Struct:
+        """Return a cached struct.Struct for cls._format, compiling it once."""
+        st = cls.__dict__.get('_struct')
+        if st is None:
+            st = struct.Struct(cls._format)
+            cls._struct = st
+        return st
+
+    @classmethod
     def pack_simple_value(cls, stream: BinaryIO, value: Any):
-        stream.write(struct.pack(cls._format, value))
+        stream.write(cls._get_struct().pack(value))
 
     @classmethod
     def unpack_simple_value(cls, stream: BinaryIO) -> Any:
-        # We calculate the size of this type in bytes and read from the stream
-        size = struct.calcsize(cls._format)
-        data = stream.read(size)
-        if len(data) < size:
+        st = cls._get_struct()
+        data = stream.read(st.size)
+        if len(data) < st.size:
             raise ValueError(f"Stream ended while reading {cls}")
 
-        # unpack the received data according to the format
-        unpacked_value, = struct.unpack(cls._format, data)
-
-        # In fact, cls.mapping is not used, since struct.unpack converts the binary data
-        # to an integer or bool type according to the format
+        # struct.unpack converts the binary data to int/bool/float per the format;
+        # cls._mapping is not needed here.
+        unpacked_value, = st.unpack(data)
         return unpacked_value
 
 
