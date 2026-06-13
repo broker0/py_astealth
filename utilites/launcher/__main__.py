@@ -100,10 +100,16 @@ def main():
     if len(sys.argv) >= 3 and sys.argv[2].isdigit():
         config.STEALTH_SCRIPT_PORT = int(sys.argv[2])
 
-    # set profile name
+    # set profile name + optional DAP debug port
+    dap_port = 0
     for arg in sys.argv:
         if arg.startswith('--profile='):
             config.STEALTH_PROFILE = arg.split('=', 1)[1]
+        elif arg.startswith('--dap-port='):
+            try:
+                dap_port = int(arg.split('=', 1)[1])
+            except ValueError:
+                dap_port = 0
 
     sys.path.insert(0, str(script_path.parent))
     # replace sys.argv[0] (py_stealth) with the script name
@@ -116,10 +122,37 @@ def main():
     inject_stealth_to_builtins(stealth_module)
     setup_io_redirection(stealth_module)
 
+    # If Stealth launched this script in debug mode it passes --dap-port=<N>.
+    # Bring up a Debug Adapter Protocol endpoint (debugpy) on that port and block
+    # until Stealth's in-editor DAP client attaches, so breakpoints are in place
+    # before the user script runs. debugpy is an optional dependency, required
+    # only for debugging (same model as Python itself).
+    if dap_port:
+        try:
+            import debugpy
+        except ImportError:
+            if sys.platform.startswith('linux'):
+                hint = 'sudo apt install python3-debugpy  (or: python3 -m pip install --break-system-packages debugpy)'
+            elif sys.platform == 'darwin':
+                hint = 'python3 -m pip install debugpy'
+            else:
+                hint = 'pip install debugpy'
+            print('Stealth debug: Python script debugging requires the "debugpy" '
+                  'package, which is not installed. Install it with:  ' + hint)
+            return
+        # in_process_debug_adapter=True runs pydevd's DAP server directly on the
+        # port (no separate debugpy "adapter" subprocess + server-bridge dance),
+        # so Stealth's plain DAP client attaches cleanly. Without it, listen()
+        # spawns an adapter proxy that a vanilla DAP client cannot bridge.
+        debugpy.listen(('127.0.0.1', dap_port), in_process_debug_adapter=True)
+        debugpy.wait_for_client()
+
     try:
         target_func_name = None
-        if len(sys.argv) >= 4:
-            # import script as module, so __main__ will not run
+        if len(sys.argv) >= 4 and not sys.argv[3].startswith('--'):
+            # import script as module, so __main__ will not run.
+            # Skip '--'-prefixed args (e.g. --dap-port=, --profile=) so they
+            # are not mistaken for a target function name.
             target_func_name = sys.argv[3]
 
         if target_func_name:
