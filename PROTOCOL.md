@@ -191,14 +191,13 @@ The client can send multiple requests at once, but the server will process/respo
 
 ---
 
-## 6. Service Packets (ID 1–12)
+## 6. Service Packets (ID 1–14)
 
 | ID | Name                         | Direction       | Arguments                             | Description / Reaction                  |
 |----|------------------------------|-----------------|---------------------------------------|-----------------------------------------|
 | 1  | `_FunctionResultCallback`    | Server → Client | `CallId: U16, Result: Buffer`         | Resolve `Future` by `CallId`            |
 | 2  | `_StopScriptCallback`        | Server → Client | —                                     | Close connection                        |
 | 3  | `_ErrorReportCallback`       | Server → Client | `Error: String`                       | Logging + close connection              |
-| 4  | `_ScriptTogglePauseCallback` | Server → Client | —                                     | Toggle client pause                     |
 | 5  | `_LangVersion`               | Client → Server | `Lang, Major, Minor, Rev, Build: U8`  | Handshake (client version)              |
 | 6  | `_EventCallback`             | Server → Client | `EventId: U8, Args: TypedTuple`       | Dispatch event                          |
 | 7  | `SetEventCallback`           | Client → Server | `EventIndex: U8`                      | Subscribe to event                      |
@@ -207,6 +206,8 @@ The client can send multiple requests at once, but the server will process/respo
 | 10 | `_ScriptPath`                | Client → Server | `ScriptName: String`                  | Response with script path               |
 | 11 | `_SelectProfile`             | Client → Server | `ProfileName: String`                 | Select profile                          |
 | 12 | `_RequestPort`               | Client → Server | `GroupId: U64, ProfileName: String`   | Request dedicated port                  |
+| 13 | `_ScriptPauseCallback`       | Server → Client | —                                     | Pause client execution                  |
+| 14 | `_ScriptResumeCallback`      | Server → Client | —                                     | Resume client execution                 |
 
 ---
 
@@ -218,7 +219,8 @@ The server can initiate sending packets independently of client requests:
 |------------------------------|-------------------------------------------|
 | `_EventCallback`             | Asynchronous event notification           |
 | `_StopScriptCallback`        | Request to terminate the script           |
-| `_ScriptTogglePauseCallback` | Pause/resume script execution             |
+| `_ScriptPauseCallback`       | Pause script execution                    |
+| `_ScriptResumeCallback`      | Resume script execution                   |
 | `_ErrorReportCallback`       | Error message                             |
 | `_ScriptPathCallback`        | Request path to the script                |
 

@@ -147,6 +147,7 @@ class FastContext(StealthContext):
             self._loop = asyncio.ProactorEventLoop()
         else:
             self._loop = asyncio.SelectorEventLoop()
+
         asyncio.set_event_loop(self._loop)
 
     def stop(self):

@@ -106,12 +106,17 @@ class AsyncStealthClient(AsyncRPCClient):
         self._calls += 1
         self.send_packet(packet)
 
-        try:
-            result_payload = await asyncio.wait_for(future, timeout=method_spec.timeout) if expect_reply else None
-            result = StealthRPCEncoder.decode_result(method_spec, result_payload)
-        except asyncio.TimeoutError:
-            self._pending_replies.pop(call_id, None)
-            raise TimeoutError(f"RPC call {method_spec.name}({call_id}) timed out after {method_spec.timeout}s")
+
+        if method_spec.timeout is None:
+            result_payload = await future if expect_reply else None
+        else:
+            try:
+                result_payload = await asyncio.wait_for(future, timeout=method_spec.timeout) if expect_reply else None
+            except asyncio.TimeoutError:
+                self._pending_replies.pop(call_id, None)
+                raise TimeoutError(f"RPC call {method_spec.name}({call_id}) timed out after {method_spec.timeout}s")
+
+        result = StealthRPCEncoder.decode_result(method_spec, result_payload)
 
         if client_logger.isEnabledFor(logging.INFO):
             if ret_type is not type(None):
@@ -193,11 +198,11 @@ class AsyncStealthClient(AsyncRPCClient):
 
     def _handle_ScriptPauseCallback(self):
         if self._sending_allowed.is_set():
-            client_logger.debug("ScriptTogglePauseCallback, set pause")
+            client_logger.debug("_ScriptPauseCallback, set pause")
 
             self._sending_allowed.clear()
         else:
-            client_logger.warning("ScriptTogglePauseCallback, repeated call")
+            client_logger.warning("ScriptPauseCallback, repeated call")
 
     def _handle_ScriptResumeCallback(self):
         if not self._sending_allowed.is_set():
