@@ -23,12 +23,6 @@ class SpeechEvent(StealthEvent):
 
 @dataclass
 class ClilocSpeechEvent(StealthEvent):
-    """EvClilocSpeech (id=14): localized NPC/system speech.
-
-    Raw arguments observed on the wire (Ultima Utopia shard):
-    ``[serial, sender_name, cliloc_id, text]`` - the client already resolves
-    ``text`` from ``cliloc_id`` (no need to call ``GetClilocByID`` ourselves).
-    """
     serial: int
     sender_name: str
     cliloc_id: int
