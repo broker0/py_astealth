@@ -31,6 +31,7 @@ class SyncInterface:
     def BandageSelf(self) -> None: pass
     def BookClearText(self) -> None: pass
     def BookGetPageText(self, Page: int) -> str: pass
+    def BookRequestPage(self, Page: int) -> None: pass
     def BookSetHeader(self, Title: str, Author: str) -> None: pass
     def BookSetPageText(self, Page: int, Text: str) -> None: pass
     def BookSetText(self, Text: str) -> None: pass

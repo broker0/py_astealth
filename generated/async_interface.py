@@ -31,6 +31,7 @@ class AsyncInterface:
     async def BandageSelf(self) -> None: pass
     async def BookClearText(self) -> None: pass
     async def BookGetPageText(self, Page: int) -> str: pass
+    async def BookRequestPage(self, Page: int) -> None: pass
     async def BookSetHeader(self, Title: str, Author: str) -> None: pass
     async def BookSetPageText(self, Page: int, Text: str) -> None: pass
     async def BookSetText(self, Text: str) -> None: pass

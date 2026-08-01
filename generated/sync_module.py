@@ -28,6 +28,7 @@ def Backpack() -> int: pass
 def BandageSelf() -> None: pass
 def BookClearText() -> None: pass
 def BookGetPageText(Page: int) -> str: pass
+def BookRequestPage(Page: int) -> None: pass
 def BookSetHeader(Title: str, Author: str) -> None: pass
 def BookSetPageText(Page: int, Text: str) -> None: pass
 def BookSetText(Text: str) -> None: pass
@@ -456,6 +457,7 @@ __all__ = [
     "BandageSelf",
     "BookClearText",
     "BookGetPageText",
+    "BookRequestPage",
     "BookSetHeader",
     "BookSetPageText",
     "BookSetText",

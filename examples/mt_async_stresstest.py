@@ -5,7 +5,7 @@ import time
 
 from py_astealth import AsyncClientPool, StealthSession
 
-TIME = timedelta(seconds=5)
+TIME = timedelta(seconds=15)
 PROCESSES = 4
 SESSIONS = 16
 CLIENTS = 16

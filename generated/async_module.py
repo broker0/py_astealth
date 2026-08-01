@@ -28,6 +28,7 @@ async def Backpack() -> int: pass
 async def BandageSelf() -> None: pass
 async def BookClearText() -> None: pass
 async def BookGetPageText(Page: int) -> str: pass
+async def BookRequestPage(Page: int) -> None: pass
 async def BookSetHeader(Title: str, Author: str) -> None: pass
 async def BookSetPageText(Page: int, Text: str) -> None: pass
 async def BookSetText(Text: str) -> None: pass
@@ -456,6 +457,7 @@ __all__ = [
     "BandageSelf",
     "BookClearText",
     "BookGetPageText",
+    "BookRequestPage",
     "BookSetHeader",
     "BookSetPageText",
     "BookSetText",

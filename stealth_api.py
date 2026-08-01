@@ -1010,6 +1010,9 @@ class StealthApi(ApiSpecification):
     @method_api(508)
     def BookSetHeader(self, Title: String, Author: String) -> None: ...
 
+    @method_api(543)
+    def BookRequestPage(self, Page: U16) -> None: ...
+
     ####################################################################################################################
     # party related functions
     ####################################################################################################################

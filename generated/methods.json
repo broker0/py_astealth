@@ -4442,5 +4442,16 @@
         "id": 540,
         "args": [],
         "result": "Bool"
+    },
+    {
+        "name": "BookRequestPage",
+        "id": 543,
+        "args": [
+            {
+                "name": "Page",
+                "type": "U16"
+            }
+        ],
+        "result": "None"
     }
 ]
