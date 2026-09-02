@@ -134,7 +134,7 @@ def GetPathArray3D(StartX: int, StartY: int, StartZ: int,
                    FinishX: int, FinishY: int, FinishZ: int,
                    WorldNum: int,
                    AccuracyXY: int, AccuracyZ: int,
-                   Run: bool) -> list[[tuple[int, int, int]]]:
+                   Run: bool) -> list[tuple[int, int, int]]:
     """
     GetPathArray3D is a legacy function, use GetPath3D instead
     """
@@ -253,6 +253,8 @@ def newMoveXYZ(x_dst, y_dst, z_dst, accuracy_xy, accuracy_z, running, callback: 
 
         if not path:
             recompute = True
+
+    return False
 
 
 def newMoveXY(x_dst, y_dst, optimized, accuracy, running):

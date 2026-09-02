@@ -237,7 +237,7 @@ def _apply_cliloc_logic(element: dict):
     element['ClilocText'] = text
 
 
-def GetClilocByID(cliloc_id, params: list[str] = None):
+def GetClilocByID(cliloc_id, params: list[str] | None = None):
     """Deprecated: emulate old behavior, use GetCliloc instead"""
     if params is None:
         params = []

@@ -61,7 +61,7 @@ def Ground() -> int:
     return 0
 
 
-def FindType(obj_type: int, container: int = None) -> int:
+def FindType(obj_type: int, container: int | None = None) -> int:
     """
     Find an object by type in the specified container (simplified version).
     
@@ -80,7 +80,7 @@ def FindType(obj_type: int, container: int = None) -> int:
     return api.FindTypeEx(obj_type, 0xFFFF, container, False)
 
 
-def FindTypeEx(obj_type: int, color: int, container: int = None, in_sub: bool = True) -> int:
+def FindTypeEx(obj_type: int, color: int, container: int | None = None, in_sub: bool = True) -> int:
     """
     Find an object by type and color in the specified container.
     

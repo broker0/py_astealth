@@ -137,7 +137,7 @@ def GetBuffBarInfo() -> list[dict]:
 
 
 def UseVirtue(virtue: Union[str, int, Virtue]):
-    return api.UseVirtue(_get_virtue_id(virtue))
+    api.UseVirtue(_get_virtue_id(virtue))
 
 
 def GetExtInfo() -> dict:

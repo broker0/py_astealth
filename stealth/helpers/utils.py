@@ -119,7 +119,8 @@ def GetEasyUO(num: int) -> str:
     
     with winreg.OpenKey(key, sub_key, 0, access) as easyuo_key:
         type_, data = winreg.QueryValueEx(easyuo_key, '*' + str(num))
-    return data
+
+    return str(data)
 
 
 def EUO2StealthType(euo: str) -> int:
