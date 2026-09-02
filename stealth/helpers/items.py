@@ -263,7 +263,6 @@ def MoveItem(item_id: int, count: int, move_into_id: int, x: int, y: int, z: int
     if not api.DragItem(item_id, count):
         return False
 
-    Wait(api.GetDropDelay())
     return api.DropItem(move_into_id, x, y, z)
 
 
