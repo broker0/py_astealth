@@ -4453,5 +4453,22 @@
             }
         ],
         "result": "None"
+    },
+    {
+        "name": "GetUserStatic",
+        "id": 545,
+        "args": [
+            {
+                "name": "StaticID",
+                "type": "I32"
+            }
+        ],
+        "result": "tuple[Bool, UserStaticItem, U8]"
+    },
+    {
+        "name": "GetUserStaticsHigh",
+        "id": 546,
+        "args": [],
+        "result": "I32"
     }
 ]
