@@ -216,6 +216,8 @@ class SyncInterface:
     def GetTradeOpponent(self, TradeNum: int) -> int: pass
     def GetTradeOpponentName(self, TradeNum: int) -> str: pass
     def GetType(self, ObjID: int) -> int: pass
+    def GetUserStatic(self, StaticID: int) -> tuple[bool, UserStaticItem, int]: pass
+    def GetUserStaticsHigh(self) -> int: pass
     def GetWalkMountTimer(self) -> int: pass
     def GetWalkUnmountTimer(self) -> int: pass
     def GetWorldItems(self) -> list[WorldItemData]: pass

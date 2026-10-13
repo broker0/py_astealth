@@ -213,6 +213,8 @@ def GetTradeContainer(TradeNum: int, Num: int) -> int: pass
 def GetTradeOpponent(TradeNum: int) -> int: pass
 def GetTradeOpponentName(TradeNum: int) -> str: pass
 def GetType(ObjID: int) -> int: pass
+def GetUserStatic(StaticID: int) -> tuple[bool, UserStaticItem, int]: pass
+def GetUserStaticsHigh() -> int: pass
 def GetWalkMountTimer() -> int: pass
 def GetWalkUnmountTimer() -> int: pass
 def GetWorldItems() -> list[WorldItemData]: pass
@@ -642,6 +644,8 @@ __all__ = [
     "GetTradeOpponent",
     "GetTradeOpponentName",
     "GetType",
+    "GetUserStatic",
+    "GetUserStaticsHigh",
     "GetWalkMountTimer",
     "GetWalkUnmountTimer",
     "GetWorldItems",

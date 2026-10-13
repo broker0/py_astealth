@@ -213,6 +213,8 @@ async def GetTradeContainer(TradeNum: int, Num: int) -> int: pass
 async def GetTradeOpponent(TradeNum: int) -> int: pass
 async def GetTradeOpponentName(TradeNum: int) -> str: pass
 async def GetType(ObjID: int) -> int: pass
+async def GetUserStatic(StaticID: int) -> tuple[bool, UserStaticItem, int]: pass
+async def GetUserStaticsHigh() -> int: pass
 async def GetWalkMountTimer() -> int: pass
 async def GetWalkUnmountTimer() -> int: pass
 async def GetWorldItems() -> list[WorldItemData]: pass
@@ -642,6 +644,8 @@ __all__ = [
     "GetTradeOpponent",
     "GetTradeOpponentName",
     "GetType",
+    "GetUserStatic",
+    "GetUserStaticsHigh",
     "GetWalkMountTimer",
     "GetWalkUnmountTimer",
     "GetWorldItems",

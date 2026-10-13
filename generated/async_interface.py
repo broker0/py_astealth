@@ -216,6 +216,8 @@ class AsyncInterface:
     async def GetTradeOpponent(self, TradeNum: int) -> int: pass
     async def GetTradeOpponentName(self, TradeNum: int) -> str: pass
     async def GetType(self, ObjID: int) -> int: pass
+    async def GetUserStatic(self, StaticID: int) -> tuple[bool, UserStaticItem, int]: pass
+    async def GetUserStaticsHigh(self) -> int: pass
     async def GetWalkMountTimer(self) -> int: pass
     async def GetWalkUnmountTimer(self) -> int: pass
     async def GetWorldItems(self) -> list[WorldItemData]: pass

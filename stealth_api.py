@@ -1283,6 +1283,12 @@ class StealthApi(ApiSpecification):
     @method_api(521)
     def ClearUserStatics(self) -> None: ...
 
+    @method_api(545)
+    def GetUserStatic(self, StaticID: I32) -> tuple[Bool, UserStaticItem, U8]: ...
+
+    @method_api(546)
+    def GetUserStaticsHigh(self) -> I32: ...
+
     ####################################################################################################################
     # abilities functions
     ####################################################################################################################
