@@ -86,6 +86,13 @@ class ContextMenuEvent(StealthEvent):
 
 
 @dataclass
+class ClientGumpReplyEvent(StealthEvent):
+    serial: int
+    gump_id: int
+    button_id: int
+
+
+@dataclass
 class SoundEvent(StealthEvent):
     sound_id: int
     x: int
@@ -123,6 +130,7 @@ class EventFactory:
         EventType.EvIncomingGump: IncomingGumpEvent,
         EventType.EvMenu: MenuEvent,
         EventType.EvContextMenu: ContextMenuEvent,
+        EventType.EvClientGumpReply: ClientGumpReplyEvent,
         EventType.EvSound: SoundEvent,
         EventType.EvCharAnimation: CharAnimationEvent,
         EventType.EvMoveRejection: MoveRejectionEvent

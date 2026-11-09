@@ -58,6 +58,8 @@ def ClearShopList() -> None: pass
 def ClearSystemJournal() -> None: pass
 def ClearUserStatics() -> None: pass
 def ClickOnObject(ObjID: int) -> None: pass
+def ClientGumpResponse(Serial: int) -> ClientGumpResponse: pass
+def ClientGumpResponsePresent(Serial: int) -> bool: pass
 def ClientHide(ObjID: int) -> bool: pass
 def ClientPrint(Text: str) -> None: pass
 def ClientPrintEx(SenderID: int, Color: int, Font: int, Text: str) -> None: pass
@@ -339,6 +341,7 @@ def RequestContextMenu(ObjID: int) -> None: pass
 def RequestStats(ObjID: int) -> None: pass
 def Salute() -> None: pass
 def Self() -> int: pass
+def SendGumpToClient(Gump: GumpInfo) -> int: pass
 def SetARExtParams(ShardName: str, CharName: str, UseAtEveryConnect: bool) -> None: pass
 def SetARStatus(Value: bool) -> None: pass
 def SetAutoBuyDelay(Value: int) -> None: pass
@@ -489,6 +492,8 @@ __all__ = [
     "ClearSystemJournal",
     "ClearUserStatics",
     "ClickOnObject",
+    "ClientGumpResponse",
+    "ClientGumpResponsePresent",
     "ClientHide",
     "ClientPrint",
     "ClientPrintEx",
@@ -770,6 +775,7 @@ __all__ = [
     "RequestStats",
     "Salute",
     "Self",
+    "SendGumpToClient",
     "SetARExtParams",
     "SetARStatus",
     "SetAutoBuyDelay",

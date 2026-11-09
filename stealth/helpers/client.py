@@ -53,6 +53,26 @@ def WaitForClientTargetResponse(max_wait_ms: int) -> bool:
     return False
 
 
+def WaitForClientGumpResponse(serial: int, max_wait_ms: int) -> bool:
+    """
+    Wait for the client's answer to a gump sent with SendGumpToClient.
+
+    Args:
+        serial: Serial returned by SendGumpToClient
+        max_wait_ms: Maximum wait time in milliseconds
+
+    Returns:
+        True if the answer is present (read it with ClientGumpResponse), False if timeout
+    """
+    end_time = datetime.now() + timedelta(milliseconds=max_wait_ms)
+
+    while datetime.now() < end_time:
+        if api.ClientGumpResponsePresent(serial):
+            return True
+        Wait(10)
+    return api.ClientGumpResponsePresent(serial)
+
+
 def CorrectDisconnection() -> None:
     """Force close the current connection."""
     client = _manager.get_client_for_thread()
@@ -61,4 +81,5 @@ def CorrectDisconnection() -> None:
         client.close()
 
 
-__all__ = ['CloseClientUIWindow', 'CorrectDisconnection', 'WaitForClientTargetResponse']
+__all__ = ['CloseClientUIWindow', 'CorrectDisconnection', 'WaitForClientTargetResponse',
+           'WaitForClientGumpResponse']
