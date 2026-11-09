@@ -4470,5 +4470,38 @@
         "id": 546,
         "args": [],
         "result": "I32"
+    },
+    {
+        "name": "SendGumpToClient",
+        "id": 547,
+        "args": [
+            {
+                "name": "Gump",
+                "type": "GumpInfo"
+            }
+        ],
+        "result": "U32"
+    },
+    {
+        "name": "ClientGumpResponsePresent",
+        "id": 548,
+        "args": [
+            {
+                "name": "Serial",
+                "type": "U32"
+            }
+        ],
+        "result": "Bool"
+    },
+    {
+        "name": "ClientGumpResponse",
+        "id": 549,
+        "args": [
+            {
+                "name": "Serial",
+                "type": "U32"
+            }
+        ],
+        "result": "ClientGumpResponse"
     }
 ]

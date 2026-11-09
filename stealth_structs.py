@@ -452,6 +452,8 @@ class Text(StructType):
     Text: String
 
 
+# Stealth sends TextEntriesLimited with the same layout as TextEntries
+# (TTextEntry on the host side); the length limit is not carried.
 @StructType.register
 class GumpTextEntryLimited(StructType):
     X: I32
@@ -460,7 +462,8 @@ class GumpTextEntryLimited(StructType):
     Height: I32
     Color: I32
     ReturnValue: I32
-    Limit: I32
+    DefaultTextID: I32
+    RealValue: String
     Page: I32
     ElemNum: I32
 
@@ -639,6 +642,24 @@ class GumpInfo(StructType):
     ToggleUpperWordCases: list[GumpToggleUpperWordCase]
     ToggleCroppedTexts: list[GumpToggleCroppedText]
     ECHandleInputs: list[GumpECHandleInput]
+
+
+####################################################################################################################
+# client reply to a gump sent by SendGumpToClient
+####################################################################################################################
+@StructType.register
+class ClientGumpTextResponse(StructType):
+    ID: I32
+    Text: String
+
+
+@StructType.register
+class ClientGumpResponse(StructType):
+    Serial: U32
+    GumpID: U32
+    ButtonID: I32
+    Switches: list[I32]
+    TextEntries: list[ClientGumpTextResponse]
 
 
 # TODO other Stealth struct-types

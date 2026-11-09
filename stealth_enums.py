@@ -112,6 +112,7 @@ class EventType(IntEnum):
     EvGlobalChat = 39
     EvWarDamage = 40
     EvContextMenu = 41
+    EvClientGumpReply = 42
 
 
 class Virtue(IntEnum):

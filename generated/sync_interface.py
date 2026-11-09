@@ -61,6 +61,8 @@ class SyncInterface:
     def ClearSystemJournal(self) -> None: pass
     def ClearUserStatics(self) -> None: pass
     def ClickOnObject(self, ObjID: int) -> None: pass
+    def ClientGumpResponse(self, Serial: int) -> ClientGumpResponse: pass
+    def ClientGumpResponsePresent(self, Serial: int) -> bool: pass
     def ClientHide(self, ObjID: int) -> bool: pass
     def ClientPrint(self, Text: str) -> None: pass
     def ClientPrintEx(self, SenderID: int, Color: int, Font: int, Text: str) -> None: pass
@@ -342,6 +344,7 @@ class SyncInterface:
     def RequestStats(self, ObjID: int) -> None: pass
     def Salute(self) -> None: pass
     def Self(self) -> int: pass
+    def SendGumpToClient(self, Gump: GumpInfo) -> int: pass
     def SetARExtParams(self, ShardName: str, CharName: str, UseAtEveryConnect: bool) -> None: pass
     def SetARStatus(self, Value: bool) -> None: pass
     def SetAutoBuyDelay(self, Value: int) -> None: pass

@@ -61,6 +61,8 @@ class AsyncInterface:
     async def ClearSystemJournal(self) -> None: pass
     async def ClearUserStatics(self) -> None: pass
     async def ClickOnObject(self, ObjID: int) -> None: pass
+    async def ClientGumpResponse(self, Serial: int) -> ClientGumpResponse: pass
+    async def ClientGumpResponsePresent(self, Serial: int) -> bool: pass
     async def ClientHide(self, ObjID: int) -> bool: pass
     async def ClientPrint(self, Text: str) -> None: pass
     async def ClientPrintEx(self, SenderID: int, Color: int, Font: int, Text: str) -> None: pass
@@ -342,6 +344,7 @@ class AsyncInterface:
     async def RequestStats(self, ObjID: int) -> None: pass
     async def Salute(self) -> None: pass
     async def Self(self) -> int: pass
+    async def SendGumpToClient(self, Gump: GumpInfo) -> int: pass
     async def SetARExtParams(self, ShardName: str, CharName: str, UseAtEveryConnect: bool) -> None: pass
     async def SetARStatus(self, Value: bool) -> None: pass
     async def SetAutoBuyDelay(self, Value: int) -> None: pass
